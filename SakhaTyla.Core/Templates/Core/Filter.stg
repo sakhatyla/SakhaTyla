@@ -1,0 +1,76 @@
+﻿main(model) ::= <<
+using System;
+using $model.Solution.Namespace$.Core.Infrastructure;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models
+{
+    public class $model.Entity.Name$Filter : EntityFilter
+    {
+$model.Entity.AllFields:field(); separator="\n"$
+    }
+}
+
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+$field:(field.TypeTemplate)()$
+>>
+
+Entity(field) ::= <<
+        public $field.Entity.IdField.TypeNameNullable$ $field.Name$$field.Entity.IdField.Name$ { get; set; }
+>>
+
+Enum(field) ::= <<
+        public Enums.$field.Enum.Name$? $field.Name$ { get; set; }
+>>
+
+String(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$ { get; set; }
+>>
+
+Int32(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$From { get; set; }
+        public $field.TypeNameNullable$ $field.Name$To { get; set; }
+>>
+
+Int64(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$From { get; set; }
+        public $field.TypeNameNullable$ $field.Name$To { get; set; }
+>>
+
+Decimal(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$From { get; set; }
+        public $field.TypeNameNullable$ $field.Name$To { get; set; }
+>>
+
+Double(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$From { get; set; }
+        public $field.TypeNameNullable$ $field.Name$To { get; set; }
+>>
+
+Boolean(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$ { get; set; }
+>>
+
+DateTime(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$From { get; set; }
+        public $field.TypeNameNullable$ $field.Name$To { get; set; }
+>>
+
+Date(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$From { get; set; }
+        public $field.TypeNameNullable$ $field.Name$To { get; set; }
+>>
+
+Time(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$From { get; set; }
+        public $field.TypeNameNullable$ $field.Name$To { get; set; }
+>>
+
+Guid(field) ::= <<
+        public $field.TypeNameNullable$ $field.Name$ { get; set; }
+>>

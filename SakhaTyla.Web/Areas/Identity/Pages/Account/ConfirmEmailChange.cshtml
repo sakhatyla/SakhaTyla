@@ -1,0 +1,11 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@model ConfirmEmailChangeModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Confirm email change"];
+}
+
+<h1>@ViewData["Title"]</h1>
+<partial name="_StatusMessage" model="Model.StatusMessage" />

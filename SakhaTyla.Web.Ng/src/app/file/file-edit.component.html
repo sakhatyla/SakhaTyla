@@ -1,0 +1,24 @@
+﻿<ng-container *transloco="let t">
+    <h1 mat-dialog-title>{{ t('File') }} <app-file-show [value]="file"></app-file-show></h1>
+    <mat-dialog-content *ngIf="file" class="mat-dialog-content-edit">
+
+        <form [formGroup]="fileForm">
+            <mat-form-field *ngIf="!file.id">
+                <mat-label>{{ t('Group') }}</mat-label>
+                <app-file-group-select formControlName="groupId" name="groupId" [placeholder]="t('Group')"></app-file-group-select>
+                <mat-error>{{ error?.modelState?.groupId | modelError }}</mat-error>
+            </mat-form-field>
+            <div class="field-view" *ngIf="group">
+                <label>{{ t('File') }}</label>
+                <div>
+                    <input type="file" id="file" name="file" #fileInput [accept]="group.accept" [multiple]="!file.id" />
+                </div>
+            </div>
+        </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="mat-dialog-actions-edit">
+        <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+        <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!group" cdkFocusInitial>{{ t('shared.save') }}</button>
+    </mat-dialog-actions>
+</ng-container>

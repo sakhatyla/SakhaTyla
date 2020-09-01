@@ -1,0 +1,11 @@
+<mat-nav-list *transloco="let t">
+    <a mat-list-item [routerLink]="['/']" (click)="collapse()" [routerLinkActive]="['link-active']"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon matListIcon>home</mat-icon>
+        <span>{{ t('Home') }}</span>
+    </a>
+    <a mat-list-item [routerLink]="[item.route]" *ngFor="let item of (menu | async)?.items" [routerLinkActive]="['link-active']">
+        <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+        <span>{{ t(item.name) }}</span>
+    </a>
+</mat-nav-list>

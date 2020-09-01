@@ -1,0 +1,22 @@
+﻿{
+  "id": "1a5af1dc-e4cc-433b-982f-4b25b71cb265",
+  "name": "FileGroupType",
+  "displayName": "File Group Type",
+  "values": [
+    {
+      "id": "48f94a2c-4df0-4ebe-a4ab-600ca174efa6",
+      "name": "Database",
+      "displayName": "Database",
+      "value": 0,
+      "properties": {}
+    },
+    {
+      "id": "57075a63-1af1-4827-9018-08605f183074",
+      "name": "Storage",
+      "displayName": "Storage",
+      "value": 1,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

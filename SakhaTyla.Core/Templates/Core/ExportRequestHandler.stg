@@ -1,0 +1,55 @@
+﻿main(model) ::= <<
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Cynosura.Core.Data;
+using Cynosura.Core.Services.Models;
+using $model.Solution.Namespace$.Core.Entities;
+using $model.Solution.Namespace$.Core.Formatters;
+using $model.Solution.Namespace$.Core.Infrastructure;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
+{
+    public class Export$model.Entity.PluralName$Handler : IRequestHandler<Export$model.Entity.PluralName$, FileContentModel>
+    {
+        private readonly IEntityRepository<$model.Entity.Name$> _$model.Entity.NameLower$Repository;
+        private readonly IExcelFormatter _excelFormatter;
+        private readonly IMapper _mapper;
+
+        public Export$model.Entity.PluralName$Handler(IEntityRepository<$model.Entity.Name$> $model.Entity.NameLower$Repository,
+            IExcelFormatter excelFormatter,
+            IMapper mapper)
+        {
+            _$model.Entity.NameLower$Repository = $model.Entity.NameLower$Repository;
+            _excelFormatter = excelFormatter;
+            _mapper = mapper;
+        }
+
+        public async Task<FileContentModel> Handle(Export$model.Entity.PluralName$ request, CancellationToken cancellationToken)
+        {
+            IQueryable<$model.Entity.Name$> query = _$model.Entity.NameLower$Repository.GetEntities()$model.Entity.EntityFields:include(); separator=""$;            
+            query = query.Filter(request.Filter);
+            query = query.OrderBy(request.OrderBy, request.OrderDirection);
+            var $model.Entity.PluralNameLower$ = await query.ToListAsync();
+            var models = _mapper.Map<List<$model.Entity.Name$>, List<$model.Entity.Name$Model>\>($model.Entity.PluralNameLower$);
+            return await _excelFormatter.GetExcelFileAsync(models, "$model.Entity.PluralName$");
+        }
+
+    }
+}
+
+>>
+
+include(field) ::= <<
+
+                .Include(e => e.$field.Name$)
+>>
+
+textFilter(field) ::= <<
+e.$field.Name$.Contains(request.Filter.Text)
+>>

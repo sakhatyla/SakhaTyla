@@ -1,0 +1,16 @@
+﻿main(model) ::= <<
+import { Component, Input } from '@angular/core';
+
+import { $model.Entity.Name$ } from './$model.Entity.NameKebab$.model';
+
+@Component({
+    selector: 'app-$model.Entity.NameKebab$-show',
+    templateUrl: './$model.Entity.NameKebab$-show.component.html'
+})
+
+export class $model.Entity.Name$ShowComponent {
+    @Input()
+    value: $model.Entity.Name$;
+}
+
+>>

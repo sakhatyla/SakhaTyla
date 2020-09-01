@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Web", "SakhaTyla.Web\SakhaTyla.Web.csproj", "{6B39A0B6-C341-4F16-BA87-EB8612B29AD0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Core", "SakhaTyla.Core\SakhaTyla.Core.csproj", "{66DE68DA-1FB5-4450-B17F-3E23CFDA4525}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Data", "SakhaTyla.Data\SakhaTyla.Data.csproj", "{C972B1DA-CBA4-42B1-A58F-AF7DC08020BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Worker", "SakhaTyla.Worker\SakhaTyla.Worker.csproj", "{813C4C98-752C-4A1F-824D-2C93B9BA5A2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{86D3C0EE-BB81-46CB-BE79-2EA9BBD9DD3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Core.UnitTests", "tests\SakhaTyla.Core.UnitTests\SakhaTyla.Core.UnitTests.csproj", "{092939FA-9B25-4484-B96E-E0D613FD449F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48F41545-21BC-4CA3-A882-690B13AD506D}"
+	ProjectSection(SolutionItems) = preProject
+		.cynosura.json = .cynosura.json
+		docker-compose.Development.yaml = docker-compose.Development.yaml
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Infrastructure", "SakhaTyla.Infrastructure\SakhaTyla.Infrastructure.csproj", "{4900DE66-3A8A-4D67-8C77-D3E2A7DA4381}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B39A0B6-C341-4F16-BA87-EB8612B29AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B39A0B6-C341-4F16-BA87-EB8612B29AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B39A0B6-C341-4F16-BA87-EB8612B29AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B39A0B6-C341-4F16-BA87-EB8612B29AD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66DE68DA-1FB5-4450-B17F-3E23CFDA4525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66DE68DA-1FB5-4450-B17F-3E23CFDA4525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66DE68DA-1FB5-4450-B17F-3E23CFDA4525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66DE68DA-1FB5-4450-B17F-3E23CFDA4525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C972B1DA-CBA4-42B1-A58F-AF7DC08020BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C972B1DA-CBA4-42B1-A58F-AF7DC08020BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C972B1DA-CBA4-42B1-A58F-AF7DC08020BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C972B1DA-CBA4-42B1-A58F-AF7DC08020BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{813C4C98-752C-4A1F-824D-2C93B9BA5A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813C4C98-752C-4A1F-824D-2C93B9BA5A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813C4C98-752C-4A1F-824D-2C93B9BA5A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813C4C98-752C-4A1F-824D-2C93B9BA5A2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{092939FA-9B25-4484-B96E-E0D613FD449F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{092939FA-9B25-4484-B96E-E0D613FD449F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{092939FA-9B25-4484-B96E-E0D613FD449F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{092939FA-9B25-4484-B96E-E0D613FD449F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4900DE66-3A8A-4D67-8C77-D3E2A7DA4381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4900DE66-3A8A-4D67-8C77-D3E2A7DA4381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4900DE66-3A8A-4D67-8C77-D3E2A7DA4381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4900DE66-3A8A-4D67-8C77-D3E2A7DA4381}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{092939FA-9B25-4484-B96E-E0D613FD449F} = {86D3C0EE-BB81-46CB-BE79-2EA9BBD9DD3C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B67DE6B-2794-4D74-8B11-B9B93DA5E671}
+	EndGlobalSection
+EndGlobal

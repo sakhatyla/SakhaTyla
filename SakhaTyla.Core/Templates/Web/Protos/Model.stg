@@ -1,0 +1,43 @@
+﻿import "./TypeName.stg"
+
+main(model) ::= <<
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+$model.Entity.DependentEnums:enumImport(); separator="\n"$
+
+option csharp_namespace = "$model.Solution.Namespace$.Web.Protos.$model.Entity.PluralName$";
+
+message $model.Entity.Name$ {
+$model.Entity.AllSystemFields:field(); separator="\n"$
+$model.Entity.AllFields:field(); separator="\n"$
+}
+
+message $model.Entity.Name$PageModel {
+    repeated $model.Entity.Name$ pageItems = 1;
+    int32 totalItems = 2;
+    int32 currentPageIndex = 3;
+}
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+    $field:typeName()$ $field.NameLower$ = $field.Number$;
+>>
+
+Entity(field) ::= <<
+    $field.Entity.IdField:typeName()$ $field.NameLower$$field.Entity.IdField.Name$ = $field.Number$;
+>>
+
+Enum(field) ::= <<
+    $field.Enum.Name$ $field.NameLower$ = $field.Number$;
+>>
+
+enumImport(enum) ::= <<
+import "Protos/$enum.Name$/$enum.NameLower$.proto";
+>>

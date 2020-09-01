@@ -1,0 +1,80 @@
+﻿import "./TypeName.stg"
+
+main(model) ::= <<
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/$model.Entity.PluralName$/$model.Entity.NameLower$Model.proto";
+import "Protos/$model.Entity.PluralName$/$model.Entity.NameLower$Filter.proto";
+$model.Entity.DependentEnums:enumImport(); separator="\n"$
+
+option csharp_namespace = "$model.Solution.Namespace$.Web.Protos.$model.Entity.PluralName$";
+
+service $model.Entity.Name$Service {
+    rpc Get$model.Entity.PluralName$(Get$model.Entity.PluralName$Request) returns ($model.Entity.Name$PageModel);
+    rpc Get$model.Entity.Name$(Get$model.Entity.Name$Request) returns ($model.Entity.Name$);
+    rpc Update$model.Entity.Name$(Update$model.Entity.Name$Request) returns (Empty);
+    rpc Create$model.Entity.Name$(Create$model.Entity.Name$Request) returns (CreatedEntity);
+    rpc Delete$model.Entity.Name$(Delete$model.Entity.Name$Request) returns (Empty);
+}
+
+message Create$model.Entity.Name$Request {
+$model.Entity.AllFields:field(); separator="\n"$
+}
+
+message Delete$model.Entity.Name$Request {
+    $model.Entity.IdField:typeName()$ $model.Entity.IdField.NameLower$ = $model.Entity.IdField.Number$;
+}
+
+message Get$model.Entity.Name$Request {
+    $model.Entity.IdField:typeName()$ $model.Entity.IdField.NameLower$ = $model.Entity.IdField.Number$;
+}
+
+message Get$model.Entity.PluralName$Request {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    $model.Entity.Name$Filter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message Update$model.Entity.Name$Request {
+    $model.Entity.IdField:typeName()$ $model.Entity.IdField.NameLower$ = $model.Entity.IdField.Number$;
+$model.Entity.AllFields:field(); separator="\n"$
+}
+
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+    oneof $field.NameLower$OneOf {
+        $field:typeName()$ $field.NameLower$ = $field.Number$;
+    }
+>>
+
+Entity(field) ::= <<
+    oneof $field.NameLower$$field.Entity.IdField.Name$OneOf {
+        $field.Entity.IdField:typeName()$ $field.NameLower$$field.Entity.IdField.Name$ = $field.Number$;
+    }
+>>
+
+Enum(field) ::= <<
+    oneof $field.NameLower$OneOf {
+        $field.Enum.Name$ $field.NameLower$ = $field.Number$;
+    }
+>>
+
+enumImport(enum) ::= <<
+import "Protos/$enum.Name$/$enum.NameLower$.proto";
+>>

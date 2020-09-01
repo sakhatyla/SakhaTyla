@@ -1,0 +1,16 @@
+﻿main(model) ::= <<
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
+using Cynosura.Web.Infrastructure;
+
+namespace $model.Solution.Namespace$.Web.Routes
+{
+    public class $model.Entity.Name$Module : IConfigurationModule<IEndpointRouteBuilder>
+    {
+        public void Configure(IEndpointRouteBuilder configuration)
+        {
+            configuration.MapGrpcService<Services.$model.Entity.Name$Service>();
+        }
+    }
+}
+>>

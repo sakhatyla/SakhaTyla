@@ -1,0 +1,72 @@
+﻿{
+  "id": "29ca3f0a-ed32-443a-9fb4-1b7fad659ec3",
+  "name": "File",
+  "pluralName": "Files",
+  "displayName": "File",
+  "pluralDisplayName": "Files",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "4e95ac9b-10b1-4b0b-9260-4b9de94d4bd3",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 100,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "f17aea12-413b-43c6-a7f2-0b99afdbac91",
+      "name": "ContentType",
+      "displayName": "Content Type",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "308a0ee9-44fc-4b02-babf-444974fb5182",
+      "name": "Content",
+      "displayName": "Content",
+      "type": "Blob",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "c7a42b29-1e8b-41b4-8e28-c647c0dbe0f7",
+      "name": "Url",
+      "displayName": "Url",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "2065634f-4258-46ee-8ef2-7d13d407d16e",
+      "name": "Group",
+      "displayName": "Group",
+      "type": null,
+      "size": null,
+      "entityId": "9c0adb44-715d-473b-bbcb-384d9a502876",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

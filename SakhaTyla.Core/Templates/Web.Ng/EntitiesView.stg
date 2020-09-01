@@ -1,0 +1,5 @@
+﻿main(model) ::= <<
+<mat-card class="mat-card-list">
+    <app-$model.Entity.NameKebab$-list [state]="state"></app-$model.Entity.NameKebab$-list>
+</mat-card>
+>>

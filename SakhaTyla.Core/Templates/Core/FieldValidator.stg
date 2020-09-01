@@ -1,0 +1,27 @@
+﻿fieldValidator(field) ::= <<
+$field:(field.Template)()$$field:length()$$field:required()$$field:name()$;
+>>
+
+Type(field) ::= <<
+RuleFor(x => x.$field.Name$)
+>>
+
+Entity(field) ::= <<
+RuleFor(x => x.$field.Name$Id)
+>>
+
+Enum(field) ::= <<
+RuleFor(x => x.$field.Name$)
+>>
+
+required(field) ::= <<
+$if(field.IsRequired)$.NotEmpty()$endif$
+>>
+
+length(field) ::= <<
+$if(field.Size)$.MaximumLength($field.Size$)$endif$
+>>
+
+name(field) ::= <<
+$if(field.IsRequired||field.Size)$.WithName(x => localizer["$field.DisplayName$"])$endif$
+>>

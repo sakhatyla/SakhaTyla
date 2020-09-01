@@ -1,0 +1,3 @@
+﻿main(model) ::= <<
+{{ $model.Enum.Name$Display[value] }}
+>>

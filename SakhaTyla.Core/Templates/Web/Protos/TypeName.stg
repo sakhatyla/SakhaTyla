@@ -1,0 +1,47 @@
+﻿typeName(field) ::= <<
+$field:({typeName$field.TypeTemplate$})()$
+>>
+
+typeNameString(field) ::= <<
+string
+>>
+
+typeNameInt32(field) ::= <<
+int32
+>>
+
+typeNameInt64(field) ::= <<
+int64
+>>
+
+typeNameDecimal(field) ::= <<
+DecimalValue
+>>
+
+typeNameDouble(field) ::= <<
+double
+>>
+
+typeNameBoolean(field) ::= <<
+bool
+>>
+
+typeNameDateTime(field) ::= <<
+google.protobuf.Timestamp
+>>
+
+typeNameDate(field) ::= <<
+google.protobuf.Timestamp
+>>
+
+typeNameTime(field) ::= <<
+google.protobuf.Duration
+>>
+
+typeNameGuid(field) ::= <<
+string
+>>
+
+typeNameBlob(field) ::= <<
+bytes
+>>

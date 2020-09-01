@@ -1,0 +1,21 @@
+﻿main(model) ::= <<
+using AutoMapper;
+using $model.Solution.Namespace$.Core.Entities;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models;
+
+namespace $model.Solution.Namespace$.Core.AutoMapper
+{
+    public class $model.Entity.Name$Profile : Profile
+    {
+        public $model.Entity.Name$Profile()
+        {
+            CreateMap<$model.Entity.Name$, $model.Entity.Name$Model>();
+            CreateMap<$model.Entity.Name$, $model.Entity.Name$ShortModel>();
+            CreateMap<Create$model.Entity.Name$, $model.Entity.Name$>();
+            CreateMap<Update$model.Entity.Name$, $model.Entity.Name$>();
+        }
+    }
+}
+
+>>

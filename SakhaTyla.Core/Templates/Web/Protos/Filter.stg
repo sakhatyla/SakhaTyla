@@ -1,0 +1,121 @@
+﻿import "./TypeName.stg"
+
+main(model) ::= <<
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+$model.Entity.DependentEnums:enumImport(); separator="\n"$
+
+option csharp_namespace = "$model.Solution.Namespace$.Web.Protos.$model.Entity.PluralName$";
+
+message $model.Entity.Name$Filter {
+$model.Entity.AllFields:field(); separator="\n"$
+}
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+$field:(field.TypeTemplate)()$
+>>
+
+Entity(field) ::= <<
+    oneof $field.NameLower$$field.Entity.IdField.Name$OneOf {
+        $field.Entity.IdField:typeName()$ $field.NameLower$$field.Entity.IdField.Name$ = $field.Number$0;
+    }
+>>
+
+Enum(field) ::= <<
+    oneof $field.NameLower$OneOf {
+        $field.Enum.Name$ $field.NameLower$ = $field.Number$0;
+    }
+>>
+
+String(field) ::= <<
+    oneof $field.NameLower$OneOf {
+        $field:typeName()$ $field.NameLower$ = $field.Number$0;
+    }
+>>
+
+Int32(field) ::= <<
+    oneof $field.NameLower$FromOneOf {
+        $field:typeName()$ $field.NameLower$From = $field.Number$0;
+    }
+    oneof $field.NameLower$ToOneOf {
+        $field:typeName()$ $field.NameLower$To = $field.Number$1;
+    }
+>>
+
+Int64(field) ::= <<
+    oneof $field.NameLower$FromOneOf {
+        $field:typeName()$ $field.NameLower$From = $field.Number$0;
+    }
+    oneof $field.NameLower$ToOneOf {
+        $field:typeName()$ $field.NameLower$To = $field.Number$1;
+    }
+>>
+
+Decimal(field) ::= <<
+    oneof $field.NameLower$FromOneOf {
+        $field:typeName()$ $field.NameLower$From = $field.Number$0;
+    }
+    oneof $field.NameLower$ToOneOf {
+        $field:typeName()$ $field.NameLower$To = $field.Number$1;
+    }
+>>
+
+Double(field) ::= <<
+    oneof $field.NameLower$FromOneOf {
+        $field:typeName()$ $field.NameLower$From = $field.Number$0;
+    }
+    oneof $field.NameLower$ToOneOf {
+        $field:typeName()$ $field.NameLower$To = $field.Number$1;
+    }
+>>
+
+Boolean(field) ::= <<
+    oneof $field.NameLower$OneOf {
+        $field:typeName()$ $field.NameLower$ = $field.Number$0;
+    }
+>>
+
+DateTime(field) ::= <<
+    oneof $field.NameLower$FromOneOf {
+        $field:typeName()$ $field.NameLower$From = $field.Number$0;
+    }
+    oneof $field.NameLower$ToOneOf {
+        $field:typeName()$ $field.NameLower$To = $field.Number$1;
+    }
+>>
+
+Date(field) ::= <<
+    oneof $field.NameLower$FromOneOf {
+        $field:typeName()$ $field.NameLower$From = $field.Number$0;
+    }
+    oneof $field.NameLower$ToOneOf {
+        $field:typeName()$ $field.NameLower$To = $field.Number$1;
+    }
+>>
+
+Time(field) ::= <<
+    oneof $field.NameLower$FromOneOf {
+        $field:typeName()$ $field.NameLower$From = $field.Number$0;
+    }
+    oneof $field.NameLower$ToOneOf {
+        $field:typeName()$ $field.NameLower$To = $field.Number$1;
+    }
+>>
+
+Guid(field) ::= <<
+    oneof $field.NameLower$OneOf {
+        $field:typeName()$ $field.NameLower$ = $field.Number$0;
+    }
+>>
+
+enumImport(enum) ::= <<
+import "Protos/$enum.Name$/$enum.NameLower$.proto";
+>>

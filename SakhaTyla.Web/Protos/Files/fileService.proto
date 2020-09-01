@@ -1,0 +1,65 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Files/fileModel.proto";
+import "Protos/Files/fileFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Files";
+
+service FileService {
+    rpc GetFiles(GetFilesRequest) returns (FilePageModel);
+    rpc GetFile(GetFileRequest) returns (File);
+    rpc UpdateFile(UpdateFileRequest) returns (Empty);
+    rpc CreateFile(CreateFileRequest) returns (CreatedEntity);
+    rpc DeleteFile(DeleteFileRequest) returns (Empty);
+}
+
+message CreateFileRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof contentTypeOneOf {
+        string contentType = 7;
+    }
+    oneof contentOneOf {
+        bytes content = 8;
+    }
+    oneof groupIdOneOf {
+        int32 groupId = 10;
+    }
+}
+
+message DeleteFileRequest {
+    int32 id = 1;
+}
+
+message GetFileRequest {
+    int32 id = 1;
+}
+
+message GetFilesRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    FileFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateFileRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof contentTypeOneOf {
+        string contentType = 7;
+    }
+    oneof contentOneOf {
+        bytes content = 8;
+    }
+}

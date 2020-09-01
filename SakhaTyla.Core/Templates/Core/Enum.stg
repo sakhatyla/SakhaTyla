@@ -1,0 +1,22 @@
+﻿main(model) ::= <<
+using System;
+using System.ComponentModel;
+
+namespace $model.Solution.Namespace$.Core.Enums
+{
+    public enum $model.Enum.Name$
+    {
+$model.Enum.Values:enumValue(); separator=",\n"$
+    }
+}
+
+>>
+
+enumValue(value) ::= <<
+        $value:enumDisplayName()$
+        $value.Name$$if(value.Value)$ = $value.Value$$endif$
+>>
+
+enumDisplayName(value) ::= <<
+[Description("$value.DisplayNameOrName$")]
+>>

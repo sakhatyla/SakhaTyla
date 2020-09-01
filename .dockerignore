@@ -1,0 +1,7 @@
+.vs/
+.idea/
+.git/
+**/bin/
+**/obj/
+**/out/
+**/node_modules

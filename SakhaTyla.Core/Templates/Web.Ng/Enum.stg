@@ -1,0 +1,18 @@
+﻿main(model) ::= <<
+export enum $model.Enum.Name$ {
+$model.Enum.Values:enumValue(); separator=",\n"$
+}
+
+const $model.Enum.Name$Display: { [index: number]: string } = {};
+$model.Enum.Values:enumDisplay(); separator="\n"$
+export { $model.Enum.Name$Display };
+
+>>
+
+enumValue(value) ::= <<
+    $value.Name$$if(value.Value)$ = $value.Value$$endif$
+>>
+
+enumDisplay(value) ::= <<
+$model.Enum.Name$Display[$model.Enum.Name$.$value.Name$] = '$value.DisplayNameOrName$';
+>>

@@ -1,0 +1,3 @@
+﻿main(model) ::= <<
+{{ value?.$model.Entity.DefaultField.NameLower$ }}
+>>

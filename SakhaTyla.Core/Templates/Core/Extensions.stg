@@ -1,0 +1,171 @@
+﻿main(model) ::= <<
+using System;
+using System.Linq;
+using $model.Solution.Namespace$.Core.Entities;
+using $model.Solution.Namespace$.Core.Infrastructure;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
+{
+    public static class $model.Entity.Name$Extensions
+    {
+        public static IOrderedQueryable<$model.Entity.Name$> OrderBy(this IQueryable<$model.Entity.Name$> queryable, string propertyName, OrderDirection? direction)
+        {
+            switch (propertyName)
+            {                
+$model.Entity.AllFields:orderByField(); separator="\n"$
+                case "":
+                case null:
+                    return queryable.OrderBy(e => e.Id);
+                default:
+                    throw new ArgumentException("Property not found", nameof(propertyName));
+            }
+        }
+
+        public static IQueryable<$model.Entity.Name$> Filter(this IQueryable<$model.Entity.Name$> queryable, $model.Entity.Name$Filter filter)
+        {
+            if (!string.IsNullOrEmpty(filter?.Text))
+            {
+                $if(model.Entity.FieldsByType.String)$queryable = queryable.Where(e => $model.Entity.FieldsByType.String:filterFieldByText(); separator=" || "$);$endif$
+            }
+$model.Entity.AllFields:filterByField(); separator="\n"$
+            return queryable;
+        }
+    }
+}
+
+>>
+
+orderByField(field) ::= <<
+                case "$field.Name$":
+                    return direction == OrderDirection.Descending
+                        ? queryable.OrderByDescending(e => e.$field.Name$)
+                        : queryable.OrderBy(e => e.$field.Name$);
+>>
+
+filterFieldByText(field) ::= <<
+e.$field.Name$.Contains(filter.Text)
+>>
+
+filterByField(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+$field:(field.TypeTemplate)()$
+>>
+
+Entity(field) ::= <<
+            if (filter?.$field.Name$$field.Entity.IdField.Name$ != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$$field.Entity.IdField.Name$ == filter.$field.Name$$field.Entity.IdField.Name$);
+            }
+>>
+
+Enum(field) ::= <<
+            if (filter?.$field.Name$ != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ == filter.$field.Name$);
+            }
+>>
+
+String(field) ::= <<
+            if (!string.IsNullOrEmpty(filter?.$field.Name$))
+            {
+                queryable = queryable.Where(e => e.$field.Name$.Contains(filter.$field.Name$));
+            }
+>>
+
+Int32(field) ::= <<
+            if (filter?.$field.Name$From != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ >= filter.$field.Name$From);
+            }
+            if (filter?.$field.Name$To != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ <= filter.$field.Name$To);
+            }
+>>
+
+Int64(field) ::= <<
+            if (filter?.$field.Name$From != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ >= filter.$field.Name$From);
+            }
+            if (filter?.$field.Name$To != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ <= filter.$field.Name$To);
+            }
+>>
+
+Decimal(field) ::= <<
+            if (filter?.$field.Name$From != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ >= filter.$field.Name$From);
+            }
+            if (filter?.$field.Name$To != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ <= filter.$field.Name$To);
+            }
+>>
+
+Double(field) ::= <<
+            if (filter?.$field.Name$From != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ >= filter.$field.Name$From);
+            }
+            if (filter?.$field.Name$To != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ <= filter.$field.Name$To);
+            }
+>>
+
+Boolean(field) ::= <<
+            if (filter?.$field.Name$ != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ == filter.$field.Name$);
+            }
+>>
+
+DateTime(field) ::= <<
+            if (filter?.$field.Name$From != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ >= filter.$field.Name$From);
+            }
+            if (filter?.$field.Name$To != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ <= filter.$field.Name$To);
+            }
+>>
+
+Date(field) ::= <<
+            if (filter?.$field.Name$From != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ >= filter.$field.Name$From);
+            }
+            if (filter?.$field.Name$To != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ <= filter.$field.Name$To);
+            }
+>>
+
+Time(field) ::= <<
+            if (filter?.$field.Name$From != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ >= filter.$field.Name$From);
+            }
+            if (filter?.$field.Name$To != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ <= filter.$field.Name$To);
+            }
+>>
+
+Guid(field) ::= <<
+            if (filter?.$field.Name$ != null)
+            {
+                queryable = queryable.Where(e => e.$field.Name$ == filter.$field.Name$);
+            }
+>>
+
+Blob(field) ::= <<
+>>

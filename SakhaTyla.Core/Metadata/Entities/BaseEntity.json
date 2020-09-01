@@ -1,0 +1,72 @@
+{
+  "id": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "name": "BaseEntity",
+  "pluralName": "BaseEntities",
+  "displayName": "Base Entity",
+  "pluralDisplayName": "Base Entities",
+  "isAbstract": true,
+  "baseEntityId": null,
+  "fields": [
+    {
+      "id": "62df3734-488e-40bb-ac86-b45c247a4c87",
+      "name": "Id",
+      "displayName": "Id",
+      "type": "Int32",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "d0af0e78-124d-4175-bef4-b0d3c497bc29",
+      "name": "CreationDate",
+      "displayName": "Creation Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "74fa604e-ab95-45e8-8cc9-e8199f4553c4",
+      "name": "ModificationDate",
+      "displayName": "Modification Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "97c1a29e-c55f-4585-b1f1-566a782c3cdd",
+      "name": "CreationUser",
+      "displayName": "Creation User",
+      "type": null,
+      "size": null,
+      "entityId": "51c285a8-11d0-4f3c-8b9d-534269015981",
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "94441b3d-b322-4591-9eae-243a3fee23a2",
+      "name": "ModificationUser",
+      "displayName": "Modification User",
+      "type": null,
+      "size": null,
+      "entityId": "51c285a8-11d0-4f3c-8b9d-534269015981",
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

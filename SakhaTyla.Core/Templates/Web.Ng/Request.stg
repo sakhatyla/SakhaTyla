@@ -1,0 +1,57 @@
+﻿main(model) ::= <<
+import { $model.Entity.Name$Filter } from './$model.Entity.NameKebab$-filter.model';
+import { OrderDirection } from '../core/models/order-direction.model';
+$model.Entity.DependentEnums:enumImport(); separator="\n"$
+
+export class Get$model.Entity.PluralName$ {
+    pageIndex?: number;
+    pageSize?: number;
+    filter?: $model.Entity.Name$Filter;
+    orderBy?: string;
+    orderDirection?: OrderDirection;
+}
+
+export class Get$model.Entity.Name$ {
+    $model.Entity.IdField.NameLower$: $model.Entity.IdField.JsTypeName$;
+}
+
+export class Export$model.Entity.PluralName$ {
+    filter?: $model.Entity.Name$Filter;
+    orderBy?: string;
+    orderDirection?: OrderDirection;
+}
+
+export class Update$model.Entity.Name$ {
+    $model.Entity.IdField.NameLower$: $model.Entity.IdField.JsTypeName$;
+$model.Entity.AllFields:field(); separator="\n"$
+}
+
+export class Create$model.Entity.Name$ {
+$model.Entity.AllFields:field(); separator="\n"$
+}
+
+export class Delete$model.Entity.Name$ {
+    $model.Entity.IdField.NameLower$: $model.Entity.IdField.JsTypeName$;
+}
+
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+    $field.NameLower$: $field.JsTypeName$;
+>>
+
+Entity(field) ::= <<
+    $field.NameLower$$field.Entity.IdField.Name$: $field.Entity.IdField.JsTypeName$;
+>>
+
+Enum(field) ::= <<
+    $field.NameLower$: $field.Enum.Name$;
+>>
+
+enumImport(enum) ::= <<
+import { $enum.Name$ } from '../$enum.NameKebab$/$enum.NameKebab$.model';
+>>

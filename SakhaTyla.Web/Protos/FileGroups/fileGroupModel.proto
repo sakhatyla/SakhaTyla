@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "Protos/FileGroupType/fileGroupType.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.FileGroups";
+
+message FileGroup {
+    int32 id = 1;
+    google.protobuf.Timestamp creationDate = 2;
+    google.protobuf.Timestamp modificationDate = 3;
+    int32 creationUserId = 4;
+    int32 modificationUserId = 5;
+    string name = 6;
+    FileGroupType type = 7;
+    string location = 8;
+    string accept = 9;
+}
+
+message FileGroupPageModel {
+    repeated FileGroup pageItems = 1;
+    int32 totalItems = 2;
+    int32 currentPageIndex = 3;
+}

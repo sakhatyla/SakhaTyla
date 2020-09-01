@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Files";
+
+message FileFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+    oneof contentTypeOneOf {
+        string contentType = 70;
+    }
+
+    oneof urlOneOf {
+        string url = 90;
+    }
+    oneof groupIdOneOf {
+        int32 groupId = 100;
+    }
+}

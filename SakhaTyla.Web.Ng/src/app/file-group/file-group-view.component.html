@@ -1,0 +1,39 @@
+﻿<mat-card class="mat-card-view" *transloco="let t">
+
+    <mat-card-header>
+        <mat-card-title>{{ t('File Group') }} <app-file-group-show [value]="fileGroup"></app-file-group-show></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-actions>
+        <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+        <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+    </mat-card-actions>
+
+    <div *ngIf="fileGroup">
+        <div class="field-view">
+            <label>{{ t('Name') }}</label>
+            <div>
+                <app-text-view [value]="fileGroup.name"></app-text-view>
+            </div>
+        </div>
+        <div class="field-view">
+            <label>{{ t('Type') }}</label>
+            <div>
+                <app-file-group-type-view [value]="fileGroup.type"></app-file-group-type-view>
+            </div>
+        </div>
+        <div class="field-view">
+            <label>{{ t('Location') }}</label>
+            <div>
+                <app-text-view [value]="fileGroup.location"></app-text-view>
+            </div>
+        </div>
+        <div class="field-view">
+            <label>{{ t('Accept') }}</label>
+            <div>
+                <app-text-view [value]="fileGroup.accept"></app-text-view>
+            </div>
+        </div>
+    </div>
+
+</mat-card>

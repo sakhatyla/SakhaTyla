@@ -1,0 +1,60 @@
+﻿main(model) ::= <<
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { CoreModule } from '../core/core.module';
+import { TranslocoRootModule } from '../transloco-root.module';
+import { $model.Entity.Name$CoreModule } from '../$model.Entity.NameKebab$-core/$model.Entity.NameKebab$-core.module';
+$model.Entity.DependentEntities:declareEntity(); separator="\n"$
+$model.Entity.DependentEnums:declareEnum(); separator="\n"$
+
+import { $model.Entity.Name$ListComponent } from './$model.Entity.NameKebab$-list.component';
+import { $model.Entity.Name$EditComponent } from './$model.Entity.NameKebab$-edit.component';
+import { $model.Entity.Name$ViewComponent } from './$model.Entity.NameKebab$-view.component';
+import { $model.Entity.PluralName$Component } from './$model.Entity.PluralNameKebab$.component';
+
+@NgModule({
+    declarations: [
+        $model.Entity.Name$ListComponent,
+        $model.Entity.Name$EditComponent,
+        $model.Entity.Name$ViewComponent,
+        $model.Entity.PluralName$Component,
+    ],
+    imports: [
+        RouterModule,
+        CoreModule,
+        TranslocoRootModule,
+$model.Entity.DependentEntities:importEntity(); separator="\n"$
+$model.Entity.DependentEnums:importEnum(); separator="\n"$
+        $model.Entity.Name$CoreModule
+    ],
+    exports: [
+        $model.Entity.Name$ListComponent,
+    ],
+    providers: [
+    ],
+    entryComponents: [
+        $model.Entity.Name$EditComponent
+    ]
+})
+export class $model.Entity.Name$Module {
+    
+}
+
+>>
+
+declareEntity(entity) ::= <<
+import { $entity.Name$CoreModule } from '../$entity.NameKebab$-core/$entity.NameKebab$-core.module';
+>>
+
+importEntity(entity) ::= <<
+        $entity.Name$CoreModule,
+>>
+
+declareEnum(enum) ::= <<
+import { $enum.Name$Module } from '../$enum.NameKebab$/$enum.NameKebab$.module';
+>>
+
+importEnum(enum) ::= <<
+        $enum.Name$Module,
+>>

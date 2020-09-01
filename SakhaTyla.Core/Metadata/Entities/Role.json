@@ -1,0 +1,60 @@
+﻿{
+  "id": "99e4f0b9-6ed6-4d0e-8faa-8c5c85b65909",
+  "name": "Role",
+  "pluralName": "Roles",
+  "displayName": "Role",
+  "pluralDisplayName": "Roles",
+  "isAbstract": false,
+  "baseEntityId": null,
+  "fields": [
+    {
+      "id": "cf8078d8-a0d5-4cf2-b2e1-d33f6932d3f9",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 256,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "ae39241c-6ce3-4259-9c42-df6ee9e9a2ce",
+      "name": "CreationDate",
+      "displayName": "Creation Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "e337d353-f2d9-4ea0-ab84-45088f1ba23c",
+      "name": "ModificationDate",
+      "displayName": "Modification Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "1f754857-b56d-472e-ac84-d3f3efa8b3b1",
+      "name": "DisplayName",
+      "displayName": "Display Name",
+      "type": "String",
+      "size": 100,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

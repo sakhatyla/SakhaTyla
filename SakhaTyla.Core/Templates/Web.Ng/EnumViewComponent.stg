@@ -1,0 +1,20 @@
+﻿main(model) ::= <<
+import { Component, Input } from '@angular/core';
+
+import { $model.Enum.Name$, $model.Enum.Name$Display } from './$model.Enum.NameKebab$.model';
+
+@Component({
+    selector: 'app-$model.Enum.NameKebab$-view',
+    templateUrl: './$model.Enum.NameKebab$-view.component.html'
+})
+
+export class $model.Enum.Name$ViewComponent {
+    constructor() { }
+
+    $model.Enum.Name$Display = $model.Enum.Name$Display;
+
+    @Input()
+    value: $model.Enum.Name$;
+}
+
+>>

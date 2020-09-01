@@ -1,0 +1,60 @@
+﻿{
+  "id": "9c0adb44-715d-473b-bbcb-384d9a502876",
+  "name": "FileGroup",
+  "pluralName": "FileGroups",
+  "displayName": "File Group",
+  "pluralDisplayName": "File Groups",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "f83af1e9-1e6c-43cc-967c-23c0d8c8dbae",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 100,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "98fcd05d-ac94-4f22-8d01-dd649aceacf3",
+      "name": "Type",
+      "displayName": "Type",
+      "type": null,
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": "1a5af1dc-e4cc-433b-982f-4b25b71cb265",
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "68fbae8e-78e4-413c-9d78-e90fd46856f7",
+      "name": "Location",
+      "displayName": "Location",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "573880cc-33db-4b17-92d0-f16e7047e320",
+      "name": "Accept",
+      "displayName": "Accept",
+      "type": "String",
+      "size": 1000,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

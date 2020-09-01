@@ -1,0 +1,42 @@
+﻿main(model) ::= <<
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Cynosura.Core.Data;
+using $model.Solution.Namespace$.Core.Entities;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
+{
+    public class Get$model.Entity.Name$Handler : IRequestHandler<Get$model.Entity.Name$, $model.Entity.Name$Model>
+    {
+        private readonly IEntityRepository<$model.Entity.Name$> _$model.Entity.NameLower$Repository;
+        private readonly IMapper _mapper;
+
+        public Get$model.Entity.Name$Handler(IEntityRepository<$model.Entity.Name$> $model.Entity.NameLower$Repository,
+            IMapper mapper)
+        {
+            _$model.Entity.NameLower$Repository = $model.Entity.NameLower$Repository;
+            _mapper = mapper;
+        }
+
+        public async Task<$model.Entity.Name$Model> Handle(Get$model.Entity.Name$ request, CancellationToken cancellationToken)
+        {
+            var $model.Entity.NameLower$ = await _$model.Entity.NameLower$Repository.GetEntities()$model.Entity.EntityFields:include(); separator=""$
+                .Where(e => e.$model.Entity.IdField.Name$ == request.$model.Entity.IdField.Name$)
+                .FirstOrDefaultAsync();
+            return _mapper.Map<$model.Entity.Name$, $model.Entity.Name$Model>($model.Entity.NameLower$);
+        }
+
+    }
+}
+
+>>
+
+include(field) ::= <<
+
+                .Include(e => e.$field.Name$)
+>>

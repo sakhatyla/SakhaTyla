@@ -1,0 +1,14 @@
+﻿main(model) ::= <<
+syntax = "proto3";
+
+option csharp_namespace = "$model.Solution.Namespace$.Web.Protos.$model.Enum.Name$";
+
+enum $model.Enum.Name$ {
+$model.Enum.Values:enumValue(); separator="\n"$
+}
+
+>>
+
+enumValue(value) ::= <<
+    $value.Name$ = $value.Value$;
+>>

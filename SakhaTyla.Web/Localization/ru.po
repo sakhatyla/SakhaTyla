@@ -1,0 +1,257 @@
+﻿msgid "First Name"
+msgstr "Имя"
+
+msgid "Last Name"
+msgstr "Фамилия"
+
+msgid "Creation Date"
+msgstr "Дата создания"
+
+msgid "Modification Date"
+msgstr "Дата изменения"
+
+msgid "Role"
+msgstr "Роль"
+
+msgid "Roles"
+msgstr "Роли"
+
+msgid "Name"
+msgstr "Название"
+
+msgid "Display Name"
+msgstr "Отображаемое название"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Email Confirmed"
+msgstr "Email подтвержден"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Confirm password"
+msgstr "Подтвердите пароль"
+
+msgid "Passwords do not match"
+msgstr "Пароли на совпадают"
+
+msgid "{0} {1} not found"
+msgstr "{0} {1} - не найдено"
+
+msgid "The {0} field is required."
+msgstr "Поле {0} обязательно"
+
+msgid "The {0} field is not a valid e-mail address."
+msgstr "Поле {0} не является валидным email адресом"
+
+msgid "The {0} must be at least {2} and at max {1} characters long."
+msgstr "Поле {0} должно быть от {2} до {1} символов."
+
+msgid "The password and confirmation password do not match."
+msgstr "Пароли на совпадают."
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Login"
+msgstr "Вход"
+
+msgid "Register"
+msgstr "Регистрация"
+
+msgid "Log in"
+msgstr "Войти"
+
+msgid "Remember me?"
+msgstr "Запомнить?"
+
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
+
+msgid "Register as a new user"
+msgstr "Зарегистрироваться"
+
+msgid "Use another service to log in."
+msgstr "Войдите с помощью других сервисов."
+
+msgid "Use another service to register."
+msgstr "Зарегистрируйтесь с помощью других сервисов."
+
+msgid "Invalid login attempt."
+msgstr "Не удалось войти."
+
+msgid "Register confirmation"
+msgstr "Подтверждение регистрации"
+
+msgid "Please check your email to confirm your account."
+msgstr "Проверьте вашу почту для подтверждения вашей регистрации."
+
+msgid "Confirm your email"
+msgstr "Подтвердите ваше email"
+
+msgid "Please confirm your account by <a href='{0}'>clicking here</a>."
+msgstr "Подтвердите ваш email <a href='{0}'>нажав сюда</a>."
+
+msgid "Confirm email"
+msgstr "Подтверждение email"
+
+msgid "Thank you for confirming your email."
+msgstr "Ваш email подтвержден."
+
+msgid "Error confirming your email."
+msgstr "Ошибка подтверждения email."
+
+msgid "Enter your email."
+msgstr "Введите ваш email."
+
+msgid "Submit"
+msgstr "Отправить"
+
+msgid "Forgot password confirmation"
+msgstr "Подтверждение сброса пароля"
+
+msgid "Please check your email to reset your password."
+msgstr "Проверьте вашу почту для сброса пароля."
+
+msgid "Reset Password"
+msgstr "Восстановление пароля"
+
+msgid "Please reset your password by <a href='{0}'>clicking here</a>."
+msgstr "Сбросьте пароль <a href='{0}'>нажав сюда</a>."
+
+msgid "Reset password"
+msgstr "Сбросить пароль"
+
+msgid "Reset"
+msgstr "Сбросить"
+
+msgid "Your password has been reset."
+msgstr "Ваш пароль успешно изменен."
+
+msgid "Click here to log in"
+msgstr "Войти"
+
+msgid "Reset password confirmation"
+msgstr "Подтверждение сброса пароля"
+
+msgid "Profile"
+msgstr "Профиль"
+
+msgid "Manage your account"
+msgstr "Управление аккаунтом"
+
+msgid "Change your account settings"
+msgstr "Изменение настроек аккаунта"
+
+msgid "Username"
+msgstr "Логин"
+
+msgid "Phone number"
+msgstr "Номер телефона"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Your profile has been updated"
+msgstr "Ваш профиль сохранен"
+
+msgid "Two-factor authentication"
+msgstr "Двухфакторная аутентификация"
+
+msgid "Manage Email"
+msgstr "Email"
+
+msgid "New email"
+msgstr "Новый email"
+
+msgid "Change email"
+msgstr "Изменить email"
+
+msgid "Send verification email"
+msgstr "Отправить email для подтверждения"
+
+msgid "Your email is unchanged."
+msgstr "Ваш email не изменился."
+
+msgid "Confirmation link to change email sent. Please check your email."
+msgstr "Ссылка на подтверждение email отправлена. Проверьте вашу почту."
+
+msgid "Confirm email change"
+msgstr "Подтверждение изменения email"
+
+msgid "Error changing email."
+msgstr "Ошибка изменения email"
+
+msgid "Error changing user name."
+msgstr "Ошибка изменения логина"
+
+msgid "Thank you for confirming your email change."
+msgstr "Ваш новый email подтвержден."
+
+msgid "Change password"
+msgstr "Изменение пароля"
+
+msgid "Update password"
+msgstr "Изменить пароль"
+
+msgid "Current password"
+msgstr "Текущий пароль"
+
+msgid "New password"
+msgstr "Новый пароль"
+
+msgid "Confirm new password"
+msgstr "Подтвердить новый пароль"
+
+msgid "Your password has been changed."
+msgstr "Ваш пароль изменен"
+
+msgid "Two-factor authentication (2FA)"
+msgstr "Двухфакторная аутентификация"
+
+msgid "Authenticator app"
+msgstr "Приложение Authenticator"
+
+msgid "Add authenticator app"
+msgstr "Добавить приложение Authenticator"
+
+msgid "Personal Data"
+msgstr "Персональные данные"
+
+msgid "File Groups"
+msgstr "Группы файлов"
+
+msgid "File Group"
+msgstr "Группы файлов"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Location"
+msgstr "Путь"
+
+msgid "Accept"
+msgstr "Accept"
+
+msgid "Files"
+msgstr "Файлы"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Group"
+msgstr "Группа"
+
+msgid "Content Type"
+msgstr "Content Type"
+
+msgid "Url"
+msgstr "Url"

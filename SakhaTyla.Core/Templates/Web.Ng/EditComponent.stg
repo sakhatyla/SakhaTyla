@@ -1,0 +1,101 @@
+﻿main(model) ::= <<
+import { Component, Input, OnInit, Inject } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Observable, of } from 'rxjs';
+import { filter } from 'rxjs/operators';
+
+import { Error } from '../core/error.model';
+import { NoticeHelper } from '../core/notice.helper';
+import { ConvertStringTo } from '../core/converter.helper';
+
+import { $model.Entity.Name$ } from '../$model.Entity.NameKebab$-core/$model.Entity.NameKebab$.model';
+import { $model.Entity.Name$Service } from '../$model.Entity.NameKebab$-core/$model.Entity.NameKebab$.service';
+
+class DialogData {
+    id: $model.Entity.IdField.JsTypeName$;
+}
+
+@Component({
+    selector: 'app-$model.Entity.NameKebab$-edit',
+    templateUrl: './$model.Entity.NameKebab$-edit.component.html',
+    styleUrls: ['./$model.Entity.NameKebab$-edit.component.scss']
+})
+export class $model.Entity.Name$EditComponent implements OnInit {
+    id: $model.Entity.IdField.JsTypeName$;
+    $model.Entity.NameLower$Form = this.fb.group({
+        id: [],
+$model.Entity.AllFields:field(); separator=",\n"$
+    });
+    $model.Entity.NameLower$: $model.Entity.Name$;
+    error: Error;
+
+    constructor(public dialogRef: MatDialogRef<$model.Entity.Name$EditComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: DialogData,
+                private $model.Entity.NameLower$Service: $model.Entity.Name$Service,
+                private fb: FormBuilder,
+                private noticeHelper: NoticeHelper) {
+        this.id = data.id;
+    }
+
+    static show(dialog: MatDialog, id: $model.Entity.IdField.JsTypeName$): Observable<any> {
+        const dialogRef = dialog.open($model.Entity.Name$EditComponent, {
+            width: '600px',
+            data: { id: id }
+        });
+        return dialogRef.afterClosed()
+            .pipe(filter(res => res === true));
+    }
+
+    ngOnInit(): void {
+        this.get$model.Entity.Name$();
+    }
+
+    private get$model.Entity.Name$() {
+        const get$model.Entity.Name$\$ = !this.id ?
+            of(new $model.Entity.Name$()) :
+            this.$model.Entity.NameLower$Service.get$model.Entity.Name$({ id: this.id });
+        get$model.Entity.Name$\$.subscribe($model.Entity.NameLower$ => {
+            this.$model.Entity.NameLower$ = $model.Entity.NameLower$;
+            this.$model.Entity.NameLower$Form.patchValue(this.$model.Entity.NameLower$);
+        });
+    }
+
+    onSave(): void {
+        this.save$model.Entity.Name$();
+    }
+
+    private save$model.Entity.Name$() {
+        const save$model.Entity.Name$\$ = this.id ?
+            this.$model.Entity.NameLower$Service.update$model.Entity.Name$(this.$model.Entity.NameLower$Form.value) :
+            this.$model.Entity.NameLower$Service.create$model.Entity.Name$(this.$model.Entity.NameLower$Form.value);
+        save$model.Entity.Name$\$.subscribe(() => this.dialogRef.close(true),
+            error => this.onError(error));
+    }
+
+    onError(error: Error) {
+        this.error = error;
+        if (error) {
+            this.noticeHelper.showError(error);
+            Error.setFormErrors(this.$model.Entity.NameLower$Form, error);
+        }
+    }
+}
+
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+        $field.NameLower$: []
+>>
+
+Entity(field) ::= <<
+        $field.NameLower$$field.Entity.IdField.Name$: []
+>>
+
+Enum(field) ::= <<
+        $field.NameLower$: []
+>>

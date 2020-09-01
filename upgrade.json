@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "upgrades": [
+        { 
+            "from": 0, 
+            "to": 1, 
+            "renames": [
+                { "left": "*.Core/Templates/Web/ClientApp", "right": "*.Core/Templates/Web.Ng"},
+                { "left": "*.Web/ClientApp", "right": "*.Web.Ng"}
+            ] 
+        }
+    ]
+}

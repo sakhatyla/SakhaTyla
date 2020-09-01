@@ -1,0 +1,66 @@
+﻿main(model) ::= <<
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using Cynosura.Core.Services.Models;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models;
+using $model.Solution.Namespace$.Web.Protos.$model.Entity.PluralName$;
+
+namespace $model.Solution.Namespace$.Web.AutoMapper
+{
+    public class $model.Entity.Name$Profile : Profile
+    {
+        public $model.Entity.Name$Profile()
+        {
+            CreateMap<Create$model.Entity.Name$Request, Create$model.Entity.Name$>()$model.Entity.AllFields:fieldConditionCreate({})$;
+            CreateMap<Delete$model.Entity.Name$Request, Delete$model.Entity.Name$>();
+            CreateMap<Get$model.Entity.Name$Request, Get$model.Entity.Name$>();
+            CreateMap<Get$model.Entity.PluralName$Request, Get$model.Entity.PluralName$>()
+                .ForMember(dest => dest.PageIndex, opt => opt.Condition(src => src.PageIndexOneOfCase == Get$model.Entity.PluralName$Request.PageIndexOneOfOneofCase.PageIndex))
+                .ForMember(dest => dest.PageSize, opt => opt.Condition(src => src.PageSizeOneOfCase == Get$model.Entity.PluralName$Request.PageSizeOneOfOneofCase.PageSize))
+                .ForMember(dest => dest.OrderDirection, opt => opt.Condition(src => src.OrderDirectionOneOfCase == Get$model.Entity.PluralName$Request.OrderDirectionOneOfOneofCase.OrderDirection));
+            CreateMap<Update$model.Entity.Name$Request, Update$model.Entity.Name$>()$model.Entity.AllFields:fieldConditionUpdate({})$;
+
+            CreateMap<$model.Entity.Name$Model, $model.Entity.Name$>()$model.Entity.AllFields:fieldConditionModel({})$;
+            CreateMap<PageModel<$model.Entity.Name$Model>, $model.Entity.Name$PageModel>()                
+                .ForMember(dest => dest.PageItems, opt => opt.Ignore())
+                .AfterMap((src, dest, rc) => dest.PageItems.AddRange(rc.Mapper.Map<IEnumerable<$model.Entity.Name$>\>(src.PageItems)));
+        }
+    }
+}
+
+>>
+
+fieldConditionCreate(field) ::= <<
+
+                .ForMember(dest => dest.$field:field()$, opt => opt.Condition(src => src.$field:field()$OneOfCase == Create$model.Entity.Name$Request.$field:field()$OneOfOneofCase.$field:field()$))
+>>
+
+fieldConditionUpdate(field) ::= <<
+
+                .ForMember(dest => dest.$field:field()$, opt => opt.Condition(src => src.$field:field()$OneOfCase == Update$model.Entity.Name$Request.$field:field()$OneOfOneofCase.$field:field()$))
+>>
+
+fieldConditionModel(field) ::= <<
+
+                .ForMember(dest => dest.$field:field()$, opt => opt.Condition(src => src.$field:field()$ != default))
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+$field.Name$
+>>
+
+Entity(field) ::= <<
+$field.Name$$field.Entity.IdField.Name$
+>>
+
+Enum(field) ::= <<
+$field.Name$
+>>

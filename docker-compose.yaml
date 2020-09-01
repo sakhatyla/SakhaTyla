@@ -1,0 +1,19 @@
+﻿version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: SakhaTyla.Web/Dockerfile
+    depends_on:
+      - db
+  webng:
+    build:
+      context: SakhaTyla.Web.Ng
+  worker:
+    build:
+      context: .
+      dockerfile: SakhaTyla.Worker/Dockerfile
+    depends_on:
+      - db
+  db:
+    image: 'mcr.microsoft.com/mssql/server:2017-latest-ubuntu'

@@ -1,0 +1,19 @@
+﻿import "FieldValidator.stg"
+
+main(model) ::= <<
+using FluentValidation;
+using Microsoft.Extensions.Localization;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
+{
+    public class Update$model.Entity.Name$Validator : AbstractValidator<Update$model.Entity.Name$>
+    {
+        public Update$model.Entity.Name$Validator(IStringLocalizer<SharedResource> localizer)
+        {
+            $model.Entity.AllFields:fieldValidator(); separator="\n"$
+        }
+
+    }
+}
+
+>>

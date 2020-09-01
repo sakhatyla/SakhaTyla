@@ -1,0 +1,76 @@
+﻿main(model) ::= <<
+import { EntityFilter } from '../core/models/entity-filter.model';
+$model.Entity.DependentEnums:enumImport(); separator="\n"$
+
+export class $model.Entity.Name$Filter extends EntityFilter {
+$model.Entity.AllFields:field(); separator="\n"$
+}
+
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+$field:(field.TypeTemplate)()$
+>>
+
+Entity(field) ::= <<
+    $field.NameLower$$field.Entity.IdField.Name$?: $field.Entity.IdField.JsTypeName$;
+>>
+
+Enum(field) ::= <<
+    $field.NameLower$?: $field.Enum.Name$;
+>>
+
+enumImport(enum) ::= <<
+import { $enum.Name$ } from '../$enum.NameKebab$/$enum.NameKebab$.model';
+>>
+
+String(field) ::= <<
+    $field.NameLower$?: $field.JsTypeName$;
+>>
+
+Int32(field) ::= <<
+    $field.NameLower$From?: $field.JsTypeName$;
+    $field.NameLower$To?: $field.JsTypeName$;
+>>
+
+Int64(field) ::= <<
+    $field.NameLower$From?: $field.JsTypeName$;
+    $field.NameLower$To?: $field.JsTypeName$;
+>>
+
+Decimal(field) ::= <<
+    $field.NameLower$From?: $field.JsTypeName$;
+    $field.NameLower$To?: $field.JsTypeName$;
+>>
+
+Double(field) ::= <<
+    $field.NameLower$From?: $field.JsTypeName$;
+    $field.NameLower$To?: $field.JsTypeName$;
+>>
+
+Boolean(field) ::= <<
+    $field.NameLower$?: $field.JsTypeName$;
+>>
+
+DateTime(field) ::= <<
+    $field.NameLower$From?: $field.JsTypeName$;
+    $field.NameLower$To?: $field.JsTypeName$;
+>>
+
+Date(field) ::= <<
+    $field.NameLower$From?: $field.JsTypeName$;
+    $field.NameLower$To?: $field.JsTypeName$;
+>>
+
+Time(field) ::= <<
+    $field.NameLower$From?: $field.JsTypeName$;
+    $field.NameLower$To?: $field.JsTypeName$;
+>>
+
+Guid(field) ::= <<
+    $field.NameLower$?: $field.JsTypeName$;
+>>

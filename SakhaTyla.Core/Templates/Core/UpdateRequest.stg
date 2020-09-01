@@ -1,0 +1,34 @@
+﻿main(model) ::= <<
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using MediatR;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
+{
+    public class Update$model.Entity.Name$ : IRequest
+    {
+        public $model.Entity.IdField.TypeName$ $model.Entity.IdField.Name$ { get; set; }
+
+        $model.Entity.AllFields:field(); separator="\n\n"$
+    }
+}
+
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+public $field.TypeNameNullable$ $field.Name$ { get; set; }
+>>
+
+Entity(field) ::= <<
+public $field.EntityIdTypeNameNullable$ $field.Name$$field.Entity.IdField.Name$ { get; set; }
+>>
+
+Enum(field) ::= <<
+public Enums.$field.Enum.Name$? $field.Name$ { get; set; }
+>>

@@ -1,0 +1,84 @@
+﻿{
+  "id": "51c285a8-11d0-4f3c-8b9d-534269015981",
+  "name": "User",
+  "pluralName": "Users",
+  "displayName": "User",
+  "pluralDisplayName": "Users",
+  "isAbstract": false,
+  "baseEntityId": null,
+  "fields": [
+    {
+      "id": "e61e1a22-733e-4398-8fa0-3b3dfac12a0f",
+      "name": "UserName",
+      "displayName": "UserName",
+      "type": "String",
+      "size": 256,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "e7d6b2e1-b948-4bfb-b421-7cc19ee0896c",
+      "name": "Email",
+      "displayName": "Email",
+      "type": "String",
+      "size": 256,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "65fafd7e-e220-4938-be3a-f523deda57d2",
+      "name": "CreationDate",
+      "displayName": "Creation Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "25c603d7-4552-4360-ad9e-8f30985299c4",
+      "name": "ModificationDate",
+      "displayName": "Modification Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "5b165057-3055-430f-8950-9084bc52cb3b",
+      "name": "FirstName",
+      "displayName": "First Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "4f000a67-ac2e-470c-ba35-2bad12c6ee9c",
+      "name": "LastName",
+      "displayName": "Last Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

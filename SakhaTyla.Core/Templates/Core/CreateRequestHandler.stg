@@ -1,0 +1,40 @@
+﻿main(model) ::= <<
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
+using Cynosura.Core.Data;
+using $model.Solution.Namespace$.Core.Entities;
+using $model.Solution.Namespace$.Core.Infrastructure;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
+{
+    public class Create$model.Entity.Name$Handler : IRequestHandler<Create$model.Entity.Name$, CreatedEntity<$model.Entity.IdField.TypeName$>\>
+    {
+        private readonly IEntityRepository<$model.Entity.Name$> _$model.Entity.NameLower$Repository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public Create$model.Entity.Name$Handler(IEntityRepository<$model.Entity.Name$> $model.Entity.NameLower$Repository,
+            IUnitOfWork unitOfWork,
+            IMapper mapper)
+        {
+            _$model.Entity.NameLower$Repository = $model.Entity.NameLower$Repository;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+        public async Task<CreatedEntity<$model.Entity.IdField.TypeName$>\> Handle(Create$model.Entity.Name$ request, CancellationToken cancellationToken)
+        {
+            var $model.Entity.NameLower$ = _mapper.Map<Create$model.Entity.Name$, $model.Entity.Name$>(request);
+            _$model.Entity.NameLower$Repository.Add($model.Entity.NameLower$);
+            await _unitOfWork.CommitAsync();
+            return new CreatedEntity<$model.Entity.IdField.TypeName$>() { Id = $model.Entity.NameLower$.$model.Entity.IdField.Name$ };
+        }
+
+    }
+}
+
+>>

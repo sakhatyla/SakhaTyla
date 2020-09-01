@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos";
+
+message CreatedEntity {
+    int32 id = 1;
+}
+
+message Empty {
+
+}
+
+enum OrderDirection {
+    Ascending = 0;
+    Descending = 1;
+}
+
+message DecimalValue {
+
+  // The whole units of the amount.
+  int64 units = 1;
+
+  // Number of nano (10^-9) units of the amount.
+  // The value must be between -999,999,999 and +999,999,999 inclusive.
+  // If `units` is positive, `nanos` must be positive or zero.
+  // If `units` is zero, `nanos` can be positive, zero, or negative.
+  // If `units` is negative, `nanos` must be negative or zero.
+  // For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+  int32 nanos = 2;
+}

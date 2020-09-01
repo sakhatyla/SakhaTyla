@@ -1,0 +1,28 @@
+﻿main(model) ::= <<
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { $model.Entity.PluralName$Component } from './$model.Entity.PluralNameKebab$.component';
+import { $model.Entity.Name$ViewComponent } from './$model.Entity.NameKebab$-view.component';
+import { $model.Entity.Name$Module } from '../$model.Entity.NameKebab$/$model.Entity.NameKebab$.module';
+
+@NgModule({
+    declarations: [
+    ],
+    imports: [
+        RouterModule.forChild([
+            { path: '', component: $model.Entity.PluralName$Component },
+            { path: ':id', component: $model.Entity.Name$ViewComponent }
+        ]),
+        $model.Entity.Name$Module,
+    ],
+    providers: [
+    ],
+    entryComponents: [
+    ]
+})
+export class $model.Entity.Name$RoutedModule {
+    
+}
+
+>>

@@ -1,0 +1,4 @@
+﻿<mat-select [(ngModel)]="innerValue" [disabled]="disabled" [placeholder]="placeholder">
+    <mat-option [value]="null"></mat-option>
+    <mat-option [value]="fileGroupType.key" *ngFor="let fileGroupType of FileGroupType | enumkeys">{{ FileGroupTypeDisplay[fileGroupType.key] }}</mat-option>
+</mat-select>

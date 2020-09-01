@@ -1,0 +1,65 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Users/userModel.proto";
+import "Protos/Users/userFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Users";
+
+service UserService {
+    rpc GetUsers(GetUsersRequest) returns (UserPageModel);
+    rpc GetUser(GetUserRequest) returns (User);
+    rpc UpdateUser(UpdateUserRequest) returns (Empty);
+    rpc CreateUser(CreateUserRequest) returns (CreatedEntity);
+    rpc DeleteUser(DeleteUserRequest) returns (Empty);
+}
+
+message CreateUserRequest {
+    oneof emailOneOf {
+        string email = 2;
+    }
+    string password = 52;
+    string confirmPassword = 53;
+    repeated int32 roleIds = 51;
+    oneof firstNameOneOf {
+        string firstName = 5;
+    }
+    oneof lastNameOneOf {
+        string lastName = 6;
+    }
+}
+
+message DeleteUserRequest {
+    int32 id = 1;
+}
+
+message GetUserRequest {
+    int32 id = 1;
+}
+
+message GetUsersRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    UserFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateUserRequest {
+    int32 id = 50;
+    string password = 52;
+    string confirmPassword = 53;
+    repeated int32 roleIds = 51;
+    oneof firstNameOneOf {
+        string firstName = 5;
+    }
+    oneof lastNameOneOf {
+        string lastName = 6;
+    }
+}

@@ -1,0 +1,12 @@
+.file {
+    display: flex;
+    justify-content: space-between;
+    
+    .delete {
+        color: red;
+
+        &.hide {
+            display: none;
+        }
+    }    
+}

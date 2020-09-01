@@ -1,0 +1,12 @@
+﻿<ng-container *transloco="let t">
+    <div *ngIf="group" class="file">
+        <div class="name">
+            {{ file?.name }}
+            <a class="delete" href="javascript:void(0);" (click)="onDelete()" [ngClass]="{ 'hide': !file }"><mat-icon [inline]="true">clear</mat-icon></a>
+        </div>
+        <div class="actions">
+            <button type="button" mat-raised-button (click)="fileInput.click()">{{ t('Upload File') }}</button>
+            <input type="file" id="file" name="file" #fileInput (change)="onFileChange($event)" [accept]="group.accept" hidden />
+        </div>        
+    </div>
+</ng-container>

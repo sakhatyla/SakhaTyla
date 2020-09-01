@@ -1,0 +1,18 @@
+﻿main(model) ::= <<
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Cynosura.EF;
+using $model.Solution.Namespace$.Core.Entities;
+
+namespace $model.Solution.Namespace$.Data.Configurations
+{
+    public class $model.Entity.Name$Configuration : IEntityTypeConfiguration<$model.Entity.Name$>
+    {
+        public void Configure(EntityTypeBuilder<$model.Entity.Name$> builder)
+        {
+            builder.ToTable("$model.Entity.PluralName$");
+        }
+    }
+}
+
+>>

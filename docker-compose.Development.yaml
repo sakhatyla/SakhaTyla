@@ -1,0 +1,36 @@
+﻿version: '3'
+services:
+  web:
+    environment:
+      ASPNETCORE_URLS: 'http://+:5000;https://+:5001'
+      ConnectionStrings__DefaultConnection: 'Server=tcp:db,1433;Database=SakhaTyla;User ID=sa;Password=Qwerty123!;MultipleActiveResultSets=false'
+      IdentityServer__Clients__SakhaTyla.Web.Ng__RedirectUri: 'http://localhost:5010/authentication/login-callback'
+      IdentityServer__Clients__SakhaTyla.Web.Ng__LogoutUri: 'http://localhost:5010/authentication/logout-callback'
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_Kestrel__Certificates__Default__Password: qwe123
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnet.pfx
+      Cors__Origin: http://localhost:5010
+    ports:
+      - '0.0.0.0:5000:5000'
+      - '0.0.0.0:5001:5001'
+    volumes:
+      - '${USERPROFILE}/.aspnet/https:/https/'
+  webng:
+    ports:
+      - '0.0.0.0:5010:80'
+    volumes:
+      - ./volumes/webng/config.json:/usr/share/nginx/html/assets/config.json
+  worker:
+    environment:
+      ConnectionStrings__DefaultConnection: 'Server=tcp:db,1433;Database=SakhaTyla;User ID=sa;Password=Qwerty123!;MultipleActiveResultSets=false'
+      DOTNET_ENVIRONMENT: Development
+  db:
+    ports:
+      - '0.0.0.0:1433:1433'
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: 'Qwerty123!'
+    volumes:
+      - db:/var/opt/mssql
+volumes:
+  db:

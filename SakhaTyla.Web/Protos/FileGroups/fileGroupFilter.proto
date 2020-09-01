@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+import "Protos/FileGroupType/fileGroupType.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.FileGroups";
+
+message FileGroupFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+    oneof typeOneOf {
+        FileGroupType type = 70;
+    }
+    oneof locationOneOf {
+        string location = 80;
+    }
+    oneof acceptOneOf {
+        string accept = 90;
+    }
+}

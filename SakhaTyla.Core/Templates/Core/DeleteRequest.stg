@@ -1,0 +1,13 @@
+﻿main(model) ::= <<
+using System;
+using MediatR;
+
+namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
+{
+    public class Delete$model.Entity.Name$ : IRequest
+    {
+        public $model.Entity.IdField.TypeName$ $model.Entity.IdField.Name$ { get; set; }
+    }
+}
+
+>>

@@ -1,0 +1,57 @@
+﻿main(model) ::= <<
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { ConfigService } from '../config/config.service';
+import { CreatedEntity } from '../core/models/created-entity.model';
+import { Page } from '../core/page.model';
+import { FileResult } from '../core/file-result.model';
+
+import { $model.Entity.Name$ } from './$model.Entity.NameKebab$.model';
+import { Get$model.Entity.PluralName$, Get$model.Entity.Name$, Export$model.Entity.PluralName$,
+    Update$model.Entity.Name$, Create$model.Entity.Name$, Delete$model.Entity.Name$ } from './$model.Entity.NameKebab$-request.model';
+
+@Injectable({ providedIn: 'root' })
+export class $model.Entity.Name$Service {
+    private apiUrl = this.configService.config.apiBaseUrl + '/api';
+
+    constructor(private httpClient: HttpClient, private configService: ConfigService) { }
+
+    get$model.Entity.PluralName$(get$model.Entity.PluralName$: Get$model.Entity.PluralName$): Observable<Page<$model.Entity.Name$>\> {
+        const url = `\${this.apiUrl}/Get$model.Entity.PluralName$`;
+        return this.httpClient.post<Page<$model.Entity.Name$>\>(url, get$model.Entity.PluralName$);
+    }
+
+    get$model.Entity.Name$(get$model.Entity.Name$: Get$model.Entity.Name$): Observable<$model.Entity.Name$> {
+        const url = `\${this.apiUrl}/Get$model.Entity.Name$`;
+        return this.httpClient.post<$model.Entity.Name$>(url, get$model.Entity.Name$);
+    }
+
+    export$model.Entity.PluralName$(export$model.Entity.PluralName$: Export$model.Entity.PluralName$): Observable<FileResult> {
+        const url = `\${this.apiUrl}/Export$model.Entity.PluralName$`;
+        return this.httpClient.post(url, export$model.Entity.PluralName$, {
+            responseType: 'blob' as 'json',
+            observe: 'response',
+        }).pipe(map((response => new FileResult(response))));
+    }
+
+    update$model.Entity.Name$(update$model.Entity.Name$: Update$model.Entity.Name$): Observable<{}> {
+        const url = `\${this.apiUrl}/Update$model.Entity.Name$`;
+        return this.httpClient.post(url, update$model.Entity.Name$);
+    }
+
+    create$model.Entity.Name$(create$model.Entity.Name$: Create$model.Entity.Name$): Observable<CreatedEntity<$model.Entity.IdField.JsTypeName$>\> {
+        const url = `\${this.apiUrl}/Create$model.Entity.Name$`;
+        return this.httpClient.post<CreatedEntity<$model.Entity.IdField.JsTypeName$>\>(url, create$model.Entity.Name$);
+    }
+
+    delete$model.Entity.Name$(delete$model.Entity.Name$: Delete$model.Entity.Name$): Observable<{}> {
+        const url = `\${this.apiUrl}/Delete$model.Entity.Name$`;
+        return this.httpClient.post(url, delete$model.Entity.Name$);
+    }
+}
+
+>>
+

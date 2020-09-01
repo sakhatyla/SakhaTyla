@@ -1,0 +1,56 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Roles/roleModel.proto";
+import "Protos/Roles/roleFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Roles";
+
+service RoleService {
+    rpc GetRoles(GetRolesRequest) returns (RolePageModel);
+    rpc GetRole(GetRoleRequest) returns (Role);
+    rpc UpdateRole(UpdateRoleRequest) returns (Empty);
+    rpc CreateRole(CreateRoleRequest) returns (CreatedEntity);
+    rpc DeleteRole(DeleteRoleRequest) returns (Empty);
+}
+
+message CreateRoleRequest {
+    oneof nameOneOf {
+        string name = 1;
+    }
+    oneof displayNameOneOf {
+        string displayName = 4;
+    }
+}
+
+message DeleteRoleRequest {
+    int32 id = 1;
+}
+
+message GetRoleRequest {
+    int32 id = 1;
+}
+
+message GetRolesRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    RoleFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateRoleRequest {
+    int32 id = 10;
+    oneof nameOneOf {
+        string name = 1;
+    }
+    oneof displayNameOneOf {
+        string displayName = 4;
+    }
+}

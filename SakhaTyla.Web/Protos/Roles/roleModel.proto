@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Roles";
+
+message Role {
+    int32 id = 10;
+    google.protobuf.Timestamp creationDate = 2;
+    google.protobuf.Timestamp modificationDate = 3;
+    string name = 1;
+    string displayName = 4;
+}
+
+message RolePageModel {
+    repeated Role pageItems = 1;
+    int32 totalItems = 2;
+    int32 currentPageIndex = 3;
+}

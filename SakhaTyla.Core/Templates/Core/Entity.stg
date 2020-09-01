@@ -1,0 +1,39 @@
+﻿main(model) ::= <<
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
+
+namespace $model.Solution.Namespace$.Core.Entities
+{
+    public $if(model.Entity.IsAbstract)$abstract $endif$class $model.Entity.Name$$if(model.Entity.BaseEntity)$ : $model.Entity.BaseEntity.Name$$endif$
+    {
+$model.Entity.Fields:field(); separator="\n"$
+    }
+}
+
+>>
+
+field(field) ::= <<
+$field.Attributes:attrubute(); separator="\n"$
+$field:(field.Template)()$
+        
+>>
+
+attrubute(attrubute) ::= <<
+        [$attrubute.Name$($attrubute.Parameters; separator=", "$)]
+>>
+
+Type(field) ::= <<
+        public $field.TypeName$ $field.Name$ { get; set; }
+>>
+
+Entity(field) ::= <<
+        public $field.EntityIdTypeName$ $field.Name$$field.Entity.IdField.Name$ { get; set; }
+        public $field.Entity.Name$ $field.Name$ { get; set; }
+>>
+
+Enum(field) ::= <<
+        public Enums.$field.Enum.Name$$if(!field.IsRequired)$?$endif$ $field.Name$ { get; set; }
+>>

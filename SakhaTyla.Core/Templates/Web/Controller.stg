@@ -1,0 +1,69 @@
+﻿main(model) ::= <<
+using System;
+using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Cynosura.Core.Services.Models;
+using Cynosura.Web.Infrastructure;
+using $model.Solution.Namespace$.Core.Infrastructure;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$;
+using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models;
+
+namespace $model.Solution.Namespace$.Web.Controllers
+{
+    [ServiceFilter(typeof(ApiExceptionFilterAttribute))]
+    [Authorize("Read$model.Entity.Name$")]
+    [ValidateModel]
+    [Route("api")]
+    public class $model.Entity.Name$Controller : Controller
+    {
+        private readonly IMediator _mediator;
+
+        public $model.Entity.Name$Controller(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpPost("Get$model.Entity.PluralName$")]
+        public async Task<PageModel<$model.Entity.Name$Model>\> Get$model.Entity.PluralName$Async([FromBody] Get$model.Entity.PluralName$ get$model.Entity.PluralName$)
+        {
+            return await _mediator.Send(get$model.Entity.PluralName$);
+        }
+
+        [HttpPost("Get$model.Entity.Name$")]
+        public async Task<$model.Entity.Name$Model> Get$model.Entity.Name$Async([FromBody] Get$model.Entity.Name$ get$model.Entity.Name$)
+        {
+            return await _mediator.Send(get$model.Entity.Name$);
+        }
+
+        [HttpPost("Export$model.Entity.PluralName$")]
+        public async Task<FileResult> Export$model.Entity.PluralName$Async([FromBody] Export$model.Entity.PluralName$ export$model.Entity.PluralName$)
+        {
+            var file = await _mediator.Send(export$model.Entity.PluralName$);
+            return File(file.Content, file.ContentType, file.Name);
+        }
+
+        [Authorize("Write$model.Entity.Name$")]
+        [HttpPost("Update$model.Entity.Name$")]
+        public async Task<Unit> Update$model.Entity.Name$Async([FromBody] Update$model.Entity.Name$ update$model.Entity.Name$)
+        {
+            return await _mediator.Send(update$model.Entity.Name$);
+        }
+
+        [Authorize("Write$model.Entity.Name$")]
+        [HttpPost("Create$model.Entity.Name$")]
+        public async Task<CreatedEntity<$model.Entity.IdField.TypeName$>\> Create$model.Entity.Name$Async([FromBody] Create$model.Entity.Name$ create$model.Entity.Name$)
+        {
+            return await _mediator.Send(create$model.Entity.Name$);
+        }
+
+        [Authorize("Write$model.Entity.Name$")]
+        [HttpPost("Delete$model.Entity.Name$")]
+        public async Task<Unit> Delete$model.Entity.Name$Async([FromBody] Delete$model.Entity.Name$ delete$model.Entity.Name$)
+        {
+            return await _mediator.Send(delete$model.Entity.Name$);
+        }
+    }
+}
+>>

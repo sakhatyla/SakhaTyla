@@ -1,0 +1,82 @@
+﻿main(model) ::= <<
+<mat-card class="mat-card-view" *transloco="let t">
+
+    <mat-card-header>
+        <mat-card-title>{{ t('$model.Entity.DisplayName$') }} <app-$model.Entity.NameKebab$-show [value]="$model.Entity.NameLower$"></app-$model.Entity.NameKebab$-show></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-actions>
+        <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+        <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+    </mat-card-actions>
+
+    <div *ngIf="$model.Entity.NameLower$">
+        $model.Entity.AllFields:field(); separator="\n"$
+    </div>
+
+</mat-card>
+>>
+
+field(field) ::= <<
+<div class="field-view">
+    <label>{{ t('$field.DisplayName$') }}</label>
+    <div>
+        $field:(field.Template)()$
+    </div>
+</div>
+>>
+
+Type(field) ::= <<
+$field:(field.TypeTemplate)()$
+>>
+
+Entity(field) ::= <<
+<app-$field.Entity.NameKebab$-show [value]="$model.Entity.NameLower$.$field.NameLower$"></app-$field.Entity.NameKebab$-show>
+>>
+
+Enum(field) ::= <<
+<app-$field.Enum.NameKebab$-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-$field.Enum.NameKebab$-view>
+>>
+
+String(field) ::= <<
+<app-text-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-text-view>
+>>
+
+Int32(field) ::= <<
+<app-number-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-number-view>
+>>
+
+Int64(field) ::= <<
+<app-number-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-number-view>
+>>
+
+Decimal(field) ::= <<
+<app-number-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-number-view>
+>>
+
+Double(field) ::= <<
+<app-number-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-number-view>
+>>
+
+Boolean(field) ::= <<
+<app-bool-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-bool-view>
+>>
+
+DateTime(field) ::= <<
+<app-datetime-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-datetime-view>
+>>
+
+Date(field) ::= <<
+<app-date-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-date-view>
+>>
+
+Time(field) ::= <<
+<app-time-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-time-view>
+>>
+
+Guid(field) ::= <<
+<app-text-view [value]="$model.Entity.NameLower$.$field.NameLower$"></app-text-view>
+>>
+
+Blob(field) ::= <<
+>>

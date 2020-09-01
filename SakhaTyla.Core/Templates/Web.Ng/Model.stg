@@ -1,0 +1,36 @@
+﻿main(model) ::= <<
+import { $model.Entity.Name$Filter } from './$model.Entity.NameKebab$-filter.model';
+$model.Entity.DependentEnums:enumImport(); separator="\n"$
+
+export class $model.Entity.Name$ {
+    $model.Entity.AllSystemFields:field(); separator="\n"$
+    $model.Entity.AllFields:field(); separator="\n"$
+}
+
+export class $model.Entity.Name$ListState {
+    pageSize = 10;
+    pageIndex = 0;
+    filter = new $model.Entity.Name$Filter();
+}
+
+>>
+
+field(field) ::= <<
+$field:(field.Template)()$
+>>
+
+Type(field) ::= <<
+$field.NameLower$: $field.JsTypeName$;
+>>
+
+Entity(field) ::= <<
+$field.NameLower$$field.Entity.IdField.Name$: $field.Entity.IdField.JsTypeName$;
+>>
+
+Enum(field) ::= <<
+$field.NameLower$: $field.Enum.Name$;
+>>
+
+enumImport(enum) ::= <<
+import { $enum.Name$ } from '../$enum.NameKebab$/$enum.NameKebab$.model';
+>>
