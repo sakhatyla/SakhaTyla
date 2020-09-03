@@ -1,0 +1,56 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Languages/languageModel.proto";
+import "Protos/Languages/languageFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Languages";
+
+service LanguageService {
+    rpc GetLanguages(GetLanguagesRequest) returns (LanguagePageModel);
+    rpc GetLanguage(GetLanguageRequest) returns (Language);
+    rpc UpdateLanguage(UpdateLanguageRequest) returns (Empty);
+    rpc CreateLanguage(CreateLanguageRequest) returns (CreatedEntity);
+    rpc DeleteLanguage(DeleteLanguageRequest) returns (Empty);
+}
+
+message CreateLanguageRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof codeOneOf {
+        string code = 7;
+    }
+}
+
+message DeleteLanguageRequest {
+    int32 id = 1;
+}
+
+message GetLanguageRequest {
+    int32 id = 1;
+}
+
+message GetLanguagesRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    LanguageFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateLanguageRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof codeOneOf {
+        string code = 7;
+    }
+}

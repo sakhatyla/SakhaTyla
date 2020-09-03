@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Languages";
+
+message LanguageFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+    oneof codeOneOf {
+        string code = 70;
+    }
+}

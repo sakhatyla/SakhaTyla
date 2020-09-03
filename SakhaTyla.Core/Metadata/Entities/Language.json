@@ -1,0 +1,36 @@
+﻿{
+  "id": "eeca086e-584f-4ef1-990a-f4305317a666",
+  "name": "Language",
+  "pluralName": "Languages",
+  "displayName": "Language",
+  "pluralDisplayName": "Languages",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "d75b3594-9fd1-44f0-98c9-5e6521083f54",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "1d7c22de-777e-474d-b2e4-7463abc19013",
+      "name": "Code",
+      "displayName": "Code",
+      "type": "String",
+      "size": 10,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}
