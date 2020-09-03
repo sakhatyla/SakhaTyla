@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Articles";
+
+message ArticleFilter {
+    oneof titleOneOf {
+        string title = 60;
+    }
+    oneof textOneOf {
+        string text = 70;
+    }
+    oneof fromLanguageIdOneOf {
+        int32 fromLanguageId = 90;
+    }
+    oneof toLanguageIdOneOf {
+        int32 toLanguageId = 100;
+    }
+    oneof fuzzyOneOf {
+        bool fuzzy = 120;
+    }
+    oneof categoryIdOneOf {
+        int32 categoryId = 130;
+    }
+}

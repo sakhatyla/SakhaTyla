@@ -1,0 +1,80 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Articles/articleModel.proto";
+import "Protos/Articles/articleFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Articles";
+
+service ArticleService {
+    rpc GetArticles(GetArticlesRequest) returns (ArticlePageModel);
+    rpc GetArticle(GetArticleRequest) returns (Article);
+    rpc UpdateArticle(UpdateArticleRequest) returns (Empty);
+    rpc CreateArticle(CreateArticleRequest) returns (CreatedEntity);
+    rpc DeleteArticle(DeleteArticleRequest) returns (Empty);
+}
+
+message CreateArticleRequest {
+    oneof titleOneOf {
+        string title = 6;
+    }
+    oneof textSourceOneOf {
+        string textSource = 8;
+    }
+    oneof fromLanguageIdOneOf {
+        int32 fromLanguageId = 9;
+    }
+    oneof toLanguageIdOneOf {
+        int32 toLanguageId = 10;
+    }
+    oneof fuzzyOneOf {
+        bool fuzzy = 12;
+    }
+    oneof categoryIdOneOf {
+        int32 categoryId = 13;
+    }
+}
+
+message DeleteArticleRequest {
+    int32 id = 1;
+}
+
+message GetArticleRequest {
+    int32 id = 1;
+}
+
+message GetArticlesRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    ArticleFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateArticleRequest {
+    int32 id = 1;
+    oneof titleOneOf {
+        string title = 6;
+    }
+    oneof textSourceOneOf {
+        string textSource = 8;
+    }
+    oneof fromLanguageIdOneOf {
+        int32 fromLanguageId = 9;
+    }
+    oneof toLanguageIdOneOf {
+        int32 toLanguageId = 10;
+    }
+    oneof fuzzyOneOf {
+        bool fuzzy = 12;
+    }
+    oneof categoryIdOneOf {
+        int32 categoryId = 13;
+    }
+}

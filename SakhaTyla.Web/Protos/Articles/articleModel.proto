@@ -1,0 +1,26 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Articles";
+
+message Article {
+    int32 id = 1;
+    google.protobuf.Timestamp creationDate = 2;
+    google.protobuf.Timestamp modificationDate = 3;
+    int32 creationUserId = 4;
+    int32 modificationUserId = 5;
+    string title = 6;
+    string text = 7;
+    string textSource = 8;
+    int32 fromLanguageId = 9;
+    int32 toLanguageId = 10;
+    bool fuzzy = 12;
+    int32 categoryId = 13;
+}
+
+message ArticlePageModel {
+    repeated Article pageItems = 1;
+    int32 totalItems = 2;
+    int32 currentPageIndex = 3;
+}

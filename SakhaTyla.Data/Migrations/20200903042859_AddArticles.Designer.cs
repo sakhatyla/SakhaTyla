@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SakhaTyla.Data;
 
 namespace SakhaTyla.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200903042859_AddArticles")]
+    partial class AddArticles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,8 +263,6 @@ namespace SakhaTyla.Data.Migrations
                     b.HasIndex("FromLanguageId");
 
                     b.HasIndex("ModificationUserId");
-
-                    b.HasIndex("Title");
 
                     b.HasIndex("ToLanguageId");
 

@@ -1,0 +1,39 @@
+﻿<ng-container *transloco="let t">
+    <h1 mat-dialog-title>{{ t('Article') }} <app-article-show [value]="article"></app-article-show></h1>
+    <mat-dialog-content *ngIf="article" class="mat-dialog-content-edit">
+
+        <form [formGroup]="articleForm">
+            <mat-form-field>
+                <mat-label>{{ t('Title') }}</mat-label>
+                <app-text-edit formControlName="title" name="title" [placeholder]="t('Title')"></app-text-edit>
+                <mat-error>{{ error?.modelState?.title | modelError }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ t('Text Source') }}</mat-label>
+                <app-text-edit formControlName="textSource" name="textSource" [placeholder]="t('Text Source')" [multiline]="true"></app-text-edit>
+                <mat-error>{{ error?.modelState?.textSource | modelError }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ t('From Language') }}</mat-label>
+                <app-language-select formControlName="fromLanguageId" name="fromLanguageId" [placeholder]="t('From Language')"></app-language-select>
+                <mat-error>{{ error?.modelState?.fromLanguageId | modelError }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ t('To Language') }}</mat-label>
+                <app-language-select formControlName="toLanguageId" name="toLanguageId" [placeholder]="t('To Language')"></app-language-select>
+                <mat-error>{{ error?.modelState?.toLanguageId | modelError }}</mat-error>
+            </mat-form-field>
+            <app-bool-edit formControlName="fuzzy" name="fuzzy" [label]="t('Fuzzy')"></app-bool-edit>
+            <mat-form-field>
+                <mat-label>{{ t('Category') }}</mat-label>
+                <app-category-select formControlName="categoryId" name="categoryId" [placeholder]="t('Category')"></app-category-select>
+                <mat-error>{{ error?.modelState?.categoryId | modelError }}</mat-error>
+            </mat-form-field>
+        </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="mat-dialog-actions-edit">
+        <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+        <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+    </mat-dialog-actions>
+</ng-container>

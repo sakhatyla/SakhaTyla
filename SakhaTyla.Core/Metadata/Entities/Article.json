@@ -1,0 +1,108 @@
+﻿{
+  "id": "d8fa5ab2-720c-4502-81f6-89ee2d7a6b0a",
+  "name": "Article",
+  "pluralName": "Articles",
+  "displayName": "Article",
+  "pluralDisplayName": "Articles",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "b3cbb1eb-060b-4748-8075-14d87d277d02",
+      "name": "Title",
+      "displayName": "Title",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "88621c74-0b8e-4bfa-a412-09d445dcada9",
+      "name": "Text",
+      "displayName": "Text",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "a9811e7c-6eff-4862-b598-1bed1ef5816d",
+      "name": "TextSource",
+      "displayName": "Text Source",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "a5a80320-07b3-4836-9f5f-e13d221cc522",
+      "name": "FromLanguage",
+      "displayName": "From Language",
+      "type": null,
+      "size": null,
+      "entityId": "eeca086e-584f-4ef1-990a-f4305317a666",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "e6686aa4-1166-4e4a-b25a-809db44fbcec",
+      "name": "ToLanguage",
+      "displayName": "To Language",
+      "type": null,
+      "size": null,
+      "entityId": "eeca086e-584f-4ef1-990a-f4305317a666",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "a2123583-602b-4127-947a-88f02026fedd",
+      "name": "IsDeleted",
+      "displayName": "Deleted",
+      "type": "Boolean",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "ba0a6ecf-ac06-41d4-89f0-1f12f4efbac8",
+      "name": "Fuzzy",
+      "displayName": "Fuzzy",
+      "type": "Boolean",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "89c4dc1c-21cd-4c48-96f4-77c9919b761e",
+      "name": "Category",
+      "displayName": "Category",
+      "type": null,
+      "size": null,
+      "entityId": "fdc731d4-eb14-415d-a115-1b4023bab27a",
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}
