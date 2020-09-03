@@ -7,6 +7,7 @@ import { ConvertStringTo } from '../core/converter.helper';
 import { Article } from '../article-core/article.model';
 import { ArticleService } from '../article-core/article.service';
 import { ArticleEditComponent } from './article-edit.component';
+import { ArticleChangesComponent } from './article-changes.component';
 
 @Component({
     selector: 'app-article-view',
@@ -38,6 +39,11 @@ export class ArticleViewComponent implements OnInit {
         ArticleEditComponent.show(this.dialog, this.id).subscribe(() => {
             this.getArticle();
         });
+    }
+
+    onViewChanges() {
+        ArticleChangesComponent.show(this.dialog, this.id)
+            .subscribe(() => {});
     }
 
     onBack(): void {

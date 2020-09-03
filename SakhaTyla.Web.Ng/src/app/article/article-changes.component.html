@@ -1,0 +1,19 @@
+﻿<ng-container *transloco="let t">
+    <h1 mat-dialog-title>{{ t('shared.changes') }}</h1>
+    <mat-dialog-content class="mat-dialog-content-edit">
+
+        <app-entity-change-list [entityName]="entityName" [entityId]="entityId" [state]="state">
+            <app-text-view *appEntityChangeValue="let value; name: 'Title'" [value]="value"></app-text-view>
+            <app-text-view *appEntityChangeValue="let value; name: 'Text'" [value]="value"></app-text-view>
+            <app-text-view *appEntityChangeValue="let value; name: 'TextSource'" [value]="value"></app-text-view>
+            <app-language-show *appEntityChangeValue="let value; name: 'FromLanguageId'" [entityId]="value"></app-language-show>
+            <app-language-show *appEntityChangeValue="let value; name: 'ToLanguageId'" [entityId]="value"></app-language-show>
+            <app-bool-view *appEntityChangeValue="let value; name: 'Fuzzy'" [value]="value"></app-bool-view>
+            <app-category-show *appEntityChangeValue="let value; name: 'CategoryId'" [entityId]="value"></app-category-show>
+        </app-entity-change-list>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="mat-dialog-actions-edit">
+        <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>{{ t('shared.close') }}</button>
+    </mat-dialog-actions>
+</ng-container>

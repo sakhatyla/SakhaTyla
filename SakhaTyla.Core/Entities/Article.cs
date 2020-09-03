@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SakhaTyla.Core.Entities
 {
-    public class Article : BaseEntity
+    public class Article : TrackedEntity
     {
         [Required()]
         [StringLength(200)]

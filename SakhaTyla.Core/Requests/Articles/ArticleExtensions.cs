@@ -43,7 +43,7 @@ namespace SakhaTyla.Core.Requests.Articles
                         : queryable.OrderBy(e => e.Category);
                 case "":
                 case null:
-                    return queryable.OrderBy(e => e.Id);
+                    return queryable.OrderBy(e => e.Title);
                 default:
                     throw new ArgumentException("Property not found", nameof(propertyName));
             }
