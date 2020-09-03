@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Categories";
+
+message CategoryFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+}

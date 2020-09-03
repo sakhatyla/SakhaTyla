@@ -1,0 +1,50 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Categories/categoryModel.proto";
+import "Protos/Categories/categoryFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Categories";
+
+service CategoryService {
+    rpc GetCategories(GetCategoriesRequest) returns (CategoryPageModel);
+    rpc GetCategory(GetCategoryRequest) returns (Category);
+    rpc UpdateCategory(UpdateCategoryRequest) returns (Empty);
+    rpc CreateCategory(CreateCategoryRequest) returns (CreatedEntity);
+    rpc DeleteCategory(DeleteCategoryRequest) returns (Empty);
+}
+
+message CreateCategoryRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+}
+
+message DeleteCategoryRequest {
+    int32 id = 1;
+}
+
+message GetCategoryRequest {
+    int32 id = 1;
+}
+
+message GetCategoriesRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    CategoryFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateCategoryRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+}

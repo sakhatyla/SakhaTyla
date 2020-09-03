@@ -1,0 +1,18 @@
+﻿<ng-container *transloco="let t">
+    <h1 mat-dialog-title>{{ t('Category') }} <app-category-show [value]="category"></app-category-show></h1>
+    <mat-dialog-content *ngIf="category" class="mat-dialog-content-edit">
+
+        <form [formGroup]="categoryForm">
+            <mat-form-field>
+                <mat-label>{{ t('Name') }}</mat-label>
+                <app-text-edit formControlName="name" name="name" [placeholder]="t('Name')"></app-text-edit>
+                <mat-error>{{ error?.modelState?.name | modelError }}</mat-error>
+            </mat-form-field>
+        </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="mat-dialog-actions-edit">
+        <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+        <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+    </mat-dialog-actions>
+</ng-container>
