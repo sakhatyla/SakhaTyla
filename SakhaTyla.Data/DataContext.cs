@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using IdentityServer4.EntityFramework.Interfaces;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Options;
 using Cynosura.EF;
@@ -20,7 +22,9 @@ namespace SakhaTyla.Data
     {
         private readonly IOptions<OperationalStoreOptions> _operationalStoreOptions;
 
-        public event EventHandler SavingChanges;
+        public event EventHandler<SaveEventArgs> SavingChanges;
+
+        public event EventHandler<SaveEventArgs> SavedChanges;
 
         public DataContext(DbContextOptions<DataContext> options, 
             IOptions<OperationalStoreOptions> operationalStoreOptions)
@@ -35,14 +39,20 @@ namespace SakhaTyla.Data
 
         public override int SaveChanges()
         {
-            OnSavingChanges();
-            return base.SaveChanges();
+            var e = new SaveEventArgs();
+            OnSavingChanges(e);
+            var result = base.SaveChanges();
+            OnSavedChanges(e);
+            return result;
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            OnSavingChanges();
-            return base.SaveChangesAsync(cancellationToken);
+            var e = new SaveEventArgs();
+            OnSavingChanges(e);
+            var result = await base.SaveChangesAsync(cancellationToken);
+            OnSavedChanges(e);
+            return result;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -67,11 +77,21 @@ namespace SakhaTyla.Data
             }
         }
 
-        protected virtual void OnSavingChanges()
+        protected virtual void OnSavingChanges(SaveEventArgs e)
         {
-            SavingChanges?.Invoke(this, EventArgs.Empty);
+            SavingChanges?.Invoke(this, e);
+        }
+
+        protected virtual void OnSavedChanges(SaveEventArgs e)
+        {
+            SavedChanges?.Invoke(this, e);
         }
 
         Task<int> IPersistedGrantDbContext.SaveChangesAsync() => SaveChangesAsync();
+
+        public class SaveEventArgs
+        {
+            public List<EntityEntry> AddedEntities { get; } = new List<EntityEntry>();
+        }
     }
 }

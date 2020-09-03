@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Cynosura.EF;
 using SakhaTyla.Core.Entities;
 using SakhaTyla.Core.Enums;
@@ -22,45 +23,53 @@ namespace SakhaTyla.Data
             _userInfoProvider = userInfoProvider;
 
             ((DataContext)Context).SavingChanges += OnSavingChanges;
+            ((DataContext)Context).SavedChanges += OnSavedChanges;
         }
 
-        private void OnSavingChanges(object sender, EventArgs eventArgs)
+        private void OnSavingChanges(object sender, DataContext.SaveEventArgs e)
         {
-            var entities = Context.ChangeTracker.Entries()
+            var entityEntries = Context.ChangeTracker.Entries()
                 .Where(e => e.State == EntityState.Modified || e.State == EntityState.Added || e.State == EntityState.Deleted)
                 .Where(e => e.Entity is T)
-                .Select(e => new
-                {
-                    Entity = (T)e.Entity,
-                    State = e.State
-                })
                 .ToList();
 
-            if (entities.Count > 0)
+            if (entityEntries.Count > 0)
             {
-                foreach (var entity in entities)
+                foreach (var entityEntry in entityEntries)
                 {
-                    if (entity.State == EntityState.Added)
+                    var entity = (T)entityEntry.Entity;
+                    if (entityEntry.State == EntityState.Added)
                     {
-                        entity.Entity.CreationDate = entity.Entity.ModificationDate = DateTime.UtcNow;
-                        entity.Entity.CreationUserId = entity.Entity.ModificationUserId = UserId;
-                        TrackChange(entity.Entity, ChangeAction.Add);
+                        entity.CreationDate = entity.ModificationDate = DateTime.UtcNow;
+                        entity.CreationUserId = entity.ModificationUserId = UserId;
+                        e.AddedEntities.Add(entityEntry);
                     }
-                    else if (entity.State == EntityState.Deleted)
+                    else if (entityEntry.State == EntityState.Deleted)
                     {
-                        TrackChange(entity.Entity, ChangeAction.Delete);
+                        TrackChange(entityEntry, ChangeAction.Delete);
                     }
-                    else if (entity.State == EntityState.Modified)
+                    else if (entityEntry.State == EntityState.Modified)
                     {
-                        entity.Entity.ModificationDate = DateTime.UtcNow;
-                        entity.Entity.ModificationUserId = UserId;
-                        TrackChange(entity.Entity, ChangeAction.Update);
+                        entity.ModificationDate = DateTime.UtcNow;
+                        entity.ModificationUserId = UserId;
+                        TrackChange(entityEntry, ChangeAction.Update);
                     }
                 }
             }
         }
 
-        protected virtual void TrackChange(BaseEntity entity, ChangeAction action)
+        private void OnSavedChanges(object sender, DataContext.SaveEventArgs e)
+        {
+            if (e.AddedEntities.Count > 0)
+            {
+                foreach (var entry in e.AddedEntities)
+                {
+                    TrackChange(entry, ChangeAction.Add);
+                }
+            }
+        }
+
+        protected virtual void TrackChange(EntityEntry entityEntry, ChangeAction action)
         {
 
         }

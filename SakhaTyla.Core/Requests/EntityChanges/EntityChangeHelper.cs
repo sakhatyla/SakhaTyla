@@ -27,8 +27,10 @@ namespace SakhaTyla.Core.Requests.EntityChanges
 
         public IList<EntityPropertyChange> GetPropertyChanges(EntityChangeModel entityChange)
         {
-            var fromEntity = JsonSerializer.Deserialize(entityChange.From, _entityType, JsonSerializerHelper.JsonSerializerOptions);
-            var toEntity = JsonSerializer.Deserialize(entityChange.To, _entityType, JsonSerializerHelper.JsonSerializerOptions);
+            var from = !string.IsNullOrEmpty(entityChange.From) ? entityChange.From : "{}";
+            var to = !string.IsNullOrEmpty(entityChange.To) ? entityChange.To : "{}";
+            var fromEntity = JsonSerializer.Deserialize(from, _entityType, JsonSerializerHelper.JsonSerializerOptions);
+            var toEntity = JsonSerializer.Deserialize(to, _entityType, JsonSerializerHelper.JsonSerializerOptions);
             var fromEntityModel = _mapper.Map(fromEntity, _entityType, _entityModelType);
             var toEntityModel = _mapper.Map(toEntity, _entityType, _entityModelType);
             var propertyChanges = new List<EntityPropertyChange>();
