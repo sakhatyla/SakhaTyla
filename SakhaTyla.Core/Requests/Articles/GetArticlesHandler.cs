@@ -28,7 +28,8 @@ namespace SakhaTyla.Core.Requests.Articles
             IQueryable<Article> query = _articleRepository.GetEntities()
                 .Include(e => e.FromLanguage)
                 .Include(e => e.ToLanguage)
-                .Include(e => e.Category);            
+                .Include(e => e.Category)
+                .DefaultFilter();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
             var articles = await query.ToPagedListAsync(request.PageIndex, request.PageSize);

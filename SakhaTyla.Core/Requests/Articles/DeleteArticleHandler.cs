@@ -28,13 +28,14 @@ namespace SakhaTyla.Core.Requests.Articles
         public async Task<Unit> Handle(DeleteArticle request, CancellationToken cancellationToken)
         {
             var article = await _articleRepository.GetEntities()
+                .DefaultFilter()
                 .Where(e => e.Id == request.Id)
                 .FirstOrDefaultAsync();
             if (article == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["Article"], request.Id]);
             }
-            _articleRepository.Delete(article);
+            article.IsDeleted = true;
             await _unitOfWork.CommitAsync();
             return Unit.Value;
         }

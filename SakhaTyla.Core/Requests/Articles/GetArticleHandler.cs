@@ -28,6 +28,7 @@ namespace SakhaTyla.Core.Requests.Articles
                 .Include(e => e.FromLanguage)
                 .Include(e => e.ToLanguage)
                 .Include(e => e.Category)
+                .DefaultFilter()
                 .Where(e => e.Id == request.Id)
                 .FirstOrDefaultAsync();
             return _mapper.Map<Article, ArticleModel>(article);

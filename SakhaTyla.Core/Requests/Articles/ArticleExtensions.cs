@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using MarkdownSharp;
 using SakhaTyla.Core.Entities;
 using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Requests.Articles.Models;
@@ -75,6 +76,17 @@ namespace SakhaTyla.Core.Requests.Articles
                 queryable = queryable.Where(e => e.CategoryId == filter.CategoryId);
             }
             return queryable;
+        }
+
+        public static IQueryable<Article> DefaultFilter(this IQueryable<Article> queryable)
+        {
+            return queryable.Where(e => !e.IsDeleted);
+        }
+
+        public static string ProcessText(this string text)
+        {
+            var markdown = new Markdown();
+            return markdown.Transform(text);
         }
     }
 }

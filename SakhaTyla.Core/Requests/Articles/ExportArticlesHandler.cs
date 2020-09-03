@@ -31,10 +31,12 @@ namespace SakhaTyla.Core.Requests.Articles
 
         public async Task<FileContentModel> Handle(ExportArticles request, CancellationToken cancellationToken)
         {
+            // TODO: Limit export size
             IQueryable<Article> query = _articleRepository.GetEntities()
                 .Include(e => e.FromLanguage)
                 .Include(e => e.ToLanguage)
-                .Include(e => e.Category);            
+                .Include(e => e.Category)
+                .DefaultFilter();
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
             var articles = await query.ToListAsync();

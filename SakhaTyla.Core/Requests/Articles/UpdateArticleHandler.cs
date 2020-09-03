@@ -32,6 +32,7 @@ namespace SakhaTyla.Core.Requests.Articles
         public async Task<Unit> Handle(UpdateArticle request, CancellationToken cancellationToken)
         {
             var article = await _articleRepository.GetEntities()
+                .DefaultFilter()
                 .Where(e => e.Id == request.Id)
                 .FirstOrDefaultAsync();
             if (article == null)
