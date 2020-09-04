@@ -1,6 +1,6 @@
 ﻿export class GetEntityChanges {
     entityName: string;
-    entityId: number;
+    entityId?: number;
     pageIndex?: number;
     pageSize?: number;
 }

@@ -3,6 +3,7 @@ import { User } from '../user-core/user.model';
 
 export class EntityChange {
     id: number;
+    entityId: number;
     creationDate: Date;
     creationUserId: number;
     creationUser: User;

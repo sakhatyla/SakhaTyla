@@ -4,6 +4,12 @@
 
         <table *ngIf="content" mat-table [dataSource]="content.pageItems" multiTemplateDataRows>
 
+            <ng-container matColumnDef="entityId">
+                <th mat-header-cell *matHeaderCellDef>{{ t('Id') }}</th>
+                <td mat-cell *matCellDef="let item">
+                    {{ item.entityId }}
+                </td>
+            </ng-container>
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>{{ t('Action') }}</th>
                 <td mat-cell *matCellDef="let item">
@@ -13,7 +19,7 @@
             <ng-container matColumnDef="changes">
                 <th mat-header-cell *matHeaderCellDef>{{ t('Changes') }}</th>
                 <td mat-cell *matCellDef="let item">
-                    <table mat-table [dataSource]="filterEntityPropertyChanges(item.changes)"> 
+                    <table mat-table [dataSource]="filterEntityPropertyChanges(item.changes)">
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef>{{ t('Property Name') }}</th>
                             <td mat-cell *matCellDef="let change">
@@ -56,7 +62,7 @@
         </table>
 
         <div>
-            <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions" [length]="content?.totalItems" 
+            <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions" [length]="content?.totalItems"
                 (page)="onPage($event)" showFirstLastButtons></mat-paginator>
         </div>
 

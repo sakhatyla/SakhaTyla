@@ -9,6 +9,9 @@ namespace SakhaTyla.Core.Requests.EntityChanges.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Entity Id")]
+        public int EntityId { get; set; }
+
         [DisplayName("Action")]
         public Enums.ChangeAction Action { get; set; }
 

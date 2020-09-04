@@ -30,11 +30,14 @@ namespace SakhaTyla.Core.Requests.EntityChanges
         {
             IQueryable<EntityChange> query = _entityChangeRepository.GetEntities()
                 .Include(e => e.CreationUser)
-                .Where(e => e.EntityName == request.EntityName && e.EntityId == request.EntityId);
+                .Where(e => e.EntityName == request.EntityName);
+            if (request.EntityId != null)
+            {
+                query = query.Where(e => e.EntityId == request.EntityId);
+            }
             query = query.OrderByDescending(e => e.CreationDate);
             var entityChanges = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
             var entityChangeModels = entityChanges.Map<EntityChange, EntityChangeModel>(_mapper);
-            entityChangeModels.PageItems = entityChangeModels.PageItems.ToList();
             var diffHelper = new EntityChangeHelper(request.EntityName, _mapper);
             foreach (var entityChangeModel in entityChangeModels.PageItems)
             {

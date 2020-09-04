@@ -17,12 +17,23 @@ import { EntityChangeValueDirective } from './entity-change-value.directive';
 export class EntityChangeListComponent implements OnInit {
     content: Page<EntityChange>;
     pageSizeOptions = [10, 20];
-    columns = [
-        'action',
-        'changes',
-        'creationDate',
-        'creationUser'
-    ];
+    get columns(): string[] {
+        const columns = [
+            'entityId',
+            'action',
+            'changes',
+            'creationDate',
+            'creationUser'
+        ];
+        return columns.filter(c => {
+            if (c === 'entityId') {
+                if (this.entityId) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    }
 
     @Input()
     state: EntityChangeListState;
