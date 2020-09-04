@@ -17,6 +17,7 @@ namespace SakhaTyla.Data
         {
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
             services.AddScoped<IDatabaseFactory, DatabaseFactory>();
+            services.AddScoped<IEntityRepository<Article>, ArticleRepository>();
             services.AddEntityRepositories<TrackedEntity>(typeof(TrackedEntityRepository<>));
             services.AddEntityRepositories<BaseEntity>(typeof(BaseEntityRepository<>));
             services.AddTransient<IUserStore<User>, CustomUserStore>();
