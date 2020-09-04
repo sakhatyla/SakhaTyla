@@ -12,6 +12,7 @@ import { NoticeHelper } from '../core/notice.helper';
 import { Article, ArticleListState } from '../article-core/article.model';
 import { ArticleService } from '../article-core/article.service';
 import { ArticleEditComponent } from './article-edit.component';
+import { ArticleChangesComponent } from './article-changes.component';
 
 @Component({
     selector: 'app-article-list',
@@ -98,6 +99,11 @@ export class ArticleListComponent implements OnInit {
         this.state.pageIndex = page.pageIndex;
         this.state.pageSize = page.pageSize;
         this.getArticles();
+    }
+
+    onViewChanges() {
+        ArticleChangesComponent.show(this.dialog, null)
+            .subscribe(() => {});
     }
 
     onError(error: Error) {
