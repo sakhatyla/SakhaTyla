@@ -22,8 +22,8 @@ namespace SakhaTyla.Data
         {
             _userInfoProvider = userInfoProvider;
 
-            ((DataContext)Context).SavingChanges += OnSavingChanges;
-            ((DataContext)Context).SavedChanges += OnSavedChanges;
+            ((DataContext)Context).CustomSavingChanges += OnSavingChanges;
+            ((DataContext)Context).CustomSavedChanges += OnSavedChanges;
         }
 
         private void OnSavingChanges(object sender, DataContext.SaveEventArgs e)

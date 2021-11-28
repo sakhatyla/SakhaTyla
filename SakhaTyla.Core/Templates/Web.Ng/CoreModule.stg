@@ -8,23 +8,23 @@ import { $model.Entity.Name$SelectComponent } from './$model.Entity.NameKebab$-s
 import { $model.Entity.Name$ShowComponent } from './$model.Entity.NameKebab$-show.component';
 
 @NgModule({
-    declarations: [
-        $model.Entity.Name$SelectComponent,
-        $model.Entity.Name$ShowComponent
-    ],
-    imports: [
-        CoreModule,
-    ],
-    providers: [
-        $model.Entity.Name$Service
-    ],
-    exports: [
-        $model.Entity.Name$SelectComponent,
-        $model.Entity.Name$ShowComponent
-    ]
+  declarations: [
+    $model.Entity.Name$SelectComponent,
+    $model.Entity.Name$ShowComponent
+  ],
+  imports: [
+    CoreModule,
+  ],
+  providers: [
+    $model.Entity.Name$Service
+  ],
+  exports: [
+    $model.Entity.Name$SelectComponent,
+    $model.Entity.Name$ShowComponent
+  ]
 })
 export class $model.Entity.Name$CoreModule {
-    
+  
 }
 
 >>

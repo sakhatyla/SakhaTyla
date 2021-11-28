@@ -6,27 +6,27 @@ import { MenuService } from './menu.service';
 import { Menu } from './menu.model';
 
 @Component({
-    selector: 'app-nav-menu',
-    templateUrl: './nav-menu.component.html',
-    styleUrls: ['./nav-menu.component.scss']
+  selector: 'app-nav-menu',
+  templateUrl: './nav-menu.component.html',
+  styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent implements OnInit {
-    menu: Observable<Menu>;
-    isExpanded = false;
+  menu: Observable<Menu>;
+  isExpanded = false;
 
-    constructor(private menuService: MenuService,
-                private router: Router) {
-    }
+  constructor(private menuService: MenuService,
+              private router: Router) {
+  }
 
-    ngOnInit(): void {
-        this.menu = this.menuService.getMenu();
-    }
+  ngOnInit(): void {
+    this.menu = this.menuService.getMenu();
+  }
 
-    collapse() {
-        this.isExpanded = false;
-    }
+  collapse() {
+    this.isExpanded = false;
+  }
 
-    toggle() {
-        this.isExpanded = !this.isExpanded;
-    }
+  toggle() {
+    this.isExpanded = !this.isExpanded;
+  }
 }

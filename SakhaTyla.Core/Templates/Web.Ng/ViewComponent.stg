@@ -10,40 +10,40 @@ import { $model.Entity.Name$Service } from '../$model.Entity.NameKebab$-core/$mo
 import { $model.Entity.Name$EditComponent } from './$model.Entity.NameKebab$-edit.component';
 
 @Component({
-    selector: 'app-$model.Entity.NameKebab$-view',
-    templateUrl: './$model.Entity.NameKebab$-view.component.html',
-    styleUrls: ['./$model.Entity.NameKebab$-view.component.scss']
+  selector: 'app-$model.Entity.NameKebab$-view',
+  templateUrl: './$model.Entity.NameKebab$-view.component.html',
+  styleUrls: ['./$model.Entity.NameKebab$-view.component.scss']
 })
 export class $model.Entity.Name$ViewComponent implements OnInit {
-    id: $model.Entity.IdField.JsTypeName$;
-    $model.Entity.NameLower$: $model.Entity.Name$;
+  id: $model.Entity.IdField.JsTypeName$;
+  $model.Entity.NameLower$: $model.Entity.Name$;
 
-    constructor(private dialog: MatDialog,
-                private $model.Entity.NameLower$Service: $model.Entity.Name$Service,
-                private route: ActivatedRoute) {
-    }
+  constructor(private dialog: MatDialog,
+              private $model.Entity.NameLower$Service: $model.Entity.Name$Service,
+              private route: ActivatedRoute) {
+  }
 
-    ngOnInit(): void {
-        this.route.params.forEach((params: Params) => {
-            this.id = ConvertStringTo.$model.Entity.IdField.JsTypeName$(params.id);
-            this.get$model.Entity.Name$();
-        });
-    }
+  ngOnInit(): void {
+    this.route.params.forEach((params: Params) => {
+      this.id = ConvertStringTo.$model.Entity.IdField.JsTypeName$(params.id);
+      this.get$model.Entity.Name$();
+    });
+  }
 
-    private get$model.Entity.Name$() {
-        this.$model.Entity.NameLower$Service.get$model.Entity.Name$({ id: this.id })
-            .subscribe($model.Entity.NameLower$ => this.$model.Entity.NameLower$ = $model.Entity.NameLower$);
-    }
+  private get$model.Entity.Name$() {
+    this.$model.Entity.NameLower$Service.get$model.Entity.Name$({ id: this.id })
+      .subscribe($model.Entity.NameLower$ => this.$model.Entity.NameLower$ = $model.Entity.NameLower$);
+  }
 
-    onEdit() {
-        $model.Entity.Name$EditComponent.show(this.dialog, this.id).subscribe(() => {
-            this.get$model.Entity.Name$();
-        });
-    }
+  onEdit() {
+    $model.Entity.Name$EditComponent.show(this.dialog, this.id).subscribe(() => {
+      this.get$model.Entity.Name$();
+    });
+  }
 
-    onBack(): void {
-        window.history.back();
-    }
+  onBack(): void {
+    window.history.back();
+  }
 }
 
 >>

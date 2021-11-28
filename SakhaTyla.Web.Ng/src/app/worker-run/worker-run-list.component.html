@@ -1,0 +1,96 @@
+﻿<ng-container *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Worker Runs') }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <div class="action-item">
+      <form (ngSubmit)="onSearch()">
+        <mat-form-field>
+          <mat-label>{{ t('shared.text') }}</mat-label>
+          <input matInput id="text" type="text" name="text" [placeholder]="t('shared.text')"
+            [(ngModel)]="state.filter.text" />
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary">{{ t('shared.search') }}</button>
+        <button mat-raised-button type="reset" (click)="onReset()">{{ t('shared.reset') }}</button>
+      </form>
+    </div>
+    <div class="action-item">
+      <button mat-raised-button color="primary" type="button" (click)="onCreate()">{{ t('shared.create') }}</button>
+      <button mat-raised-button type="button" (click)="onExport()">{{ t('shared.export') }}</button>
+    </div>
+  </mat-card-actions>
+
+  <mat-card-content class="mat-elevation-z8">
+
+    <table *ngIf="content" mat-table [dataSource]="content.pageItems" multiTemplateDataRows>
+
+      <ng-container matColumnDef="workerInfo">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Worker') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-worker-info-show [value]="item.workerInfo"></app-worker-info-show>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Status') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-worker-run-status-view [value]="item.status"></app-worker-run-status-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="startDateTime">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Start Date') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-datetime-view [value]="item.startDateTime"></app-datetime-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="endDateTime">
+        <th mat-header-cell *matHeaderCellDef>{{ t('End Date') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-datetime-view [value]="item.endDateTime"></app-datetime-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Data') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.data"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="result">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Result') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.result"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="resultData">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Result Data') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.resultData"></app-text-view>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="actionMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #actionMenu="matMenu">
+            <a mat-menu-item (click)="onDelete(item.id)">{{ t('shared.delete') }}</a>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let item; columns: columns;" [routerLink]="[baseRoute, item.id]"></tr>
+
+    </table>
+
+    <div>
+      <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions"
+        [length]="content?.totalItems" (page)="onPage($event)" showFirstLastButtons></mat-paginator>
+    </div>
+
+  </mat-card-content>
+
+</ng-container>

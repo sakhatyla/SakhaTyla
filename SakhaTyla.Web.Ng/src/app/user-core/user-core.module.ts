@@ -7,20 +7,20 @@ import { UserSelectComponent } from './user-select.component';
 import { UserShowComponent } from './user-show.component';
 
 @NgModule({
-    declarations: [
-        UserSelectComponent,
-        UserShowComponent
-    ],
-    imports: [
-        CoreModule,
-    ],
-    providers: [
-        UserService
-    ],
-    exports: [
-        UserSelectComponent,
-        UserShowComponent
-    ]
+  declarations: [
+    UserSelectComponent,
+    UserShowComponent
+  ],
+  imports: [
+    CoreModule,
+  ],
+  providers: [
+    UserService
+  ],
+  exports: [
+    UserSelectComponent,
+    UserShowComponent
+  ]
 })
 export class UserCoreModule {
 

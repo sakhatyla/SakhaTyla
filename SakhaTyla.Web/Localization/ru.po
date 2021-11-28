@@ -255,3 +255,36 @@ msgstr "Content Type"
 
 msgid "Url"
 msgstr "Url"
+
+msgid "Workers"
+msgstr "Процессы"
+
+msgid "Worker"
+msgstr "Процесс"
+
+msgid "Class Name"
+msgstr "Название класса"
+
+msgid "Worker Runs"
+msgstr "Запуски процессов"
+
+msgid "Worker Run"
+msgstr "Запуск процесса"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Start Date"
+msgstr "Дата начала"
+
+msgid "End Date"
+msgstr "Дата окончания"
+
+msgid "Data"
+msgstr "Данные"
+
+msgid "Result"
+msgstr "Результат"
+
+msgid "Result Data"
+msgstr "Данные результата"

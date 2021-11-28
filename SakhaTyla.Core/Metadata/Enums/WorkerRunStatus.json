@@ -1,0 +1,36 @@
+﻿{
+  "id": "abc55c36-4d18-41a1-b36d-dc04fa35294e",
+  "name": "WorkerRunStatus",
+  "displayName": "Worker Run Status",
+  "values": [
+    {
+      "id": "c9b1fe7f-5af6-4532-9fa0-019b330a17f5",
+      "name": "New",
+      "displayName": "New",
+      "value": 0,
+      "properties": {}
+    },
+    {
+      "id": "dfc35caf-8322-4098-9187-14486ca94c2f",
+      "name": "Running",
+      "displayName": "Running",
+      "value": 1,
+      "properties": {}
+    },
+    {
+      "id": "75af293b-8a35-4201-b12e-ea67cec70bc4",
+      "name": "Completed",
+      "displayName": "Completed",
+      "value": 2,
+      "properties": {}
+    },
+    {
+      "id": "80baf9e5-d08f-4f86-92b2-8640be25aa88",
+      "name": "Error",
+      "displayName": "Error",
+      "value": 3,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

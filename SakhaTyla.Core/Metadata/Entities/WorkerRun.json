@@ -1,0 +1,96 @@
+﻿{
+  "id": "6d6119fa-269c-4eb9-8a92-1309bc48f3f6",
+  "name": "WorkerRun",
+  "pluralName": "WorkerRuns",
+  "displayName": "Worker Run",
+  "pluralDisplayName": "Worker Runs",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "0601aeb4-ce52-4aa0-aa6c-5c00a675e02c",
+      "name": "WorkerInfo",
+      "displayName": "Worker",
+      "type": null,
+      "size": null,
+      "entityId": "63a8c5c9-9fe5-4f29-81b3-b0824b2bb105",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "15075891-3309-459d-981f-6930201a8c74",
+      "name": "Status",
+      "displayName": "Status",
+      "type": null,
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": "abc55c36-4d18-41a1-b36d-dc04fa35294e",
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "619ea813-d31f-4833-bb54-bf3124271044",
+      "name": "StartDateTime",
+      "displayName": "Start Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "44891f65-24ad-4df6-be24-8d1fb8cf92ac",
+      "name": "EndDateTime",
+      "displayName": "End Date",
+      "type": "DateTime",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "a5b75a1c-d42d-41c9-a493-d4cd12dc307d",
+      "name": "Data",
+      "displayName": "Data",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "c8704065-f7e4-421d-8fe9-03f021802daf",
+      "name": "Result",
+      "displayName": "Result",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "2cdb8301-b6da-4c0b-803c-d1a1c17b96c7",
+      "name": "ResultData",
+      "displayName": "Result Data",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

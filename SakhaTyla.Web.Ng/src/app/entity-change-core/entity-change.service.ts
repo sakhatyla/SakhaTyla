@@ -13,12 +13,12 @@ import { GetEntityChanges } from './entity-change-request.model';
 
 @Injectable({ providedIn: 'root' })
 export class EntityChangeService {
-    private apiUrl = this.configService.config.apiBaseUrl + '/api';
+  private apiUrl = this.configService.config.apiBaseUrl + '/api';
 
-    constructor(private httpClient: HttpClient, private configService: ConfigService) { }
+  constructor(private httpClient: HttpClient, private configService: ConfigService) { }
 
-    getEntityChanges(getEntityChanges: GetEntityChanges): Observable<Page<EntityChange>> {
-        const url = `${this.apiUrl}/GetEntityChanges`;
-        return this.httpClient.post<Page<EntityChange>>(url, getEntityChanges);
-    }
+  getEntityChanges(getEntityChanges: GetEntityChanges): Observable<Page<EntityChange>> {
+    const url = `${this.apiUrl}/GetEntityChanges`;
+    return this.httpClient.post<Page<EntityChange>>(url, getEntityChanges);
+  }
 }

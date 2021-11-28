@@ -11,26 +11,26 @@ import { LanguageViewComponent } from './language-view.component';
 import { LanguagesComponent } from './languages.component';
 
 @NgModule({
-    declarations: [
-        LanguageListComponent,
-        LanguageEditComponent,
-        LanguageViewComponent,
-        LanguagesComponent,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-        LanguageCoreModule
-    ],
-    exports: [
-        LanguageListComponent,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        LanguageEditComponent
-    ]
+  declarations: [
+    LanguageListComponent,
+    LanguageEditComponent,
+    LanguageViewComponent,
+    LanguagesComponent,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    LanguageCoreModule
+  ],
+  exports: [
+    LanguageListComponent,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    LanguageEditComponent
+  ]
 })
 export class LanguageModule {
 

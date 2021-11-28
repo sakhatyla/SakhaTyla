@@ -1,17 +1,19 @@
 ﻿main(model) ::= <<
 <ng-container *transloco="let t">
-    <h1 mat-dialog-title>{{ t('$model.Entity.DisplayName$') }} <app-$model.Entity.NameKebab$-show [value]="$model.Entity.NameLower$"></app-$model.Entity.NameKebab$-show></h1>
-    <mat-dialog-content *ngIf="$model.Entity.NameLower$" class="mat-dialog-content-edit">
+  <h1 mat-dialog-title>
+    {{ t('$model.Entity.DisplayName$') }} <app-$model.Entity.NameKebab$-show [value]="$model.Entity.NameLower$"></app-$model.Entity.NameKebab$-show>
+  </h1>
+  <mat-dialog-content *ngIf="$model.Entity.NameLower$" class="mat-dialog-content-edit">
 
-        <form [formGroup]="$model.Entity.NameLower$Form">
-            $model.Entity.AllFields:field(); separator="\n"$
-        </form>
+    <form [formGroup]="$model.Entity.NameLower$Form">
+      $model.Entity.AllFields:field(); separator="\n"$
+    </form>
 
-    </mat-dialog-content>
-    <mat-dialog-actions class="mat-dialog-actions-edit">
-        <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
-        <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
-    </mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
 </ng-container>
 >>
 
@@ -25,57 +27,57 @@ $field:(field.TypeTemplate)()$
 
 Entity(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-$field.Entity.NameKebab$-select formControlName="$field.NameLower$Id" name="$field.NameLower$Id" [placeholder]="t('$field.DisplayName$')"></app-$field.Entity.NameKebab$-select>
-    <mat-error>{{ error?.modelState?.$field.NameLower$Id | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-$field.Entity.NameKebab$-select formControlName="$field.NameLower$Id" name="$field.NameLower$Id" [placeholder]="t('$field.DisplayName$')"></app-$field.Entity.NameKebab$-select>
+  <mat-error>{{ error?.modelState?.$field.NameLower$Id | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Enum(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-$field.Enum.NameKebab$-select formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-$field.Enum.NameKebab$-select>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-$field.Enum.NameKebab$-select formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-$field.Enum.NameKebab$-select>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 String(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-text-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-text-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-text-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-text-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Int32(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Int64(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Decimal(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Double(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-number-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-number-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
@@ -85,33 +87,33 @@ Boolean(field) ::= <<
 
 DateTime(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-datetime-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-datetime-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-datetime-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-datetime-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Date(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-date-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-date-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-date-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-date-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Time(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-time-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-time-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-time-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-time-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 
 Guid(field) ::= <<
 <mat-form-field>
-    <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
-    <app-text-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-text-edit>
-    <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
+  <mat-label>{{ t('$field.DisplayName$') }}</mat-label>
+  <app-text-edit formControlName="$field.NameLower$" name="$field.NameLower$" [placeholder]="t('$field.DisplayName$')"></app-text-edit>
+  <mat-error>{{ error?.modelState?.$field.NameLower$ | modelError }}</mat-error>
 </mat-form-field>
 >>
 

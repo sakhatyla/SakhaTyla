@@ -12,27 +12,27 @@ import { FileGroupViewComponent } from './file-group-view.component';
 import { FileGroupsComponent } from './file-groups.component';
 
 @NgModule({
-    declarations: [
-        FileGroupListComponent,
-        FileGroupEditComponent,
-        FileGroupViewComponent,
-        FileGroupsComponent,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-        FileGroupTypeModule,
-        FileGroupCoreModule
-    ],
-    exports: [
-        FileGroupListComponent,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        FileGroupEditComponent
-    ]
+  declarations: [
+    FileGroupListComponent,
+    FileGroupEditComponent,
+    FileGroupViewComponent,
+    FileGroupsComponent,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    FileGroupTypeModule,
+    FileGroupCoreModule
+  ],
+  exports: [
+    FileGroupListComponent,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    FileGroupEditComponent
+  ]
 })
 export class FileGroupModule {
 

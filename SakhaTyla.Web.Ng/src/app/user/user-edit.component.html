@@ -1,48 +1,48 @@
 <ng-container *transloco="let t">
-    <h1 mat-dialog-title>{{ t('User') }} <app-user-show [value]="user"></app-user-show></h1>
-    <mat-dialog-content *ngIf="user" class="mat-dialog-content-edit">
+  <h1 mat-dialog-title>
+    {{ t('User') }} <app-user-show [value]="user"></app-user-show>
+  </h1>
+  <mat-dialog-content *ngIf="user" class="mat-dialog-content-edit">
 
-        <form [formGroup]="userForm">
-            <mat-form-field>
-                <mat-label>{{ t('Email') }}</mat-label>
-                <input matInput type="email" id="email" name="email" formControlName="email"
-                    [placeholder]="t('Email')" />
-                <mat-error>{{ error?.modelState?.email | modelError }}</mat-error>
-            </mat-form-field>
-            <app-bool-edit formControlName="emailConfirmed" name="emailConfirmed" [label]="t('Email Confirmed')"></app-bool-edit>
-            <mat-form-field>
-                <mat-label>{{ t('First Name') }}</mat-label>
-                <app-text-edit formControlName="firstName" name="firstName" [placeholder]="t('First Name')"></app-text-edit>
-                <mat-error>{{ error?.modelState?.firstName | modelError }}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>{{ t('Last Name') }}</mat-label>
-                <app-text-edit formControlName="lastName" name="lastName" [placeholder]="t('Last Name')"></app-text-edit>
-                <mat-error>{{ error?.modelState?.lastName | modelError }}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>{{ t('Password') }}</mat-label>
-                <input matInput type="password" id="password" name="password"
-                    formControlName="password" [placeholder]="t('Password')" />
-                <mat-error>{{ error?.modelState?.password | modelError }}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>{{ t('Confirm password') }}</mat-label>
-                <input matInput type="password" id="confirmPassword" name="confirmPassword"
-                    formControlName="confirmPassword" [placeholder]="t('Confirm password')" />
-                <mat-error>{{ error?.modelState?.confirmPassword | modelError }}</mat-error>
-            </mat-form-field>
-            <div class="field-view">
-                <label>{{ t('Roles') }}</label>
-                <div *ngFor="let role of roles; let i = index ">
-                    <mat-checkbox [name]="'roleIds' + i" [(ngModel)]="role.isSelected" [ngModelOptions]="{standalone: true}">{{ role.displayName }}</mat-checkbox>
-                </div>
-            </div>
-        </form>
+    <form [formGroup]="userForm">
+      <mat-form-field>
+        <mat-label>{{ t('Email') }}</mat-label>
+        <input matInput type="email" id="email" name="email" formControlName="email"
+          [placeholder]="t('Email')" />
+        <mat-error>{{ error?.modelState?.email | modelError }}</mat-error>
+      </mat-form-field>
+      <app-bool-edit formControlName="emailConfirmed" name="emailConfirmed" [label]="t('Email Confirmed')"></app-bool-edit>
+      <mat-form-field>
+        <mat-label>{{ t('First Name') }}</mat-label>
+        <app-text-edit formControlName="firstName" name="firstName" [placeholder]="t('First Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.firstName | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Last Name') }}</mat-label>
+        <app-text-edit formControlName="lastName" name="lastName" [placeholder]="t('Last Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.lastName | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Password') }}</mat-label>
+        <input matInput type="password" id="password" name="password"
+          formControlName="password" [placeholder]="t('Password')" />
+        <mat-error>{{ error?.modelState?.password | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Confirm password') }}</mat-label>
+        <input matInput type="password" id="confirmPassword" name="confirmPassword"
+          formControlName="confirmPassword" [placeholder]="t('Confirm password')" />
+        <mat-error>{{ error?.modelState?.confirmPassword | modelError }}</mat-error>
+      </mat-form-field>
+      <div class="field-view">
+        <label>{{ t('Roles') }}</label>
+        <app-roles-select formControlName="roleIds"></app-roles-select>
+      </div>
+    </form>
 
-    </mat-dialog-content>
-    <mat-dialog-actions class="mat-dialog-actions-edit">
-        <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
-        <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
-    </mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
 </ng-container>

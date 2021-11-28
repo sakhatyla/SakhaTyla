@@ -1,51 +1,51 @@
 @media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-    .body-content {
-        padding-top: 50px;
-    }
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+  .body-content {
+    padding-top: 50px;
+  }
 }
 
 mat-sidenav-container {
-    height: calc(100% - 64px);
+  height: calc(100% - 64px);
 
-    mat-sidenav {
-        min-width: 250px;
-    }
-    
-    mat-sidenav-content {
-        min-height: 100%;
-        padding: 20px;
-    }
+  mat-sidenav {
+    min-width: 250px;
+  }
+
+  mat-sidenav-content {
+    min-height: 100%;
+    padding: 20px;
+  }
 }
 
 .loading {
-    position: relative;
-    height: 0;
+  position: relative;
+  height: 0;
 
-    mat-progress-bar {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 1000;
-    }
+  mat-progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+  }
 }
 
 @media (min-width: 600px) {
-    mat-sidenav-container {
-        mat-sidenav {
-            margin-top: 64px;
-        }
+  mat-sidenav-container {
+    mat-sidenav {
+      margin-top: 64px;
     }
+  }
 }
 
 @media (max-width: 599px) {
-    mat-sidenav-container {
-        mat-sidenav {
-            margin-top: 56px;
-        }
+  mat-sidenav-container {
+    mat-sidenav {
+      margin-top: 56px;
     }
+  }
 }
 
 .menu-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }

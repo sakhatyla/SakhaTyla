@@ -3,11 +3,11 @@
 import { File } from './file.model';
 
 @Component({
-    selector: 'app-file-show',
-    templateUrl: './file-show.component.html'
+  selector: 'app-file-show',
+  templateUrl: './file-show.component.html'
 })
 
 export class FileShowComponent {
-    @Input()
-    value: File;
+  @Input()
+  value: File;
 }

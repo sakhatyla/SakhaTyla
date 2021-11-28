@@ -73,11 +73,26 @@ namespace SakhaTyla.Core.Requests.Files
                 return;
             var valid = accept.Split(",")
                 .Select(a => a.Trim())
-                .Any(a => filename.EndsWith(a) || contentType == a);
+                .Any(a => filename.EndsWith(a) || MatchContentType(contentType, a));
             if (!valid)
             {
                 throw new ServiceException("Invalid file format");
             }
+        }
+
+        private static bool MatchContentType(string contentType, string pattern)
+        {
+            if (pattern == null)
+                return false;
+            if (contentType == pattern)
+                return true;
+
+            var patternParts = pattern.Split("/");
+            if (patternParts.Length == 2 && patternParts[1] == "*" && contentType.StartsWith(patternParts[0] + "/"))
+            {
+                return true;
+            }
+            return false;
         }
 
         public static byte[] ConvertToBytes(this System.IO.Stream input)

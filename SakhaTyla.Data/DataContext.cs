@@ -22,9 +22,9 @@ namespace SakhaTyla.Data
     {
         private readonly IOptions<OperationalStoreOptions> _operationalStoreOptions;
 
-        public event EventHandler<SaveEventArgs> SavingChanges;
+        public event EventHandler<SaveEventArgs> CustomSavingChanges;
 
-        public event EventHandler<SaveEventArgs> SavedChanges;
+        public event EventHandler<SaveEventArgs> CustomSavedChanges;
 
         public DataContext(DbContextOptions<DataContext> options, 
             IOptions<OperationalStoreOptions> operationalStoreOptions)
@@ -79,12 +79,12 @@ namespace SakhaTyla.Data
 
         protected virtual void OnSavingChanges(SaveEventArgs e)
         {
-            SavingChanges?.Invoke(this, e);
+            CustomSavingChanges?.Invoke(this, e);
         }
 
         protected virtual void OnSavedChanges(SaveEventArgs e)
         {
-            SavedChanges?.Invoke(this, e);
+            CustomSavedChanges?.Invoke(this, e);
         }
 
         Task<int> IPersistedGrantDbContext.SaveChangesAsync() => SaveChangesAsync();

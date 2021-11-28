@@ -1,7 +1,7 @@
 ﻿export enum ChangeAction {
-    Add = 0,
-    Update = 1,
-    Delete = 2
+  Add = 0,
+  Update = 1,
+  Delete = 2
 }
 
 const ChangeActionDisplay: { [index: number]: string } = {};

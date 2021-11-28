@@ -1,0 +1,58 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/WorkerInfos/workerInfoModel.proto";
+import "Protos/WorkerInfos/workerInfoFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.WorkerInfos";
+
+service WorkerInfoService {
+    rpc GetWorkerInfos(GetWorkerInfosRequest) returns (WorkerInfoPageModel);
+    rpc GetWorkerInfo(GetWorkerInfoRequest) returns (WorkerInfo);
+    rpc UpdateWorkerInfo(UpdateWorkerInfoRequest) returns (Empty);
+    rpc CreateWorkerInfo(CreateWorkerInfoRequest) returns (CreatedEntity);
+    rpc DeleteWorkerInfo(DeleteWorkerInfoRequest) returns (Empty);
+}
+
+message CreateWorkerInfoRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof classNameOneOf {
+        string className = 7;
+    }
+}
+
+message DeleteWorkerInfoRequest {
+    int32 id = 1;
+}
+
+message GetWorkerInfoRequest {
+    int32 id = 1;
+}
+
+message GetWorkerInfosRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    WorkerInfoFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateWorkerInfoRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof classNameOneOf {
+        string className = 7;
+    }
+}

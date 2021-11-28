@@ -1,0 +1,48 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/WorkerRuns/workerRunModel.proto";
+import "Protos/WorkerRuns/workerRunFilter.proto";
+import "Protos/WorkerRunStatus/workerRunStatus.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.WorkerRuns";
+
+service WorkerRunService {
+    rpc GetWorkerRuns(GetWorkerRunsRequest) returns (WorkerRunPageModel);
+    rpc GetWorkerRun(GetWorkerRunRequest) returns (WorkerRun);
+    rpc CreateWorkerRun(CreateWorkerRunRequest) returns (CreatedEntity);
+    rpc DeleteWorkerRun(DeleteWorkerRunRequest) returns (Empty);
+}
+
+message CreateWorkerRunRequest {
+    oneof workerInfoIdOneOf {
+        int32 workerInfoId = 6;
+    }
+    oneof dataOneOf {
+        string data = 10;
+    }
+}
+
+message DeleteWorkerRunRequest {
+    int32 id = 1;
+}
+
+message GetWorkerRunRequest {
+    int32 id = 1;
+}
+
+message GetWorkerRunsRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    WorkerRunFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}

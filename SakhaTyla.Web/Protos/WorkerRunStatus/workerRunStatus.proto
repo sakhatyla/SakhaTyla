@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.WorkerRunStatus";
+
+enum WorkerRunStatus {
+    New = 0;
+    Running = 1;
+    Completed = 2;
+    Error = 3;
+}

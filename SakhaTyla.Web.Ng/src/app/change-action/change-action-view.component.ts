@@ -3,15 +3,15 @@
 import { ChangeAction, ChangeActionDisplay } from './change-action.model';
 
 @Component({
-    selector: 'app-change-action-view',
-    templateUrl: './change-action-view.component.html'
+  selector: 'app-change-action-view',
+  templateUrl: './change-action-view.component.html'
 })
 
 export class ChangeActionViewComponent {
-    constructor() { }
+  constructor() { }
 
-    ChangeActionDisplay = ChangeActionDisplay;
+  ChangeActionDisplay = ChangeActionDisplay;
 
-    @Input()
-    value: ChangeAction;
+  @Input()
+  value: ChangeAction;
 }

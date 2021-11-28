@@ -7,20 +7,20 @@ import { FileGroupSelectComponent } from './file-group-select.component';
 import { FileGroupShowComponent } from './file-group-show.component';
 
 @NgModule({
-    declarations: [
-        FileGroupSelectComponent,
-        FileGroupShowComponent
-    ],
-    imports: [
-        CoreModule,
-    ],
-    providers: [
-        FileGroupService
-    ],
-    exports: [
-        FileGroupSelectComponent,
-        FileGroupShowComponent
-    ]
+  declarations: [
+    FileGroupSelectComponent,
+    FileGroupShowComponent
+  ],
+  imports: [
+    CoreModule,
+  ],
+  providers: [
+    FileGroupService
+  ],
+  exports: [
+    FileGroupSelectComponent,
+    FileGroupShowComponent
+  ]
 })
 export class FileGroupCoreModule {
 

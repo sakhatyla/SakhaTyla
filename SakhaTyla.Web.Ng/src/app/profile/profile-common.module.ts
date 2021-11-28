@@ -8,20 +8,20 @@ import { ProfileService } from './profile.service';
 import { ProfileEditComponent } from './profile-edit.component';
 
 @NgModule({
-    declarations: [
-        ProfileEditComponent,
-    ],
-    imports: [
-        CoreModule,
-        TranslocoRootModule,
-        RouterModule,
-    ],
-    providers: [
-        ProfileService
-    ],
-    exports: [
-        ProfileEditComponent
-    ]
+  declarations: [
+    ProfileEditComponent,
+  ],
+  imports: [
+    CoreModule,
+    TranslocoRootModule,
+    RouterModule,
+  ],
+  providers: [
+    ProfileService
+  ],
+  exports: [
+    ProfileEditComponent
+  ]
 })
 export class ProfileCommonModule {
 

@@ -1,4 +1,4 @@
 export enum OrderDirection {
-    Ascending,
-    Descending
+  Ascending,
+  Descending
 }

@@ -9,45 +9,45 @@ import { FileService } from '../file-core/file.service';
 import { FileEditComponent } from './file-edit.component';
 
 @Component({
-    selector: 'app-file-view',
-    templateUrl: './file-view.component.html',
-    styleUrls: ['./file-view.component.scss']
+  selector: 'app-file-view',
+  templateUrl: './file-view.component.html',
+  styleUrls: ['./file-view.component.scss']
 })
 export class FileViewComponent implements OnInit {
-    id: number;
-    file: File;
+  id: number;
+  file: File;
 
-    constructor(private dialog: MatDialog,
-                private fileService: FileService,
-                private route: ActivatedRoute) {
-    }
+  constructor(private dialog: MatDialog,
+              private fileService: FileService,
+              private route: ActivatedRoute) {
+  }
 
-    ngOnInit(): void {
-        this.route.params.forEach((params: Params) => {
-            this.id = ConvertStringTo.number(params.id);
-            this.getFile();
-        });
-    }
+  ngOnInit(): void {
+    this.route.params.forEach((params: Params) => {
+      this.id = ConvertStringTo.number(params.id);
+      this.getFile();
+    });
+  }
 
-    private getFile() {
-        this.fileService.getFile({ id: this.id })
-            .subscribe(file => this.file = file);
-    }
+  private getFile() {
+    this.fileService.getFile({ id: this.id })
+      .subscribe(file => this.file = file);
+  }
 
-    onEdit() {
-        FileEditComponent.show(this.dialog, this.id).subscribe(() => {
-            this.getFile();
-        });
-    }
+  onEdit() {
+    FileEditComponent.show(this.dialog, this.id).subscribe(() => {
+      this.getFile();
+    });
+  }
 
-    onBack(): void {
-        window.history.back();
-    }
+  onBack(): void {
+    window.history.back();
+  }
 
-    onDownload(): void {
-        this.fileService.downloadFile({ id: this.id })
-            .subscribe(file => {
-                file.download();
-            });
-    }
+  onDownload(): void {
+    this.fileService.downloadFile({ id: this.id })
+      .subscribe(file => {
+        file.download();
+      });
+  }
 }

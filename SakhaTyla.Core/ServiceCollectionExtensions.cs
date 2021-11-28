@@ -26,7 +26,7 @@ namespace SakhaTyla.Core
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddAllValidators();
             services.Configure<FileSystemStorageSettings>(configuration.GetSection("FileSystemStorage"));
-            return services;
+            return services; 
         }
 
         private static void AddAllRequestHandlers(this IServiceCollection services)

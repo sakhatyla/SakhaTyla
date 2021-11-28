@@ -10,7 +10,7 @@ export { $model.Enum.Name$Display };
 >>
 
 enumValue(value) ::= <<
-    $value.Name$$if(value.Value)$ = $value.Value$$endif$
+  $value.Name$$if(value.Value)$ = $value.Value$$endif$
 >>
 
 enumDisplay(value) ::= <<

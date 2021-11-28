@@ -1,6 +1,6 @@
 ﻿export enum FileGroupType {
-    Database = 0,
-    Storage = 1
+  Database = 0,
+  Storage = 1
 }
 
 const FileGroupTypeDisplay: { [index: number]: string } = {};

@@ -1,0 +1,6 @@
+﻿<mat-select [(ngModel)]="innerValue" [disabled]="disabled" [placeholder]="placeholder">
+  <mat-option [value]="null"></mat-option>
+  <mat-option [value]="workerRunStatus.key" *ngFor="let workerRunStatus of WorkerRunStatus | enumkeys">
+    {{ WorkerRunStatusDisplay[workerRunStatus.key] }}
+  </mat-option>
+</mat-select>

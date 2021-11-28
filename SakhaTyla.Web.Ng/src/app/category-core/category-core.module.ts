@@ -7,20 +7,20 @@ import { CategorySelectComponent } from './category-select.component';
 import { CategoryShowComponent } from './category-show.component';
 
 @NgModule({
-    declarations: [
-        CategorySelectComponent,
-        CategoryShowComponent
-    ],
-    imports: [
-        CoreModule,
-    ],
-    providers: [
-        CategoryService
-    ],
-    exports: [
-        CategorySelectComponent,
-        CategoryShowComponent
-    ]
+  declarations: [
+    CategorySelectComponent,
+    CategoryShowComponent
+  ],
+  imports: [
+    CoreModule,
+  ],
+  providers: [
+    CategoryService
+  ],
+  exports: [
+    CategorySelectComponent,
+    CategoryShowComponent
+  ]
 })
 export class CategoryCoreModule {
 

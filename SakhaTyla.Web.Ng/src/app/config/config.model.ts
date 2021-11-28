@@ -1,3 +1,3 @@
 export class Config {
-    apiBaseUrl: string;
+  apiBaseUrl: string;
 }

@@ -2,34 +2,34 @@
 import { OrderDirection } from '../core/models/order-direction.model';
 
 export class GetRoles {
-    pageIndex?: number;
-    pageSize?: number;
-    filter?: RoleFilter;
-    orderBy?: string;
-    orderDirection?: OrderDirection;
+  pageIndex?: number;
+  pageSize?: number;
+  filter?: RoleFilter;
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }
 
 export class GetRole {
-    id: number;
+  id: number;
 }
 
 export class ExportRoles {
-    filter?: RoleFilter;
-    orderBy?: string;
-    orderDirection?: OrderDirection;
+  filter?: RoleFilter;
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }
 
 export class UpdateRole {
-    id: number;
-    name: string;
-    displayName: string;
+  id: number;
+  name: string;
+  displayName: string;
 }
 
 export class CreateRole {
-    name: string;
-    displayName: string;
+  name: string;
+  displayName: string;
 }
 
 export class DeleteRole {
-    id: number;
+  id: number;
 }

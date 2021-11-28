@@ -7,22 +7,22 @@ import { $model.Enum.Name$SelectComponent } from './$model.Enum.NameKebab$-selec
 import { $model.Enum.Name$ViewComponent } from './$model.Enum.NameKebab$-view.component';
 
 @NgModule({
-    declarations: [
-        $model.Enum.Name$SelectComponent,
-        $model.Enum.Name$ViewComponent
-    ],
-    imports: [
-        CoreModule
-    ],
-    providers: [
-    ],
-    exports: [
-        $model.Enum.Name$SelectComponent,
-        $model.Enum.Name$ViewComponent
-    ]
+  declarations: [
+    $model.Enum.Name$SelectComponent,
+    $model.Enum.Name$ViewComponent
+  ],
+  imports: [
+    CoreModule
+  ],
+  providers: [
+  ],
+  exports: [
+    $model.Enum.Name$SelectComponent,
+    $model.Enum.Name$ViewComponent
+  ]
 })
 export class $model.Enum.Name$Module {
-    
+  
 }
 
 >>

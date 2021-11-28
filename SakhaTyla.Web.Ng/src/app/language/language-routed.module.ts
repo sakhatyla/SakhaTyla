@@ -6,19 +6,19 @@ import { LanguageViewComponent } from './language-view.component';
 import { LanguageModule } from '../language/language.module';
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-        RouterModule.forChild([
-            { path: '', component: LanguagesComponent },
-            { path: ':id', component: LanguageViewComponent }
-        ]),
-        LanguageModule,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-    ]
+  declarations: [
+  ],
+  imports: [
+    RouterModule.forChild([
+      { path: '', component: LanguagesComponent },
+      { path: ':id', component: LanguageViewComponent }
+    ]),
+    LanguageModule,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+  ]
 })
 export class LanguageRoutedModule {
 

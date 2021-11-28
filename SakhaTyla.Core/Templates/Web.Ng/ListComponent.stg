@@ -7,7 +7,7 @@ import { mergeMap } from 'rxjs/operators';
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
 import { Error } from '../core/error.model';
-import { Page } from '../core/page.model';
+import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 
 import { $model.Entity.Name$, $model.Entity.Name$ListState } from '../$model.Entity.NameKebab$-core/$model.Entity.NameKebab$.model';
@@ -15,92 +15,94 @@ import { $model.Entity.Name$Service } from '../$model.Entity.NameKebab$-core/$mo
 import { $model.Entity.Name$EditComponent } from './$model.Entity.NameKebab$-edit.component';
 
 @Component({
-    selector: 'app-$model.Entity.NameKebab$-list',
-    templateUrl: './$model.Entity.NameKebab$-list.component.html',
-    styleUrls: ['./$model.Entity.NameKebab$-list.component.scss']
+  selector: 'app-$model.Entity.NameKebab$-list',
+  templateUrl: './$model.Entity.NameKebab$-list.component.html',
+  styleUrls: ['./$model.Entity.NameKebab$-list.component.scss']
 })
 export class $model.Entity.Name$ListComponent implements OnInit {
-    content: Page<$model.Entity.Name$>;
-    pageSizeOptions = [10, 20];
-    columns = [
-        $model.Entity.AllFields:field(); separator="\r\n"$
-        'action'
-    ];
+  content: Page<$model.Entity.Name$>;
+  pageSizeOptions = PageSettings.pageSizeOptions;
+  columns = [
+    $model.Entity.AllFields:field(); separator="\r\n"$
+    'action'
+  ];
 
-    @Input()
-    state: $model.Entity.Name$ListState;
-    
-    @Input()
-    baseRoute = '/$model.Entity.NameKebab$';
+  @Input()
+  state: $model.Entity.Name$ListState;
+  
+  @Input()
+  baseRoute = '/$model.Entity.NameKebab$';
 
-    constructor(
-        private dialog: MatDialog,
-        private modalHelper: ModalHelper,
-        private $model.Entity.NameLower$Service: $model.Entity.Name$Service,
-        private noticeHelper: NoticeHelper
-        ) {
+  constructor(
+    private dialog: MatDialog,
+    private modalHelper: ModalHelper,
+    private $model.Entity.NameLower$Service: $model.Entity.Name$Service,
+    private noticeHelper: NoticeHelper
+    ) {
+  }
+
+  ngOnInit() {
+    this.get$model.Entity.PluralName$();
+  }
+
+  private get$model.Entity.PluralName$() {
+    this.$model.Entity.NameLower$Service.get$model.Entity.PluralName$({
+      pageIndex: this.state.pageIndex,
+      pageSize: this.state.pageSize,
+      filter: this.state.filter
+    }).subscribe(content => this.content = content);
+  }
+
+  onSearch() {
+    this.state.pageIndex = 0;
+    this.get$model.Entity.PluralName$();
+  }
+
+  onReset() {
+    this.state.pageIndex = 0;
+    this.state.filter.text = null;
+    this.get$model.Entity.PluralName$();
+  }
+
+  onCreate() {
+    $model.Entity.Name$EditComponent.show(this.dialog, null).subscribe(() => {
+      this.get$model.Entity.PluralName$();
+    });
+  }
+
+  onExport(): void {
+    this.$model.Entity.NameLower$Service.export$model.Entity.PluralName$({ filter: this.state.filter })
+      .subscribe(file => {
+        file.download();
+      });
+  }
+
+  onEdit($model.Entity.IdField.NameLower$: $model.Entity.IdField.JsTypeName$) {
+    $model.Entity.Name$EditComponent.show(this.dialog, id).subscribe(() => {
+      this.get$model.Entity.PluralName$();
+    });
+  }
+
+  onDelete($model.Entity.IdField.NameLower$: $model.Entity.IdField.JsTypeName$) {
+    this.modalHelper.confirmDelete()
+      .pipe(
+        mergeMap(() => this.$model.Entity.NameLower$Service.delete$model.Entity.Name$({ $model.Entity.IdField.NameLower$ }))
+      )
+      .subscribe(() => this.get$model.Entity.PluralName$(),
+        error => this.onError(error));
+  }
+
+  onPage(page: PageEvent) {
+    this.state.pageIndex = page.pageIndex;
+    this.state.pageSize = page.pageSize;
+    this.get$model.Entity.PluralName$();
+  }
+
+  onError(error: Error) {
+    if (error) {
+      this.noticeHelper.showError(error);
     }
-
-    ngOnInit() {
-        this.get$model.Entity.PluralName$();
-    }
-
-    private get$model.Entity.PluralName$() {
-        this.$model.Entity.NameLower$Service.get$model.Entity.PluralName$({
-            pageIndex: this.state.pageIndex,
-            pageSize: this.state.pageSize,
-            filter: this.state.filter
-        }).subscribe(content => this.content = content);
-    }
-
-    onSearch() {
-        this.get$model.Entity.PluralName$();
-    }
-
-    onReset() {
-        this.state.filter.text = null;
-        this.get$model.Entity.PluralName$();
-    }
-
-    onCreate() {
-        $model.Entity.Name$EditComponent.show(this.dialog, null).subscribe(() => {
-            this.get$model.Entity.PluralName$();
-        });
-    }
-
-    onExport(): void {
-        this.$model.Entity.NameLower$Service.export$model.Entity.PluralName$({ filter: this.state.filter })
-            .subscribe(file => {
-                file.download();
-            });
-    }
-
-    onEdit($model.Entity.IdField.NameLower$: $model.Entity.IdField.JsTypeName$) {
-        $model.Entity.Name$EditComponent.show(this.dialog, id).subscribe(() => {
-            this.get$model.Entity.PluralName$();
-        });
-    }
-
-    onDelete($model.Entity.IdField.NameLower$: $model.Entity.IdField.JsTypeName$) {
-        this.modalHelper.confirmDelete()
-            .pipe(
-                mergeMap(() => this.$model.Entity.NameLower$Service.delete$model.Entity.Name$({ $model.Entity.IdField.NameLower$ }))
-            )
-            .subscribe(() => this.get$model.Entity.PluralName$(),
-                error => this.onError(error));
-    }
-
-    onPage(page: PageEvent) {
-        this.state.pageIndex = page.pageIndex;
-        this.state.pageSize = page.pageSize;
-        this.get$model.Entity.PluralName$();
-    }
-
-    onError(error: Error) {
-        if (error) {
-            this.noticeHelper.showError(error);
-        }
-    }
+  }
 }
 
 >>

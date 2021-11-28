@@ -12,71 +12,71 @@ import { Category } from '../category-core/category.model';
 import { CategoryService } from '../category-core/category.service';
 
 class DialogData {
-    id: number;
+  id: number;
 }
 
 @Component({
-    selector: 'app-category-edit',
-    templateUrl: './category-edit.component.html',
-    styleUrls: ['./category-edit.component.scss']
+  selector: 'app-category-edit',
+  templateUrl: './category-edit.component.html',
+  styleUrls: ['./category-edit.component.scss']
 })
 export class CategoryEditComponent implements OnInit {
-    id: number;
-    categoryForm = this.fb.group({
-        id: [],
-        name: []
+  id: number;
+  categoryForm = this.fb.group({
+    id: [],
+    name: []
+  });
+  category: Category;
+  error: Error;
+
+  constructor(public dialogRef: MatDialogRef<CategoryEditComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private categoryService: CategoryService,
+              private fb: FormBuilder,
+              private noticeHelper: NoticeHelper) {
+    this.id = data.id;
+  }
+
+  static show(dialog: MatDialog, id: number): Observable<any> {
+    const dialogRef = dialog.open(CategoryEditComponent, {
+      width: '600px',
+      data: { id: id }
     });
-    category: Category;
-    error: Error;
+    return dialogRef.afterClosed()
+      .pipe(filter(res => res === true));
+  }
 
-    constructor(public dialogRef: MatDialogRef<CategoryEditComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: DialogData,
-                private categoryService: CategoryService,
-                private fb: FormBuilder,
-                private noticeHelper: NoticeHelper) {
-        this.id = data.id;
-    }
+  ngOnInit(): void {
+    this.getCategory();
+  }
 
-    static show(dialog: MatDialog, id: number): Observable<any> {
-        const dialogRef = dialog.open(CategoryEditComponent, {
-            width: '600px',
-            data: { id: id }
-        });
-        return dialogRef.afterClosed()
-            .pipe(filter(res => res === true));
-    }
+  private getCategory() {
+    const getCategory$ = !this.id ?
+      of(new Category()) :
+      this.categoryService.getCategory({ id: this.id });
+    getCategory$.subscribe(category => {
+      this.category = category;
+      this.categoryForm.patchValue(this.category);
+    });
+  }
 
-    ngOnInit(): void {
-        this.getCategory();
-    }
+  onSave(): void {
+    this.saveCategory();
+  }
 
-    private getCategory() {
-        const getCategory$ = !this.id ?
-            of(new Category()) :
-            this.categoryService.getCategory({ id: this.id });
-        getCategory$.subscribe(category => {
-            this.category = category;
-            this.categoryForm.patchValue(this.category);
-        });
-    }
+  private saveCategory() {
+    const saveCategory$ = this.id ?
+      this.categoryService.updateCategory(this.categoryForm.value) :
+      this.categoryService.createCategory(this.categoryForm.value);
+    saveCategory$.subscribe(() => this.dialogRef.close(true),
+      error => this.onError(error));
+  }
 
-    onSave(): void {
-        this.saveCategory();
+  onError(error: Error) {
+    this.error = error;
+    if (error) {
+      this.noticeHelper.showError(error);
+      Error.setFormErrors(this.categoryForm, error);
     }
-
-    private saveCategory() {
-        const saveCategory$ = this.id ?
-            this.categoryService.updateCategory(this.categoryForm.value) :
-            this.categoryService.createCategory(this.categoryForm.value);
-        saveCategory$.subscribe(() => this.dialogRef.close(true),
-            error => this.onError(error));
-    }
-
-    onError(error: Error) {
-        this.error = error;
-        if (error) {
-            this.noticeHelper.showError(error);
-            Error.setFormErrors(this.categoryForm, error);
-        }
-    }
+  }
 }

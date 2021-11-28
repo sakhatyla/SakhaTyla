@@ -1,21 +1,21 @@
 ﻿<mat-card class="mat-card-view" *transloco="let t">
 
-    <mat-card-header>
-        <mat-card-title>{{ t('Category') }} <app-category-show [value]="category"></app-category-show></mat-card-title>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>{{ t('Category') }} <app-category-show [value]="category"></app-category-show></mat-card-title>
+  </mat-card-header>
 
-    <mat-card-actions>
-        <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
-        <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
-    </mat-card-actions>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
 
-    <div *ngIf="category">
-        <div class="field-view">
-            <label>{{ t('Name') }}</label>
-            <div>
-                <app-text-view [value]="category.name"></app-text-view>
-            </div>
-        </div>
+  <div *ngIf="category">
+    <div class="field-view">
+      <label>{{ t('Name') }}</label>
+      <div>
+        <app-text-view [value]="category.name"></app-text-view>
+      </div>
     </div>
+  </div>
 
 </mat-card>

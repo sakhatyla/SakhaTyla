@@ -7,118 +7,118 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 
 @Component({
-    selector: 'app-datetime-edit',
-    templateUrl: './datetime.edit.component.html',
-    providers: [
-        { provide: MatFormFieldControl, useExisting: DateTimeEditComponent }
-    ]
+  selector: 'app-datetime-edit',
+  templateUrl: './datetime.edit.component.html',
+  providers: [
+    { provide: MatFormFieldControl, useExisting: DateTimeEditComponent }
+  ]
 })
 export class DateTimeEditComponent implements ControlValueAccessor, MatFormFieldControl<Date>, OnDestroy, DoCheck {
 
-    static nextId = 0;
+  static nextId = 0;
 
-    stateChanges = new Subject<void>();
-    focused = false;
-    controlType = 'app-datetime-edit';
-    id = `datetime-edit-${DateTimeEditComponent.nextId++}`;
-    describedBy = '';
+  stateChanges = new Subject<void>();
+  focused = false;
+  controlType = 'app-datetime-edit';
+  id = `datetime-edit-${DateTimeEditComponent.nextId++}`;
+  describedBy = '';
 
-    errorState = false;
+  errorState = false;
 
-    get empty() {
-        return !this.value;
+  get empty() {
+    return !this.value;
+  }
+
+  get shouldLabelFloat() { return this.focused || !this.empty; }
+
+  @Input()
+  value: Date;
+
+  @Input()
+  name: string;
+
+  @Input()
+  placeholder: string;
+
+  @Input()
+  get required(): boolean { return this.innerRequired; }
+  set required(value: boolean) {
+    this.innerRequired = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+  private innerRequired = false;
+
+  @Input()
+  get disabled(): boolean { return this.innerDisabled; }
+  set disabled(value: boolean) {
+    this.innerDisabled = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+  private innerDisabled = false;
+
+  get innerValue(): string {
+    if (this.value) {
+      return this.value.toISOString();
+    } else {
+      return null;
     }
+  }
 
-    get shouldLabelFloat() { return this.focused || !this.empty; }
-
-    @Input()
-    value: Date;
-
-    @Input()
-    name: string;
-
-    @Input()
-    placeholder: string;
-
-    @Input()
-    get required(): boolean { return this.innerRequired; }
-    set required(value: boolean) {
-        this.innerRequired = coerceBooleanProperty(value);
-        this.stateChanges.next();
+  set innerValue(val: string) {
+    if (val) {
+      this.value = new Date(val);
+    } else {
+      this.value = null;
     }
-    private innerRequired = false;
-
-    @Input()
-    get disabled(): boolean { return this.innerDisabled; }
-    set disabled(value: boolean) {
-        this.innerDisabled = coerceBooleanProperty(value);
-        this.stateChanges.next();
+    this.onChange(this.value);
+    this.onTouched();
+  }
+  constructor(private fm: FocusMonitor, private elRef: ElementRef<HTMLElement>,
+              @Optional() @Self() public ngControl: NgControl) {
+    fm.monitor(elRef, true).subscribe(origin => {
+      this.focused = !!origin;
+      this.stateChanges.next();
+    });
+    if (this.ngControl !== null) {
+      this.ngControl.valueAccessor = this;
     }
-    private innerDisabled = false;
+  }
 
-    get innerValue(): string {
-        if (this.value) {
-            return this.value.toISOString();
-        } else {
-            return null;
-        }
-    }
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
-    set innerValue(val: string) {
-        if (val) {
-            this.value = new Date(val);
-        } else {
-            this.value = null;
-        }
-        this.onChange(this.value);
-        this.onTouched();
-    }
-    constructor(private fm: FocusMonitor, private elRef: ElementRef<HTMLElement>,
-                @Optional() @Self() public ngControl: NgControl) {
-        fm.monitor(elRef, true).subscribe(origin => {
-            this.focused = !!origin;
-            this.stateChanges.next();
-        });
-        if (this.ngControl !== null) {
-            this.ngControl.valueAccessor = this;
-        }
-    }
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
 
-    onChange: any = () => { };
-    onTouched: any = () => { };
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
 
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
+  writeValue(value) {
+    this.innerValue = value;
+  }
 
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
+  ngOnDestroy() {
+    this.stateChanges.complete();
+    this.fm.stopMonitoring(this.elRef);
+  }
 
-    writeValue(value) {
-        this.innerValue = value;
-    }
+  setDescribedByIds(ids: string[]) {
+    this.describedBy = ids.join(' ');
+  }
 
-    ngOnDestroy() {
-        this.stateChanges.complete();
-        this.fm.stopMonitoring(this.elRef);
-    }
+  onContainerClick(event: MouseEvent) {
+  }
 
-    setDescribedByIds(ids: string[]) {
-        this.describedBy = ids.join(' ');
+  ngDoCheck(): void {
+    if (this.ngControl) {
+      this.errorState = this.ngControl.invalid;
+      this.stateChanges.next();
     }
+  }
 
-    onContainerClick(event: MouseEvent) {
-    }
-
-    ngDoCheck(): void {
-        if (this.ngControl) {
-            this.errorState = this.ngControl.invalid;
-            this.stateChanges.next();
-        }
-    }
-
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-    }
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

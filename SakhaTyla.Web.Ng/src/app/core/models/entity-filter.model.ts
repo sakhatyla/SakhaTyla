@@ -1,3 +1,3 @@
 export class EntityFilter {
-    text: string;
+  text: string;
 }

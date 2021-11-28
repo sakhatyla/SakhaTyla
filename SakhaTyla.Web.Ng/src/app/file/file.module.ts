@@ -12,27 +12,27 @@ import { FileViewComponent } from './file-view.component';
 import { FilesComponent } from './files.component';
 
 @NgModule({
-    declarations: [
-        FileListComponent,
-        FileEditComponent,
-        FileViewComponent,
-        FilesComponent,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-        FileGroupCoreModule,
-        FileCoreModule
-    ],
-    exports: [
-        FileListComponent,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        FileEditComponent
-    ]
+  declarations: [
+    FileListComponent,
+    FileEditComponent,
+    FileViewComponent,
+    FilesComponent,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    FileGroupCoreModule,
+    FileCoreModule
+  ],
+  exports: [
+    FileListComponent,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    FileEditComponent
+  ]
 })
 export class FileModule {
 

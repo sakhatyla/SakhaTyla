@@ -1,0 +1,38 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/WorkerRunStatus/workerRunStatus.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.WorkerRuns";
+
+message WorkerRunFilter {
+    oneof workerInfoIdOneOf {
+        int32 workerInfoId = 60;
+    }
+    oneof statusOneOf {
+        WorkerRunStatus status = 70;
+    }
+    oneof startDateTimeFromOneOf {
+        google.protobuf.Timestamp startDateTimeFrom = 80;
+    }
+    oneof startDateTimeToOneOf {
+        google.protobuf.Timestamp startDateTimeTo = 81;
+    }
+    oneof endDateTimeFromOneOf {
+        google.protobuf.Timestamp endDateTimeFrom = 90;
+    }
+    oneof endDateTimeToOneOf {
+        google.protobuf.Timestamp endDateTimeTo = 91;
+    }
+    oneof dataOneOf {
+        string data = 100;
+    }
+    oneof resultOneOf {
+        string result = 110;
+    }
+    oneof resultDataOneOf {
+        string resultData = 120;
+    }
+}

@@ -8,21 +8,21 @@ import { FileShowComponent } from './file-show.component';
 import { TranslocoRootModule } from '../transloco-root.module';
 
 @NgModule({
-    declarations: [
-        FileSelectComponent,
-        FileShowComponent
-    ],
-    imports: [
-        CoreModule,
-        TranslocoRootModule,
-    ],
-    providers: [
-        FileService
-    ],
-    exports: [
-        FileSelectComponent,
-        FileShowComponent
-    ]
+  declarations: [
+    FileSelectComponent,
+    FileShowComponent
+  ],
+  imports: [
+    CoreModule,
+    TranslocoRootModule,
+  ],
+  providers: [
+    FileService
+  ],
+  exports: [
+    FileSelectComponent,
+    FileShowComponent
+  ]
 })
 export class FileCoreModule {
 

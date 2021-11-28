@@ -12,28 +12,28 @@ import { EntityChangeValueDirective } from './entity-change-value.directive';
 import { EntityChangesComponent } from './entity-changes.component';
 
 @NgModule({
-    declarations: [
-        EntityChangeListComponent,
-        EntityChangesComponent,
-        EntityChangeValueDirective,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-        UserCoreModule,
-        ChangeActionModule,
-        EntityChangeCoreModule
-    ],
-    exports: [
-        EntityChangeListComponent,
-        EntityChangeValueDirective,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        EntityChangesComponent
-    ]
+  declarations: [
+    EntityChangeListComponent,
+    EntityChangesComponent,
+    EntityChangeValueDirective,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    UserCoreModule,
+    ChangeActionModule,
+    EntityChangeCoreModule
+  ],
+  exports: [
+    EntityChangeListComponent,
+    EntityChangeValueDirective,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    EntityChangesComponent
+  ]
 })
 export class EntityChangeModule {
 

@@ -1,16 +1,17 @@
 ﻿main(model) ::= <<
+import { PageSettings } from '../core/page.model';
 import { $model.Entity.Name$Filter } from './$model.Entity.NameKebab$-filter.model';
 $model.Entity.DependentEnums:enumImport(); separator="\n"$
 
 export class $model.Entity.Name$ {
-    $model.Entity.AllSystemFields:field(); separator="\n"$
-    $model.Entity.AllFields:field(); separator="\n"$
+  $model.Entity.AllSystemFields:field(); separator="\n"$
+  $model.Entity.AllFields:field(); separator="\n"$
 }
 
 export class $model.Entity.Name$ListState {
-    pageSize = 10;
-    pageIndex = 0;
-    filter = new $model.Entity.Name$Filter();
+  pageSize = PageSettings.pageSize;
+  pageIndex = 0;
+  filter = new $model.Entity.Name$Filter();
 }
 
 >>

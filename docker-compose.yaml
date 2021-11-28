@@ -17,3 +17,6 @@ services:
       - db
   db:
     image: 'mcr.microsoft.com/mssql/server:2017-latest-ubuntu'
+  mq:
+    image: rabbitmq:3.8-management
+    hostname: "mq"

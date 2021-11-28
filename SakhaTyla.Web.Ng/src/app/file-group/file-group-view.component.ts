@@ -9,38 +9,38 @@ import { FileGroupService } from '../file-group-core/file-group.service';
 import { FileGroupEditComponent } from './file-group-edit.component';
 
 @Component({
-    selector: 'app-file-group-view',
-    templateUrl: './file-group-view.component.html',
-    styleUrls: ['./file-group-view.component.scss']
+  selector: 'app-file-group-view',
+  templateUrl: './file-group-view.component.html',
+  styleUrls: ['./file-group-view.component.scss']
 })
 export class FileGroupViewComponent implements OnInit {
-    id: number;
-    fileGroup: FileGroup;
+  id: number;
+  fileGroup: FileGroup;
 
-    constructor(private dialog: MatDialog,
-                private fileGroupService: FileGroupService,
-                private route: ActivatedRoute) {
-    }
+  constructor(private dialog: MatDialog,
+              private fileGroupService: FileGroupService,
+              private route: ActivatedRoute) {
+  }
 
-    ngOnInit(): void {
-        this.route.params.forEach((params: Params) => {
-            this.id = ConvertStringTo.number(params.id);
-            this.getFileGroup();
-        });
-    }
+  ngOnInit(): void {
+    this.route.params.forEach((params: Params) => {
+      this.id = ConvertStringTo.number(params.id);
+      this.getFileGroup();
+    });
+  }
 
-    private getFileGroup() {
-        this.fileGroupService.getFileGroup({ id: this.id })
-            .subscribe(fileGroup => this.fileGroup = fileGroup);
-    }
+  private getFileGroup() {
+    this.fileGroupService.getFileGroup({ id: this.id })
+      .subscribe(fileGroup => this.fileGroup = fileGroup);
+  }
 
-    onEdit() {
-        FileGroupEditComponent.show(this.dialog, this.id).subscribe(() => {
-            this.getFileGroup();
-        });
-    }
+  onEdit() {
+    FileGroupEditComponent.show(this.dialog, this.id).subscribe(() => {
+      this.getFileGroup();
+    });
+  }
 
-    onBack(): void {
-        window.history.back();
-    }
+  onBack(): void {
+    window.history.back();
+  }
 }

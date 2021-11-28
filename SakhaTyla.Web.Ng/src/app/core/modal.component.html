@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>{{ data.title }}</h1>
 <mat-dialog-content>
-    <div>{{ data.body }}</div>
+  <div>{{ data.body }}</div>
 </mat-dialog-content>
-<mat-dialog-actions>    
-    <button mat-raised-button mat-dialog-close *ngIf="data.cancelButton">{{ data.cancelButton }}</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>{{ data.okButton }}</button>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close *ngIf="data.cancelButton">{{ data.cancelButton }}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>{{ data.okButton }}</button>
 </mat-dialog-actions>

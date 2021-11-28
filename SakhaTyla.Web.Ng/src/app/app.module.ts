@@ -20,81 +20,91 @@ import { MatPaginatorIntlCustom } from './mat-paginator-intl';
 import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavMenuComponent,
-        HomeComponent
-    ],
-    imports: [
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] },
-// ADD ROUTES HERE
-            {
-                path: 'article',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./article/article-routed.module').then(m => m.ArticleRoutedModule)
-            },
-            {
-                path: 'category',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./category/category-routed.module').then(m => m.CategoryRoutedModule)
-            },
-            {
-                path: 'language',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./language/language-routed.module').then(m => m.LanguageRoutedModule)
-            },
-            {
-                path: 'file',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./file/file-routed.module').then(m => m.FileRoutedModule)
-            },
-            {
-                path: 'file-group',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./file-group/file-group-routed.module').then(m => m.FileGroupRoutedModule)
-            },
-            {
-                path: 'profile',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-            },
-            {
-                path: 'role',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./role/role-routed.module').then(m => m.RoleRoutedModule)
-            },
-            {
-                path: 'user',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./user/user-routed.module').then(m => m.UserRoutedModule)
-            },
-        ]),
-        MaterialModule,
-        CoreModule,
-        ApiAuthorizationModule,
-        TranslocoRootModule,
-    ],
-    exports: [
-        MaterialModule
-    ],
-    providers: [
-        ConfigService,
-        MenuService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: (configService: ConfigService) => {
-                return () => configService.load();
-            },
-            multi: true,
-            deps: [ConfigService]
-        },
-        { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-        { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCustom}
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    NavMenuComponent,
+    HomeComponent
+  ],
+  imports: [
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] },
+      // ADD ROUTES HERE
+      {
+        path: 'article',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./article/article-routed.module').then(m => m.ArticleRoutedModule)
+      },
+      {
+        path: 'category',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./category/category-routed.module').then(m => m.CategoryRoutedModule)
+      },
+      {
+        path: 'language',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./language/language-routed.module').then(m => m.LanguageRoutedModule)
+      },
+      {
+        path: 'worker-run',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./worker-run/worker-run-routed.module').then(m => m.WorkerRunRoutedModule)
+      },
+      {
+        path: 'worker-info',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./worker-info/worker-info-routed.module').then(m => m.WorkerInfoRoutedModule)
+      },
+      {
+        path: 'file',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./file/file-routed.module').then(m => m.FileRoutedModule)
+      },
+      {
+        path: 'file-group',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./file-group/file-group-routed.module').then(m => m.FileGroupRoutedModule)
+      },
+      {
+        path: 'profile',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
+        path: 'role',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./role/role-routed.module').then(m => m.RoleRoutedModule)
+      },
+      {
+        path: 'user',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./user/user-routed.module').then(m => m.UserRoutedModule)
+      },
+    ]),
+    MaterialModule,
+    CoreModule,
+    ApiAuthorizationModule,
+    TranslocoRootModule,
+  ],
+  exports: [
+    MaterialModule
+  ],
+  providers: [
+    ConfigService,
+    MenuService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (configService: ConfigService) => {
+        return () => configService.load();
+      },
+      multi: true,
+      deps: [ConfigService]
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCustom }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

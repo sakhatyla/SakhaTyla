@@ -1,23 +1,23 @@
 <mat-card class="mat-card-edit" *transloco="let t">
 
-    <mat-card-header>
-        <mat-card-title>{{ t('app.profile') }}</mat-card-title>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>{{ t('app.profile') }}</mat-card-title>
+  </mat-card-header>
 
-    <form *ngIf="profile" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
-            <mat-label>{{ t('First Name') }}</mat-label>
-            <app-text-edit formControlName="firstName" name="firstName" [placeholder]="t('First Name')"></app-text-edit>
-            <mat-error>{{ error?.modelState?.firstName | modelError }}</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>{{ t('Last Name') }}</mat-label>
-            <app-text-edit formControlName="lastName" name="lastName" [placeholder]="t('Last Name')"></app-text-edit>
-            <mat-error>{{ error?.modelState?.lastName | modelError }}</mat-error>
-        </mat-form-field>
-        <mat-card-actions>
-            <button mat-raised-button color="primary" type="submit">{{ t('shared.save') }}</button>
-        </mat-card-actions>
-    </form>
+  <form *ngIf="profile" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>{{ t('First Name') }}</mat-label>
+      <app-text-edit formControlName="firstName" name="firstName" [placeholder]="t('First Name')"></app-text-edit>
+      <mat-error>{{ error?.modelState?.firstName | modelError }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ t('Last Name') }}</mat-label>
+      <app-text-edit formControlName="lastName" name="lastName" [placeholder]="t('Last Name')"></app-text-edit>
+      <mat-error>{{ error?.modelState?.lastName | modelError }}</mat-error>
+    </mat-form-field>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">{{ t('shared.save') }}</button>
+    </mat-card-actions>
+  </form>
 
 </mat-card>

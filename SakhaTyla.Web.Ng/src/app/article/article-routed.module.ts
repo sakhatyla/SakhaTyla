@@ -6,19 +6,19 @@ import { ArticleViewComponent } from './article-view.component';
 import { ArticleModule } from '../article/article.module';
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-        RouterModule.forChild([
-            { path: '', component: ArticlesComponent },
-            { path: ':id', component: ArticleViewComponent }
-        ]),
-        ArticleModule,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-    ]
+  declarations: [
+  ],
+  imports: [
+    RouterModule.forChild([
+      { path: '', component: ArticlesComponent },
+      { path: ':id', component: ArticleViewComponent }
+    ]),
+    ArticleModule,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+  ]
 })
 export class ArticleRoutedModule {
 

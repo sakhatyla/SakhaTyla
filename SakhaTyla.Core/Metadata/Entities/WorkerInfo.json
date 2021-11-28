@@ -1,0 +1,36 @@
+﻿{
+  "id": "63a8c5c9-9fe5-4f29-81b3-b0824b2bb105",
+  "name": "WorkerInfo",
+  "pluralName": "WorkerInfos",
+  "displayName": "Worker",
+  "pluralDisplayName": "Workers",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "a7141981-1967-4456-9a2e-06547a2d4c2d",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "cd90e1fc-081f-4d9a-a5d2-085eaa26ba57",
+      "name": "ClassName",
+      "displayName": "Class Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

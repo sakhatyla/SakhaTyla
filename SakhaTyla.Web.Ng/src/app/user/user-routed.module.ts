@@ -6,21 +6,21 @@ import { UserViewComponent } from './user-view.component';
 import { UserModule } from './user.module';
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-        RouterModule.forChild([
-            { path: '', component: UsersComponent },
-            { path: ':id', component: UserViewComponent }
-        ]),
-        UserModule,
-    ],
-    exports: [
-    ],
-    providers: [
-    ],
-    entryComponents: [
-    ]
+  declarations: [
+  ],
+  imports: [
+    RouterModule.forChild([
+      { path: '', component: UsersComponent },
+      { path: ':id', component: UserViewComponent }
+    ]),
+    UserModule,
+  ],
+  exports: [
+  ],
+  providers: [
+  ],
+  entryComponents: [
+  ]
 })
 export class UserRoutedModule {
 

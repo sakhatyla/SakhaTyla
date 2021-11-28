@@ -6,21 +6,21 @@ import { RoleViewComponent } from './role-view.component';
 import { RoleModule } from './role.module';
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-        RouterModule.forChild([
-            { path: '', component: RolesComponent },
-            { path: ':id', component: RoleViewComponent }
-        ]),
-        RoleModule,
-    ],
-    exports: [
-    ],
-    providers: [
-    ],
-    entryComponents: [
-    ]
+  declarations: [
+  ],
+  imports: [
+    RouterModule.forChild([
+      { path: '', component: RolesComponent },
+      { path: ':id', component: RoleViewComponent }
+    ]),
+    RoleModule,
+  ],
+  exports: [
+  ],
+  providers: [
+  ],
+  entryComponents: [
+  ]
 })
 export class RoleRoutedModule {
 

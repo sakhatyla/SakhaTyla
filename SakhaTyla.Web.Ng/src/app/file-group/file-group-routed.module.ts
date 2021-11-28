@@ -6,19 +6,19 @@ import { FileGroupViewComponent } from './file-group-view.component';
 import { FileGroupModule } from '../file-group/file-group.module';
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-        RouterModule.forChild([
-            { path: '', component: FileGroupsComponent },
-            { path: ':id', component: FileGroupViewComponent }
-        ]),
-        FileGroupModule,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-    ]
+  declarations: [
+  ],
+  imports: [
+    RouterModule.forChild([
+      { path: '', component: FileGroupsComponent },
+      { path: ':id', component: FileGroupViewComponent }
+    ]),
+    FileGroupModule,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+  ]
 })
 export class FileGroupRoutedModule {
 

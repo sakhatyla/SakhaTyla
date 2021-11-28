@@ -1,82 +1,85 @@
 ﻿<ng-container *transloco="let t">
 
-    <mat-card-header>
-        <mat-card-title>{{ t('Users') }}</mat-card-title>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>{{ t('Users') }}</mat-card-title>
+  </mat-card-header>
 
-    <mat-card-actions>
-        <div class="action-item">
-            <form (ngSubmit)="onSearch()">
-                <mat-form-field>
-                    <mat-label>{{ t('shared.text') }}</mat-label>
-                    <input matInput id="text" type="text" name="text" [placeholder]="t('shared.text')" [(ngModel)]="state.filter.text" />
-                </mat-form-field>
-                <button mat-raised-button type="submit" color="primary">{{ t('shared.search') }}</button>
-                <button mat-raised-button type="reset" (click)="onReset()">{{ t('shared.reset') }}</button>
-            </form>
-        </div>
-        <div class="action-item">
-            <button mat-raised-button color="primary" type="button" (click)="onCreate()">{{ t('shared.create') }}</button>
-            <button mat-raised-button type="button" (click)="onExport()">{{ t('shared.export') }}</button>
-        </div>
-    </mat-card-actions>
+  <mat-card-actions>
+    <div class="action-item">
+      <form (ngSubmit)="onSearch()">
+        <mat-form-field>
+          <mat-label>{{ t('shared.text') }}</mat-label>
+          <input matInput id="text" type="text" name="text" [placeholder]="t('shared.text')"
+            [(ngModel)]="state.filter.text" />
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary">{{ t('shared.search') }}</button>
+        <button mat-raised-button type="reset" (click)="onReset()">{{ t('shared.reset') }}</button>
+      </form>
+    </div>
+    <div class="action-item">
+      <button mat-raised-button color="primary" type="button" (click)="onCreate()">{{ t('shared.create') }}</button>
+      <button mat-raised-button type="button" (click)="onExport()">{{ t('shared.export') }}</button>
+    </div>
+  </mat-card-actions>
 
-    <mat-card-content class="mat-elevation-z8">
+  <mat-card-content class="mat-elevation-z8">
 
-        <table *ngIf="content" mat-table [dataSource]="content.pageItems" multiTemplateDataRows>
+    <table *ngIf="content" mat-table [dataSource]="content.pageItems" multiTemplateDataRows>
 
-            <ng-container matColumnDef="userName">
-                <th mat-header-cell *matHeaderCellDef>{{ t('UserName') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-text-view [value]="item.userName"></app-text-view>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef>{{ t('Email') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-text-view [value]="item.email"></app-text-view>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="emailConfirmed">
-                <th mat-header-cell *matHeaderCellDef>{{ t('Email Confirmed') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-bool-view [value]="item.emailConfirmed"></app-bool-view>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="firstName">
-                <th mat-header-cell *matHeaderCellDef>{{ t('First Name') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-text-view [value]="item.firstName"></app-text-view>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="lastName">
-                <th mat-header-cell *matHeaderCellDef>{{ t('Last Name') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-text-view [value]="item.lastName"></app-text-view>
-                </td>
-            </ng-container>
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef>{{ t('UserName') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.userName"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Email') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.email"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="emailConfirmed">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Email Confirmed') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-bool-view [value]="item.emailConfirmed"></app-bool-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef>{{ t('First Name') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.firstName"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Last Name') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.lastName"></app-text-view>
+        </td>
+      </ng-container>
 
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let item">
-                    <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="actionMenu"><mat-icon>more_vert</mat-icon></button>
-                    <mat-menu #actionMenu="matMenu">
-                        <a mat-menu-item (click)="onEdit(item.id)">{{ t('shared.edit') }}</a>
-                        <a mat-menu-item (click)="onDelete(item.id)">{{ t('shared.delete') }}</a>
-                    </mat-menu>
-                </td>
-            </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="actionMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #actionMenu="matMenu">
+            <a mat-menu-item (click)="onEdit(item.id)">{{ t('shared.edit') }}</a>
+            <a mat-menu-item (click)="onDelete(item.id)">{{ t('shared.delete') }}</a>
+          </mat-menu>
+        </td>
+      </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="columns"></tr>
-            <tr mat-row *matRowDef="let item; columns: columns;" [routerLink]="[baseRoute, item.id]"></tr>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let item; columns: columns;" [routerLink]="[baseRoute, item.id]"></tr>
 
-        </table>
+    </table>
 
-        <div>
-            <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions" [length]="content?.totalItems"
-                (page)="onPage($event)" showFirstLastButtons></mat-paginator>
-        </div>
+    <div>
+      <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions"
+        [length]="content?.totalItems" (page)="onPage($event)" showFirstLastButtons></mat-paginator>
+    </div>
 
-    </mat-card-content>
+  </mat-card-content>
 
 </ng-container>

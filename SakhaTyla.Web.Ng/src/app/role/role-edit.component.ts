@@ -12,72 +12,72 @@ import { Role } from '../role-core/role.model';
 import { RoleService } from '../role-core/role.service';
 
 class DialogData {
-    id: number;
+  id: number;
 }
 
 @Component({
-    selector: 'app-role-edit',
-    templateUrl: './role-edit.component.html',
-    styleUrls: ['./role-edit.component.scss']
+  selector: 'app-role-edit',
+  templateUrl: './role-edit.component.html',
+  styleUrls: ['./role-edit.component.scss']
 })
 export class RoleEditComponent implements OnInit {
-    id: number;
-    roleForm = this.fb.group({
-        id: [],
-        name: [],
-        displayName: []
+  id: number;
+  roleForm = this.fb.group({
+    id: [],
+    name: [],
+    displayName: []
+  });
+  role: Role;
+  error: Error;
+
+  constructor(public dialogRef: MatDialogRef<RoleEditComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private roleService: RoleService,
+              private fb: FormBuilder,
+              private noticeHelper: NoticeHelper) {
+    this.id = data.id;
+  }
+
+  static show(dialog: MatDialog, id: number): Observable<any> {
+    const dialogRef = dialog.open(RoleEditComponent, {
+      width: '600px',
+      data: { id: id }
     });
-    role: Role;
-    error: Error;
+    return dialogRef.afterClosed()
+      .pipe(filter(res => res === true));
+  }
 
-    constructor(public dialogRef: MatDialogRef<RoleEditComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: DialogData,
-                private roleService: RoleService,
-                private fb: FormBuilder,
-                private noticeHelper: NoticeHelper) {
-        this.id = data.id;
-    }
+  ngOnInit(): void {
+    this.getRole();
+  }
 
-    static show(dialog: MatDialog, id: number): Observable<any> {
-        const dialogRef = dialog.open(RoleEditComponent, {
-            width: '600px',
-            data: { id: id }
-        });
-        return dialogRef.afterClosed()
-            .pipe(filter(res => res === true));
-    }
+  private getRole() {
+    const getRole$ = !this.id ?
+      of(new Role()) :
+      this.roleService.getRole({ id: this.id });
+    getRole$.subscribe(role => {
+      this.role = role;
+      this.roleForm.patchValue(this.role);
+    });
+  }
 
-    ngOnInit(): void {
-        this.getRole();
-    }
+  onSave(): void {
+    this.saveRole();
+  }
 
-    private getRole() {
-        const getRole$ = !this.id ?
-            of(new Role()) :
-            this.roleService.getRole({ id: this.id });
-        getRole$.subscribe(role => {
-            this.role = role;
-            this.roleForm.patchValue(this.role);
-        });
-    }
+  private saveRole() {
+    const saveRole$ = this.id ?
+      this.roleService.updateRole(this.roleForm.value) :
+      this.roleService.createRole(this.roleForm.value);
+    saveRole$.subscribe(() => this.dialogRef.close(true),
+      error => this.onError(error));
+  }
 
-    onSave(): void {
-        this.saveRole();
+  onError(error: Error) {
+    this.error = error;
+    if (error) {
+      this.noticeHelper.showError(error);
+      Error.setFormErrors(this.roleForm, error);
     }
-
-    private saveRole() {
-        const saveRole$ = this.id ?
-            this.roleService.updateRole(this.roleForm.value) :
-            this.roleService.createRole(this.roleForm.value);
-        saveRole$.subscribe(() => this.dialogRef.close(true),
-            error => this.onError(error));
-    }
-
-    onError(error: Error) {
-        this.error = error;
-        if (error) {
-            this.noticeHelper.showError(error);
-            Error.setFormErrors(this.roleForm, error);
-        }
-    }
+  }
 }

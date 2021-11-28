@@ -7,18 +7,18 @@ import { ProfileEditComponent } from './profile-edit.component';
 
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-        ProfileCommonModule,
-        RouterModule.forChild([
-            { path: '', component: ProfileEditComponent },
-        ]),
-    ],
-    providers: [
-    ],
-    exports: [
-    ]
+  declarations: [
+  ],
+  imports: [
+    ProfileCommonModule,
+    RouterModule.forChild([
+      { path: '', component: ProfileEditComponent },
+    ]),
+  ],
+  providers: [
+  ],
+  exports: [
+  ]
 })
 export class ProfileModule {
 

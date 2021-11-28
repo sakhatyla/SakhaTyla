@@ -1,51 +1,49 @@
 <mat-card class="mat-card-view" *transloco="let t">
 
-    <mat-card-header>
-        <mat-card-title>{{ t('User') }} <app-user-show [value]="user"></app-user-show></mat-card-title>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>{{ t('User') }} <app-user-show [value]="user"></app-user-show></mat-card-title>
+  </mat-card-header>
 
-    <mat-card-actions>
-        <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
-        <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
-    </mat-card-actions>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
 
-    <div *ngIf="user">
-        <div class="field-view">
-            <label>{{ t('UserName') }}</label>
-            <div>
-                <app-text-view [value]="user.userName"></app-text-view>
-            </div>
-        </div>
-        <div class="field-view">
-            <label>{{ t('Email') }}</label>
-            <div>
-                <app-text-view [value]="user.email"></app-text-view>
-            </div>
-        </div>
-        <div class="field-view">
-            <label>{{ t('Email Confirmed') }}</label>
-            <div>
-                <app-bool-view [value]="user.emailConfirmed"></app-bool-view>
-            </div>
-        </div>
-        <div class="field-view">
-            <label>{{ t('First Name') }}</label>
-            <div>
-                <app-text-view [value]="user.firstName"></app-text-view>
-            </div>
-        </div>
-        <div class="field-view">
-            <label>{{ t('Last Name') }}</label>
-            <div>
-                <app-text-view [value]="user.lastName"></app-text-view>
-            </div>
-        </div>
-        <div class="field-view">
-            <label>{{ t('Roles') }}</label>
-            <div *ngFor="let role of userRoles">
-                {{ role.displayName }}
-            </div>
-        </div>
+  <div *ngIf="user">
+    <div class="field-view">
+      <label>{{ t('UserName') }}</label>
+      <div>
+        <app-text-view [value]="user.userName"></app-text-view>
+      </div>
     </div>
+    <div class="field-view">
+      <label>{{ t('Email') }}</label>
+      <div>
+        <app-text-view [value]="user.email"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Email Confirmed') }}</label>
+      <div>
+        <app-bool-view [value]="user.emailConfirmed"></app-bool-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('First Name') }}</label>
+      <div>
+        <app-text-view [value]="user.firstName"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Last Name') }}</label>
+      <div>
+        <app-text-view [value]="user.lastName"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Roles') }}</label>
+      <app-roles-show [value]="user.roleIds"></app-roles-show>
+    </div>
+  </div>
 
 </mat-card>

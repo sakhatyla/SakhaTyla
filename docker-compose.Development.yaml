@@ -32,5 +32,18 @@ services:
       SA_PASSWORD: 'Qwerty123!'
     volumes:
       - db:/var/opt/mssql
+  mq:
+    environment:
+      RABBITMQ_DEFAULT_USER: 'Manager'
+      RABBITMQ_DEFAULT_PASS: 'Qwerty123!'
+    ports:
+      - '0.0.0.0:4369:4369'
+      - '0.0.0.0:5672:5672'
+      - '0.0.0.0:5671:5671'
+      - '0.0.0.0:15672:15672'
+      - '0.0.0.0:15671:15671'
+    volumes:
+      - mq:/var/lib/rabbitmq
 volumes:
   db:
+  mq:

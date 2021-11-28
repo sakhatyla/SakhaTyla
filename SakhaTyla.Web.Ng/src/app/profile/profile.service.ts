@@ -9,19 +9,19 @@ import { GetProfile, UpdateProfile } from './profile-request.model';
 
 @Injectable()
 export class ProfileService {
-    private apiUrl = this.configService.config.apiBaseUrl + '/api';
+  private apiUrl = this.configService.config.apiBaseUrl + '/api';
 
-    constructor(private httpClient: HttpClient,
-                private configService: ConfigService) {
-    }
+  constructor(private httpClient: HttpClient,
+              private configService: ConfigService) {
+  }
 
-    getProfile(getProfile: GetProfile): Observable<Profile> {
-        const url = `${this.apiUrl}/GetProfile`;
-        return this.httpClient.post<Profile>(url, getProfile);
-    }
+  getProfile(getProfile: GetProfile): Observable<Profile> {
+    const url = `${this.apiUrl}/GetProfile`;
+    return this.httpClient.post<Profile>(url, getProfile);
+  }
 
-    updateProfile(updateProfile: UpdateProfile): Observable<{}> {
-        const url = `${this.apiUrl}/UpdateProfile`;
-        return this.httpClient.post(url, updateProfile);
-    }
+  updateProfile(updateProfile: UpdateProfile): Observable<{}> {
+    const url = `${this.apiUrl}/UpdateProfile`;
+    return this.httpClient.post(url, updateProfile);
+  }
 }

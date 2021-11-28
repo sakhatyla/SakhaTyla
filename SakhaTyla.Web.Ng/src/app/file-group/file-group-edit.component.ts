@@ -12,74 +12,74 @@ import { FileGroup } from '../file-group-core/file-group.model';
 import { FileGroupService } from '../file-group-core/file-group.service';
 
 class DialogData {
-    id: number;
+  id: number;
 }
 
 @Component({
-    selector: 'app-file-group-edit',
-    templateUrl: './file-group-edit.component.html',
-    styleUrls: ['./file-group-edit.component.scss']
+  selector: 'app-file-group-edit',
+  templateUrl: './file-group-edit.component.html',
+  styleUrls: ['./file-group-edit.component.scss']
 })
 export class FileGroupEditComponent implements OnInit {
-    id: number;
-    fileGroupForm = this.fb.group({
-        id: [],
-        name: [],
-        type: [],
-        location: [],
-        accept: []
+  id: number;
+  fileGroupForm = this.fb.group({
+    id: [],
+    name: [],
+    type: [],
+    location: [],
+    accept: []
+  });
+  fileGroup: FileGroup;
+  error: Error;
+
+  constructor(public dialogRef: MatDialogRef<FileGroupEditComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData,
+              private fileGroupService: FileGroupService,
+              private fb: FormBuilder,
+              private noticeHelper: NoticeHelper) {
+    this.id = data.id;
+  }
+
+  static show(dialog: MatDialog, id: number): Observable<any> {
+    const dialogRef = dialog.open(FileGroupEditComponent, {
+      width: '600px',
+      data: { id: id }
     });
-    fileGroup: FileGroup;
-    error: Error;
+    return dialogRef.afterClosed()
+      .pipe(filter(res => res === true));
+  }
 
-    constructor(public dialogRef: MatDialogRef<FileGroupEditComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: DialogData,
-                private fileGroupService: FileGroupService,
-                private fb: FormBuilder,
-                private noticeHelper: NoticeHelper) {
-        this.id = data.id;
-    }
+  ngOnInit(): void {
+    this.getFileGroup();
+  }
 
-    static show(dialog: MatDialog, id: number): Observable<any> {
-        const dialogRef = dialog.open(FileGroupEditComponent, {
-            width: '600px',
-            data: { id: id }
-        });
-        return dialogRef.afterClosed()
-            .pipe(filter(res => res === true));
-    }
+  private getFileGroup() {
+    const getFileGroup$ = !this.id ?
+      of(new FileGroup()) :
+      this.fileGroupService.getFileGroup({ id: this.id });
+    getFileGroup$.subscribe(fileGroup => {
+      this.fileGroup = fileGroup;
+      this.fileGroupForm.patchValue(this.fileGroup);
+    });
+  }
 
-    ngOnInit(): void {
-        this.getFileGroup();
-    }
+  onSave(): void {
+    this.saveFileGroup();
+  }
 
-    private getFileGroup() {
-        const getFileGroup$ = !this.id ?
-            of(new FileGroup()) :
-            this.fileGroupService.getFileGroup({ id: this.id });
-        getFileGroup$.subscribe(fileGroup => {
-            this.fileGroup = fileGroup;
-            this.fileGroupForm.patchValue(this.fileGroup);
-        });
-    }
+  private saveFileGroup() {
+    const saveFileGroup$ = this.id ?
+      this.fileGroupService.updateFileGroup(this.fileGroupForm.value) :
+      this.fileGroupService.createFileGroup(this.fileGroupForm.value);
+    saveFileGroup$.subscribe(() => this.dialogRef.close(true),
+      error => this.onError(error));
+  }
 
-    onSave(): void {
-        this.saveFileGroup();
+  onError(error: Error) {
+    this.error = error;
+    if (error) {
+      this.noticeHelper.showError(error);
+      Error.setFormErrors(this.fileGroupForm, error);
     }
-
-    private saveFileGroup() {
-        const saveFileGroup$ = this.id ?
-            this.fileGroupService.updateFileGroup(this.fileGroupForm.value) :
-            this.fileGroupService.createFileGroup(this.fileGroupForm.value);
-        saveFileGroup$.subscribe(() => this.dialogRef.close(true),
-            error => this.onError(error));
-    }
-
-    onError(error: Error) {
-        this.error = error;
-        if (error) {
-            this.noticeHelper.showError(error);
-            Error.setFormErrors(this.fileGroupForm, error);
-        }
-    }
+  }
 }

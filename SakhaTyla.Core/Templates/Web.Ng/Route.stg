@@ -1,7 +1,7 @@
 ﻿main(model) ::= <<
-            {
-                path: '$model.Entity.NameKebab$',
-                canActivate: [AuthorizeGuard],
-                loadChildren: () => import('./$model.Entity.NameKebab$/$model.Entity.NameKebab$-routed.module').then(m => m.$model.Entity.Name$RoutedModule)
-            },
+      {
+        path: '$model.Entity.NameKebab$',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./$model.Entity.NameKebab$/$model.Entity.NameKebab$-routed.module').then(m => m.$model.Entity.Name$RoutedModule)
+      },
 >>

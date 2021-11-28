@@ -1,75 +1,79 @@
 ﻿<ng-container *transloco="let t">
 
-    <mat-card-content class="mat-elevation-z8">
+  <mat-card-content class="mat-elevation-z8">
 
-        <table *ngIf="content" mat-table [dataSource]="content.pageItems" multiTemplateDataRows>
+    <table *ngIf="content" mat-table [dataSource]="content.pageItems" multiTemplateDataRows>
 
-            <ng-container matColumnDef="entityId">
-                <th mat-header-cell *matHeaderCellDef>{{ t('Id') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    {{ item.entityId }}
-                </td>
+      <ng-container matColumnDef="entityId">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Id') }}</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.entityId }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Action') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-change-action-view [value]="item.action"></app-change-action-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="changes">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Changes') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <table mat-table [dataSource]="filterEntityPropertyChanges(item.changes)">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>{{ t('Property Name') }}</th>
+              <td mat-cell *matCellDef="let change">
+                {{ t(change.displayName) }}
+              </td>
             </ng-container>
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef>{{ t('Action') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-change-action-view [value]="item.action"></app-change-action-view>
-                </td>
+            <ng-container matColumnDef="from">
+              <th mat-header-cell *matHeaderCellDef>{{ t('Old Value') }}</th>
+              <td mat-cell *matCellDef="let change">
+                <ng-container
+                  *ngTemplateOutlet="entityChangeValueTemplate(change.name) || defaultEntityChangeValueTemplate; context: entityChangeValueTemplateContext(change.fromValue)">
+                </ng-container>
+              </td>
             </ng-container>
-            <ng-container matColumnDef="changes">
-                <th mat-header-cell *matHeaderCellDef>{{ t('Changes') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <table mat-table [dataSource]="filterEntityPropertyChanges(item.changes)">
-                        <ng-container matColumnDef="name">
-                            <th mat-header-cell *matHeaderCellDef>{{ t('Property Name') }}</th>
-                            <td mat-cell *matCellDef="let change">
-                                {{ t(change.displayName) }}
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="from">
-                            <th mat-header-cell *matHeaderCellDef>{{ t('Old Value') }}</th>
-                            <td mat-cell *matCellDef="let change">
-                                <ng-container *ngTemplateOutlet="entityChangeValueTemplate(change.name) || defaultEntityChangeValueTemplate; context: entityChangeValueTemplateContext(change.fromValue)"></ng-container>
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="to">
-                            <th mat-header-cell *matHeaderCellDef>{{ t('New Value') }}</th>
-                            <td mat-cell *matCellDef="let change">
-                                <ng-container *ngTemplateOutlet="entityChangeValueTemplate(change.name) || defaultEntityChangeValueTemplate; context: entityChangeValueTemplateContext(change.toValue)"></ng-container>
-                            </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="['name','from','to']"></tr>
-                        <tr mat-row *matRowDef="let item; columns: ['name','from','to'];"></tr>
-                    </table>
-                </td>
+            <ng-container matColumnDef="to">
+              <th mat-header-cell *matHeaderCellDef>{{ t('New Value') }}</th>
+              <td mat-cell *matCellDef="let change">
+                <ng-container
+                  *ngTemplateOutlet="entityChangeValueTemplate(change.name) || defaultEntityChangeValueTemplate; context: entityChangeValueTemplateContext(change.toValue)">
+                </ng-container>
+              </td>
             </ng-container>
-            <ng-container matColumnDef="creationDate">
-                <th mat-header-cell *matHeaderCellDef>{{ t('Change Date') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-datetime-view [value]="item.creationDate"></app-datetime-view>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="creationUser">
-                <th mat-header-cell *matHeaderCellDef>{{ t('User') }}</th>
-                <td mat-cell *matCellDef="let item">
-                    <app-user-show [value]="item.creationUser"></app-user-show>
-                </td>
-            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="['name','from','to']"></tr>
+            <tr mat-row *matRowDef="let item; columns: ['name','from','to'];"></tr>
+          </table>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef>{{ t('Change Date') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-datetime-view [value]="item.creationDate"></app-datetime-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="creationUser">
+        <th mat-header-cell *matHeaderCellDef>{{ t('User') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-user-show [value]="item.creationUser"></app-user-show>
+        </td>
+      </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="columns"></tr>
-            <tr mat-row *matRowDef="let item; columns: columns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let item; columns: columns;"></tr>
 
-        </table>
+    </table>
 
-        <div>
-            <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions" [length]="content?.totalItems"
-                (page)="onPage($event)" showFirstLastButtons></mat-paginator>
-        </div>
+    <div>
+      <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions"
+        [length]="content?.totalItems" (page)="onPage($event)" showFirstLastButtons></mat-paginator>
+    </div>
 
-    </mat-card-content>
+  </mat-card-content>
 
 </ng-container>
 
 <ng-template #defaultEntityChangeValueTemplate let-value>
-    {{ value }}
+  {{ value }}
 </ng-template>

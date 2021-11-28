@@ -1,0 +1,56 @@
+﻿<mat-card class="mat-card-view" *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Worker Run') }} <app-worker-run-show [value]="workerRun"></app-worker-run-show></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
+
+  <div *ngIf="workerRun">
+    <div class="field-view">
+      <label>{{ t('Worker') }}</label>
+      <div>
+        <app-worker-info-show [value]="workerRun.workerInfo"></app-worker-info-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Status') }}</label>
+      <div>
+        <app-worker-run-status-view [value]="workerRun.status"></app-worker-run-status-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Start Date') }}</label>
+      <div>
+        <app-datetime-view [value]="workerRun.startDateTime"></app-datetime-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('End Date') }}</label>
+      <div>
+        <app-datetime-view [value]="workerRun.endDateTime"></app-datetime-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Data') }}</label>
+      <div>
+        <app-text-view [value]="workerRun.data"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Result') }}</label>
+      <div>
+        <app-text-view [value]="workerRun.result"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Result Data') }}</label>
+      <div>
+        <app-text-view [value]="workerRun.resultData"></app-text-view>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

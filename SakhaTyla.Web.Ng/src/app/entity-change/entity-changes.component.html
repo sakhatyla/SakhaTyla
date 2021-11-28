@@ -1,11 +1,11 @@
 ﻿<ng-container *transloco="let t">
-    <h1 mat-dialog-title>{{ t('shared.changes') }}</h1>
-    <mat-dialog-content class="mat-dialog-content-edit">
+  <h1 mat-dialog-title>{{ t('shared.changes') }}</h1>
+  <mat-dialog-content class="mat-dialog-content-edit">
 
-        <app-entity-change-list [entityName]="entityName" [entityId]="entityId" [state]="state"></app-entity-change-list>
+    <app-entity-change-list [entityName]="entityName" [entityId]="entityId" [state]="state"></app-entity-change-list>
 
-    </mat-dialog-content>
-    <mat-dialog-actions class="mat-dialog-actions-edit">
-        <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>{{ t('shared.close') }}</button>
-    </mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>{{ t('shared.close') }}</button>
+  </mat-dialog-actions>
 </ng-container>

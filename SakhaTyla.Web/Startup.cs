@@ -52,7 +52,6 @@ namespace SakhaTyla.Web
                     if (!string.IsNullOrEmpty(authority))
                     {
                         o.IssuerUri = authority;
-                        o.PublicOrigin = authority;
                     }
                 })
                 .AddApiAuthorization<User, DataContext>()

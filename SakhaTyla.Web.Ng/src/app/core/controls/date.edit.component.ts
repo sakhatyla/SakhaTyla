@@ -7,125 +7,125 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 
 @Component({
-    selector: 'app-date-edit',
-    templateUrl: './date.edit.component.html',
-    providers: [
-        { provide: MatFormFieldControl, useExisting: DateEditComponent }
-    ]
+  selector: 'app-date-edit',
+  templateUrl: './date.edit.component.html',
+  providers: [
+    { provide: MatFormFieldControl, useExisting: DateEditComponent }
+  ]
 })
 export class DateEditComponent implements ControlValueAccessor, MatFormFieldControl<Date>, OnDestroy, DoCheck {
 
-    static nextId = 0;
+  static nextId = 0;
 
-    stateChanges = new Subject<void>();
-    focused = false;
-    controlType = 'app-date-edit';
-    id = `date-edit-${DateEditComponent.nextId++}`;
-    describedBy = '';
+  stateChanges = new Subject<void>();
+  focused = false;
+  controlType = 'app-date-edit';
+  id = `date-edit-${DateEditComponent.nextId++}`;
+  describedBy = '';
 
-    errorState = false;
+  errorState = false;
 
-    get empty() {
-        return !this.value;
+  get empty() {
+    return !this.value;
+  }
+
+  get shouldLabelFloat() { return this.focused || !this.empty; }
+
+  @Input()
+  value: Date;
+
+  @Input()
+  name: string;
+
+  @Input()
+  placeholder: string;
+
+  @Input()
+  type = 'text';
+
+  @Input()
+  get required(): boolean { return this.innerRequired; }
+  set required(value: boolean) {
+    this.innerRequired = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+  private innerRequired = false;
+
+  @Input()
+  get disabled(): boolean { return this.innerDisabled; }
+  set disabled(value: boolean) {
+    this.innerDisabled = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+  private innerDisabled = false;
+
+  get innerValue(): string {
+    if (this.value) {
+      return this.value.toISOString();
+    } else {
+      return null;
     }
+  }
 
-    get shouldLabelFloat() { return this.focused || !this.empty; }
-
-    @Input()
-    value: Date;
-
-    @Input()
-    name: string;
-
-    @Input()
-    placeholder: string;
-
-    @Input()
-    type = 'text';
-
-    @Input()
-    get required(): boolean { return this.innerRequired; }
-    set required(value: boolean) {
-        this.innerRequired = coerceBooleanProperty(value);
-        this.stateChanges.next();
+  set innerValue(val: string) {
+    if (val) {
+      this.value = this.removeTimezone(new Date(val));
+    } else {
+      this.value = null;
     }
-    private innerRequired = false;
+    this.onChange(this.value);
+    this.onTouched();
+  }
 
-    @Input()
-    get disabled(): boolean { return this.innerDisabled; }
-    set disabled(value: boolean) {
-        this.innerDisabled = coerceBooleanProperty(value);
-        this.stateChanges.next();
-    }
-    private innerDisabled = false;
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
-    get innerValue(): string {
-        if (this.value) {
-            return this.value.toISOString();
-        } else {
-            return null;
-        }
+  constructor(private fm: FocusMonitor, private elRef: ElementRef<HTMLElement>,
+              @Optional() @Self() public ngControl: NgControl) {
+    fm.monitor(elRef, true).subscribe(origin => {
+      this.focused = !!origin;
+      this.stateChanges.next();
+    });
+    if (this.ngControl !== null) {
+      this.ngControl.valueAccessor = this;
     }
+  }
+  removeTimezone(date: Date): Date {
+    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+  }
 
-    set innerValue(val: string) {
-        if (val) {
-            this.value = this.removeTimezone(new Date(val));
-        } else {
-            this.value = null;
-        }
-        this.onChange(this.value);
-        this.onTouched();
-    }
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
 
-    onChange: any = () => { };
-    onTouched: any = () => { };
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
 
-    constructor(private fm: FocusMonitor, private elRef: ElementRef<HTMLElement>,
-                @Optional() @Self() public ngControl: NgControl) {
-        fm.monitor(elRef, true).subscribe(origin => {
-            this.focused = !!origin;
-            this.stateChanges.next();
-        });
-        if (this.ngControl !== null) {
-            this.ngControl.valueAccessor = this;
-        }
-    }
-    removeTimezone(date: Date): Date {
-        return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
-    }
+  writeValue(value) {
+    this.innerValue = value;
+  }
 
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
+  ngOnDestroy() {
+    this.stateChanges.complete();
+    this.fm.stopMonitoring(this.elRef);
+  }
 
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
+  setDescribedByIds(ids: string[]) {
+    this.describedBy = ids.join(' ');
+  }
 
-    writeValue(value) {
-        this.innerValue = value;
-    }
+  onContainerClick(event: MouseEvent) {
+  }
 
-    ngOnDestroy() {
-        this.stateChanges.complete();
-        this.fm.stopMonitoring(this.elRef);
+  ngDoCheck(): void {
+    if (this.ngControl) {
+      this.errorState = this.ngControl.invalid;
+      this.stateChanges.next();
     }
+  }
 
-    setDescribedByIds(ids: string[]) {
-        this.describedBy = ids.join(' ');
-    }
-
-    onContainerClick(event: MouseEvent) {
-    }
-
-    ngDoCheck(): void {
-        if (this.ngControl) {
-            this.errorState = this.ngControl.invalid;
-            this.stateChanges.next();
-        }
-    }
-
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-    }
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

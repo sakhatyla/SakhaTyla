@@ -11,26 +11,26 @@ import { RoleViewComponent } from './role-view.component';
 import { RolesComponent } from './roles.component';
 
 @NgModule({
-    declarations: [
-        RoleListComponent,
-        RoleEditComponent,
-        RoleViewComponent,
-        RolesComponent,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-        RoleCoreModule
-    ],
-    exports: [
-        RoleListComponent,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        RoleEditComponent
-    ]
+  declarations: [
+    RoleListComponent,
+    RoleEditComponent,
+    RoleViewComponent,
+    RolesComponent,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    RoleCoreModule
+  ],
+  exports: [
+    RoleListComponent,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    RoleEditComponent
+  ]
 })
 export class RoleModule {
 

@@ -55,7 +55,8 @@ namespace SakhaTyla.Core.Requests.Files
             {
                 var oldUrl = file.Url;
                 var filename = Guid.NewGuid() + Path.GetExtension(request.Name);
-                file.Url = await _fileStorage.SaveFileAsync($"{file.Group.Location}/{filename}", request.Content, request.ContentType);
+                var filePath = $"{file.Group.Location}/{DateTime.Today:yyyy'/'MM}/{filename}";
+                file.Url = await _fileStorage.SaveFileAsync(filePath, request.Content, request.ContentType);
                 await _fileStorage.DeleteFileAsync(oldUrl);
             }
             else

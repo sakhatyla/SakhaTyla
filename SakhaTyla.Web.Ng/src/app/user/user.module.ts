@@ -12,27 +12,27 @@ import { UserViewComponent } from './user-view.component';
 import { UsersComponent } from './users.component';
 
 @NgModule({
-    declarations: [
-        UserListComponent,
-        UserEditComponent,
-        UserViewComponent,
-        UsersComponent,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-        UserCoreModule,
-        RoleCoreModule,
-    ],
-    exports: [
-        UserListComponent,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        UserEditComponent
-    ]
+  declarations: [
+    UserListComponent,
+    UserEditComponent,
+    UserViewComponent,
+    UsersComponent,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    UserCoreModule,
+    RoleCoreModule,
+  ],
+  exports: [
+    UserListComponent,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    UserEditComponent
+  ]
 })
 export class UserModule {
 

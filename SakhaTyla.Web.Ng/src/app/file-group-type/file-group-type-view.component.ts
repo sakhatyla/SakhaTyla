@@ -3,15 +3,15 @@
 import { FileGroupType, FileGroupTypeDisplay } from './file-group-type.model';
 
 @Component({
-    selector: 'app-file-group-type-view',
-    templateUrl: './file-group-type-view.component.html'
+  selector: 'app-file-group-type-view',
+  templateUrl: './file-group-type-view.component.html'
 })
 
 export class FileGroupTypeViewComponent {
-    constructor() { }
+  constructor() { }
 
-    FileGroupTypeDisplay = FileGroupTypeDisplay;
+  FileGroupTypeDisplay = FileGroupTypeDisplay;
 
-    @Input()
-    value: FileGroupType;
+  @Input()
+  value: FileGroupType;
 }

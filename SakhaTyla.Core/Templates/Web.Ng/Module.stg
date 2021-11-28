@@ -14,31 +14,31 @@ import { $model.Entity.Name$ViewComponent } from './$model.Entity.NameKebab$-vie
 import { $model.Entity.PluralName$Component } from './$model.Entity.PluralNameKebab$.component';
 
 @NgModule({
-    declarations: [
-        $model.Entity.Name$ListComponent,
-        $model.Entity.Name$EditComponent,
-        $model.Entity.Name$ViewComponent,
-        $model.Entity.PluralName$Component,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-$model.Entity.DependentEntities:importEntity(); separator="\n"$
-$model.Entity.DependentEnums:importEnum(); separator="\n"$
-        $model.Entity.Name$CoreModule
-    ],
-    exports: [
-        $model.Entity.Name$ListComponent,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        $model.Entity.Name$EditComponent
-    ]
+  declarations: [
+    $model.Entity.Name$ListComponent,
+    $model.Entity.Name$EditComponent,
+    $model.Entity.Name$ViewComponent,
+    $model.Entity.PluralName$Component,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    $model.Entity.DependentEntities:importEntity(); separator="\n"$
+    $model.Entity.DependentEnums:importEnum(); separator="\n"$
+    $model.Entity.Name$CoreModule
+  ],
+  exports: [
+    $model.Entity.Name$ListComponent,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    $model.Entity.Name$EditComponent
+  ]
 })
 export class $model.Entity.Name$Module {
-    
+  
 }
 
 >>
@@ -48,7 +48,7 @@ import { $entity.Name$CoreModule } from '../$entity.NameKebab$-core/$entity.Name
 >>
 
 importEntity(entity) ::= <<
-        $entity.Name$CoreModule,
+$entity.Name$CoreModule,
 >>
 
 declareEnum(enum) ::= <<
@@ -56,5 +56,5 @@ import { $enum.Name$Module } from '../$enum.NameKebab$/$enum.NameKebab$.module';
 >>
 
 importEnum(enum) ::= <<
-        $enum.Name$Module,
+$enum.Name$Module,
 >>

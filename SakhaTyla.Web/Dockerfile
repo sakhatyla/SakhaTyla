@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+﻿FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 
 COPY *.sln .
@@ -16,7 +16,7 @@ COPY SakhaTyla.Web/. ./SakhaTyla.Web/
 
 RUN dotnet publish SakhaTyla.Web/SakhaTyla.Web.csproj -c Release -o ./out
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 

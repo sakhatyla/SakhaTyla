@@ -1,33 +1,35 @@
 ﻿<ng-container *transloco="let t">
-    <h1 mat-dialog-title>{{ t('File Group') }} <app-file-group-show [value]="fileGroup"></app-file-group-show></h1>
-    <mat-dialog-content *ngIf="fileGroup" class="mat-dialog-content-edit">
+  <h1 mat-dialog-title>
+    {{ t('File Group') }} <app-file-group-show [value]="fileGroup"></app-file-group-show>
+  </h1>
+  <mat-dialog-content *ngIf="fileGroup" class="mat-dialog-content-edit">
 
-        <form [formGroup]="fileGroupForm">
-            <mat-form-field>
-                <mat-label>{{ t('Name') }}</mat-label>
-                <app-text-edit formControlName="name" name="name" [placeholder]="t('Name')"></app-text-edit>
-                <mat-error>{{ error?.modelState?.name | modelError }}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>{{ t('Type') }}</mat-label>
-                <app-file-group-type-select formControlName="type" name="type" [placeholder]="t('Type')"></app-file-group-type-select>
-                <mat-error>{{ error?.modelState?.type | modelError }}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>{{ t('Location') }}</mat-label>
-                <app-text-edit formControlName="location" name="location" [placeholder]="t('Location')"></app-text-edit>
-                <mat-error>{{ error?.modelState?.location | modelError }}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>{{ t('Accept') }}</mat-label>
-                <app-text-edit formControlName="accept" name="accept" [placeholder]="t('Accept')"></app-text-edit>
-                <mat-error>{{ error?.modelState?.accept | modelError }}</mat-error>
-            </mat-form-field>
-        </form>
+    <form [formGroup]="fileGroupForm">
+      <mat-form-field>
+        <mat-label>{{ t('Name') }}</mat-label>
+        <app-text-edit formControlName="name" name="name" [placeholder]="t('Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.name | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Type') }}</mat-label>
+        <app-file-group-type-select formControlName="type" name="type" [placeholder]="t('Type')"></app-file-group-type-select>
+        <mat-error>{{ error?.modelState?.type | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Location') }}</mat-label>
+        <app-text-edit formControlName="location" name="location" [placeholder]="t('Location')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.location | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Accept') }}</mat-label>
+        <app-text-edit formControlName="accept" name="accept" [placeholder]="t('Accept')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.accept | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
 
-    </mat-dialog-content>
-    <mat-dialog-actions class="mat-dialog-actions-edit">
-        <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
-        <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
-    </mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
 </ng-container>

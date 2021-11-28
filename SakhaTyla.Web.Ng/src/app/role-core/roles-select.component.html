@@ -1,0 +1,3 @@
+<div *ngFor="let role of roles; let i = index ">
+  <mat-checkbox [name]="'roleIds' + i" [ngModel]="role.isSelected" (ngModelChange)="roleSelectedChanged(role, $event)" [ngModelOptions]="{standalone: true}">{{ role.displayName }}</mat-checkbox>
+</div>
