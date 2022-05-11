@@ -30,34 +30,39 @@ namespace SakhaTyla.Web.Services
         public override async Task<FileGroupPageModel> GetFileGroups(GetFileGroupsRequest getFileGroupsRequest, ServerCallContext context)
         {
             var getFileGroups = _mapper.Map<GetFileGroupsRequest, GetFileGroups>(getFileGroupsRequest);
-            return _mapper.Map<PageModel<FileGroupModel>, FileGroupPageModel>(await _mediator.Send(getFileGroups));
+            var model = await _mediator.Send(getFileGroups);
+            return _mapper.Map<PageModel<FileGroupModel>, FileGroupPageModel>(model);
         }
 
         public override async Task<FileGroup> GetFileGroup(GetFileGroupRequest getFileGroupRequest, ServerCallContext context)
         {
             var getFileGroup = _mapper.Map<GetFileGroupRequest, GetFileGroup>(getFileGroupRequest);
-            return _mapper.Map<FileGroupModel, FileGroup>(await _mediator.Send(getFileGroup));
+            var model = await _mediator.Send(getFileGroup);
+            return _mapper.Map<FileGroupModel, FileGroup>(model!);
         }
 
         [Authorize("WriteFileGroup")]
         public override async Task<Empty> UpdateFileGroup(UpdateFileGroupRequest updateFileGroupRequest, ServerCallContext context)
         {
             var updateFileGroup = _mapper.Map<UpdateFileGroupRequest, UpdateFileGroup>(updateFileGroupRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(updateFileGroup));
+            var model = await _mediator.Send(updateFileGroup);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("WriteFileGroup")]
         public override async Task<CreatedEntity> CreateFileGroup(CreateFileGroupRequest createFileGroupRequest, ServerCallContext context)
         {
             var createFileGroup = _mapper.Map<CreateFileGroupRequest, CreateFileGroup>(createFileGroupRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createFileGroup));
+            var model = await _mediator.Send(createFileGroup);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteFileGroup")]
         public override async Task<Empty> DeleteFileGroup(DeleteFileGroupRequest deleteFileGroupRequest, ServerCallContext context)
         {
             var deleteFileGroup = _mapper.Map<DeleteFileGroupRequest, DeleteFileGroup>(deleteFileGroupRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteFileGroup));
+            var model = await _mediator.Send(deleteFileGroup);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

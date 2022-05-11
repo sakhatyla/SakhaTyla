@@ -25,7 +25,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetProfile")]
-        public async Task<ProfileModel> GetProfileAsync(GetProfile getProfile)
+        public async Task<ProfileModel?> GetProfileAsync(GetProfile getProfile)
         {
             return await _mediator.Send(getProfile);
         }

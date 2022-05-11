@@ -1,3 +1,4 @@
+import { OrderDirection } from '../core/models/order-direction.model';
 import { PageSettings } from '../core/page.model';
 import { RoleFilter } from './role-filter.model';
 
@@ -14,4 +15,6 @@ export class RoleListState {
   pageSize = PageSettings.pageSize;
   pageIndex = 0;
   filter = new RoleFilter();
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }

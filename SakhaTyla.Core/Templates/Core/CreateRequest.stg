@@ -21,7 +21,7 @@ $field:(field.Template)()$
 >>
 
 Type(field) ::= <<
-public $field.TypeNameNullable$ $field.Name$ { get; set; }
+public $field.TypeNameNullable$$if(!field.NetType.IsValueType)$?$endif$ $field.Name$ { get; set; }
 >>
 
 Entity(field) ::= <<

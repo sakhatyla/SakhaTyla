@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.Json.Serialization;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 using Cynosura.Web;
 using Cynosura.Web.Authorization;
 using Cynosura.Web.Infrastructure;
@@ -70,7 +71,7 @@ namespace SakhaTyla.Web
                 })
                 .AddJsonOptions(o =>
                 {
-                    o.JsonSerializerOptions.IgnoreNullValues = true;
+                    o.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     o.JsonSerializerOptions.Converters.Add(new TimeSpanConverter());
                 })
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
@@ -87,7 +88,6 @@ namespace SakhaTyla.Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SakhaTyla API", Version = "v1" });
-                c.AddFluentValidationRules();
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
@@ -108,6 +108,8 @@ namespace SakhaTyla.Web
                 });
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
+
+            services.AddFluentValidationRulesToSwagger();
 
             services.AddGrpc();
 
@@ -132,7 +134,7 @@ namespace SakhaTyla.Web
             }
 
             var supportedCultures = new[]
-            {
+           {
                 new CultureInfo("en-US"),
                 new CultureInfo("ru-RU")
             };

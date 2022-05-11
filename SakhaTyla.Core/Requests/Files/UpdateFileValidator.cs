@@ -9,7 +9,7 @@ namespace SakhaTyla.Core.Requests.Files
         {
             RuleFor(x => x.Name).MaximumLength(100).NotEmpty().WithName(x => localizer["Name"]);
             RuleFor(x => x.ContentType).MaximumLength(200).NotEmpty().WithName(x => localizer["Content Type"]);
-            RuleFor(x => x.Content);
+            RuleFor(x => x.Content).NotEmpty().WithName(x => localizer["Content"]);
         }
 
     }

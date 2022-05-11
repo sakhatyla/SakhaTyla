@@ -33,13 +33,13 @@ namespace SakhaTyla.Core.Requests.WorkerInfos
         {
             var workerInfo = await _workerInfoRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (workerInfo == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["Worker"], request.Id]);
             }
             _mapper.Map(request, workerInfo);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

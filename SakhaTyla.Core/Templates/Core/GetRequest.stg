@@ -5,7 +5,7 @@ using $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$.Models;
 
 namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
 {
-    public class Get$model.Entity.Name$ : IRequest<$model.Entity.Name$Model>
+    public class Get$model.Entity.Name$ : IRequest<$model.Entity.Name$Model?>
     {
         public $model.Entity.IdField.TypeName$ $model.Entity.IdField.Name$ { get; set; }
     }

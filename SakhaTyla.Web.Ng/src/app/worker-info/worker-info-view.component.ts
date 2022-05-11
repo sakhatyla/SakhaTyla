@@ -7,6 +7,8 @@ import { ConvertStringTo } from '../core/converter.helper';
 import { WorkerInfo } from '../worker-info-core/worker-info.model';
 import { WorkerInfoService } from '../worker-info-core/worker-info.service';
 import { WorkerInfoEditComponent } from './worker-info-edit.component';
+import { WorkerScheduleTaskListState } from '../worker-schedule-task-core/worker-schedule-task.model';
+import { WorkerScheduleTaskFilter } from '../worker-schedule-task-core/worker-schedule-task-filter.model';
 
 @Component({
   selector: 'app-worker-info-view',
@@ -16,6 +18,7 @@ import { WorkerInfoEditComponent } from './worker-info-edit.component';
 export class WorkerInfoViewComponent implements OnInit {
   id: number;
   workerInfo: WorkerInfo;
+  workerScheduleTaskListState: WorkerScheduleTaskListState;
 
   constructor(private dialog: MatDialog,
               private workerInfoService: WorkerInfoService,
@@ -31,7 +34,10 @@ export class WorkerInfoViewComponent implements OnInit {
 
   private getWorkerInfo() {
     this.workerInfoService.getWorkerInfo({ id: this.id })
-      .subscribe(workerInfo => this.workerInfo = workerInfo);
+      .subscribe(workerInfo => {
+        this.workerInfo = workerInfo;
+        this.workerScheduleTaskListState = new WorkerScheduleTaskListState(new WorkerScheduleTaskFilter(this.workerInfo.id));
+      });
   }
 
   onEdit() {

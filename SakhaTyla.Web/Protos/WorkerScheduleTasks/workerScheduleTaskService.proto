@@ -1,0 +1,89 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/WorkerScheduleTasks/workerScheduleTaskModel.proto";
+import "Protos/WorkerScheduleTasks/workerScheduleTaskFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.WorkerScheduleTasks";
+
+service WorkerScheduleTaskService {
+    rpc GetWorkerScheduleTasks(GetWorkerScheduleTasksRequest) returns (WorkerScheduleTaskPageModel);
+    rpc GetWorkerScheduleTask(GetWorkerScheduleTaskRequest) returns (WorkerScheduleTask);
+    rpc UpdateWorkerScheduleTask(UpdateWorkerScheduleTaskRequest) returns (Empty);
+    rpc CreateWorkerScheduleTask(CreateWorkerScheduleTaskRequest) returns (CreatedEntity);
+    rpc DeleteWorkerScheduleTask(DeleteWorkerScheduleTaskRequest) returns (Empty);
+}
+
+message CreateWorkerScheduleTaskRequest {
+    oneof workerInfoIdOneOf {
+        int32 workerInfoId = 6;
+    }
+    oneof secondsOneOf {
+        string seconds = 7;
+    }
+    oneof minutesOneOf {
+        string minutes = 8;
+    }
+    oneof hoursOneOf {
+        string hours = 9;
+    }
+    oneof dayOfMonthOneOf {
+        string dayOfMonth = 10;
+    }
+    oneof monthOneOf {
+        string month = 11;
+    }
+    oneof dayOfWeekOneOf {
+        string dayOfWeek = 12;
+    }
+    oneof yearOneOf {
+        string year = 13;
+    }
+}
+
+message DeleteWorkerScheduleTaskRequest {
+    int32 id = 1;
+}
+
+message GetWorkerScheduleTaskRequest {
+    int32 id = 1;
+}
+
+message GetWorkerScheduleTasksRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    WorkerScheduleTaskFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateWorkerScheduleTaskRequest {
+    int32 id = 1;
+    oneof secondsOneOf {
+        string seconds = 7;
+    }
+    oneof minutesOneOf {
+        string minutes = 8;
+    }
+    oneof hoursOneOf {
+        string hours = 9;
+    }
+    oneof dayOfMonthOneOf {
+        string dayOfMonth = 10;
+    }
+    oneof monthOneOf {
+        string month = 11;
+    }
+    oneof dayOfWeekOneOf {
+        string dayOfWeek = 12;
+    }
+    oneof yearOneOf {
+        string year = 13;
+    }
+}

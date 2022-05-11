@@ -31,7 +31,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetWorkerRun")]
-        public async Task<WorkerRunModel> GetWorkerRunAsync([FromBody] GetWorkerRun getWorkerRun)
+        public async Task<WorkerRunModel?> GetWorkerRunAsync([FromBody] GetWorkerRun getWorkerRun)
         {
             return await _mediator.Send(getWorkerRun);
         }

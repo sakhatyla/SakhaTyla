@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Requests.WorkerInfos
             IQueryable<WorkerInfo> query = _workerInfoRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var workerInfos = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var workerInfos = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return workerInfos.Map<WorkerInfo, WorkerInfoModel>(_mapper);
         }
 

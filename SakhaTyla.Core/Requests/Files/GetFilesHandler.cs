@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Files
                 .Include(e => e.Group);            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var files = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var files = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return files.Map<File, FileModel>(_mapper);
         }
 

@@ -47,10 +47,13 @@ namespace SakhaTyla.Core.Requests.Users
 
             var userCurrentRoles = await _userManager.GetRolesAsync(user);
             var newUserRolesList = new List<Role>();
-            foreach (var role in request.RoleIds)
+            if (request.RoleIds != null)
             {
-                var newRole = await _roleManager.FindByIdAsync(role.ToString());
-                newUserRolesList.Add(newRole);
+                foreach (var role in request.RoleIds)
+                {
+                    var newRole = await _roleManager.FindByIdAsync(role.ToString());
+                    newUserRolesList.Add(newRole);
+                }
             }
 
             var newUserRoleNamesList = newUserRolesList.Select(newUserRole => newUserRole.Name).ToList();

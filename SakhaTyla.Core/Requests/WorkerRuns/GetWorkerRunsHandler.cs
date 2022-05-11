@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.WorkerRuns
                 .Include(e => e.WorkerInfo);            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var workerRuns = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var workerRuns = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return workerRuns.Map<WorkerRun, WorkerRunModel>(_mapper);
         }
 

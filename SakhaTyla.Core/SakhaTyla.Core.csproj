@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="Cynosura.Core" Version="0.3.0-b343" />
-    <PackageReference Include="FluentValidation" Version="9.3.0" />
+    <PackageReference Include="Cynosura.Core" Version="0.4.0-b372" />
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
     <PackageReference Include="MarkdownSharp" Version="2.0.5" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

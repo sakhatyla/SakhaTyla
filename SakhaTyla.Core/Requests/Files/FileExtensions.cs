@@ -9,7 +9,7 @@ namespace SakhaTyla.Core.Requests.Files
 {
     public static class FileExtensions
     {
-        public static IOrderedQueryable<File> OrderBy(this IQueryable<File> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<File> OrderBy(this IQueryable<File> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -21,18 +21,14 @@ namespace SakhaTyla.Core.Requests.Files
                     return direction == OrderDirection.Descending
                         ? queryable.OrderByDescending(e => e.ContentType)
                         : queryable.OrderBy(e => e.ContentType);
-                case "Content":
-                    return direction == OrderDirection.Descending
-                        ? queryable.OrderByDescending(e => e.Content)
-                        : queryable.OrderBy(e => e.Content);
                 case "Url":
                     return direction == OrderDirection.Descending
                         ? queryable.OrderByDescending(e => e.Url)
                         : queryable.OrderBy(e => e.Url);
                 case "Group":
                     return direction == OrderDirection.Descending
-                        ? queryable.OrderByDescending(e => e.Group)
-                        : queryable.OrderBy(e => e.Group);
+                        ? queryable.OrderByDescending(e => e.Group.Name)
+                        : queryable.OrderBy(e => e.Group.Name);
                 case "":
                 case null:
                     return queryable.OrderBy(e => e.Id);
@@ -41,11 +37,11 @@ namespace SakhaTyla.Core.Requests.Files
             }
         }
 
-        public static IQueryable<File> Filter(this IQueryable<File> queryable, FileFilter filter)
+        public static IQueryable<File> Filter(this IQueryable<File> queryable, FileFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Text) || e.ContentType.Contains(filter.Text) || e.Url.Contains(filter.Text));
+                queryable = queryable.Where(e => e.Name.Contains(filter.Text) || e.ContentType.Contains(filter.Text) || e.Url!.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.Name))
             {
@@ -58,7 +54,7 @@ namespace SakhaTyla.Core.Requests.Files
 
             if (!string.IsNullOrEmpty(filter?.Url))
             {
-                queryable = queryable.Where(e => e.Url.Contains(filter.Url));
+                queryable = queryable.Where(e => e.Url!.Contains(filter.Url));
             }
             if (filter?.GroupId != null)
             {
@@ -67,7 +63,7 @@ namespace SakhaTyla.Core.Requests.Files
             return queryable;
         }
 
-        public static void Validate(this string accept, string filename, string contentType)
+        public static void Validate(this string? accept, string filename, string contentType)
         {
             if (string.IsNullOrEmpty(accept))
                 return;

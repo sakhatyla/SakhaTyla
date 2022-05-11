@@ -32,7 +32,7 @@ namespace $model.Solution.Namespace$.Web.Controllers
         }
 
         [HttpPost("Get$model.Entity.Name$")]
-        public async Task<$model.Entity.Name$Model> Get$model.Entity.Name$Async([FromBody] Get$model.Entity.Name$ get$model.Entity.Name$)
+        public async Task<$model.Entity.Name$Model?> Get$model.Entity.Name$Async([FromBody] Get$model.Entity.Name$ get$model.Entity.Name$)
         {
             return await _mediator.Send(get$model.Entity.Name$);
         }

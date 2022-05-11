@@ -10,9 +10,9 @@ namespace SakhaTyla.Core.Requests.Articles
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string TextSource { get; set; }
+        public string? TextSource { get; set; }
 
         public int? FromLanguageId { get; set; }
 

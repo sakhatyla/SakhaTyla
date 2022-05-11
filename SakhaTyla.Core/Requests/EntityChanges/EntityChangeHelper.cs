@@ -40,19 +40,13 @@ namespace SakhaTyla.Core.Requests.EntityChanges
                 var toValue = property.GetValue(toEntityModel);
                 if (!Equal(fromValue, toValue))
                 {
-                    propertyChanges.Add(new EntityPropertyChange()
-                    {
-                        Name = property.Name,
-                        DisplayName = GetDisplayName(property),
-                        FromValue = fromValue,
-                        ToValue = toValue,
-                    });
+                    propertyChanges.Add(new EntityPropertyChange(property.Name, GetDisplayName(property), fromValue, toValue));
                 }
             }
             return propertyChanges;
         }
 
-        private bool Equal(object val1, object val2)
+        private bool Equal(object? val1, object? val2)
         {
             if (val1 != null && val2 != null)
             {
@@ -76,7 +70,7 @@ namespace SakhaTyla.Core.Requests.EntityChanges
             return CoreHelper.GetPlatformAndAppAssemblies()
                 .SelectMany(a => a.GetTypes())
                 .Where(t => typeof(TrackedEntity).IsAssignableFrom(t) && t.Name == entityName)
-                .FirstOrDefault();
+                .First();
         }
 
         private Type GetEntityModelType(string entityName)
@@ -84,18 +78,26 @@ namespace SakhaTyla.Core.Requests.EntityChanges
             return CoreHelper.GetPlatformAndAppAssemblies()
                 .SelectMany(a => a.GetTypes())
                 .Where(t => t.Name == $"{entityName}Model")
-                .FirstOrDefault();
+                .First();
         }
     }
 
     public class EntityPropertyChange
     {
+        public EntityPropertyChange(string name, string displayName, object? fromValue, object? toValue)
+        {
+            Name = name;
+            DisplayName = displayName;
+            FromValue = fromValue;
+            ToValue = toValue;
+        }
+
         public string Name { get; set; }
 
         public string DisplayName { get; set; }
 
-        public object FromValue { get; set; }
+        public object? FromValue { get; set; }
 
-        public object ToValue { get; set; }
+        public object? ToValue { get; set; }
     }
 }

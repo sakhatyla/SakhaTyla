@@ -10,12 +10,12 @@ namespace SakhaTyla.Core.Requests.FileGroups
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public Enums.FileGroupType? Type { get; set; }
 
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
-        public string Accept { get; set; }
+        public string? Accept { get; set; }
     }
 }

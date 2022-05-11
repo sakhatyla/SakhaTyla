@@ -30,34 +30,39 @@ namespace SakhaTyla.Web.Services
         public override async Task<CategoryPageModel> GetCategories(GetCategoriesRequest getCategoriesRequest, ServerCallContext context)
         {
             var getCategories = _mapper.Map<GetCategoriesRequest, GetCategories>(getCategoriesRequest);
-            return _mapper.Map<PageModel<CategoryModel>, CategoryPageModel>(await _mediator.Send(getCategories));
+            var model = await _mediator.Send(getCategories);
+            return _mapper.Map<PageModel<CategoryModel>, CategoryPageModel>(model);
         }
 
         public override async Task<Category> GetCategory(GetCategoryRequest getCategoryRequest, ServerCallContext context)
         {
             var getCategory = _mapper.Map<GetCategoryRequest, GetCategory>(getCategoryRequest);
-            return _mapper.Map<CategoryModel, Category>(await _mediator.Send(getCategory));
+            var model = await _mediator.Send(getCategory);
+            return _mapper.Map<CategoryModel, Category>(model!);
         }
 
         [Authorize("WriteCategory")]
         public override async Task<Empty> UpdateCategory(UpdateCategoryRequest updateCategoryRequest, ServerCallContext context)
         {
             var updateCategory = _mapper.Map<UpdateCategoryRequest, UpdateCategory>(updateCategoryRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(updateCategory));
+            var model = await _mediator.Send(updateCategory);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("WriteCategory")]
         public override async Task<CreatedEntity> CreateCategory(CreateCategoryRequest createCategoryRequest, ServerCallContext context)
         {
             var createCategory = _mapper.Map<CreateCategoryRequest, CreateCategory>(createCategoryRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createCategory));
+            var model = await _mediator.Send(createCategory);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteCategory")]
         public override async Task<Empty> DeleteCategory(DeleteCategoryRequest deleteCategoryRequest, ServerCallContext context)
         {
             var deleteCategory = _mapper.Map<DeleteCategoryRequest, DeleteCategory>(deleteCategoryRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteCategory));
+            var model = await _mediator.Send(deleteCategory);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

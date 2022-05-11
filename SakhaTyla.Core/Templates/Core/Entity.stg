@@ -1,4 +1,6 @@
-﻿main(model) ::= <<
+﻿import "./Constructor.stg"
+
+main(model) ::= <<
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +11,12 @@ namespace $model.Solution.Namespace$.Core.Entities
 {
     public $if(model.Entity.IsAbstract)$abstract $endif$class $model.Entity.Name$$if(model.Entity.BaseEntity)$ : $model.Entity.BaseEntity.Name$$endif$
     {
-$model.Entity.Fields:field(); separator="\n"$
+        public $model.Entity.Name$($model.Entity.RequiredReferenceTypeFields:constructorParam(); separator=", "$)
+        {
+            $model.Entity.RequiredReferenceTypeFields:constructorInit(); separator="\n"$
+        }
+
+        $model.Entity.Fields:field(); separator="\n"$
     }
 }
 
@@ -22,18 +29,18 @@ $field:(field.Template)()$
 >>
 
 attrubute(attrubute) ::= <<
-        [$attrubute.Name$($attrubute.Parameters; separator=", "$)]
+[$attrubute.Name$($attrubute.Parameters; separator=", "$)]
 >>
 
 Type(field) ::= <<
-        public $field.TypeName$ $field.Name$ { get; set; }
+public $field.TypeName$$if(!field.IsRequired && !field.NetType.IsValueType)$?$endif$ $field.Name$ { get; set; }
 >>
 
 Entity(field) ::= <<
-        public $field.EntityIdTypeName$ $field.Name$$field.Entity.IdField.Name$ { get; set; }
-        public $field.Entity.Name$ $field.Name$ { get; set; }
+public $field.EntityIdTypeName$ $field.Name$$field.Entity.IdField.Name$ { get; set; }
+public $field.Entity.Name$$if(!field.IsRequired)$?$endif$ $field.Name$ { get; set; }$if(field.IsRequired)$ = null!;$endif$
 >>
 
 Enum(field) ::= <<
-        public Enums.$field.Enum.Name$$if(!field.IsRequired)$?$endif$ $field.Name$ { get; set; }
+public Enums.$field.Enum.Name$$if(!field.IsRequired)$?$endif$ $field.Name$ { get; set; }
 >>

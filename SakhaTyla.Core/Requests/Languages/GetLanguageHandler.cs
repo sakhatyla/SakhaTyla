@@ -10,7 +10,7 @@ using SakhaTyla.Core.Requests.Languages.Models;
 
 namespace SakhaTyla.Core.Requests.Languages
 {
-    public class GetLanguageHandler : IRequestHandler<GetLanguage, LanguageModel>
+    public class GetLanguageHandler : IRequestHandler<GetLanguage, LanguageModel?>
     {
         private readonly IEntityRepository<Language> _languageRepository;
         private readonly IMapper _mapper;
@@ -22,11 +22,15 @@ namespace SakhaTyla.Core.Requests.Languages
             _mapper = mapper;
         }
 
-        public async Task<LanguageModel> Handle(GetLanguage request, CancellationToken cancellationToken)
+        public async Task<LanguageModel?> Handle(GetLanguage request, CancellationToken cancellationToken)
         {
             var language = await _languageRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
+            if (language == null)
+            {
+                return null;
+            }
             return _mapper.Map<Language, LanguageModel>(language);
         }
 

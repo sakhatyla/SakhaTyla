@@ -35,7 +35,7 @@ namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
             IQueryable<$model.Entity.Name$> query = _$model.Entity.NameLower$Repository.GetEntities()$model.Entity.EntityFields:include(); separator=""$;            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var $model.Entity.PluralNameLower$ = await query.ToListAsync();
+            var $model.Entity.PluralNameLower$ = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<$model.Entity.Name$>, List<$model.Entity.Name$Model>\>($model.Entity.PluralNameLower$);
             return await _excelFormatter.GetExcelFileAsync(models, "$model.Entity.PluralName$");
         }

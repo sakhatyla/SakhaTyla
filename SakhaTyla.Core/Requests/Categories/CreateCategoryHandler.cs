@@ -29,8 +29,8 @@ namespace SakhaTyla.Core.Requests.Categories
         {
             var category = _mapper.Map<CreateCategory, Category>(request);
             _categoryRepository.Add(category);
-            await _unitOfWork.CommitAsync();
-            return new CreatedEntity<int>() { Id = category.Id };
+            await _unitOfWork.CommitAsync(cancellationToken);
+            return new CreatedEntity<int>(category.Id);
         }
 
     }

@@ -40,7 +40,7 @@ namespace SakhaTyla.Web.Infrastructure
 
         private IEnumerable<T> GetControllerAndActionAttributes<T>(OperationFilterContext context) where T : Attribute
         {
-            var controllerAttributes = context.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<T>();
+            var controllerAttributes = context.MethodInfo.DeclaringType!.GetTypeInfo().GetCustomAttributes<T>();
             var actionAttributes = context.MethodInfo.GetCustomAttributes<T>();
 
             var result = new List<T>(controllerAttributes);

@@ -12,11 +12,11 @@ namespace SakhaTyla.Core.AutoMapper
             CreateMap<Article, ArticleModel>();
             CreateMap<Article, ArticleShortModel>();
             CreateMap<CreateArticle, Article>()
-                .ForMember(dest => dest.Title, o => o.MapFrom(src => src.Title.Trim().ToLower()))
-                .ForMember(dest => dest.Text, o => o.MapFrom(src => src.TextSource.ProcessText()));
+                .ForMember(dest => dest.Title, o => o.MapFrom(src => src.Title!.Trim().ToLower()))
+                .ForMember(dest => dest.Text, o => o.MapFrom(src => src.TextSource!.ProcessText()));
             CreateMap<UpdateArticle, Article>()
-                .ForMember(dest => dest.Title, o => o.MapFrom(src => src.Title.Trim().ToLower()))
-                .ForMember(dest => dest.Text, o => o.MapFrom(src => src.TextSource.ProcessText()));
+                .ForMember(dest => dest.Title, o => o.MapFrom(src => src.Title!.Trim().ToLower()))
+                .ForMember(dest => dest.Text, o => o.MapFrom(src => src.TextSource!.ProcessText()));
         }
     }
 }

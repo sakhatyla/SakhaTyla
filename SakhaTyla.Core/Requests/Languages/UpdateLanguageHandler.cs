@@ -33,13 +33,13 @@ namespace SakhaTyla.Core.Requests.Languages
         {
             var language = await _languageRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (language == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["Language"], request.Id]);
             }
             _mapper.Map(request, language);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

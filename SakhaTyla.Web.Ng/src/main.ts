@@ -3,6 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import './app/core/extensions/string.extension';
 
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
@@ -18,3 +19,11 @@ if (environment.production) {
 
 platformBrowserDynamic(providers).bootstrapModule(AppModule)
   .catch(err => console.log(err));
+
+declare global {
+  interface String {
+    capitalizeFirstLetter(this: string): string;
+    lowerFirstLetter(this: string): string;
+  }
+}
+

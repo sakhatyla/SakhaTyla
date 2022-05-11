@@ -34,9 +34,9 @@ namespace SakhaTyla.Core.Requests.WorkerRuns
         {
             var workerRun = _mapper.Map<CreateWorkerRun, WorkerRun>(request);
             _workerRunRepository.Add(workerRun);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             await _messagingService.SendAsync(StartWorkerRun.QueueName, new StartWorkerRun(workerRun.Id));
-            return new CreatedEntity<int>() { Id = workerRun.Id };
+            return new CreatedEntity<int>(workerRun.Id);
         }
 
     }

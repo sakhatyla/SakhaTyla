@@ -24,7 +24,7 @@ namespace SakhaTyla.Core.Requests.Roles
             var role = _mapper.Map<CreateRole, Role>(request);
             var result = await _roleManager.CreateAsync(role);
             result.CheckIfSucceeded();
-            return new CreatedEntity<int>() { Id = role.Id };
+            return new CreatedEntity<int>(role.Id);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetArticle")]
-        public async Task<ArticleModel> GetArticleAsync([FromBody] GetArticle getArticle)
+        public async Task<ArticleModel?> GetArticleAsync([FromBody] GetArticle getArticle)
         {
             return await _mediator.Send(getArticle);
         }

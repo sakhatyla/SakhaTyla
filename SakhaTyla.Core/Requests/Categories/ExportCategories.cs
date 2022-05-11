@@ -6,8 +6,8 @@ namespace SakhaTyla.Core.Requests.Categories
 {
     public class ExportCategories : IRequest<FileContentModel>
     {
-        public CategoryFilter Filter { get; set; }
-        public string OrderBy { get; set; }
+        public CategoryFilter? Filter { get; set; }
+        public string? OrderBy { get; set; }
         public OrderDirection? OrderDirection { get; set; }
     }
 }

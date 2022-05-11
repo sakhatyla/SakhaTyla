@@ -30,34 +30,39 @@ namespace SakhaTyla.Web.Services
         public override async Task<RolePageModel> GetRoles(GetRolesRequest getRolesRequest, ServerCallContext context)
         {
             var getRoles = _mapper.Map<GetRolesRequest, GetRoles>(getRolesRequest);
-            return _mapper.Map<PageModel<RoleModel>, RolePageModel>(await _mediator.Send(getRoles));
+            var model = await _mediator.Send(getRoles);
+            return _mapper.Map<PageModel<RoleModel>, RolePageModel>(model);
         }
 
         public override async Task<Role> GetRole(GetRoleRequest getRoleRequest, ServerCallContext context)
         {
             var getRole = _mapper.Map<GetRoleRequest, GetRole>(getRoleRequest);
-            return _mapper.Map<RoleModel, Role>(await _mediator.Send(getRole));
+            var model = await _mediator.Send(getRole);
+            return _mapper.Map<RoleModel, Role>(model!);
         }
 
         [Authorize("WriteRole")]
         public override async Task<Empty> UpdateRole(UpdateRoleRequest updateRoleRequest, ServerCallContext context)
         {
             var updateRole = _mapper.Map<UpdateRoleRequest, UpdateRole>(updateRoleRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(updateRole));
+            var model = await _mediator.Send(updateRole);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("WriteRole")]
         public override async Task<CreatedEntity> CreateRole(CreateRoleRequest createRoleRequest, ServerCallContext context)
         {
             var createRole = _mapper.Map<CreateRoleRequest, CreateRole>(createRoleRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createRole));
+            var model = await _mediator.Send(createRole);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteRole")]
         public override async Task<Empty> DeleteRole(DeleteRoleRequest deleteRoleRequest, ServerCallContext context)
         {
             var deleteRole = _mapper.Map<DeleteRoleRequest, DeleteRole>(deleteRoleRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteRole));
+            var model = await _mediator.Send(deleteRole);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

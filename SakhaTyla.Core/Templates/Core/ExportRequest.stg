@@ -7,8 +7,8 @@ namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
 {
     public class Export$model.Entity.PluralName$ : IRequest<FileContentModel>
     {
-        public $model.Entity.Name$Filter Filter { get; set; }
-        public string OrderBy { get; set; }
+        public $model.Entity.Name$Filter? Filter { get; set; }
+        public string? OrderBy { get; set; }
         public OrderDirection? OrderDirection { get; set; }
     }
 }

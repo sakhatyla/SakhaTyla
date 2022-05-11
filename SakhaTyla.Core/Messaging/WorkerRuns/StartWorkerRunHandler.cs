@@ -38,13 +38,19 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
             var workerRun = await _workerRunRepository.GetEntities()
                 .Include(e => e.WorkerInfo)
                 .Where(e => e.Id == request.WorkerRunId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (workerRun != null)
             {
+                if (workerRun.Status != Enums.WorkerRunStatus.New)
+                {
+                    _logger.LogError($"Can't start WorkerRun {request.WorkerRunId} (status is {workerRun.Status})");
+                    return Unit.Value;
+                }
+
                 await SetWorkerRunStartAsync(workerRun.Id);
 
                 var assemblies = CoreHelper.GetPlatformAndAppAssemblies();
-                var type = assemblies.SelectMany(a => a.GetTypes()).Where(t => t.FullName == workerRun.WorkerInfo.ClassName).FirstOrDefault();
+                var type = assemblies.SelectMany(a => a.GetTypes()).Where(t => t.FullName == workerRun.WorkerInfo.ClassName).First();
 
                 var workerContext = new WorkerContext(workerRun.Data, cancellationToken);
 
@@ -52,7 +58,11 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
                 {
                     using (var scope = _serviceProvider.CreateScope())
                     {
-                        var worker = (IWorker)scope.ServiceProvider.GetService(type);
+                        var worker = (IWorker?)scope.ServiceProvider.GetService(type);
+                        if (worker == null)
+                        {
+                            throw new Exception($"Worker with type {type} not found");
+                        }
                         await worker.ExecuteAsync(workerContext);
                     }
                     await SetWorkerRunEndAsync(workerRun.Id, Enums.WorkerRunStatus.Completed, workerContext.Result, workerContext.ResultData);
@@ -74,13 +84,13 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
         {
             var workerRun = await _workerRunRepository.GetEntities()
                 .Where(e => e.Id == workerRunId)
-                .FirstOrDefaultAsync();
+                .FirstAsync();
             workerRun.StartDateTime = DateTime.UtcNow;
             workerRun.Status = Enums.WorkerRunStatus.Running;
             await _unitOfWork.CommitAsync();
         }
 
-        private static string PrepareResult(string result)
+        private static string? PrepareResult(string? result)
         {
             if (result == null)
             {
@@ -91,11 +101,11 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
             return result;
         }
 
-        private async Task SetWorkerRunEndAsync(int workerRunId, Enums.WorkerRunStatus status, string result, string resultData)
+        private async Task SetWorkerRunEndAsync(int workerRunId, Enums.WorkerRunStatus status, string? result, string? resultData)
         {
             var workerRun = await _workerRunRepository.GetEntities()
                 .Where(e => e.Id == workerRunId)
-                .FirstOrDefaultAsync();
+                .FirstAsync();
             workerRun.EndDateTime = DateTime.UtcNow;
             workerRun.Status = status;
             workerRun.Result = PrepareResult(result);

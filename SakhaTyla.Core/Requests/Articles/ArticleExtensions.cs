@@ -9,7 +9,7 @@ namespace SakhaTyla.Core.Requests.Articles
 {
     public static class ArticleExtensions
     {
-        public static IOrderedQueryable<Article> OrderBy(this IQueryable<Article> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<Article> OrderBy(this IQueryable<Article> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -27,20 +27,20 @@ namespace SakhaTyla.Core.Requests.Articles
                         : queryable.OrderBy(e => e.TextSource);
                 case "FromLanguage":
                     return direction == OrderDirection.Descending
-                        ? queryable.OrderByDescending(e => e.FromLanguage)
-                        : queryable.OrderBy(e => e.FromLanguage);
+                        ? queryable.OrderByDescending(e => e.FromLanguage.Name)
+                        : queryable.OrderBy(e => e.FromLanguage.Name);
                 case "ToLanguage":
                     return direction == OrderDirection.Descending
-                        ? queryable.OrderByDescending(e => e.ToLanguage)
-                        : queryable.OrderBy(e => e.ToLanguage);
+                        ? queryable.OrderByDescending(e => e.ToLanguage.Name)
+                        : queryable.OrderBy(e => e.ToLanguage.Name);
                 case "Fuzzy":
                     return direction == OrderDirection.Descending
                         ? queryable.OrderByDescending(e => e.Fuzzy)
                         : queryable.OrderBy(e => e.Fuzzy);
                 case "Category":
                     return direction == OrderDirection.Descending
-                        ? queryable.OrderByDescending(e => e.Category)
-                        : queryable.OrderBy(e => e.Category);
+                        ? queryable.OrderByDescending(e => e.Category!.Name)
+                        : queryable.OrderBy(e => e.Category!.Name);
                 case "":
                 case null:
                     return queryable.OrderBy(e => e.Title);
@@ -49,15 +49,15 @@ namespace SakhaTyla.Core.Requests.Articles
             }
         }
 
-        public static IQueryable<Article> Filter(this IQueryable<Article> queryable, ArticleFilter filter)
+        public static IQueryable<Article> Filter(this IQueryable<Article> queryable, ArticleFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.Title.Contains(filter.Text) || e.Text.Contains(filter.Text) || e.TextSource.Contains(filter.Text));
+                queryable = queryable.Where(e => e.Title!.Contains(filter.Text) || e.Text!.Contains(filter.Text) || e.TextSource!.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.Title))
             {
-                queryable = queryable.Where(e => e.Title.Contains(filter.Title));
+                queryable = queryable.Where(e => e.Title!.Contains(filter.Title));
             }
             if (filter?.FromLanguageId != null)
             {

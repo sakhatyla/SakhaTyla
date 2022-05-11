@@ -30,34 +30,39 @@ namespace SakhaTyla.Web.Services
         public override async Task<LanguagePageModel> GetLanguages(GetLanguagesRequest getLanguagesRequest, ServerCallContext context)
         {
             var getLanguages = _mapper.Map<GetLanguagesRequest, GetLanguages>(getLanguagesRequest);
-            return _mapper.Map<PageModel<LanguageModel>, LanguagePageModel>(await _mediator.Send(getLanguages));
+            var model = await _mediator.Send(getLanguages);
+            return _mapper.Map<PageModel<LanguageModel>, LanguagePageModel>(model);
         }
 
         public override async Task<Language> GetLanguage(GetLanguageRequest getLanguageRequest, ServerCallContext context)
         {
             var getLanguage = _mapper.Map<GetLanguageRequest, GetLanguage>(getLanguageRequest);
-            return _mapper.Map<LanguageModel, Language>(await _mediator.Send(getLanguage));
+            var model = await _mediator.Send(getLanguage);
+            return _mapper.Map<LanguageModel, Language>(model!);
         }
 
         [Authorize("WriteLanguage")]
         public override async Task<Empty> UpdateLanguage(UpdateLanguageRequest updateLanguageRequest, ServerCallContext context)
         {
             var updateLanguage = _mapper.Map<UpdateLanguageRequest, UpdateLanguage>(updateLanguageRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(updateLanguage));
+            var model = await _mediator.Send(updateLanguage);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("WriteLanguage")]
         public override async Task<CreatedEntity> CreateLanguage(CreateLanguageRequest createLanguageRequest, ServerCallContext context)
         {
             var createLanguage = _mapper.Map<CreateLanguageRequest, CreateLanguage>(createLanguageRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createLanguage));
+            var model = await _mediator.Send(createLanguage);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteLanguage")]
         public override async Task<Empty> DeleteLanguage(DeleteLanguageRequest deleteLanguageRequest, ServerCallContext context)
         {
             var deleteLanguage = _mapper.Map<DeleteLanguageRequest, DeleteLanguage>(deleteLanguageRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteLanguage));
+            var model = await _mediator.Send(deleteLanguage);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

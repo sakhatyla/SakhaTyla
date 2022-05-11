@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using SakhaTyla.Core.Requests.Roles.Models;
 
 namespace SakhaTyla.Core.Requests.Users.Models
 {
     public class UserModel
     {
+        public UserModel(string userName, string email)
+        {
+            UserName = userName;
+            Email = email;
+        }
+
         public int Id { get; set; }
 
         [DisplayName("Creation Date")]
@@ -23,12 +30,14 @@ namespace SakhaTyla.Core.Requests.Users.Models
         [DisplayName("Email Confirmed")]
         public bool EmailConfirmed { get; set; }
 
-        public IList<int> RoleIds { get; } = new List<int>();
+        public IList<int> RoleIds { get; set; } = null!;
+
+        public IList<RoleShortModel> Roles { get; set; } = null!;
 
         [DisplayName("First Name")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [DisplayName("Last Name")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
     }
 }

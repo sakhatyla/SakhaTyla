@@ -8,7 +8,7 @@ namespace SakhaTyla.Core.Requests.Users
 {
     public static class UserExtensions
     {
-        public static IOrderedQueryable<User> OrderBy(this IQueryable<User> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<User> OrderBy(this IQueryable<User> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -36,11 +36,11 @@ namespace SakhaTyla.Core.Requests.Users
             }
         }
 
-        public static IQueryable<User> Filter(this IQueryable<User> queryable, UserFilter filter)
+        public static IQueryable<User> Filter(this IQueryable<User> queryable, UserFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.UserName.Contains(filter.Text) || e.Email.Contains(filter.Text) || e.FirstName.Contains(filter.Text) || e.LastName.Contains(filter.Text));
+                queryable = queryable.Where(e => e.UserName.Contains(filter.Text) || e.Email.Contains(filter.Text) || e.FirstName!.Contains(filter.Text) || e.LastName!.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.UserName))
             {
@@ -52,11 +52,15 @@ namespace SakhaTyla.Core.Requests.Users
             }
             if (!string.IsNullOrEmpty(filter?.FirstName))
             {
-                queryable = queryable.Where(e => e.FirstName.Contains(filter.FirstName));
+                queryable = queryable.Where(e => e.FirstName!.Contains(filter.FirstName));
             }
             if (!string.IsNullOrEmpty(filter?.LastName))
             {
-                queryable = queryable.Where(e => e.LastName.Contains(filter.LastName));
+                queryable = queryable.Where(e => e.LastName!.Contains(filter.LastName));
+            }
+            if (filter?.RoleId != null)
+            {
+                queryable = queryable.Where(e => e.Roles.Any(r => r.Id == filter.RoleId));
             }
             return queryable;
         }

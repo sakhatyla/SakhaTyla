@@ -7,6 +7,11 @@ namespace SakhaTyla.Core.Entities
 {
     public class EntityChange
     {
+        public EntityChange(string entityName)
+        {
+            EntityName = entityName;
+        }
+
         public int Id { get; set; }
 
         [StringLength(100)]
@@ -18,13 +23,13 @@ namespace SakhaTyla.Core.Entities
         [Required]
         public Enums.ChangeAction Action { get; set; }
 
-        public string From { get; set; }
+        public string? From { get; set; }
 
-        public string To { get; set; }
+        public string? To { get; set; }
 
         public DateTime CreationDate { get; set; }
 
-        public User CreationUser { get; set; }
+        public User? CreationUser { get; set; }
 
         public int? CreationUserId { get; set; }
     }

@@ -7,8 +7,8 @@
         }
 
         public EmailModel(string @from, string to, string subject, string body, bool isHtmlBody = false,
-            string cc = null, string bcc = null,
-            EmailAttachment[] attachments = null)
+            string? cc = null, string? bcc = null,
+            EmailAttachment[]? attachments = null)
         {
             From = @from;
             To = to;
@@ -20,13 +20,13 @@
             Attachments = attachments;
         }
 
-        public string From { get; set; }
-        public string To { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
+        public string? From { get; set; }
+        public string? To { get; set; }
+        public string? Subject { get; set; }
+        public string? Body { get; set; }
         public bool IsBodyHtml { get; set; }
-        public string Cc { get; set; }
-        public string Bcc { get; set; }
-        public EmailAttachment[] Attachments { get; set; }
+        public string? Cc { get; set; }
+        public string? Bcc { get; set; }
+        public EmailAttachment[]? Attachments { get; set; }
     }
 }

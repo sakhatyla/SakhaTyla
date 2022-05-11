@@ -1,0 +1,108 @@
+﻿{
+  "id": "c8d5d664-f47f-4dce-9f7c-f47dd9e92fd6",
+  "name": "WorkerScheduleTask",
+  "pluralName": "WorkerScheduleTasks",
+  "displayName": "Worker Schedule Task",
+  "pluralDisplayName": "Worker Schedule Tasks",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "cf267d51-16bb-4a1f-9ee8-8c554dedffd9",
+      "name": "WorkerInfo",
+      "displayName": "Worker",
+      "type": null,
+      "size": null,
+      "entityId": "63a8c5c9-9fe5-4f29-81b3-b0824b2bb105",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "5a6217de-8651-48c6-a5ec-075bd68baec1",
+      "name": "Seconds",
+      "displayName": "Seconds",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "1265f0e3-3789-40cf-afb8-8fd9b7b45468",
+      "name": "Minutes",
+      "displayName": "Minutes",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "02e0fefd-f3f0-4be4-8f4e-52c28fc1f75a",
+      "name": "Hours",
+      "displayName": "Hours",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "72624619-6575-4323-b739-830d8879715e",
+      "name": "DayOfMonth",
+      "displayName": "Day of Month",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "b2398301-4164-4573-bfec-91635759ba20",
+      "name": "Month",
+      "displayName": "Month",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "40cdf5a1-871a-41e5-8884-ba6eef422d78",
+      "name": "DayOfWeek",
+      "displayName": "Day of Week",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "7ff32fd2-98d8-4ac8-bebd-0c2009371707",
+      "name": "Year",
+      "displayName": "Year",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

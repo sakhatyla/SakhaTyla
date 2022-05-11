@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.WorkerScheduleTasks";
+
+message WorkerScheduleTaskFilter {
+    oneof workerInfoIdOneOf {
+        int32 workerInfoId = 60;
+    }
+    oneof secondsOneOf {
+        string seconds = 70;
+    }
+    oneof minutesOneOf {
+        string minutes = 80;
+    }
+    oneof hoursOneOf {
+        string hours = 90;
+    }
+    oneof dayOfMonthOneOf {
+        string dayOfMonth = 100;
+    }
+    oneof monthOneOf {
+        string month = 110;
+    }
+    oneof dayOfWeekOneOf {
+        string dayOfWeek = 120;
+    }
+    oneof yearOneOf {
+        string year = 130;
+    }
+}

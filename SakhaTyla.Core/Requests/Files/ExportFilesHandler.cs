@@ -35,7 +35,7 @@ namespace SakhaTyla.Core.Requests.Files
                 .Include(e => e.Group);            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var files = await query.ToListAsync();
+            var files = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<File>, List<FileModel>>(files);
             return await _excelFormatter.GetExcelFileAsync(models, "Files");
         }

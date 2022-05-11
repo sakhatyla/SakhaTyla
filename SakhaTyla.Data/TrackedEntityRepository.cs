@@ -29,9 +29,8 @@ namespace SakhaTyla.Data
             var to = action != ChangeAction.Delete ?
                 JsonSerializer.Serialize(entityEntry.CurrentValues.ToObject(), JsonSerializerHelper.JsonSerializerOptions) :
                 "";
-            var change = new EntityChange()
+            var change = new EntityChange(entityType.Name)
             {
-                EntityName = entityType.Name,
                 EntityId = entity.Id,
                 Action = action,
                 From = from,
@@ -43,7 +42,7 @@ namespace SakhaTyla.Data
             {
                 Context.Database.ExecuteSqlRaw("insert into [EntityChanges] ([EntityName], [EntityId], [Action], [From], [To], [CreationDate], [CreationUserId]) " +
                     "values ({0}, {1}, {2}, {3}, {4}, {5}, {6})",
-                    entityType.Name, entity.Id, action, from, to, DateTime.UtcNow, UserId);
+                    entityType.Name, entity.Id, action, from, to, DateTime.UtcNow, UserId!);
             }
             else
             {

@@ -9,7 +9,7 @@ namespace SakhaTyla.Core.Workers
 {
     public class WorkerContext
     {
-        public WorkerContext(string data, CancellationToken cancellationToken)
+        public WorkerContext(string? data, CancellationToken cancellationToken)
         {
             Data = data;
             CancellationToken = cancellationToken;
@@ -17,10 +17,10 @@ namespace SakhaTyla.Core.Workers
 
         public CancellationToken CancellationToken { get; }
 
-        public string Data { get; }
+        public string? Data { get; }
 
-        public string Result { get; set; }
+        public string? Result { get; set; }
 
-        public string ResultData { get; set; }
+        public string? ResultData { get; set; }
     }
 }

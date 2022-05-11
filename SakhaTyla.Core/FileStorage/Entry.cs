@@ -11,11 +11,11 @@ namespace SakhaTyla.Core.FileStorage
         public string Name { get; }
         public string Url { get; }
         public EntryType Type { get; }
-        public string ContentType { get; }
+        public string? ContentType { get; }
         public DateTime? CreationDate { get; set; }
         public DateTime? ModificationDate { get; set; }
 
-        public Entry(string name, string url, EntryType type, string contentType = null,
+        public Entry(string name, string url, EntryType type, string? contentType = null,
             DateTime? creationDate = null, DateTime? modificationDate = null)
         {
             Name = name;

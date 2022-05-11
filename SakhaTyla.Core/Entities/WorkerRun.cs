@@ -10,7 +10,7 @@ namespace SakhaTyla.Core.Entities
     {
         [Required()]
         public int WorkerInfoId { get; set; }
-        public WorkerInfo WorkerInfo { get; set; }
+        public WorkerInfo WorkerInfo { get; set; } = null!;
         
         [Required()]
         public Enums.WorkerRunStatus Status { get; set; }
@@ -22,13 +22,13 @@ namespace SakhaTyla.Core.Entities
         public DateTime? EndDateTime { get; set; }
         
 
-        public string Data { get; set; }
+        public string? Data { get; set; }
         
 
-        public string Result { get; set; }
+        public string? Result { get; set; }
         
 
-        public string ResultData { get; set; }
+        public string? ResultData { get; set; }
         
     }
 }

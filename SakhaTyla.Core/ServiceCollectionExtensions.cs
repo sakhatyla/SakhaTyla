@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SakhaTyla.Core.FileStorage;
 using SakhaTyla.Core.Infrastructure;
+using SakhaTyla.Core.Messaging.WorkerRuns;
+using SakhaTyla.Core.Workers;
 
 namespace SakhaTyla.Core
 {
@@ -26,6 +28,8 @@ namespace SakhaTyla.Core
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddAllValidators();
             services.Configure<FileSystemStorageSettings>(configuration.GetSection("FileSystemStorage"));
+            services.AddTransient<IWorkerRunner, WorkerRunner>();
+            services.AddTransient<TestWorker>();
             return services; 
         }
 

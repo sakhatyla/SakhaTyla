@@ -34,13 +34,13 @@ namespace SakhaTyla.Core.Requests.Articles
             var article = await _articleRepository.GetEntities()
                 .DefaultFilter()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (article == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["Article"], request.Id]);
             }
             _mapper.Map(request, article);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

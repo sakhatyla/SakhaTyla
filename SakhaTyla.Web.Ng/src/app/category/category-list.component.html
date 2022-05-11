@@ -19,15 +19,24 @@
     <div class="action-item">
       <button mat-raised-button color="primary" type="button" (click)="onCreate()">{{ t('shared.create') }}</button>
       <button mat-raised-button type="button" (click)="onExport()">{{ t('shared.export') }}</button>
+      <button mat-raised-button type="button" *ngIf="selectedIds.size > 0" (click)="onDeleteSelected()">{{ t('shared.delete') }}</button>
     </div>
   </mat-card-actions>
 
   <mat-card-content class="mat-elevation-z8">
 
-    <table *ngIf="content" mat-table [dataSource]="content.pageItems" multiTemplateDataRows>
+    <table *ngIf="content" mat-table [dataSource]="content.pageItems" [matSortActive]="state | sortActive" [matSortDirection]="state | sortDirection" multiTemplateDataRows matSort (matSortChange)="onSortChange($event)">
 
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox [appSelectAllItems]="content.pageItems" [(selectedIds)]="selectedIds"></mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let item">
+          <mat-checkbox [appSelectItem]="item" [(selectedIds)]="selectedIds"></mat-checkbox>
+        </td>
+      </ng-container>
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>{{ t('Name') }}</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Name') }}</th>
         <td mat-cell *matCellDef="let item">
           <app-text-view [value]="item.name"></app-text-view>
         </td>

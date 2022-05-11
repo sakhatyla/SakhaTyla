@@ -26,7 +26,7 @@ namespace SakhaTyla.Data
             ((DataContext)Context).CustomSavedChanges += OnSavedChanges;
         }
 
-        private void OnSavingChanges(object sender, DataContext.SaveEventArgs e)
+        private void OnSavingChanges(object? sender, DataContext.SaveEventArgs e)
         {
             var entityEntries = Context.ChangeTracker.Entries()
                 .Where(e => e.State == EntityState.Modified || e.State == EntityState.Added || e.State == EntityState.Deleted)
@@ -58,7 +58,7 @@ namespace SakhaTyla.Data
             }
         }
 
-        private void OnSavedChanges(object sender, DataContext.SaveEventArgs e)
+        private void OnSavedChanges(object? sender, DataContext.SaveEventArgs e)
         {
             if (e.AddedEntities.Count > 0)
             {

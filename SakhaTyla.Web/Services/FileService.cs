@@ -30,34 +30,39 @@ namespace SakhaTyla.Web.Services
         public override async Task<FilePageModel> GetFiles(GetFilesRequest getFilesRequest, ServerCallContext context)
         {
             var getFiles = _mapper.Map<GetFilesRequest, GetFiles>(getFilesRequest);
-            return _mapper.Map<PageModel<FileModel>, FilePageModel>(await _mediator.Send(getFiles));
+            var model = await _mediator.Send(getFiles);
+            return _mapper.Map<PageModel<FileModel>, FilePageModel>(model);
         }
 
         public override async Task<File> GetFile(GetFileRequest getFileRequest, ServerCallContext context)
         {
             var getFile = _mapper.Map<GetFileRequest, GetFile>(getFileRequest);
-            return _mapper.Map<FileModel, File>(await _mediator.Send(getFile));
+            var model = await _mediator.Send(getFile);
+            return _mapper.Map<FileModel, File>(model!);
         }
 
         [Authorize("WriteFile")]
         public override async Task<Empty> UpdateFile(UpdateFileRequest updateFileRequest, ServerCallContext context)
         {
             var updateFile = _mapper.Map<UpdateFileRequest, UpdateFile>(updateFileRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(updateFile));
+            var model = await _mediator.Send(updateFile);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("WriteFile")]
         public override async Task<CreatedEntity> CreateFile(CreateFileRequest createFileRequest, ServerCallContext context)
         {
             var createFile = _mapper.Map<CreateFileRequest, CreateFile>(createFileRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createFile));
+            var model = await _mediator.Send(createFile);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteFile")]
         public override async Task<Empty> DeleteFile(DeleteFileRequest deleteFileRequest, ServerCallContext context)
         {
             var deleteFile = _mapper.Map<DeleteFileRequest, DeleteFile>(deleteFileRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteFile));
+            var model = await _mediator.Send(deleteFile);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

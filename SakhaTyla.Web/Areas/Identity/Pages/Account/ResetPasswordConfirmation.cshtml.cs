@@ -10,9 +10,9 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ResetPasswordConfirmationModel : PageModel
     {
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
 
-        public void OnGet(string returnUrl = null)
+        public void OnGet(string? returnUrl = null)
         {
             ReturnUrl = returnUrl;
         }

@@ -1,4 +1,5 @@
-﻿import { PageSettings } from '../core/page.model';
+﻿import { OrderDirection } from '../core/models/order-direction.model';
+import { PageSettings } from '../core/page.model';
 import { WorkerInfoFilter } from './worker-info-filter.model';
 
 export class WorkerInfo {
@@ -15,4 +16,6 @@ export class WorkerInfoListState {
   pageSize = PageSettings.pageSize;
   pageIndex = 0;
   filter = new WorkerInfoFilter();
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }

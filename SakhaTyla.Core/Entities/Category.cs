@@ -8,9 +8,14 @@ namespace SakhaTyla.Core.Entities
 {
     public class Category : BaseEntity
     {
+        public Category(string name)
+        {
+            Name = name;
+        }
+
         [Required()]
         [StringLength(100)]
         public string Name { get; set; }
-        
+                
     }
 }

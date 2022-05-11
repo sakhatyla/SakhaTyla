@@ -1,4 +1,5 @@
-﻿import { PageSettings } from '../core/page.model';
+﻿import { OrderDirection } from '../core/models/order-direction.model';
+import { PageSettings } from '../core/page.model';
 import { CategoryFilter } from './category-filter.model';
 
 export class Category {
@@ -14,4 +15,6 @@ export class CategoryListState {
   pageSize = PageSettings.pageSize;
   pageIndex = 0;
   filter = new CategoryFilter();
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }

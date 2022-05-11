@@ -30,34 +30,39 @@ namespace SakhaTyla.Web.Services
         public override async Task<ArticlePageModel> GetArticles(GetArticlesRequest getArticlesRequest, ServerCallContext context)
         {
             var getArticles = _mapper.Map<GetArticlesRequest, GetArticles>(getArticlesRequest);
-            return _mapper.Map<PageModel<ArticleModel>, ArticlePageModel>(await _mediator.Send(getArticles));
+            var model = await _mediator.Send(getArticles);
+            return _mapper.Map<PageModel<ArticleModel>, ArticlePageModel>(model);
         }
 
         public override async Task<Article> GetArticle(GetArticleRequest getArticleRequest, ServerCallContext context)
         {
             var getArticle = _mapper.Map<GetArticleRequest, GetArticle>(getArticleRequest);
-            return _mapper.Map<ArticleModel, Article>(await _mediator.Send(getArticle));
+            var model = await _mediator.Send(getArticle);
+            return _mapper.Map<ArticleModel, Article>(model!);
         }
 
         [Authorize("WriteArticle")]
         public override async Task<Empty> UpdateArticle(UpdateArticleRequest updateArticleRequest, ServerCallContext context)
         {
             var updateArticle = _mapper.Map<UpdateArticleRequest, UpdateArticle>(updateArticleRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(updateArticle));
+            var model = await _mediator.Send(updateArticle);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("WriteArticle")]
         public override async Task<CreatedEntity> CreateArticle(CreateArticleRequest createArticleRequest, ServerCallContext context)
         {
             var createArticle = _mapper.Map<CreateArticleRequest, CreateArticle>(createArticleRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createArticle));
+            var model = await _mediator.Send(createArticle);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteArticle")]
         public override async Task<Empty> DeleteArticle(DeleteArticleRequest deleteArticleRequest, ServerCallContext context)
         {
             var deleteArticle = _mapper.Map<DeleteArticleRequest, DeleteArticle>(deleteArticleRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteArticle));
+            var model = await _mediator.Send(deleteArticle);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

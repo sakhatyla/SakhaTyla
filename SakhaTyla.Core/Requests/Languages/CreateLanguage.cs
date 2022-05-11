@@ -9,8 +9,8 @@ namespace SakhaTyla.Core.Requests.Languages
 {
     public class CreateLanguage : IRequest<CreatedEntity<int>>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string Code { get; set; }
+        public string? Code { get; set; }
     }
 }

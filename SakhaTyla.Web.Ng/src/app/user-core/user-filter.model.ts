@@ -5,4 +5,5 @@ export class UserFilter extends EntityFilter {
   email?: string;
   firstName?: string;
   lastName?: string;
+  roleId?: number;
 }

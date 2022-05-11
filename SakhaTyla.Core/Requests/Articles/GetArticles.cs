@@ -10,8 +10,8 @@ namespace SakhaTyla.Core.Requests.Articles
         public int? PageIndex { get; set; }
         public int? PageSize { get; set; }
 
-        public ArticleFilter Filter { get; set; }
-        public string OrderBy { get; set; }
+        public ArticleFilter? Filter { get; set; }
+        public string? OrderBy { get; set; }
         public OrderDirection? OrderDirection { get; set; }
     }
 }

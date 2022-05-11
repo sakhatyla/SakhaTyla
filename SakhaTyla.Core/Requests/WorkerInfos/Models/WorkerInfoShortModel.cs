@@ -5,6 +5,11 @@ namespace SakhaTyla.Core.Requests.WorkerInfos.Models
 {
     public class WorkerInfoShortModel
     {
+        public WorkerInfoShortModel(string name)
+        {
+            Name = name;
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

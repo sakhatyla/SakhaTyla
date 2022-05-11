@@ -6,7 +6,7 @@ namespace SakhaTyla.Core.FileStorage
 {
     public class FileSystemStorageSettings
     {
-        public string Url { get; set; }
-        public string Path { get; set; }
+        public string? Url { get; set; }
+        public string? Path { get; set; }
     }
 }

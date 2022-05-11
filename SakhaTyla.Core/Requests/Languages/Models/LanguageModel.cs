@@ -6,6 +6,12 @@ namespace SakhaTyla.Core.Requests.Languages.Models
 {
     public class LanguageModel
     {
+        public LanguageModel(string name, string code)
+        {
+            Name = name;
+            Code = code;
+        }
+
         [DisplayName("Id")]
         public int Id { get; set; }
 
@@ -17,11 +23,11 @@ namespace SakhaTyla.Core.Requests.Languages.Models
 
         [DisplayName("Creation User")]
         public int? CreationUserId { get; set; }
-        public Users.Models.UserShortModel CreationUser { get; set; }
+        public Users.Models.UserShortModel? CreationUser { get; set; }
 
         [DisplayName("Modification User")]
         public int? ModificationUserId { get; set; }
-        public Users.Models.UserShortModel ModificationUser { get; set; }
+        public Users.Models.UserShortModel? ModificationUser { get; set; }
 
         [DisplayName("Name")]
         public string Name { get; set; }

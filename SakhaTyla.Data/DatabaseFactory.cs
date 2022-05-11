@@ -8,7 +8,7 @@ namespace SakhaTyla.Data
     public class DatabaseFactory : IDatabaseFactory
     {
         private readonly IServiceProvider _serviceProvider;
-        private DataContext _dataContext;
+        private DataContext? _dataContext;
 
         public DatabaseFactory(IServiceProvider serviceProvider)
         {

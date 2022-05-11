@@ -8,6 +8,13 @@ namespace SakhaTyla.Core.Entities
 {
     public class File : BaseEntity
     {
+        public File(string name, string contentType, int groupId)
+        {
+            Name = name;
+            ContentType = contentType;
+            GroupId = groupId;
+        }
+
         [Required()]
         [StringLength(100)]
         public string Name { get; set; }
@@ -17,14 +24,14 @@ namespace SakhaTyla.Core.Entities
         public string ContentType { get; set; }
         
 
-        public byte[] Content { get; set; }
+        public byte[]? Content { get; set; }
         
         [StringLength(200)]
-        public string Url { get; set; }
+        public string? Url { get; set; }
         
         [Required()]
         public int GroupId { get; set; }
-        public FileGroup Group { get; set; }
+        public FileGroup Group { get; set; } = null!;
         
     }
 }

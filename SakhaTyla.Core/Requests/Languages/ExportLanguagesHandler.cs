@@ -34,7 +34,7 @@ namespace SakhaTyla.Core.Requests.Languages
             IQueryable<Language> query = _languageRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var languages = await query.ToListAsync();
+            var languages = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<Language>, List<LanguageModel>>(languages);
             return await _excelFormatter.GetExcelFileAsync(models, "Languages");
         }

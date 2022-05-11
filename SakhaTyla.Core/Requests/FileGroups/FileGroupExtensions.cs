@@ -8,7 +8,7 @@ namespace SakhaTyla.Core.Requests.FileGroups
 {
     public static class FileGroupExtensions
     {
-        public static IOrderedQueryable<FileGroup> OrderBy(this IQueryable<FileGroup> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<FileGroup> OrderBy(this IQueryable<FileGroup> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -36,11 +36,11 @@ namespace SakhaTyla.Core.Requests.FileGroups
             }
         }
 
-        public static IQueryable<FileGroup> Filter(this IQueryable<FileGroup> queryable, FileGroupFilter filter)
+        public static IQueryable<FileGroup> Filter(this IQueryable<FileGroup> queryable, FileGroupFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Text) || e.Location.Contains(filter.Text) || e.Accept.Contains(filter.Text));
+                queryable = queryable.Where(e => e.Name.Contains(filter.Text) || e.Location!.Contains(filter.Text) || e.Accept!.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.Name))
             {
@@ -52,11 +52,11 @@ namespace SakhaTyla.Core.Requests.FileGroups
             }
             if (!string.IsNullOrEmpty(filter?.Location))
             {
-                queryable = queryable.Where(e => e.Location.Contains(filter.Location));
+                queryable = queryable.Where(e => e.Location!.Contains(filter.Location));
             }
             if (!string.IsNullOrEmpty(filter?.Accept))
             {
-                queryable = queryable.Where(e => e.Accept.Contains(filter.Accept));
+                queryable = queryable.Where(e => e.Accept!.Contains(filter.Accept));
             }
             return queryable;
         }

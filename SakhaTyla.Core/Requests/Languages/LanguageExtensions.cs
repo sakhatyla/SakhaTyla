@@ -8,7 +8,7 @@ namespace SakhaTyla.Core.Requests.Languages
 {
     public static class LanguageExtensions
     {
-        public static IOrderedQueryable<Language> OrderBy(this IQueryable<Language> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<Language> OrderBy(this IQueryable<Language> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -28,19 +28,19 @@ namespace SakhaTyla.Core.Requests.Languages
             }
         }
 
-        public static IQueryable<Language> Filter(this IQueryable<Language> queryable, LanguageFilter filter)
+        public static IQueryable<Language> Filter(this IQueryable<Language> queryable, LanguageFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Text) || e.Code.Contains(filter.Text));
+                queryable = queryable.Where(e => e.Name!.Contains(filter.Text) || e.Code!.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.Name))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Name));
+                queryable = queryable.Where(e => e.Name!.Contains(filter.Name));
             }
             if (!string.IsNullOrEmpty(filter?.Code))
             {
-                queryable = queryable.Where(e => e.Code.Contains(filter.Code));
+                queryable = queryable.Where(e => e.Code!.Contains(filter.Code));
             }
             return queryable;
         }

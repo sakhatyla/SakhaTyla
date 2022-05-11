@@ -32,7 +32,7 @@ namespace SakhaTyla.Core.Requests.Roles
             IQueryable<Role> query = _roleManager.Roles;
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var roles = await query.ToListAsync();
+            var roles = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<Role>, List<RoleModel>>(roles);
             return await _excelFormatter.GetExcelFileAsync(models, "Roles");
         }

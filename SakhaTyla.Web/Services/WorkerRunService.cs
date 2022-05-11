@@ -30,27 +30,31 @@ namespace SakhaTyla.Web.Services
         public override async Task<WorkerRunPageModel> GetWorkerRuns(GetWorkerRunsRequest getWorkerRunsRequest, ServerCallContext context)
         {
             var getWorkerRuns = _mapper.Map<GetWorkerRunsRequest, GetWorkerRuns>(getWorkerRunsRequest);
-            return _mapper.Map<PageModel<WorkerRunModel>, WorkerRunPageModel>(await _mediator.Send(getWorkerRuns));
+            var model = await _mediator.Send(getWorkerRuns);
+            return _mapper.Map<PageModel<WorkerRunModel>, WorkerRunPageModel>(model);
         }
 
         public override async Task<WorkerRun> GetWorkerRun(GetWorkerRunRequest getWorkerRunRequest, ServerCallContext context)
         {
             var getWorkerRun = _mapper.Map<GetWorkerRunRequest, GetWorkerRun>(getWorkerRunRequest);
-            return _mapper.Map<WorkerRunModel, WorkerRun>(await _mediator.Send(getWorkerRun));
+            var model = await _mediator.Send(getWorkerRun);
+            return _mapper.Map<WorkerRunModel, WorkerRun>(model!);
         }
 
         [Authorize("WriteWorkerRun")]
         public override async Task<CreatedEntity> CreateWorkerRun(CreateWorkerRunRequest createWorkerRunRequest, ServerCallContext context)
         {
             var createWorkerRun = _mapper.Map<CreateWorkerRunRequest, CreateWorkerRun>(createWorkerRunRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createWorkerRun));
+            var model = await _mediator.Send(createWorkerRun);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteWorkerRun")]
         public override async Task<Empty> DeleteWorkerRun(DeleteWorkerRunRequest deleteWorkerRunRequest, ServerCallContext context)
         {
             var deleteWorkerRun = _mapper.Map<DeleteWorkerRunRequest, DeleteWorkerRun>(deleteWorkerRunRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteWorkerRun));
+            var model = await _mediator.Send(deleteWorkerRun);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

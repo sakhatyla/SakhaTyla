@@ -5,6 +5,11 @@ namespace SakhaTyla.Core.Requests.Files.Models
 {
     public class FileShortModel
     {
+        public FileShortModel(string name)
+        {
+            Name = name;
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

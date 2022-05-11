@@ -8,7 +8,7 @@ namespace SakhaTyla.Core.Requests.WorkerInfos
 {
     public static class WorkerInfoExtensions
     {
-        public static IOrderedQueryable<WorkerInfo> OrderBy(this IQueryable<WorkerInfo> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<WorkerInfo> OrderBy(this IQueryable<WorkerInfo> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Requests.WorkerInfos
             }
         }
 
-        public static IQueryable<WorkerInfo> Filter(this IQueryable<WorkerInfo> queryable, WorkerInfoFilter filter)
+        public static IQueryable<WorkerInfo> Filter(this IQueryable<WorkerInfo> queryable, WorkerInfoFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {

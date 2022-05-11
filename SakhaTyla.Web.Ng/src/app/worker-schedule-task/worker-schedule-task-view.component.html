@@ -1,0 +1,63 @@
+﻿<mat-card class="mat-card-view" *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Worker Schedule Task') }} <app-worker-schedule-task-show [value]="workerScheduleTask"></app-worker-schedule-task-show></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
+
+  <div *ngIf="workerScheduleTask">
+    <div class="field-view">
+      <label>{{ t('Worker Info') }}</label>
+      <div>
+        <app-worker-info-show [value]="workerScheduleTask.workerInfo"></app-worker-info-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Seconds') }}</label>
+      <div>
+        <app-text-view [value]="workerScheduleTask.seconds"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Minutes') }}</label>
+      <div>
+        <app-text-view [value]="workerScheduleTask.minutes"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Hours') }}</label>
+      <div>
+        <app-text-view [value]="workerScheduleTask.hours"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Day of Month') }}</label>
+      <div>
+        <app-text-view [value]="workerScheduleTask.dayOfMonth"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Month') }}</label>
+      <div>
+        <app-text-view [value]="workerScheduleTask.month"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Day of Week') }}</label>
+      <div>
+        <app-text-view [value]="workerScheduleTask.dayOfWeek"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Year') }}</label>
+      <div>
+        <app-text-view [value]="workerScheduleTask.year"></app-text-view>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

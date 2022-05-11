@@ -85,11 +85,10 @@ namespace SakhaTyla.Infrastructure.Formatters
             }
         }
 
-        private void SetValue(ExcelRange range, object value)
+        private void SetValue(ExcelRange range, object? value)
         {
-            if (value is Enum)
+            if (value is Enum enumValue)
             {
-                var enumValue = value as Enum;
                 var description = enumValue.GetType()
                     .GetMember(enumValue.ToString())
                     .First()
@@ -114,10 +113,7 @@ namespace SakhaTyla.Infrastructure.Formatters
         {
             var type = typeof(T);
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Select(p => new PropertyMetaData()
-                {
-                    Property = p,
-                })
+                .Select(p => new PropertyMetaData(p))
                 .ToList();
             foreach (var property in properties)
             {
@@ -147,9 +143,14 @@ namespace SakhaTyla.Infrastructure.Formatters
 
         class PropertyMetaData
         {
+            public PropertyMetaData(PropertyInfo property)
+            {
+                Property = property;
+            }
+
             public PropertyInfo Property { get; set; }
-            public string DisplayName { get; set; }
-            public string Format { get; set; }
+            public string? DisplayName { get; set; }
+            public string? Format { get; set; }
         }
     }
 }

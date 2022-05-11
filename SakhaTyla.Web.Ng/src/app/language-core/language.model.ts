@@ -1,4 +1,5 @@
-﻿import { PageSettings } from '../core/page.model';
+﻿import { OrderDirection } from '../core/models/order-direction.model';
+import { PageSettings } from '../core/page.model';
 import { LanguageFilter } from './language-filter.model';
 
 export class Language {
@@ -15,4 +16,6 @@ export class LanguageListState {
   pageSize = PageSettings.pageSize;
   pageIndex = 0;
   filter = new LanguageFilter();
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }

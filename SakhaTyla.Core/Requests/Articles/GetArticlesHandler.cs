@@ -32,7 +32,7 @@ namespace SakhaTyla.Core.Requests.Articles
                 .DefaultFilter();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var articles = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var articles = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return articles.Map<Article, ArticleModel>(_mapper);
         }
 

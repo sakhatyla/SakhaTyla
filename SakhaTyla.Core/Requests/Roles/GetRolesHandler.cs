@@ -27,7 +27,7 @@ namespace SakhaTyla.Core.Requests.Roles
             IQueryable<Role> query = _roleManager.Roles;
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var roles = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var roles = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return roles.Map<Role, RoleModel>(_mapper);
         }
 

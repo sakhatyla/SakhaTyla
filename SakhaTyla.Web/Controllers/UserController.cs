@@ -31,7 +31,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetUser")]
-        public async Task<UserModel> GetUserAsync([FromBody] GetUser getUser)
+        public async Task<UserModel?> GetUserAsync([FromBody] GetUser getUser)
         {
             return await _mediator.Send(getUser);
         }

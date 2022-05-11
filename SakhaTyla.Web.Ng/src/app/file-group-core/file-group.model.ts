@@ -1,4 +1,5 @@
-﻿import { PageSettings } from '../core/page.model';
+﻿import { OrderDirection } from '../core/models/order-direction.model';
+import { PageSettings } from '../core/page.model';
 import { FileGroupFilter } from './file-group-filter.model';
 import { FileGroupType } from '../file-group-type/file-group-type.model';
 
@@ -18,4 +19,6 @@ export class FileGroupListState {
   pageSize = PageSettings.pageSize;
   pageIndex = 0;
   filter = new FileGroupFilter();
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }

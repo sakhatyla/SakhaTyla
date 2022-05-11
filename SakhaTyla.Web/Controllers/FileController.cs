@@ -33,7 +33,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetFile")]
-        public async Task<FileModel> GetFileAsync([FromBody] GetFile getFile)
+        public async Task<FileModel?> GetFileAsync([FromBody] GetFile getFile)
         {
             return await _mediator.Send(getFile);
         }

@@ -9,9 +9,9 @@ namespace SakhaTyla.Core.Requests.Articles
 {
     public class CreateArticle : IRequest<CreatedEntity<int>>
     {
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string TextSource { get; set; }
+        public string? TextSource { get; set; }
 
         public int? FromLanguageId { get; set; }
 

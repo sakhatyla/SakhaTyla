@@ -18,9 +18,18 @@ namespace SakhaTyla.Core.FileStorage
             _settings = settings.Value;
         }
 
+        private string GetRootPath()
+        {
+            if (_settings.Path == null)
+            {
+                throw new Exception("Path settings is empty");
+            }
+            return _settings.Path;
+        }
+
         private void ValidatePath(string path, bool excludeRoot = false)
         {
-            var relativePath = Path.GetRelativePath(_settings.Path, path);
+            var relativePath = Path.GetRelativePath(GetRootPath(), path);
             if (relativePath.StartsWith(".."))
             {
                 throw new Exception("Invalid path");
@@ -37,7 +46,7 @@ namespace SakhaTyla.Core.FileStorage
         private string GetFilePathFromUrl(string url)
         {
             var filePath = url.Replace($"{_settings.Url}/", "");
-            return Path.Combine(_settings.Path, filePath);
+            return Path.Combine(GetRootPath(), filePath);
         }
 
         public Task DeleteFileAsync(string url)
@@ -65,7 +74,7 @@ namespace SakhaTyla.Core.FileStorage
 
         public Task<Stream> GetWriteFileStreamAsync(string filePath, string contentType)
         {
-            var absoluteFilePath = Path.Combine(_settings.Path, filePath);
+            var absoluteFilePath = Path.Combine(GetRootPath(), filePath);
             ValidatePath(absoluteFilePath);
             var fs = new FileStream(absoluteFilePath, FileMode.OpenOrCreate, FileAccess.Write);
             return Task.FromResult<Stream>(fs);
@@ -73,7 +82,7 @@ namespace SakhaTyla.Core.FileStorage
 
         public Task<PageModel<Entry>> GetEntriesAsync(string path, int pageIndex, int pageSize)
         {
-            var absolutePath = Path.Combine(_settings.Path, path);
+            var absolutePath = Path.Combine(GetRootPath(), path);
             ValidatePath(absolutePath);
             var entries = Directory.GetFileSystemEntries(absolutePath);
             var pageEntries = entries
@@ -86,7 +95,7 @@ namespace SakhaTyla.Core.FileStorage
 
         private Entry GetEntry(string path)
         {
-            var relativePath = Path.GetRelativePath(_settings.Path, path);
+            var relativePath = Path.GetRelativePath(GetRootPath(), path);
             var url = $"{_settings.Url}/{relativePath.Replace("\\", "/")}";
             var name = Path.GetFileName(relativePath);
             var type = GetEntryType(path);
@@ -116,9 +125,9 @@ namespace SakhaTyla.Core.FileStorage
 
         public async Task<string> SaveFileAsync(string filePath, Stream content, string contentType)
         {
-            var absoluteFilePath = Path.Combine(_settings.Path, filePath);
+            var absoluteFilePath = Path.Combine(GetRootPath(), filePath);
             ValidatePath(absoluteFilePath);
-            var directory = Path.GetDirectoryName(absoluteFilePath);
+            var directory = Path.GetDirectoryName(absoluteFilePath)!;
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -132,7 +141,7 @@ namespace SakhaTyla.Core.FileStorage
 
         public Task<string> CreateDirectoryAsync(string directoryPath)
         {
-            var absoluteDirectoryPath = Path.Combine(_settings.Path, directoryPath);
+            var absoluteDirectoryPath = Path.Combine(GetRootPath(), directoryPath);
             ValidatePath(absoluteDirectoryPath);
             if (!Directory.Exists(absoluteDirectoryPath))
             {

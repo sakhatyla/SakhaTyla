@@ -16,7 +16,7 @@ namespace SakhaTyla.Core.Infrastructure
             var types = assemblies.SelectMany(a => a.GetTypes()).ToList();
             foreach (var serviceSection in config.GetChildren())
             {
-                var serviceType = types.FirstOrDefault(t => t.FullName == serviceSection.Key);
+                var serviceType = types.First(t => t.FullName == serviceSection.Key);
                 var components = new List<string>();
                 if (!string.IsNullOrEmpty(serviceSection.Value))
                 {
@@ -31,7 +31,7 @@ namespace SakhaTyla.Core.Infrastructure
                 }
                 foreach (var component in components)
                 {
-                    var componentType = types.FirstOrDefault(t => t.FullName == component);
+                    var componentType = types.First(t => t.FullName == component);
                     services.AddTransient(serviceType, componentType);
                 }
             }

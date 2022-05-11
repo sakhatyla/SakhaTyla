@@ -34,7 +34,7 @@ namespace SakhaTyla.Core.Requests.FileGroups
             IQueryable<FileGroup> query = _fileGroupRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var fileGroups = await query.ToListAsync();
+            var fileGroups = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<FileGroup>, List<FileGroupModel>>(fileGroups);
             return await _excelFormatter.GetExcelFileAsync(models, "FileGroups");
         }

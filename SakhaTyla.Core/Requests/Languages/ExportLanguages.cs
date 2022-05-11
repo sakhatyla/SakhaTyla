@@ -6,8 +6,8 @@ namespace SakhaTyla.Core.Requests.Languages
 {
     public class ExportLanguages : IRequest<FileContentModel>
     {
-        public LanguageFilter Filter { get; set; }
-        public string OrderBy { get; set; }
+        public LanguageFilter? Filter { get; set; }
+        public string? OrderBy { get; set; }
         public OrderDirection? OrderDirection { get; set; }
     }
 }

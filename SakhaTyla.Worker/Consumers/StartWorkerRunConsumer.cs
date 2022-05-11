@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SakhaTyla.Core.Messaging.WorkerRuns;
 using MassTransit;
-using MediatR;
+using SakhaTyla.Core.Messaging.WorkerRuns;
+using SakhaTyla.Worker.WorkerInfos;
 
 namespace SakhaTyla.Worker.Consumers
 {
     public class StartWorkerRunConsumer : IConsumer<StartWorkerRun>
     {
-        private readonly IMediator _mediator;
+        private readonly WorkerInfoSheduler _workerInfoSheduler;
 
-        public StartWorkerRunConsumer(IMediator mediator)
+        public StartWorkerRunConsumer(WorkerInfoSheduler workerInfoSheduler)
         {
-            _mediator = mediator;
+            _workerInfoSheduler = workerInfoSheduler;
         }
 
         public async Task Consume(ConsumeContext<StartWorkerRun> context)
         {
-            await _mediator.Send(context.Message, context.CancellationToken);
+            await _workerInfoSheduler.RunAsync(context.Message);
         }
     }
 }

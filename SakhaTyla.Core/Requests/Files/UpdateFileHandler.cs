@@ -40,30 +40,34 @@ namespace SakhaTyla.Core.Requests.Files
             var file = await _fileRepository.GetEntities()
                 .Include(e => e.Group)
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (file == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["File"], request.Id]);
             }
-            file.Group.Accept.Validate(request.Name, request.ContentType);
+            file.Group.Accept.Validate(request.Name!, request.ContentType!);
             _mapper.Map(request, file);
             if (file.Group.Type == Enums.FileGroupType.Database)
             {
-                file.Content = request.Content.ConvertToBytes();
+                file.Content = request.Content!.ConvertToBytes();
             }
             else if (file.Group.Type == Enums.FileGroupType.Storage)
             {
+                if (file.Url == null)
+                {
+                    throw new Exception($"File {file.Id} Url is empty");
+                }
                 var oldUrl = file.Url;
                 var filename = Guid.NewGuid() + Path.GetExtension(request.Name);
                 var filePath = $"{file.Group.Location}/{DateTime.Today:yyyy'/'MM}/{filename}";
-                file.Url = await _fileStorage.SaveFileAsync(filePath, request.Content, request.ContentType);
+                file.Url = await _fileStorage.SaveFileAsync(filePath, request.Content!, request.ContentType!);
                 await _fileStorage.DeleteFileAsync(oldUrl);
             }
             else
             {
                 throw new NotSupportedException($"Group type {file.Group.Type} not supported");
             }
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

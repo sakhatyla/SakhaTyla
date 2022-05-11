@@ -288,3 +288,30 @@ msgstr "Результат"
 
 msgid "Result Data"
 msgstr "Данные результата"
+
+msgid "Worker Schedule Tasks"
+msgstr "Расписания процесса"
+
+msgid "Worker Schedule Task"
+msgstr "Расписание процесса"
+
+msgid "Seconds"
+msgstr "Секунды"
+
+msgid "Minutes"
+msgstr "Минуты"
+
+msgid "Hours"
+msgstr "Часы"
+
+msgid "Day of Month"
+msgstr "День месяца"
+
+msgid "Month"
+msgstr "Месяц"
+
+msgid "Day of Week"
+msgstr "День недели"
+
+msgid "Year"
+msgstr "Год"

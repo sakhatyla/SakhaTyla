@@ -11,7 +11,7 @@ namespace SakhaTyla.Data
 {
     public class CustomUserStore : UserStore<User, Role, DataContext, int>
     {
-        public CustomUserStore(DataContext context, IdentityErrorDescriber describer = null)
+        public CustomUserStore(DataContext context, IdentityErrorDescriber? describer = null)
             : base(context, describer)
         {
         }

@@ -11,7 +11,7 @@ namespace SakhaTyla.Data
 {
     public class CustomRoleStore : RoleStore<Role, DataContext, int>
     {
-        public CustomRoleStore(DataContext context, IdentityErrorDescriber describer = null)
+        public CustomRoleStore(DataContext context, IdentityErrorDescriber? describer = null)
             : base(context, describer)
         {
         }

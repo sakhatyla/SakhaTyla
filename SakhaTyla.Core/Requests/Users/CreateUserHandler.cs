@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Users
             var result = await _userManager.CreateAsync(user, request.Password);
             result.CheckIfSucceeded();
 
-            if (request.RoleIds.Any())
+            if (request.RoleIds != null)
             {
                 foreach (var roleId in request.RoleIds)
                 {
@@ -38,7 +38,7 @@ namespace SakhaTyla.Core.Requests.Users
                     result.CheckIfSucceeded();
                 }
             }
-            return new CreatedEntity<int>() { Id = user.Id };
+            return new CreatedEntity<int>(user.Id);
         }
 
     }

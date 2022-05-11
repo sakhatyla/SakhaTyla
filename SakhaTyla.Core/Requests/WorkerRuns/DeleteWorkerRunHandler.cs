@@ -29,13 +29,13 @@ namespace SakhaTyla.Core.Requests.WorkerRuns
         {
             var workerRun = await _workerRunRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (workerRun == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["Worker Run"], request.Id]);
             }
             _workerRunRepository.Delete(workerRun);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

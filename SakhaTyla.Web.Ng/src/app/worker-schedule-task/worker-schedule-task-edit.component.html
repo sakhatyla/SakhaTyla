@@ -1,0 +1,50 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Worker Schedule Task') }} <app-worker-schedule-task-show [value]="workerScheduleTask"></app-worker-schedule-task-show>
+  </h1>
+  <mat-dialog-content *ngIf="workerScheduleTask" class="mat-dialog-content-edit">
+
+    <form [formGroup]="workerScheduleTaskForm">
+      <mat-form-field>
+        <mat-label>{{ t('Seconds') }}</mat-label>
+        <app-text-edit formControlName="seconds" name="seconds" [placeholder]="t('Seconds')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.seconds | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Minutes') }}</mat-label>
+        <app-text-edit formControlName="minutes" name="minutes" [placeholder]="t('Minutes')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.minutes | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Hours') }}</mat-label>
+        <app-text-edit formControlName="hours" name="hours" [placeholder]="t('Hours')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.hours | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Day of Month') }}</mat-label>
+        <app-text-edit formControlName="dayOfMonth" name="dayOfMonth" [placeholder]="t('Day of Month')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.dayOfMonth | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Month') }}</mat-label>
+        <app-text-edit formControlName="month" name="month" [placeholder]="t('Month')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.month | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Day of Week') }}</mat-label>
+        <app-text-edit formControlName="dayOfWeek" name="dayOfWeek" [placeholder]="t('Day of Week')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.dayOfWeek | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Year') }}</mat-label>
+        <app-text-edit formControlName="year" name="year" [placeholder]="t('Year')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.year | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>

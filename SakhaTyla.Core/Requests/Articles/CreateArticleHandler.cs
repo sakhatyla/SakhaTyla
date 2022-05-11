@@ -29,8 +29,8 @@ namespace SakhaTyla.Core.Requests.Articles
         {
             var article = _mapper.Map<CreateArticle, Article>(request);
             _articleRepository.Add(article);
-            await _unitOfWork.CommitAsync();
-            return new CreatedEntity<int>() { Id = article.Id };
+            await _unitOfWork.CommitAsync(cancellationToken);
+            return new CreatedEntity<int>(article.Id);
         }
 
     }

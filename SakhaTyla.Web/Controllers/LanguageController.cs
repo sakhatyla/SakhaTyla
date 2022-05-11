@@ -31,7 +31,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetLanguage")]
-        public async Task<LanguageModel> GetLanguageAsync([FromBody] GetLanguage getLanguage)
+        public async Task<LanguageModel?> GetLanguageAsync([FromBody] GetLanguage getLanguage)
         {
             return await _mediator.Send(getLanguage);
         }

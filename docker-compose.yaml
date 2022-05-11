@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
   db:
-    image: 'mcr.microsoft.com/mssql/server:2017-latest-ubuntu'
+    image: 'mcr.microsoft.com/mssql/server:2019-latest'
   mq:
     image: rabbitmq:3.8-management
     hostname: "mq"

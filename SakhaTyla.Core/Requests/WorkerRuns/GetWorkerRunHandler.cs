@@ -10,7 +10,7 @@ using SakhaTyla.Core.Requests.WorkerRuns.Models;
 
 namespace SakhaTyla.Core.Requests.WorkerRuns
 {
-    public class GetWorkerRunHandler : IRequestHandler<GetWorkerRun, WorkerRunModel>
+    public class GetWorkerRunHandler : IRequestHandler<GetWorkerRun, WorkerRunModel?>
     {
         private readonly IEntityRepository<WorkerRun> _workerRunRepository;
         private readonly IMapper _mapper;
@@ -22,12 +22,16 @@ namespace SakhaTyla.Core.Requests.WorkerRuns
             _mapper = mapper;
         }
 
-        public async Task<WorkerRunModel> Handle(GetWorkerRun request, CancellationToken cancellationToken)
+        public async Task<WorkerRunModel?> Handle(GetWorkerRun request, CancellationToken cancellationToken)
         {
             var workerRun = await _workerRunRepository.GetEntities()
                 .Include(e => e.WorkerInfo)
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
+            if (workerRun == null)
+            {
+                return null;
+            }
             return _mapper.Map<WorkerRun, WorkerRunModel>(workerRun);
         }
 

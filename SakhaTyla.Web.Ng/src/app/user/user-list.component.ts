@@ -1,13 +1,16 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { mergeMap } from 'rxjs/operators';
+import { Sort } from '@angular/material/sort';
+import { forkJoin, of } from 'rxjs';
+import { catchError, mergeMap } from 'rxjs/operators';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
 import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
+import { OrderDirectionManager } from '../core/models/order-direction.model';
 
 import { User, UserListState } from '../user-core/user.model';
 import { UserService } from '../user-core/user.service';
@@ -22,6 +25,7 @@ export class UserListComponent implements OnInit {
   content: Page<User>;
   pageSizeOptions = PageSettings.pageSizeOptions;
   columns = [
+    'select',
     'userName',
     'email',
     'emailConfirmed',
@@ -29,6 +33,7 @@ export class UserListComponent implements OnInit {
     'lastName',
     'action'
   ];
+  selectedIds = new Set<number>();
 
   @Input()
   state: UserListState = new UserListState();
@@ -49,10 +54,13 @@ export class UserListComponent implements OnInit {
   }
 
   private getUsers() {
+    this.selectedIds = new Set<number>();
     this.userService.getUsers({
       pageIndex: this.state.pageIndex,
       pageSize: this.state.pageSize,
-      filter: this.state.filter
+      filter: this.state.filter,
+      orderBy: this.state.orderBy,
+      orderDirection: this.state.orderDirection
     }).subscribe(content => this.content = content);
   }
 
@@ -64,6 +72,7 @@ export class UserListComponent implements OnInit {
   onReset() {
     this.state.pageIndex = 0;
     this.state.filter.text = null;
+    this.state.filter.roleId = null;
     this.getUsers();
   }
 
@@ -95,9 +104,27 @@ export class UserListComponent implements OnInit {
         error => this.onError(error));
   }
 
+  onDeleteSelected() {
+    this.modalHelper.confirmDelete()
+      .pipe(
+        mergeMap(() => forkJoin([...this.selectedIds]
+          .map(id => this.userService.deleteUser({ id })
+            .pipe(
+              catchError(error => { this.onError(error); return of({}); })
+            ))))
+      )
+      .subscribe(() => this.getUsers());
+  }
+
   onPage(page: PageEvent) {
     this.state.pageIndex = page.pageIndex;
     this.state.pageSize = page.pageSize;
+    this.getUsers();
+  }
+
+  onSortChange(sortState: Sort) {
+    this.state.orderDirection = OrderDirectionManager.getOrderDirectionBySort(sortState);
+    this.state.orderBy = OrderDirectionManager.getOrderByBySort(sortState);
     this.getUsers();
   }
 

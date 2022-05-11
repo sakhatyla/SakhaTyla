@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Requests.Languages
             IQueryable<Language> query = _languageRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var languages = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var languages = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return languages.Map<Language, LanguageModel>(_mapper);
         }
 

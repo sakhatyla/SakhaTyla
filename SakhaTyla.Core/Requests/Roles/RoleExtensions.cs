@@ -8,7 +8,7 @@ namespace SakhaTyla.Core.Requests.Roles
 {
     public static class RoleExtensions
     {
-        public static IOrderedQueryable<Role> OrderBy(this IQueryable<Role> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<Role> OrderBy(this IQueryable<Role> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Requests.Roles
             }
         }
 
-        public static IQueryable<Role> Filter(this IQueryable<Role> queryable, RoleFilter filter)
+        public static IQueryable<Role> Filter(this IQueryable<Role> queryable, RoleFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {

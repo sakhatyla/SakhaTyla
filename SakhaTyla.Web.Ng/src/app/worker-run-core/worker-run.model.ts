@@ -1,4 +1,5 @@
-﻿import { PageSettings } from '../core/page.model';
+﻿import { OrderDirection } from '../core/models/order-direction.model';
+import { PageSettings } from '../core/page.model';
 import { WorkerRunFilter } from './worker-run-filter.model';
 import { WorkerRunStatus } from '../worker-run-status/worker-run-status.model';
 
@@ -21,4 +22,6 @@ export class WorkerRunListState {
   pageSize = PageSettings.pageSize;
   pageIndex = 0;
   filter = new WorkerRunFilter();
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }

@@ -13,7 +13,6 @@ namespace SakhaTyla.Worker.Consumers
         public StartWorkerRunConsumerDefinition()
         {
             EndpointName = StartWorkerRun.QueueName;
-            ConcurrentMessageLimit = 1;
         }
     }
 }

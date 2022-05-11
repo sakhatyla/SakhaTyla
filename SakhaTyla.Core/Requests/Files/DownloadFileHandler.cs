@@ -30,26 +30,29 @@ namespace SakhaTyla.Core.Requests.Files
             var file = await _fileRepository.GetEntities()
                 .Include(e => e.Group)
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
-            byte[] content = null;
+                .FirstAsync(cancellationToken);
+            byte[] content;
             if (file.Group.Type == Enums.FileGroupType.Database)
             {
+                if (file.Content == null)
+                {
+                    throw new Exception($"File {file.Id} Content is empty");
+                }
                 content = file.Content;
             }
             else if (file.Group.Type == Enums.FileGroupType.Storage)
             {
+                if (file.Url == null)
+                {
+                    throw new Exception($"File {file.Id} Url is empty");
+                }
                 content = await _fileStorage.DownloadFileAsync(file.Url);
             }
             else
             {
                 throw new NotSupportedException($"Group type {file.Group.Type} not supported");
             }
-            return new FileContentModel
-            {
-                Name = file.Name,
-                ContentType = file.ContentType,
-                Content = content,
-            };
+            return new FileContentModel(file.Name, content, file.ContentType);
         }
 
     }

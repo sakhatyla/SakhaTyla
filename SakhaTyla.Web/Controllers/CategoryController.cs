@@ -31,7 +31,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetCategory")]
-        public async Task<CategoryModel> GetCategoryAsync([FromBody] GetCategory getCategory)
+        public async Task<CategoryModel?> GetCategoryAsync([FromBody] GetCategory getCategory)
         {
             return await _mediator.Send(getCategory);
         }

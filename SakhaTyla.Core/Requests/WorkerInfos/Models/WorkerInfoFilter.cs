@@ -5,7 +5,7 @@ namespace SakhaTyla.Core.Requests.WorkerInfos.Models
 {
     public class WorkerInfoFilter : EntityFilter
     {
-        public string Name { get; set; }
-        public string ClassName { get; set; }
+        public string? Name { get; set; }
+        public string? ClassName { get; set; }
     }
 }

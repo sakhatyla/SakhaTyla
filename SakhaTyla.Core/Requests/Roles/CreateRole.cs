@@ -9,8 +9,8 @@ namespace SakhaTyla.Core.Requests.Roles
 {
     public class CreateRole : IRequest<CreatedEntity<int>>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
     }
 }

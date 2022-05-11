@@ -32,7 +32,7 @@ namespace SakhaTyla.Core.Requests.Users
             IQueryable<User> query = _userManager.Users;
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var users = await query.ToListAsync();
+            var users = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<User>, List<UserModel>>(users);
             return await _excelFormatter.GetExcelFileAsync(models, "Users");
         }

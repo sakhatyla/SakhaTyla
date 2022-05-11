@@ -31,7 +31,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetRole")]
-        public async Task<RoleModel> GetRoleAsync([FromBody] GetRole getRole)
+        public async Task<RoleModel?> GetRoleAsync([FromBody] GetRole getRole)
         {
             return await _mediator.Send(getRole);
         }

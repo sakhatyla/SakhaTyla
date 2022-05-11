@@ -35,7 +35,7 @@ namespace SakhaTyla.Core.Requests.WorkerRuns
                 .Include(e => e.WorkerInfo);            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var workerRuns = await query.ToListAsync();
+            var workerRuns = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<WorkerRun>, List<WorkerRunModel>>(workerRuns);
             return await _excelFormatter.GetExcelFileAsync(models, "WorkerRuns");
         }

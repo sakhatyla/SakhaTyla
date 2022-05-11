@@ -25,3 +25,7 @@
   </div>
 
 </mat-card>
+
+<mat-card class="mat-card-list" *ngIf="workerScheduleTaskListState">
+  <app-worker-schedule-task-list [state]="workerScheduleTaskListState"></app-worker-schedule-task-list>
+</mat-card>

@@ -25,10 +25,9 @@ namespace SakhaTyla.Data
             var administratorRoleName = "Administrator";
             if (await _roleManager.FindByNameAsync(administratorRoleName) == null)
             {
-                await _roleManager.CreateAsync(new Role() 
+                await _roleManager.CreateAsync(new Role(administratorRoleName) 
                 { 
                     Name = administratorRoleName,
-                    DisplayName = administratorRoleName,
                 });
             }
 

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using IdentityServer4.EntityFramework.Entities;
-using IdentityServer4.EntityFramework.Extensions;
-using IdentityServer4.EntityFramework.Interfaces;
-using IdentityServer4.EntityFramework.Options;
+using Duende.IdentityServer.EntityFramework.Entities;
+using Duende.IdentityServer.EntityFramework.Extensions;
+using Duende.IdentityServer.EntityFramework.Interfaces;
+using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -22,9 +22,9 @@ namespace SakhaTyla.Data
     {
         private readonly IOptions<OperationalStoreOptions> _operationalStoreOptions;
 
-        public event EventHandler<SaveEventArgs> CustomSavingChanges;
+        public event EventHandler<SaveEventArgs>? CustomSavingChanges;
 
-        public event EventHandler<SaveEventArgs> CustomSavedChanges;
+        public event EventHandler<SaveEventArgs>? CustomSavedChanges;
 
         public DataContext(DbContextOptions<DataContext> options, 
             IOptions<OperationalStoreOptions> operationalStoreOptions)
@@ -33,9 +33,11 @@ namespace SakhaTyla.Data
             _operationalStoreOptions = operationalStoreOptions;
         }
 
-        public DbSet<PersistedGrant> PersistedGrants { get; set; }
+        public DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
 
-        public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
+        public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; } = null!;
+
+        public DbSet<Key> Keys { get; set; } = null!;
 
         public override int SaveChanges()
         {

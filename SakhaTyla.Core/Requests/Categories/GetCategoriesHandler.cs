@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Requests.Categories
             IQueryable<Category> query = _categoryRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var categories = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var categories = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return categories.Map<Category, CategoryModel>(_mapper);
         }
 

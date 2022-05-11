@@ -16,10 +16,12 @@ namespace SakhaTyla.Core.Entities
         public DateTime ModificationDate { get; set; }
         
         [StringLength(200)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         
         [StringLength(200)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
+
+        public ICollection<Role> Roles { get; set; } = null!;
         
     }
 }

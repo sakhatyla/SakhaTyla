@@ -10,12 +10,12 @@ namespace SakhaTyla.Core.Infrastructure.Validators
 {
     public static class JsonValidator
     {
-        public static IRuleBuilderOptions<T, string> IsJson<T>(this IRuleBuilder<T, string> ruleBuilder)
+        public static IRuleBuilderOptions<T, string?> IsJson<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
             return ruleBuilder.Must(str => IsJson(str)).WithMessage("{PropertyName} is not valid JSON");
         }
 
-        private static bool IsJson(string str)
+        private static bool IsJson(string? str)
         {
             if (string.IsNullOrEmpty(str))
                 return true;

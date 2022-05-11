@@ -34,7 +34,7 @@ namespace SakhaTyla.Core.Requests.WorkerInfos
             IQueryable<WorkerInfo> query = _workerInfoRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var workerInfos = await query.ToListAsync();
+            var workerInfos = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<WorkerInfo>, List<WorkerInfoModel>>(workerInfos);
             return await _excelFormatter.GetExcelFileAsync(models, "WorkerInfos");
         }

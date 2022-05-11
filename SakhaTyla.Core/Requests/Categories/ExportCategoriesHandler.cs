@@ -34,7 +34,7 @@ namespace SakhaTyla.Core.Requests.Categories
             IQueryable<Category> query = _categoryRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var categories = await query.ToListAsync();
+            var categories = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<Category>, List<CategoryModel>>(categories);
             return await _excelFormatter.GetExcelFileAsync(models, "Categories");
         }

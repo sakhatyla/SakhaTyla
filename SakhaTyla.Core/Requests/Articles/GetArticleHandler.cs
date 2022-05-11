@@ -10,7 +10,7 @@ using SakhaTyla.Core.Requests.Articles.Models;
 
 namespace SakhaTyla.Core.Requests.Articles
 {
-    public class GetArticleHandler : IRequestHandler<GetArticle, ArticleModel>
+    public class GetArticleHandler : IRequestHandler<GetArticle, ArticleModel?>
     {
         private readonly IEntityRepository<Article> _articleRepository;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace SakhaTyla.Core.Requests.Articles
             _mapper = mapper;
         }
 
-        public async Task<ArticleModel> Handle(GetArticle request, CancellationToken cancellationToken)
+        public async Task<ArticleModel?> Handle(GetArticle request, CancellationToken cancellationToken)
         {
             var article = await _articleRepository.GetEntities()
                 .Include(e => e.FromLanguage)
@@ -30,7 +30,11 @@ namespace SakhaTyla.Core.Requests.Articles
                 .Include(e => e.Category)
                 .DefaultFilter()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
+            if (article == null)
+            {
+                return null;
+            }
             return _mapper.Map<Article, ArticleModel>(article);
         }
 

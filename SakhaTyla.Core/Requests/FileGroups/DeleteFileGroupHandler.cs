@@ -29,13 +29,13 @@ namespace SakhaTyla.Core.Requests.FileGroups
         {
             var fileGroup = await _fileGroupRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (fileGroup == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["File Group"], request.Id]);
             }
             _fileGroupRepository.Delete(fileGroup);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

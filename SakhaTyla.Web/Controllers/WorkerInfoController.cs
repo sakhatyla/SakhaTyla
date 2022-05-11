@@ -31,7 +31,7 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("GetWorkerInfo")]
-        public async Task<WorkerInfoModel> GetWorkerInfoAsync([FromBody] GetWorkerInfo getWorkerInfo)
+        public async Task<WorkerInfoModel?> GetWorkerInfoAsync([FromBody] GetWorkerInfo getWorkerInfo)
         {
             return await _mediator.Send(getWorkerInfo);
         }

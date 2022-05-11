@@ -1,0 +1,29 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.WorkerScheduleTasks";
+
+message WorkerScheduleTask {
+    int32 id = 1;
+    google.protobuf.Timestamp creationDate = 2;
+    google.protobuf.Timestamp modificationDate = 3;
+    int32 creationUserId = 4;
+    int32 modificationUserId = 5;
+    int32 workerInfoId = 6;
+    string seconds = 7;
+    string minutes = 8;
+    string hours = 9;
+    string dayOfMonth = 10;
+    string month = 11;
+    string dayOfWeek = 12;
+    string year = 13;
+}
+
+message WorkerScheduleTaskPageModel {
+    repeated WorkerScheduleTask pageItems = 1;
+    int32 totalItems = 2;
+    int32 currentPageIndex = 3;
+}

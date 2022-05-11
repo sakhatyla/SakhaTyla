@@ -11,10 +11,10 @@ namespace SakhaTyla.Core.Requests.Files
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string ContentType { get; set; }
+        public string? ContentType { get; set; }
 
-        public Stream Content { get; set; }
+        public Stream? Content { get; set; }
     }
 }

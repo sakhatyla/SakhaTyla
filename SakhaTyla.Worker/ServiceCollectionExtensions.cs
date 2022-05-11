@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using Cynosura.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +12,8 @@ using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Security;
 using SakhaTyla.Infrastructure.Messaging;
 using SakhaTyla.Worker.Infrastructure;
-using Cynosura.Messaging;
+using SakhaTyla.Worker.Jobs;
+using SakhaTyla.Worker.WorkerInfos;
 
 namespace SakhaTyla.Worker
 {
@@ -22,7 +24,9 @@ namespace SakhaTyla.Worker
             services.AddScoped<IUserInfoProvider, UserInfoProvider>();
             services.AddQuartz(q =>
             {
-                q.UseMicrosoftDependencyInjectionScopedJobFactory();
+                q.UseMicrosoftDependencyInjectionJobFactory();
+
+                q.AddJob<RunWorkerInfoJob>(new JobKey(RunWorkerInfoJob.JobKey), o => o.StoreDurably());
             });
             services.AddQuartzHostedService(
                 q => q.WaitForJobsToComplete = true);
@@ -39,6 +43,9 @@ namespace SakhaTyla.Worker
                 x.AddConsumers(assemblies);
             });
             services.AddTransient<IHostedService, MessagingWorker>();
+            services.AddTransient<WorkerInfoSheduler>();
+            services.AddTransient<IHostedService, WorkerInfoShedulerService>();
+            services.AddTransient<StartWorkerRunJob>();
             return services;
         }
     }

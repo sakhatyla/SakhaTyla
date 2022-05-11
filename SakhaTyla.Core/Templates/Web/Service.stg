@@ -31,34 +31,39 @@ namespace $model.Solution.Namespace$.Web.Services
         public override async Task<$model.Entity.Name$PageModel> Get$model.Entity.PluralName$(Get$model.Entity.PluralName$Request get$model.Entity.PluralName$Request, ServerCallContext context)
         {
             var get$model.Entity.PluralName$ = _mapper.Map<Get$model.Entity.PluralName$Request, Get$model.Entity.PluralName$>(get$model.Entity.PluralName$Request);
-            return _mapper.Map<PageModel<$model.Entity.Name$Model>, $model.Entity.Name$PageModel>(await _mediator.Send(get$model.Entity.PluralName$));
+            var model = await _mediator.Send(get$model.Entity.PluralName$);
+            return _mapper.Map<PageModel<$model.Entity.Name$Model>, $model.Entity.Name$PageModel>(model);
         }
 
         public override async Task<$model.Entity.Name$> Get$model.Entity.Name$(Get$model.Entity.Name$Request get$model.Entity.Name$Request, ServerCallContext context)
         {
             var get$model.Entity.Name$ = _mapper.Map<Get$model.Entity.Name$Request, Get$model.Entity.Name$>(get$model.Entity.Name$Request);
-            return _mapper.Map<$model.Entity.Name$Model, $model.Entity.Name$>(await _mediator.Send(get$model.Entity.Name$));
+            var model = await _mediator.Send(get$model.Entity.Name$);
+            return _mapper.Map<$model.Entity.Name$Model, $model.Entity.Name$>(model!);
         }
 
         [Authorize("Write$model.Entity.Name$")]
         public override async Task<Empty> Update$model.Entity.Name$(Update$model.Entity.Name$Request update$model.Entity.Name$Request, ServerCallContext context)
         {
             var update$model.Entity.Name$ = _mapper.Map<Update$model.Entity.Name$Request, Update$model.Entity.Name$>(update$model.Entity.Name$Request);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(update$model.Entity.Name$));
+            var model = await _mediator.Send(update$model.Entity.Name$);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("Write$model.Entity.Name$")]
         public override async Task<CreatedEntity> Create$model.Entity.Name$(Create$model.Entity.Name$Request create$model.Entity.Name$Request, ServerCallContext context)
         {
             var create$model.Entity.Name$ = _mapper.Map<Create$model.Entity.Name$Request, Create$model.Entity.Name$>(create$model.Entity.Name$Request);
-            return _mapper.Map<CreatedEntity<$model.Entity.IdField.TypeName$>, CreatedEntity>(await _mediator.Send(create$model.Entity.Name$));
+            var model = await _mediator.Send(create$model.Entity.Name$);
+            return _mapper.Map<CreatedEntity<$model.Entity.IdField.TypeName$>, CreatedEntity>(model);
         }
 
         [Authorize("Write$model.Entity.Name$")]
         public override async Task<Empty> Delete$model.Entity.Name$(Delete$model.Entity.Name$Request delete$model.Entity.Name$Request, ServerCallContext context)
         {
             var delete$model.Entity.Name$ = _mapper.Map<Delete$model.Entity.Name$Request, Delete$model.Entity.Name$>(delete$model.Entity.Name$Request);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(delete$model.Entity.Name$));
+            var model = await _mediator.Send(delete$model.Entity.Name$);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

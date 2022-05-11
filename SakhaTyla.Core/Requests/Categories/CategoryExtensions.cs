@@ -8,7 +8,7 @@ namespace SakhaTyla.Core.Requests.Categories
 {
     public static class CategoryExtensions
     {
-        public static IOrderedQueryable<Category> OrderBy(this IQueryable<Category> queryable, string propertyName, OrderDirection? direction)
+        public static IOrderedQueryable<Category> OrderBy(this IQueryable<Category> queryable, string? propertyName, OrderDirection? direction)
         {
             switch (propertyName)
             {                
@@ -24,15 +24,15 @@ namespace SakhaTyla.Core.Requests.Categories
             }
         }
 
-        public static IQueryable<Category> Filter(this IQueryable<Category> queryable, CategoryFilter filter)
+        public static IQueryable<Category> Filter(this IQueryable<Category> queryable, CategoryFilter? filter)
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Text));
+                queryable = queryable.Where(e => e.Name!.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.Name))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Name));
+                queryable = queryable.Where(e => e.Name!.Contains(filter.Name));
             }
             return queryable;
         }

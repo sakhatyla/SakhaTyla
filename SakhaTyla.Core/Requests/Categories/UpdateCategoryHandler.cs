@@ -33,13 +33,13 @@ namespace SakhaTyla.Core.Requests.Categories
         {
             var category = await _categoryRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (category == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["Category"], request.Id]);
             }
             _mapper.Map(request, category);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

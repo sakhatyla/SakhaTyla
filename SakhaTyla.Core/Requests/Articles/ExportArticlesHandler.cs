@@ -39,7 +39,7 @@ namespace SakhaTyla.Core.Requests.Articles
                 .DefaultFilter();
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var articles = await query.ToListAsync();
+            var articles = await query.ToListAsync(cancellationToken);
             var models = _mapper.Map<List<Article>, List<ArticleModel>>(articles);
             return await _excelFormatter.GetExcelFileAsync(models, "Articles");
         }

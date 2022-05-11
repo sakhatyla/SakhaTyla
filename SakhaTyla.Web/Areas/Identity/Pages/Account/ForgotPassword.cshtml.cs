@@ -33,24 +33,24 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel Input { get; set; } = null!;
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
 
         public class InputModel
         {
             [Required(ErrorMessage = "The {0} field is required.")]
             [EmailAddress(ErrorMessage = "The {0} field is not a valid e-mail address.")]
             [Display(Name = "Email")]
-            public string Email { get; set; }
+            public string? Email { get; set; }
         }
 
-        public void OnGet(string returnUrl = null)
+        public void OnGet(string? returnUrl = null)
         {
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account
                     "/Account/ResetPassword",
                     pageHandler: null,
                     values: new { area = "Identity", code, returnUrl },
-                    protocol: Request.Scheme);
+                    protocol: Request.Scheme)!;
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,

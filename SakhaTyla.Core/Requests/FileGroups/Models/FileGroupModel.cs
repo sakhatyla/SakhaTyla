@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using SakhaTyla.Core.Enums;
 
 namespace SakhaTyla.Core.Requests.FileGroups.Models
 {
     public class FileGroupModel
     {
+        public FileGroupModel(string name, FileGroupType type)
+        {
+            Name = name;
+            Type = type;
+        }
+
         [DisplayName("Id")]
         public int Id { get; set; }
 
@@ -17,11 +24,11 @@ namespace SakhaTyla.Core.Requests.FileGroups.Models
 
         [DisplayName("Creation User")]
         public int? CreationUserId { get; set; }
-        public Users.Models.UserShortModel CreationUser { get; set; }
+        public Users.Models.UserShortModel? CreationUser { get; set; }
 
         [DisplayName("Modification User")]
         public int? ModificationUserId { get; set; }
-        public Users.Models.UserShortModel ModificationUser { get; set; }
+        public Users.Models.UserShortModel? ModificationUser { get; set; }
 
         [DisplayName("Name")]
         public string Name { get; set; }
@@ -30,9 +37,9 @@ namespace SakhaTyla.Core.Requests.FileGroups.Models
         public Enums.FileGroupType Type { get; set; }
 
         [DisplayName("Location")]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [DisplayName("Accept")]
-        public string Accept { get; set; }
+        public string? Accept { get; set; }
     }
 }

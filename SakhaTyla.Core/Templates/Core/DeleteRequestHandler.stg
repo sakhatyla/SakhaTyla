@@ -30,13 +30,13 @@ namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
         {
             var $model.Entity.NameLower$ = await _$model.Entity.NameLower$Repository.GetEntities()
                 .Where(e => e.$model.Entity.IdField.Name$ == request.$model.Entity.IdField.Name$)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if ($model.Entity.NameLower$ == null)
             {
                 throw new ServiceException(_localizer["{0} {1} not found", _localizer["$model.Entity.DisplayName$"], request.Id]);
             }
             _$model.Entity.NameLower$Repository.Delete($model.Entity.NameLower$);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             return Unit.Value;
         }
 

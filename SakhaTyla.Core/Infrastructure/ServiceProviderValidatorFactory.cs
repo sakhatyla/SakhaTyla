@@ -14,7 +14,7 @@ namespace SakhaTyla.Core.Infrastructure
 
         public override IValidator CreateInstance(Type validatorType)
         {
-            return _serviceProvider.GetService(validatorType) as IValidator;
+            return (IValidator)_serviceProvider.GetService(validatorType)!;
         }
     }
 }

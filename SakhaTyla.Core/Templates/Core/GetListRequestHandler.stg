@@ -29,7 +29,7 @@ namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
             IQueryable<$model.Entity.Name$> query = _$model.Entity.NameLower$Repository.GetEntities()$model.Entity.EntityFields:include(); separator=""$;            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var $model.Entity.PluralNameLower$ = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var $model.Entity.PluralNameLower$ = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return $model.Entity.PluralNameLower$.Map<$model.Entity.Name$, $model.Entity.Name$Model>(_mapper);
         }
 

@@ -29,8 +29,8 @@ namespace SakhaTyla.Core.Requests.Languages
         {
             var language = _mapper.Map<CreateLanguage, Language>(request);
             _languageRepository.Add(language);
-            await _unitOfWork.CommitAsync();
-            return new CreatedEntity<int>() { Id = language.Id };
+            await _unitOfWork.CommitAsync(cancellationToken);
+            return new CreatedEntity<int>(language.Id);
         }
 
     }

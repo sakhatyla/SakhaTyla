@@ -1,0 +1,31 @@
+﻿constructorParam(field) ::= <<
+$field:({constructorParam$field.Template$})()$
+>>
+
+constructorParamType(field) ::= <<
+$field.TypeName$$if(!field.IsRequired && !field.NetType.IsValueType)$?$endif$ $field.NameLower$
+>>
+
+constructorParamEntity(field) ::= <<
+$field.EntityIdTypeName$ $field.NameLower$Id
+>>
+
+constructorParamEnum(field) ::= <<
+Enums.$field.Enum.Name$$if(!field.IsRequired)$?$endif$ $field.NameLower$
+>>
+
+constructorInit(field) ::= <<
+$field:({constructorInit$field.Template$})()$
+>>
+
+constructorInitType(field) ::= <<
+$field.Name$ = $field.NameLower$;
+>>
+
+constructorInitEntity(field) ::= <<
+$field.Name$Id = $field.NameLower$Id;
+>>
+
+constructorInitEnum(field) ::= <<
+$field.Name$ = $field.NameLower$;
+>>

@@ -22,7 +22,7 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account
             _userManager = userManager;
         }
 
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string email)
         {

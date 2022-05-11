@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Requests.FileGroups
             IQueryable<FileGroup> query = _fileGroupRepository.GetEntities();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
-            var fileGroups = await query.ToPagedListAsync(request.PageIndex, request.PageSize);
+            var fileGroups = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);
             return fileGroups.Map<FileGroup, FileGroupModel>(_mapper);
         }
 

@@ -16,18 +16,18 @@ namespace SakhaTyla.Core.Requests.EntityChanges.Models
         public Enums.ChangeAction Action { get; set; }
 
         [DisplayName("From")]
-        public string From { get; set; }
+        public string? From { get; set; }
 
         [DisplayName("To")]
-        public string To { get; set; }
+        public string? To { get; set; }
 
         [DisplayName("Creation Date")]
         public DateTime CreationDate { get; set; }
 
         [DisplayName("Creation User")]
         public int? CreationUserId { get; set; }
-        public Users.Models.UserShortModel CreationUser { get; set; }
+        public Users.Models.UserShortModel? CreationUser { get; set; }
 
-        public IList<EntityPropertyChange> Changes { get; set; }
+        public IList<EntityPropertyChange>? Changes { get; set; }
     }
 }

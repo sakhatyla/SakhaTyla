@@ -9,6 +9,6 @@ namespace SakhaTyla.Core.Requests.Categories
 {
     public class CreateCategory : IRequest<CreatedEntity<int>>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

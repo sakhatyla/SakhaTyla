@@ -12,7 +12,7 @@ using SakhaTyla.Core.Entities;
 
 namespace SakhaTyla.Core.Messaging.WorkerRuns
 {
-    public class WorkerRunner
+    public class WorkerRunner : IWorkerRunner
     {
         private readonly IEntityRepository<WorkerRun> _workerRunRepository;
         private readonly IEntityRepository<WorkerInfo> _workerInfoRepository;
@@ -30,7 +30,7 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
             _messagingService = messagingService;
         }
 
-        public async Task<int> RunAsync(Type workerType, object data)
+        public async Task<int> RunAsync(Type workerType, object? data)
         {
             var workerInfo = await _workerInfoRepository.GetEntities()
                 .FirstOrDefaultAsync(e => e.ClassName == workerType.FullName);

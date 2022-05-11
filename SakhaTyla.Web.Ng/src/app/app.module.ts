@@ -48,6 +48,11 @@ import { TranslocoRootModule } from './transloco-root.module';
         loadChildren: () => import('./language/language-routed.module').then(m => m.LanguageRoutedModule)
       },
       {
+        path: 'worker-schedule-task',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./worker-schedule-task/worker-schedule-task-routed.module').then(m => m.WorkerScheduleTaskRoutedModule)
+      },
+      {
         path: 'worker-run',
         canActivate: [AuthorizeGuard],
         loadChildren: () => import('./worker-run/worker-run-routed.module').then(m => m.WorkerRunRoutedModule)

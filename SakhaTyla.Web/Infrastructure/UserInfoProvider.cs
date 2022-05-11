@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,7 @@ namespace SakhaTyla.Web.Infrastructure
 {
     public class UserInfoProvider : IUserInfoProvider
     {
-        private UserInfoModel _userInfoModel;
+        private UserInfoModel? _userInfoModel;
         private readonly IEntityRepository<User> _userRepository;
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -32,13 +33,23 @@ namespace SakhaTyla.Web.Infrastructure
             if (_userInfoModel == null)
             {
                 var context = _httpContextAccessor.HttpContext;
-                var userName = context.User.Identity.Name;
-                _userInfoModel = new UserInfoModel
+                if (context != null)
                 {
-                    User = await _userRepository.GetEntities().FirstOrDefaultAsync(e => e.UserName == userName),
-                };
-                if (_userInfoModel.User != null)
-                    _userInfoModel.Roles = await _userManager.GetRolesAsync(_userInfoModel.User);
+                    var identity = (ClaimsIdentity?)context.User.Identity;
+                    var userName = identity?.Claims.Where(e => e.Type == ClaimTypes.Name).Select(e => e.Value).FirstOrDefault();
+                    _userInfoModel = new UserInfoModel
+                    {
+                        User = await _userRepository.GetEntities().FirstOrDefaultAsync(e => e.UserName == userName),
+                    };
+                    if (_userInfoModel.User != null)
+                    {
+                        _userInfoModel.Roles = await _userManager.GetRolesAsync(_userInfoModel.User);
+                    }   
+                }
+                if (_userInfoModel == null)
+                {
+                    _userInfoModel = new UserInfoModel();
+                }
             }
             return _userInfoModel;
         }

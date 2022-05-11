@@ -10,7 +10,7 @@ using SakhaTyla.Core.Requests.Categories.Models;
 
 namespace SakhaTyla.Core.Requests.Categories
 {
-    public class GetCategoryHandler : IRequestHandler<GetCategory, CategoryModel>
+    public class GetCategoryHandler : IRequestHandler<GetCategory, CategoryModel?>
     {
         private readonly IEntityRepository<Category> _categoryRepository;
         private readonly IMapper _mapper;
@@ -22,11 +22,15 @@ namespace SakhaTyla.Core.Requests.Categories
             _mapper = mapper;
         }
 
-        public async Task<CategoryModel> Handle(GetCategory request, CancellationToken cancellationToken)
+        public async Task<CategoryModel?> Handle(GetCategory request, CancellationToken cancellationToken)
         {
             var category = await _categoryRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
+            if (category == null)
+            {
+                return null;
+            }
             return _mapper.Map<Category, CategoryModel>(category);
         }
 

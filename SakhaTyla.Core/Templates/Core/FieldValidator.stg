@@ -11,7 +11,7 @@ RuleFor(x => x.$field.Name$Id)
 >>
 
 Enum(field) ::= <<
-RuleFor(x => x.$field.Name$)
+RuleFor(x => x.$field.Name$).IsInEnum()
 >>
 
 required(field) ::= <<
@@ -23,5 +23,5 @@ $if(field.Size)$.MaximumLength($field.Size$)$endif$
 >>
 
 name(field) ::= <<
-$if(field.IsRequired||field.Size)$.WithName(x => localizer["$field.DisplayName$"])$endif$
+$if(field.IsRequired||field.Size||field.Enum)$.WithName(x => localizer["$field.DisplayName$"])$endif$
 >>

@@ -30,34 +30,39 @@ namespace SakhaTyla.Web.Services
         public override async Task<WorkerInfoPageModel> GetWorkerInfos(GetWorkerInfosRequest getWorkerInfosRequest, ServerCallContext context)
         {
             var getWorkerInfos = _mapper.Map<GetWorkerInfosRequest, GetWorkerInfos>(getWorkerInfosRequest);
-            return _mapper.Map<PageModel<WorkerInfoModel>, WorkerInfoPageModel>(await _mediator.Send(getWorkerInfos));
+            var model = await _mediator.Send(getWorkerInfos);
+            return _mapper.Map<PageModel<WorkerInfoModel>, WorkerInfoPageModel>(model);
         }
 
         public override async Task<WorkerInfo> GetWorkerInfo(GetWorkerInfoRequest getWorkerInfoRequest, ServerCallContext context)
         {
             var getWorkerInfo = _mapper.Map<GetWorkerInfoRequest, GetWorkerInfo>(getWorkerInfoRequest);
-            return _mapper.Map<WorkerInfoModel, WorkerInfo>(await _mediator.Send(getWorkerInfo));
+            var model = await _mediator.Send(getWorkerInfo);
+            return _mapper.Map<WorkerInfoModel, WorkerInfo>(model!);
         }
 
         [Authorize("WriteWorkerInfo")]
         public override async Task<Empty> UpdateWorkerInfo(UpdateWorkerInfoRequest updateWorkerInfoRequest, ServerCallContext context)
         {
             var updateWorkerInfo = _mapper.Map<UpdateWorkerInfoRequest, UpdateWorkerInfo>(updateWorkerInfoRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(updateWorkerInfo));
+            var model = await _mediator.Send(updateWorkerInfo);
+            return _mapper.Map<Unit, Empty>(model);
         }
 
         [Authorize("WriteWorkerInfo")]
         public override async Task<CreatedEntity> CreateWorkerInfo(CreateWorkerInfoRequest createWorkerInfoRequest, ServerCallContext context)
         {
             var createWorkerInfo = _mapper.Map<CreateWorkerInfoRequest, CreateWorkerInfo>(createWorkerInfoRequest);
-            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(await _mediator.Send(createWorkerInfo));
+            var model = await _mediator.Send(createWorkerInfo);
+            return _mapper.Map<CreatedEntity<int>, CreatedEntity>(model);
         }
 
         [Authorize("WriteWorkerInfo")]
         public override async Task<Empty> DeleteWorkerInfo(DeleteWorkerInfoRequest deleteWorkerInfoRequest, ServerCallContext context)
         {
             var deleteWorkerInfo = _mapper.Map<DeleteWorkerInfoRequest, DeleteWorkerInfo>(deleteWorkerInfoRequest);
-            return _mapper.Map<Unit, Empty>(await _mediator.Send(deleteWorkerInfo));
+            var model = await _mediator.Send(deleteWorkerInfo);
+            return _mapper.Map<Unit, Empty>(model);
         }
     }
 }

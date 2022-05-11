@@ -43,30 +43,30 @@ namespace SakhaTyla.Core.Requests.Files
         {
             var fileGroup = await _fileGroupRepository.GetEntities()
                 .Where(e => e.Id == request.GroupId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
             if (fileGroup == null)
             {
-                throw new ServiceException(_localizer["{0} {1} not found", _localizer["File Group"], request.GroupId]);
+                throw new ServiceException(_localizer["{0} {1} not found", _localizer["File Group"], request.GroupId!]);
             }
-            fileGroup.Accept.Validate(request.Name, request.ContentType);
+            fileGroup.Accept.Validate(request.Name!, request.ContentType!);
             var file = _mapper.Map<CreateFile, Entities.File>(request);
             if (fileGroup.Type == Enums.FileGroupType.Database)
             {
-                file.Content = request.Content.ConvertToBytes();
+                file.Content = request.Content!.ConvertToBytes();
             }
             else if (fileGroup.Type == Enums.FileGroupType.Storage)
             {
                 var filename = Guid.NewGuid() + Path.GetExtension(request.Name);
                 var filePath = $"{fileGroup.Location}/{DateTime.Today:yyyy'/'MM}/{filename}";
-                file.Url = await _fileStorage.SaveFileAsync(filePath, request.Content, request.ContentType);
+                file.Url = await _fileStorage.SaveFileAsync(filePath, request.Content!, request.ContentType!);
             }
             else
             {
                 throw new NotSupportedException($"Group type {fileGroup.Type} not supported");
             }
             _fileRepository.Add(file);
-            await _unitOfWork.CommitAsync();
-            return new CreatedEntity<int>() { Id = file.Id };
+            await _unitOfWork.CommitAsync(cancellationToken);
+            return new CreatedEntity<int>(file.Id);
         }
     }
 }

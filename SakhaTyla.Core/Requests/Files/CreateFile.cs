@@ -10,11 +10,11 @@ namespace SakhaTyla.Core.Requests.Files
 {
     public class CreateFile : IRequest<CreatedEntity<int>>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string ContentType { get; set; }
+        public string? ContentType { get; set; }
 
-        public Stream Content { get; set; }
+        public Stream? Content { get; set; }
 
         public int? GroupId { get; set; }
     }

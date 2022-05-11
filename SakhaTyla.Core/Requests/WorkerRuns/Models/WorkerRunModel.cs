@@ -17,15 +17,15 @@ namespace SakhaTyla.Core.Requests.WorkerRuns.Models
 
         [DisplayName("Creation User")]
         public int? CreationUserId { get; set; }
-        public Users.Models.UserShortModel CreationUser { get; set; }
+        public Users.Models.UserShortModel? CreationUser { get; set; }
 
         [DisplayName("Modification User")]
         public int? ModificationUserId { get; set; }
-        public Users.Models.UserShortModel ModificationUser { get; set; }
+        public Users.Models.UserShortModel? ModificationUser { get; set; }
 
         [DisplayName("Worker")]
         public int WorkerInfoId { get; set; }
-        public WorkerInfos.Models.WorkerInfoShortModel WorkerInfo { get; set; }
+        public WorkerInfos.Models.WorkerInfoShortModel WorkerInfo { get; set; } = null!;
 
         [DisplayName("Status")]
         public Enums.WorkerRunStatus Status { get; set; }
@@ -37,12 +37,12 @@ namespace SakhaTyla.Core.Requests.WorkerRuns.Models
         public DateTime? EndDateTime { get; set; }
 
         [DisplayName("Data")]
-        public string Data { get; set; }
+        public string? Data { get; set; }
 
         [DisplayName("Result")]
-        public string Result { get; set; }
+        public string? Result { get; set; }
 
         [DisplayName("Result Data")]
-        public string ResultData { get; set; }
+        public string? ResultData { get; set; }
     }
 }

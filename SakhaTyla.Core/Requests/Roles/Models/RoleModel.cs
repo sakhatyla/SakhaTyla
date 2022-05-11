@@ -6,6 +6,12 @@ namespace SakhaTyla.Core.Requests.Roles.Models
 {
     public class RoleModel
     {
+        public RoleModel(string name, string displayName)
+        {
+            Name = name;
+            DisplayName = displayName;
+        }
+
         public int Id { get; set; }
 
         [DisplayName("Creation Date")]
