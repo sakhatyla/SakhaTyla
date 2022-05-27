@@ -1,0 +1,8 @@
+﻿<mat-select [(ngModel)]="innerValue" [disabled]="disabled" [placeholder]="placeholder" multiple>
+  <mat-select-trigger>
+    <span>
+        {{ getSelectedTags() }}
+    </span>
+  </mat-select-trigger>
+  <mat-option [value]="tag.id" *ngFor="let tag of tags">{{ tag.name }}</mat-option>
+</mat-select>

@@ -53,6 +53,12 @@
                 <app-category-show [value]="article.category"></app-category-show>
             </div>
         </div>
+        <div class="field-view">
+            <label>{{ t('Tags') }}</label>
+            <div>
+                <app-article-tags-show [value]="article.tags"></app-article-tags-show>
+            </div>
+        </div>
     </div>
 
 </mat-card>

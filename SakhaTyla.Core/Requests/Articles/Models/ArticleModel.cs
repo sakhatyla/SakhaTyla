@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using SakhaTyla.Core.Requests.ArticleTags.Models;
 
 namespace SakhaTyla.Core.Requests.Articles.Models
 {
@@ -53,5 +54,8 @@ namespace SakhaTyla.Core.Requests.Articles.Models
         [DisplayName("Category")]
         public int? CategoryId { get; set; }
         public Categories.Models.CategoryShortModel? Category { get; set; }
+
+        [DisplayName("Tags")]
+        public IList<ArticleTagModel> Tags { get; set; } = null!;
     }
 }

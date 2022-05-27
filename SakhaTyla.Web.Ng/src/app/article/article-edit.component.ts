@@ -29,7 +29,8 @@ export class ArticleEditComponent implements OnInit {
         fromLanguageId: [],
         toLanguageId: [],
         fuzzy: [],
-        categoryId: []
+        categoryId: [],
+        tagIds: []
     });
     article: Article;
     error: Error;
@@ -62,6 +63,7 @@ export class ArticleEditComponent implements OnInit {
         getArticle$.subscribe(article => {
             this.article = article;
             this.articleForm.patchValue(this.article);
+            this.articleForm.controls.tagIds.setValue(this.article.tags?.map(e => e.tagId));
         });
     }
 

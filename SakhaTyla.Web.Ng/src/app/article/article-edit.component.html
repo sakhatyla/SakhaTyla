@@ -31,6 +31,11 @@
                 <app-category-select formControlName="categoryId" name="categoryId" [placeholder]="t('Category')"></app-category-select>
                 <mat-error>{{ error?.modelState?.categoryId | modelError }}</mat-error>
             </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ t('Tags') }}</mat-label>
+                <app-article-tags-select formControlName="tagIds" name="tagIds" [placeholder]="t('Tags')"></app-article-tags-select>
+                <mat-error>{{ error?.modelState?.tagIds | modelError }}</mat-error>
+            </mat-form-field>
         </form>
 
     </mat-dialog-content>

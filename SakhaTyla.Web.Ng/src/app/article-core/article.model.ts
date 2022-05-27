@@ -1,5 +1,6 @@
 ﻿import { OrderDirection } from '../core/models/order-direction.model';
 import { PageSettings } from '../core/page.model';
+import { ArticleTag } from '../article-tag-core/article-tag.model';
 import { ArticleFilter } from './article-filter.model';
 
 export class Article {
@@ -15,6 +16,7 @@ export class Article {
   toLanguageId: number;
   fuzzy: boolean;
   categoryId: number;
+  tags: ArticleTag[];
 }
 
 export class ArticleListState {

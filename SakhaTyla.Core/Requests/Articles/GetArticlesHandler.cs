@@ -29,6 +29,8 @@ namespace SakhaTyla.Core.Requests.Articles
                 .Include(e => e.FromLanguage)
                 .Include(e => e.ToLanguage)
                 .Include(e => e.Category)
+                .Include(e => e.Tags)
+                .ThenInclude(e => e.Tag)
                 .DefaultFilter();            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);

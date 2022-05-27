@@ -20,5 +20,7 @@ namespace SakhaTyla.Core.Requests.Articles
         public bool? Fuzzy { get; set; }
 
         public int? CategoryId { get; set; }
+
+        public int[]? TagIds { get; set; }
     }
 }

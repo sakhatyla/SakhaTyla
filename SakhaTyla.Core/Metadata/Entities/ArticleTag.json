@@ -1,0 +1,36 @@
+﻿{
+  "id": "411dd070-f5be-4403-a813-b784a112648b",
+  "name": "ArticleTag",
+  "pluralName": "ArticleTags",
+  "displayName": "Article Tag",
+  "pluralDisplayName": "Article Tags",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "672bfb8b-a7fd-473b-bce0-aa3fe1be9012",
+      "name": "Article",
+      "displayName": "Article",
+      "type": null,
+      "size": null,
+      "entityId": "d8fa5ab2-720c-4502-81f6-89ee2d7a6b0a",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "d36e35c2-441b-4b1b-a72f-1c976152ab77",
+      "name": "Tag",
+      "displayName": "Tag",
+      "type": null,
+      "size": null,
+      "entityId": "28a6026b-5eda-49e7-97c9-645beea67813",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}
