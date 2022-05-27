@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Tags";
+
+message TagFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+}

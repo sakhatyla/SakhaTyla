@@ -1,0 +1,24 @@
+﻿{
+  "id": "28a6026b-5eda-49e7-97c9-645beea67813",
+  "name": "Tag",
+  "pluralName": "Tags",
+  "displayName": "Tag",
+  "pluralDisplayName": "Tags",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "04cbd287-a885-4feb-b01f-18bef3b58037",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 100,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

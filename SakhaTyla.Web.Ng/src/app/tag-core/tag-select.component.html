@@ -1,0 +1,13 @@
+﻿<mat-select *ngIf="mode == 'select'" [(ngModel)]="innerValue" [disabled]="disabled" [placeholder]="placeholder">
+  <mat-option [value]="null"></mat-option>
+  <mat-option [value]="tag.id" *ngFor="let tag of tags">{{ tag.name }}</mat-option>
+</mat-select>
+<ng-container *ngIf="mode == 'autocomplete'">
+  <input matInput type="text" [formControl]="autocompleteControl" [placeholder]="placeholder"
+    [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplay">
+    <mat-option *ngFor="let tag of autocompleteTags | async" [value]="tag">
+      {{ tag.name }}
+    </mat-option>
+  </mat-autocomplete>
+</ng-container>

@@ -1,0 +1,50 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Tags/tagModel.proto";
+import "Protos/Tags/tagFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Tags";
+
+service TagService {
+    rpc GetTags(GetTagsRequest) returns (TagPageModel);
+    rpc GetTag(GetTagRequest) returns (Tag);
+    rpc UpdateTag(UpdateTagRequest) returns (Empty);
+    rpc CreateTag(CreateTagRequest) returns (CreatedEntity);
+    rpc DeleteTag(DeleteTagRequest) returns (Empty);
+}
+
+message CreateTagRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+}
+
+message DeleteTagRequest {
+    int32 id = 1;
+}
+
+message GetTagRequest {
+    int32 id = 1;
+}
+
+message GetTagsRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    TagFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateTagRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+}

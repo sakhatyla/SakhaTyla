@@ -1,0 +1,20 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Tag') }} <app-tag-show [value]="tag"></app-tag-show>
+  </h1>
+  <mat-dialog-content *ngIf="tag" class="mat-dialog-content-edit">
+
+    <form [formGroup]="tagForm">
+      <mat-form-field>
+        <mat-label>{{ t('Name') }}</mat-label>
+        <app-text-edit formControlName="name" name="name" [placeholder]="t('Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.name | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>
