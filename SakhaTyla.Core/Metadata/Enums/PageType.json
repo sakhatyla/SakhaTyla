@@ -1,0 +1,36 @@
+﻿{
+  "id": "5484491d-9bf5-4248-b6d0-b428a8ddf244",
+  "name": "PageType",
+  "displayName": "Page Type",
+  "values": [
+    {
+      "id": "f61fa712-2b96-45fd-a649-07c01d61496a",
+      "name": "General",
+      "displayName": "General",
+      "value": 0,
+      "properties": {}
+    },
+    {
+      "id": "122a2cc5-44b8-4fab-b88c-51fc8df9b087",
+      "name": "Blog",
+      "displayName": "Blog",
+      "value": 1,
+      "properties": {}
+    },
+    {
+      "id": "4166bf79-0e29-4a87-8624-96af225ebcbc",
+      "name": "Article",
+      "displayName": "Article",
+      "value": 2,
+      "properties": {}
+    },
+    {
+      "id": "033b0ea0-6d19-43de-a17c-11286d9746a9",
+      "name": "Main",
+      "displayName": "Main",
+      "value": 3,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

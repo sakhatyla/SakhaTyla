@@ -1,0 +1,6 @@
+﻿<mat-select [(ngModel)]="innerValue" [disabled]="disabled" [placeholder]="placeholder">
+  <mat-option [value]="null"></mat-option>
+  <mat-option [value]="pageType.key" *ngFor="let pageType of PageType | enumkeys">
+    {{ PageTypeDisplay[pageType.key] }}
+  </mat-option>
+</mat-select>

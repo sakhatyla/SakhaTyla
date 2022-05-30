@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.PageType";
+
+enum PageType {
+    General = 0;
+    Blog = 1;
+    Article = 2;
+    Main = 3;
+}
