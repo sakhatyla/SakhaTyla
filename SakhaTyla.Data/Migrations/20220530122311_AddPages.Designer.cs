@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SakhaTyla.Data;
 
@@ -11,9 +12,10 @@ using SakhaTyla.Data;
 namespace SakhaTyla.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220530122311_AddPages")]
+    partial class AddPages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -702,52 +704,6 @@ namespace SakhaTyla.Data.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("SakhaTyla.Core.Entities.Route", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ModificationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ModificationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreationUserId");
-
-                    b.HasIndex("ModificationUserId");
-
-                    b.HasIndex("PageId")
-                        .IsUnique()
-                        .HasFilter("[PageId] IS NOT NULL");
-
-                    b.HasIndex("Path")
-                        .IsUnique();
-
-                    b.ToTable("Routes", (string)null);
-
-                    b.HasCheckConstraint("CK_Routes_Parent", "[PageId] is not null");
-                });
-
             modelBuilder.Entity("SakhaTyla.Core.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -1241,28 +1197,6 @@ namespace SakhaTyla.Data.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("SakhaTyla.Core.Entities.Route", b =>
-                {
-                    b.HasOne("SakhaTyla.Core.Entities.User", "CreationUser")
-                        .WithMany()
-                        .HasForeignKey("CreationUserId");
-
-                    b.HasOne("SakhaTyla.Core.Entities.User", "ModificationUser")
-                        .WithMany()
-                        .HasForeignKey("ModificationUserId");
-
-                    b.HasOne("SakhaTyla.Core.Entities.Page", "Page")
-                        .WithOne("Route")
-                        .HasForeignKey("SakhaTyla.Core.Entities.Route", "PageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("CreationUser");
-
-                    b.Navigation("ModificationUser");
-
-                    b.Navigation("Page");
-                });
-
             modelBuilder.Entity("SakhaTyla.Core.Entities.Tag", b =>
                 {
                     b.HasOne("SakhaTyla.Core.Entities.User", "CreationUser")
@@ -1342,11 +1276,6 @@ namespace SakhaTyla.Data.Migrations
             modelBuilder.Entity("SakhaTyla.Core.Entities.Article", b =>
                 {
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("SakhaTyla.Core.Entities.Page", b =>
-                {
-                    b.Navigation("Route");
                 });
 
             modelBuilder.Entity("SakhaTyla.Core.Entities.WorkerInfo", b =>

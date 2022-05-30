@@ -1,0 +1,36 @@
+{
+  "id": "d39353e8-92d1-4f1e-8327-142802826d57",
+  "name": "Route",
+  "pluralName": "Routes",
+  "displayName": "Route",
+  "pluralDisplayName": "Routes",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "cc258226-0aae-4347-9472-e9edb73cb88c",
+      "name": "Path",
+      "displayName": "Path",
+      "type": "String",
+      "size": 500,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "c84a27a1-7ba2-4b36-9ec0-9bca8e770569",
+      "name": "Page",
+      "displayName": "Page",
+      "type": null,
+      "size": null,
+      "entityId": "c224c092-3281-4e53-b467-776d94966c71",
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

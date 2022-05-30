@@ -11,6 +11,9 @@ $MaterialIcons_FontPath: "~material-icons-font/fonts";
 @import '~material-icons-font/sass/main';
 @import '~material-icons-font/sass/Regular';
 
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
 
 $primary: mat-palette($mat-indigo);
 

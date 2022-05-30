@@ -1,0 +1,77 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Page') }} <app-page-show [value]="page"></app-page-show>
+  </h1>
+  <mat-dialog-content *ngIf="page" class="mat-dialog-content-edit">
+
+    <form [formGroup]="pageForm">
+      <mat-form-field>
+        <mat-label>{{ t('Type') }}</mat-label>
+        <app-page-type-select formControlName="type" name="type" [placeholder]="t('Type')"></app-page-type-select>
+        <mat-error>{{ error?.modelState?.type | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Name') }}</mat-label>
+        <app-text-edit formControlName="name" name="name" [placeholder]="t('Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.name | modelError }}</mat-error>
+      </mat-form-field>
+      <ng-container formGroupName="route">
+        <mat-form-field>
+          <mat-label>{{ t('Route') }}</mat-label>
+          <app-route-edit formControlName="path" name="route" [placeholder]="t('Route')"></app-route-edit>
+          <mat-error>{{ error?.modelState?.route?.path | modelError }}</mat-error>
+        </mat-form-field>
+      </ng-container>
+      <mat-form-field>
+        <mat-label>{{ t('Short Name') }}</mat-label>
+        <app-text-edit formControlName="shortName" name="shortName" [placeholder]="t('Short Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.shortName | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Parent') }}</mat-label>
+        <app-page-select formControlName="parentId" name="parentId" [placeholder]="t('Parent')"></app-page-select>
+        <mat-error>{{ error?.modelState?.parentId | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Header') }}</mat-label>
+        <app-text-edit formControlName="header" name="header" [placeholder]="t('Header')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.header | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Preview') }}</mat-label>
+        <app-html-edit formControlName="preview" name="preview" [placeholder]="t('Preview')"></app-html-edit>
+        <mat-error>{{ error?.modelState?.preview | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Body') }}</mat-label>
+        <app-html-edit formControlName="body" name="body" [placeholder]="t('Body')"></app-html-edit>
+        <mat-error>{{ error?.modelState?.body | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Image') }}</mat-label>
+        <app-file-select formControlName="imageId" name="imageId" [placeholder]="t('Image')" groupName="Images"></app-file-select>
+        <mat-error>{{ error?.modelState?.imageId | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Meta Title') }}</mat-label>
+        <app-text-edit formControlName="metaTitle" name="metaTitle" [placeholder]="t('Meta Title')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.metaTitle | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Meta Keywords') }}</mat-label>
+        <app-text-edit formControlName="metaKeywords" name="metaKeywords" [placeholder]="t('Meta Keywords')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.metaKeywords | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Meta Description') }}</mat-label>
+        <app-text-edit formControlName="metaDescription" name="metaDescription" [placeholder]="t('Meta Description')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.metaDescription | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>

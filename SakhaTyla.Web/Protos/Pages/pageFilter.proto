@@ -1,0 +1,44 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/PageType/pageType.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Pages";
+
+message PageFilter {
+    oneof typeOneOf {
+        PageType type = 60;
+    }
+    oneof nameOneOf {
+        string name = 70;
+    }
+    oneof shortNameOneOf {
+        string shortName = 80;
+    }
+    oneof parentIdOneOf {
+        int32 parentId = 90;
+    }
+    oneof headerOneOf {
+        string header = 100;
+    }
+    oneof bodyOneOf {
+        string body = 110;
+    }
+    oneof metaTitleOneOf {
+        string metaTitle = 120;
+    }
+    oneof metaKeywordsOneOf {
+        string metaKeywords = 130;
+    }
+    oneof metaDescriptionOneOf {
+        string metaDescription = 140;
+    }
+    oneof imageIdOneOf {
+        int32 imageId = 170;
+    }
+    oneof previewOneOf {
+        string preview = 180;
+    }
+}

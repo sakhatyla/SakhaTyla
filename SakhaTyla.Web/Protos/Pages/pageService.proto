@@ -1,0 +1,113 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/Pages/pageModel.proto";
+import "Protos/Pages/pageFilter.proto";
+import "Protos/PageType/pageType.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Pages";
+
+service PageService {
+    rpc GetPages(GetPagesRequest) returns (PagePageModel);
+    rpc GetPage(GetPageRequest) returns (Page);
+    rpc UpdatePage(UpdatePageRequest) returns (Empty);
+    rpc CreatePage(CreatePageRequest) returns (CreatedEntity);
+    rpc DeletePage(DeletePageRequest) returns (Empty);
+}
+
+message CreatePageRequest {
+    oneof typeOneOf {
+        PageType type = 6;
+    }
+    oneof nameOneOf {
+        string name = 7;
+    }
+    oneof shortNameOneOf {
+        string shortName = 8;
+    }
+    oneof parentIdOneOf {
+        int32 parentId = 9;
+    }
+    oneof headerOneOf {
+        string header = 10;
+    }
+    oneof bodyOneOf {
+        string body = 11;
+    }
+    oneof metaTitleOneOf {
+        string metaTitle = 12;
+    }
+    oneof metaKeywordsOneOf {
+        string metaKeywords = 13;
+    }
+    oneof metaDescriptionOneOf {
+        string metaDescription = 14;
+    }
+    oneof imageIdOneOf {
+        int32 imageId = 17;
+    }
+    oneof previewOneOf {
+        string preview = 18;
+    }
+}
+
+message DeletePageRequest {
+    int32 id = 1;
+}
+
+message GetPageRequest {
+    int32 id = 1;
+}
+
+message GetPagesRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    PageFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdatePageRequest {
+    int32 id = 1;
+    oneof typeOneOf {
+        PageType type = 6;
+    }
+    oneof nameOneOf {
+        string name = 7;
+    }
+    oneof shortNameOneOf {
+        string shortName = 8;
+    }
+    oneof parentIdOneOf {
+        int32 parentId = 9;
+    }
+    oneof headerOneOf {
+        string header = 10;
+    }
+    oneof bodyOneOf {
+        string body = 11;
+    }
+    oneof metaTitleOneOf {
+        string metaTitle = 12;
+    }
+    oneof metaKeywordsOneOf {
+        string metaKeywords = 13;
+    }
+    oneof metaDescriptionOneOf {
+        string metaDescription = 14;
+    }
+    oneof imageIdOneOf {
+        int32 imageId = 17;
+    }
+    oneof previewOneOf {
+        string preview = 18;
+    }
+}

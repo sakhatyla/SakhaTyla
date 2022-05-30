@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Route } from '@angular/router';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { QuillModule } from 'ngx-quill';
 
 import { MaterialModule } from './material.module';
 import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
@@ -32,6 +33,11 @@ import { TranslocoRootModule } from './transloco-root.module';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] },
       // ADD ROUTES HERE
+      {
+        path: 'page',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./page/page-routed.module').then(m => m.PageRoutedModule)
+      },
       {
         path: 'tag',
         canActivate: [AuthorizeGuard],
@@ -94,6 +100,7 @@ import { TranslocoRootModule } from './transloco-root.module';
       },
     ]),
     MaterialModule,
+    QuillModule.forRoot(),
     CoreModule,
     ApiAuthorizationModule,
     TranslocoRootModule,

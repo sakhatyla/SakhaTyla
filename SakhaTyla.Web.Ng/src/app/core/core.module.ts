@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { OwlDateTimeModule, OwlMomentDateTimeModule, OWL_DATE_TIME_FORMATS } from '@danielmoncada/angular-datetime-picker';
+import { QuillModule } from 'ngx-quill';
 import { MaterialModule } from '../material.module';
 
 import { ErrorInterceptor } from './error.interceptor';
@@ -24,6 +25,7 @@ import { DateEditComponent } from './controls/date.edit.component';
 import { DateViewComponent } from './controls/date.view.component';
 import { TimeEditComponent } from './controls/time.edit.component';
 import { TimeViewComponent } from './controls/time.view.component';
+import { HtmlEditComponent } from './controls/html.edit.component';
 
 import { LoadingService } from './loading.service';
 import { StoreService } from './store.service';
@@ -69,7 +71,8 @@ export const MY_MOMENT_FORMATS = {
     DateEditComponent,
     DateViewComponent,
     TimeEditComponent,
-    TimeViewComponent
+    TimeViewComponent,
+    HtmlEditComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +80,8 @@ export const MY_MOMENT_FORMATS = {
     ReactiveFormsModule,
     OwlDateTimeModule,
     OwlMomentDateTimeModule,
-    MaterialModule
+    MaterialModule,
+    QuillModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: AppErrorHandler },
@@ -123,7 +127,8 @@ export const MY_MOMENT_FORMATS = {
     DateEditComponent,
     DateViewComponent,
     TimeEditComponent,
-    TimeViewComponent
+    TimeViewComponent,
+    HtmlEditComponent
   ]
 })
 export class CoreModule {

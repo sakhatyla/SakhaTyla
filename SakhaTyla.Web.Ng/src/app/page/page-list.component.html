@@ -1,0 +1,142 @@
+﻿<ng-container *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Pages') }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <div class="action-item">
+      <form (ngSubmit)="onSearch()">
+        <mat-form-field>
+          <mat-label>{{ t('shared.text') }}</mat-label>
+          <input matInput id="text" type="text" name="text" [placeholder]="t('shared.text')"
+            [(ngModel)]="state.filter.text" />
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary">{{ t('shared.search') }}</button>
+        <button mat-raised-button type="reset" (click)="onReset()">{{ t('shared.reset') }}</button>
+      </form>
+    </div>
+    <div class="action-item">
+      <button mat-raised-button color="primary" type="button" (click)="onCreate()">{{ t('shared.create') }}</button>
+      <button mat-raised-button type="button" (click)="onExport()">{{ t('shared.export') }}</button>
+      <button mat-raised-button type="button" *ngIf="selectedIds.size > 0" (click)="onDeleteSelected()">{{ t('shared.delete') }}</button>
+    </div>
+  </mat-card-actions>
+
+  <mat-card-content class="mat-elevation-z8">
+
+    <table *ngIf="content" mat-table [dataSource]="content.pageItems" [matSortActive]="state | sortActive" [matSortDirection]="state | sortDirection" multiTemplateDataRows matSort (matSortChange)="onSortChange($event)">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox [appSelectAllItems]="content.pageItems" [(selectedIds)]="selectedIds"></mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let item">
+          <mat-checkbox [appSelectItem]="item" [(selectedIds)]="selectedIds"></mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Type') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-page-type-view [value]="item.type"></app-page-type-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Name') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.name"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="shortName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Short Name') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.shortName"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="parent">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Parent') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-page-show [value]="item.parent"></app-page-show>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="header">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Header') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.header"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="body">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Body') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.body"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="metaTitle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Meta Title') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.metaTitle"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="metaKeywords">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Meta Keywords') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.metaKeywords"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="metaDescription">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Meta Description') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.metaDescription"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Image') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-file-show [value]="item.image"></app-file-show>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="preview">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Preview') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-text-view [value]="item.preview"></app-text-view>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="route">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Route') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-route-show [value]="item.route"></app-route-show>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="modificationDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Modification Date') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-datetime-view [value]="item.modificationDate"></app-datetime-view>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="actionMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #actionMenu="matMenu">
+            <a mat-menu-item (click)="onEdit(item.id)">{{ t('shared.edit') }}</a>
+            <a mat-menu-item (click)="onDelete(item.id)">{{ t('shared.delete') }}</a>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let item; columns: columns;" [routerLink]="[baseRoute, item.id]"></tr>
+
+    </table>
+
+    <div>
+      <mat-paginator [pageSize]="state.pageSize" [pageIndex]="state.pageIndex" [pageSizeOptions]="pageSizeOptions"
+        [length]="content?.totalItems" (page)="onPage($event)" showFirstLastButtons></mat-paginator>
+    </div>
+
+  </mat-card-content>
+
+</ng-container>

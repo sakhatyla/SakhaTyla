@@ -1,0 +1,9 @@
+<mat-button-toggle-group name="mode" [(ngModel)]="mode">
+    <mat-button-toggle value="html">Html</mat-button-toggle>
+    <mat-button-toggle value="text">Text</mat-button-toggle>
+</mat-button-toggle-group>
+
+<quill-editor [(ngModel)]="innerValue" *ngIf="mode == 'html'" [modules]="{ clipboard: {matchVisual: false} }"></quill-editor>
+
+<textarea matInput [id]="name" [name]="name" *ngIf="mode == 'text'"
+    [(ngModel)]="innerValue" [placeholder]="placeholder" [disabled]="disabled"></textarea>

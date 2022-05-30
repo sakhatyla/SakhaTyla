@@ -1,0 +1,87 @@
+﻿<mat-card class="mat-card-view" *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Page') }} <app-page-show [value]="page"></app-page-show></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
+
+  <div *ngIf="page">
+    <div class="field-view">
+      <label>{{ t('Type') }}</label>
+      <div>
+        <app-page-type-view [value]="page.type"></app-page-type-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Name') }}</label>
+      <div>
+        <app-text-view [value]="page.name"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Route') }}</label>
+      <div>
+          <app-route-show [value]="page.route"></app-route-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Short Name') }}</label>
+      <div>
+        <app-text-view [value]="page.shortName"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Parent') }}</label>
+      <div>
+        <app-page-show [value]="page.parent"></app-page-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Header') }}</label>
+      <div>
+        <app-text-view [value]="page.header"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Preview') }}</label>
+      <div>
+        <app-text-view [value]="page.preview"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Body') }}</label>
+      <div>
+        <app-text-view [value]="page.body"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Image') }}</label>
+      <div>
+        <app-file-show [value]="page.image"></app-file-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Meta Title') }}</label>
+      <div>
+        <app-text-view [value]="page.metaTitle"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Meta Keywords') }}</label>
+      <div>
+        <app-text-view [value]="page.metaKeywords"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Meta Description') }}</label>
+      <div>
+        <app-text-view [value]="page.metaDescription"></app-text-view>
+      </div>
+    </div>
+  </div>
+
+</mat-card>
