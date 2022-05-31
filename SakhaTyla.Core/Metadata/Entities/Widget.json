@@ -1,0 +1,60 @@
+﻿{
+  "id": "902f4c32-5210-4c58-a8d9-f66a09ef5e32",
+  "name": "Widget",
+  "pluralName": "Widgets",
+  "displayName": "Widget",
+  "pluralDisplayName": "Widgets",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "32e63311-a548-4242-a3fc-4da120fd54f0",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "e2234b8e-f9df-41cb-856f-dd6236e3541f",
+      "name": "Code",
+      "displayName": "Code",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "91737ab7-f2a3-42e4-a1d7-3cd7cfb1e1cd",
+      "name": "Body",
+      "displayName": "Body",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "99783ddf-501b-46dd-bf43-a301cd9f69cb",
+      "name": "Type",
+      "displayName": "Type",
+      "type": null,
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": "0f1b3b57-a49c-4219-a69c-54c0685dc78d",
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

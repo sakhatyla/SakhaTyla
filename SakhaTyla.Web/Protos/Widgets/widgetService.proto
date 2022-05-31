@@ -1,0 +1,71 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/Widgets/widgetModel.proto";
+import "Protos/Widgets/widgetFilter.proto";
+import "Protos/WidgetType/widgetType.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Widgets";
+
+service WidgetService {
+    rpc GetWidgets(GetWidgetsRequest) returns (WidgetPageModel);
+    rpc GetWidget(GetWidgetRequest) returns (Widget);
+    rpc UpdateWidget(UpdateWidgetRequest) returns (Empty);
+    rpc CreateWidget(CreateWidgetRequest) returns (CreatedEntity);
+    rpc DeleteWidget(DeleteWidgetRequest) returns (Empty);
+}
+
+message CreateWidgetRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof codeOneOf {
+        string code = 7;
+    }
+    oneof bodyOneOf {
+        string body = 8;
+    }
+    oneof typeOneOf {
+        WidgetType type = 9;
+    }
+}
+
+message DeleteWidgetRequest {
+    int32 id = 1;
+}
+
+message GetWidgetRequest {
+    int32 id = 1;
+}
+
+message GetWidgetsRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    WidgetFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateWidgetRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof codeOneOf {
+        string code = 7;
+    }
+    oneof bodyOneOf {
+        string body = 8;
+    }
+    oneof typeOneOf {
+        WidgetType type = 9;
+    }
+}

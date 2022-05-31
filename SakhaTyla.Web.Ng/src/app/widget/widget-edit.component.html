@@ -1,0 +1,35 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Widget') }} <app-widget-show [value]="widget"></app-widget-show>
+  </h1>
+  <mat-dialog-content *ngIf="widget" class="mat-dialog-content-edit">
+
+    <form [formGroup]="widgetForm">
+      <mat-form-field>
+        <mat-label>{{ t('Name') }}</mat-label>
+        <app-text-edit formControlName="name" name="name" [placeholder]="t('Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.name | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Code') }}</mat-label>
+        <app-text-edit formControlName="code" name="code" [placeholder]="t('Code')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.code | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Body') }}</mat-label>
+        <app-text-edit formControlName="body" name="body" [placeholder]="t('Body')" [multiline]="true"></app-text-edit>
+        <mat-error>{{ error?.modelState?.body | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Type') }}</mat-label>
+        <app-widget-type-select formControlName="type" name="type" [placeholder]="t('Type')"></app-widget-type-select>
+        <mat-error>{{ error?.modelState?.type | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>

@@ -1,0 +1,23 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/WidgetType/widgetType.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Widgets";
+
+message WidgetFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+    oneof codeOneOf {
+        string code = 70;
+    }
+    oneof bodyOneOf {
+        string body = 80;
+    }
+    oneof typeOneOf {
+        WidgetType type = 90;
+    }
+}

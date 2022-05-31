@@ -17,6 +17,7 @@ export class MenuService {
     this.menu.items.push({ route: '/language', name: 'Languages', icon: 'language', roles: ['Administrator'] });
     this.menu.items.push({ route: '/tag', name: 'Tags', icon: 'label', roles: ['Administrator'] });
     this.menu.items.push({ route: '/page', name: 'Pages', icon: 'description', roles: ['Administrator'] });
+    this.menu.items.push({ route: '/widget', name: 'Widgets', icon: 'web_asset', roles: ['Administrator'] });
     this.menu.items.push({ route: '/worker-run', name: 'Worker Runs', icon: 'not_started', roles: ['Administrator'] });
     this.menu.items.push({ route: '/worker-info', name: 'Workers', icon: 'play_for_work', roles: ['Administrator'] });
     this.menu.items.push({ route: '/file', name: 'Files', icon: 'insert_drive_file', roles: ['Administrator'] });
