@@ -1,0 +1,15 @@
+﻿{
+  "id": "0f1b3b57-a49c-4219-a69c-54c0685dc78d",
+  "name": "WidgetType",
+  "displayName": "Widget Type",
+  "values": [
+    {
+      "id": "f666cb95-694e-4270-a5db-4b9a305613bf",
+      "name": "Html",
+      "displayName": "Html",
+      "value": 0,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}
