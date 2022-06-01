@@ -1,0 +1,68 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/Books/bookModel.proto";
+import "Protos/Books/bookFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Books";
+
+service BookService {
+    rpc GetBooks(GetBooksRequest) returns (BookPageModel);
+    rpc GetBook(GetBookRequest) returns (Book);
+    rpc UpdateBook(UpdateBookRequest) returns (Empty);
+    rpc CreateBook(CreateBookRequest) returns (CreatedEntity);
+    rpc DeleteBook(DeleteBookRequest) returns (Empty);
+}
+
+message CreateBookRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof synonymOneOf {
+        string synonym = 7;
+    }
+    oneof hiddenOneOf {
+        bool hidden = 8;
+    }
+    oneof coverOneOf {
+        string cover = 9;
+    }
+}
+
+message DeleteBookRequest {
+    int32 id = 1;
+}
+
+message GetBookRequest {
+    int32 id = 1;
+}
+
+message GetBooksRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    BookFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateBookRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof synonymOneOf {
+        string synonym = 7;
+    }
+    oneof hiddenOneOf {
+        bool hidden = 8;
+    }
+    oneof coverOneOf {
+        string cover = 9;
+    }
+}

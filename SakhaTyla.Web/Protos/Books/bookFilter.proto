@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Books";
+
+message BookFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+    oneof synonymOneOf {
+        string synonym = 70;
+    }
+    oneof hiddenOneOf {
+        bool hidden = 80;
+    }
+    oneof coverOneOf {
+        string cover = 90;
+    }
+}

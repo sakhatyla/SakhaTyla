@@ -7,7 +7,7 @@ namespace SakhaTyla.Core.Requests.Routes
     {
         public UpdateRouteValidator(IStringLocalizer<SharedResource> localizer)
         {
-            RuleFor(x => x.Path).MaximumLength(500).NotEmpty().Matches("^[a-z0-9/]+$").WithName(x => localizer["Path"]);
+            RuleFor(x => x.Path).MaximumLength(500).NotEmpty().Matches("^[a-z0-9/\\-\\._]+$").WithName(x => localizer["Path"]);
         }
 
     }

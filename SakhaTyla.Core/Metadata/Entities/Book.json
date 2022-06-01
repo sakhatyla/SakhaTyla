@@ -1,0 +1,60 @@
+﻿{
+  "id": "ca613b0f-a866-4418-aabb-f1740ac1f6ef",
+  "name": "Book",
+  "pluralName": "Books",
+  "displayName": "Book",
+  "pluralDisplayName": "Books",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "bccae77b-83b3-4642-8959-972a2c2bedca",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 100,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "ef85a7f9-0194-4a51-8c0d-696145c2508d",
+      "name": "Synonym",
+      "displayName": "Synonym",
+      "type": "String",
+      "size": 100,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "ea2e90ce-d82b-4f98-ae6e-a75abd93ee37",
+      "name": "Hidden",
+      "displayName": "Hidden",
+      "type": "Boolean",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "dc57f789-19b1-40a2-91c1-3ba9e674b835",
+      "name": "Cover",
+      "displayName": "Cover",
+      "type": "String",
+      "size": 100,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

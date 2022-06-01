@@ -1,0 +1,31 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Book') }} <app-book-show [value]="book"></app-book-show>
+  </h1>
+  <mat-dialog-content *ngIf="book" class="mat-dialog-content-edit">
+
+    <form [formGroup]="bookForm">
+      <mat-form-field>
+        <mat-label>{{ t('Name') }}</mat-label>
+        <app-text-edit formControlName="name" name="name" [placeholder]="t('Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.name | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Synonym') }}</mat-label>
+        <app-text-edit formControlName="synonym" name="synonym" [placeholder]="t('Synonym')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.synonym | modelError }}</mat-error>
+      </mat-form-field>
+      <app-bool-edit formControlName="hidden" name="hidden" [label]="t('Hidden')"></app-bool-edit>
+      <mat-form-field>
+        <mat-label>{{ t('Cover') }}</mat-label>
+        <app-text-edit formControlName="cover" name="cover" [placeholder]="t('Cover')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.cover | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>
