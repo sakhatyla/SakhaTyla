@@ -1,0 +1,36 @@
+﻿{
+  "id": "6b949f94-22b0-47f0-b2e1-90cacc2b4a02",
+  "name": "Menu",
+  "pluralName": "Menus",
+  "displayName": "Menu",
+  "pluralDisplayName": "Menus",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "8656c125-3025-47a8-a669-8f8053ba9a28",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "04e6148e-cc8b-4508-9713-0843970c7422",
+      "name": "Code",
+      "displayName": "Code",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

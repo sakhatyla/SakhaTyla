@@ -1,0 +1,58 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/Menus/menuModel.proto";
+import "Protos/Menus/menuFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Menus";
+
+service MenuService {
+    rpc GetMenus(GetMenusRequest) returns (MenuPageModel);
+    rpc GetMenu(GetMenuRequest) returns (Menu);
+    rpc UpdateMenu(UpdateMenuRequest) returns (Empty);
+    rpc CreateMenu(CreateMenuRequest) returns (CreatedEntity);
+    rpc DeleteMenu(DeleteMenuRequest) returns (Empty);
+}
+
+message CreateMenuRequest {
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof codeOneOf {
+        string code = 7;
+    }
+}
+
+message DeleteMenuRequest {
+    int32 id = 1;
+}
+
+message GetMenuRequest {
+    int32 id = 1;
+}
+
+message GetMenusRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    MenuFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateMenuRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 6;
+    }
+    oneof codeOneOf {
+        string code = 7;
+    }
+}

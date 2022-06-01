@@ -34,6 +34,11 @@ import { TranslocoRootModule } from './transloco-root.module';
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] },
       // ADD ROUTES HERE
       {
+        path: 'menu',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./menu/menu-routed.module').then(m => m.MenuRoutedModule)
+      },
+      {
         path: 'widget',
         canActivate: [AuthorizeGuard],
         loadChildren: () => import('./widget/widget-routed.module').then(m => m.WidgetRoutedModule)

@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Menus";
+
+message MenuFilter {
+    oneof nameOneOf {
+        string name = 60;
+    }
+    oneof codeOneOf {
+        string code = 70;
+    }
+}
