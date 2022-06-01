@@ -1,0 +1,96 @@
+﻿{
+  "id": "af204dcc-e99a-4278-ae4c-5fbbee1eb59a",
+  "name": "MenuItem",
+  "pluralName": "MenuItems",
+  "displayName": "Menu Item",
+  "pluralDisplayName": "Menu Items",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "62d325bb-06d1-4c67-a328-fb4d43d7e0b7",
+      "name": "Menu",
+      "displayName": "Menu",
+      "type": null,
+      "size": null,
+      "entityId": "6b949f94-22b0-47f0-b2e1-90cacc2b4a02",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "3edc5dbc-4f72-4e1e-9964-bc94850fa04c",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "6975705a-63ac-426a-a09e-8229d2f54c86",
+      "name": "Url",
+      "displayName": "Url",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "4e2d835c-ef7d-4a1b-b6ae-ae7300dfab26",
+      "name": "Weight",
+      "displayName": "Weight",
+      "type": "Int32",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "49ce9bcf-cdfc-4bc3-807d-b8573c8c3b90",
+      "name": "Parent",
+      "displayName": "Parent",
+      "type": null,
+      "size": null,
+      "entityId": "af204dcc-e99a-4278-ae4c-5fbbee1eb59a",
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "ac2d361d-b651-4713-ad80-7a2650a54efe",
+      "name": "TreePath",
+      "displayName": "TreePath",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "efb1fb11-98e2-42e8-a802-841349785474",
+      "name": "TreeOrder",
+      "displayName": "TreeOrder",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

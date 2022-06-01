@@ -1,0 +1,38 @@
+<mat-tree *ngIf="dataSource" [dataSource]="dataSource" [treeControl]="treeControl" cdkDropList (cdkDropListDropped)="drop($event)">
+
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding cdkDrag [cdkDragData]="node"
+        (mouseenter)="dragHover(node)" (mouseleave)="dragHoverEnd()" (cdkDragStarted)="dragStart()"
+        (cdkDragReleased)="dragEnd()" (click)="editNode($event, node)">
+        <button mat-icon-button disabled></button>
+        <app-bool-edit *ngIf="selectedIds && (!checkHideCheckbox || (checkHideCheckbox && !node.hideCheckbox))" class="checkbox-value" [(ngModel)]="node.checked" (ngModelChange)="updateSelectedIds($event, node)" (click)="$event.stopPropagation()"></app-bool-edit>
+        <span>{{node.name}}</span>
+        <div class="node-actions" *ngIf="canEdit">
+            <button mat-icon-button cdkDragHandle (click)="$event.stopPropagation()">
+                <mat-icon class="drag" [inline]="true">reorder</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteNode($event, node.id)">
+                <mat-icon class="delete" [inline]="true">clear</mat-icon>
+            </button>
+        </div>
+    </mat-tree-node>
+
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding cdkDrag [cdkDragData]="node"
+        (mouseenter)="dragHover(node)" (mouseleave)="dragHoverEnd()" (cdkDragStarted)="dragStart()"
+        (cdkDragReleased)="dragEnd()" (click)="editNode($event, node)">
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name" (click)="expandedNodeState(node)">
+            <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+        </button>
+        <app-bool-edit *ngIf="selectedIds && (!checkHideCheckbox || (checkHideCheckbox && !node.hideCheckbox))" class="checkbox-value" [(ngModel)]="node.checked" (ngModelChange)="updateSelectedIds($event, node)" (click)="$event.stopPropagation()"></app-bool-edit>
+        <span>{{node.name}}</span>
+        <div class="node-actions" *ngIf="canEdit">
+            <button mat-icon-button cdkDragHandle (click)="$event.stopPropagation()">
+                <mat-icon class="drag" [inline]="true">reorder</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteNode($event, node.id)">
+                <mat-icon class="delete" [inline]="true">clear</mat-icon>
+            </button>
+        </div>
+    </mat-tree-node>
+</mat-tree>

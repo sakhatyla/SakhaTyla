@@ -1,0 +1,28 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.MenuItems";
+
+message MenuItem {
+    int32 id = 1;
+    google.protobuf.Timestamp creationDate = 2;
+    google.protobuf.Timestamp modificationDate = 3;
+    int32 creationUserId = 4;
+    int32 modificationUserId = 5;
+    string treePath = 11;
+    string treeOrder = 12;
+    int32 menuId = 6;
+    string name = 7;
+    string url = 8;
+    int32 weight = 9;
+    int32 parentId = 10;
+}
+
+message MenuItemPageModel {
+    repeated MenuItem pageItems = 1;
+    int32 totalItems = 2;
+    int32 currentPageIndex = 3;
+}

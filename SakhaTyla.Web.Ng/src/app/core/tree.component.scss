@@ -1,0 +1,48 @@
+mat-tree {
+    mat-icon {
+        cursor: pointer;
+        vertical-align: middle;
+    }
+
+    .checkbox-value {
+        margin-right: 8px;
+    }
+
+    mat-tree-node {
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .node-actions {
+        flex-grow: 1;
+        position: absolute;
+        right: 16px;
+
+        mat-icon.delete {
+            color: red;
+        }
+
+        mat-icon.drag {
+            cursor: move;
+            color: black;
+        }
+    }
+
+    mat-icon.drag, mat-icon.delete {
+       visibility: hidden;
+    }
+
+    mat-tree-node:hover {
+        background-color: #b4b4b433;
+        mat-icon.drag, mat-icon.delete {
+            visibility: visible;
+        }
+    }
+
+}
+
+.mat-tree-node {
+    justify-content: start !important;
+}

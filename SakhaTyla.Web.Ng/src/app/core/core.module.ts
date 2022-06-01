@@ -39,6 +39,7 @@ import { SortActivePipe } from './pipes/sort-active.pipe';
 import { SortDirectionPipe } from './pipes/sort-direction.pipe';
 import { SelectItemDirective } from './directives/select-item.directive';
 import { SelectAllItemsDirective } from './directives/select-all-items.directive';
+import { TreeComponent } from './tree.component';
 
 export const MY_MOMENT_FORMATS = {
   parseInput: 'L LT',
@@ -72,7 +73,8 @@ export const MY_MOMENT_FORMATS = {
     DateViewComponent,
     TimeEditComponent,
     TimeViewComponent,
-    HtmlEditComponent
+    HtmlEditComponent,
+    TreeComponent
   ],
   imports: [
     CommonModule,
@@ -128,7 +130,8 @@ export const MY_MOMENT_FORMATS = {
     DateViewComponent,
     TimeEditComponent,
     TimeViewComponent,
-    HtmlEditComponent
+    HtmlEditComponent,
+    TreeComponent
   ]
 })
 export class CoreModule {

@@ -1,0 +1,65 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "Protos/MenuItems/menuItemModel.proto";
+import "Protos/MenuItems/menuItemFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.MenuItems";
+
+service MenuItemService {
+    rpc GetMenuItems(GetMenuItemsRequest) returns (MenuItemPageModel);
+    rpc GetMenuItem(GetMenuItemRequest) returns (MenuItem);
+    rpc UpdateMenuItem(UpdateMenuItemRequest) returns (Empty);
+    rpc CreateMenuItem(CreateMenuItemRequest) returns (CreatedEntity);
+    rpc DeleteMenuItem(DeleteMenuItemRequest) returns (Empty);
+}
+
+message CreateMenuItemRequest {
+    oneof menuIdOneOf {
+        int32 menuId = 6;
+    }
+    oneof nameOneOf {
+        string name = 7;
+    }
+    oneof urlOneOf {
+        string url = 8;
+    }
+    oneof parentIdOneOf {
+        int32 parentId = 10;
+    }
+}
+
+message DeleteMenuItemRequest {
+    int32 id = 1;
+}
+
+message GetMenuItemRequest {
+    int32 id = 1;
+}
+
+message GetMenuItemsRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    MenuItemFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateMenuItemRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 7;
+    }
+    oneof urlOneOf {
+        string url = 8;
+    }
+    oneof parentIdOneOf {
+        int32 parentId = 10;
+    }
+}

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
 import { TranslocoRootModule } from '../transloco-root.module';
 import { MenuCoreModule } from '../menu-core/menu-core.module';
+import { MenuItemModule } from '../menu-item/menu-item.module';
 
 import { MenuListComponent } from './menu-list.component';
 import { MenuEditComponent } from './menu-edit.component';
@@ -21,7 +22,8 @@ import { MenusComponent } from './menus.component';
     RouterModule,
     CoreModule,
     TranslocoRootModule,
-    MenuCoreModule
+    MenuCoreModule,
+    MenuItemModule
   ],
   exports: [
     MenuListComponent,

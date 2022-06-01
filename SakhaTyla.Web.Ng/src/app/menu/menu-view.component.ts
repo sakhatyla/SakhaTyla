@@ -7,6 +7,7 @@ import { ConvertStringTo } from '../core/converter.helper';
 import { Menu } from '../menu-core/menu.model';
 import { MenuService } from '../menu-core/menu.service';
 import { MenuEditComponent } from './menu-edit.component';
+import { MenuItemListState } from '../menu-item-core/menu-item.model';
 
 @Component({
   selector: 'app-menu-view',
@@ -16,6 +17,7 @@ import { MenuEditComponent } from './menu-edit.component';
 export class MenuViewComponent implements OnInit {
   id: number;
   menu: Menu;
+  menuItemListState = new MenuItemListState();
 
   constructor(private dialog: MatDialog,
               private menuService: MenuService,
@@ -25,6 +27,7 @@ export class MenuViewComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       this.id = ConvertStringTo.number(params.id);
+      this.menuItemListState.filter.menuId = this.id;
       this.getMenu();
     });
   }

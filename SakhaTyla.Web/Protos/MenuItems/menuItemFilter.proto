@@ -1,0 +1,28 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.MenuItems";
+
+message MenuItemFilter {
+    oneof menuIdOneOf {
+        int32 menuId = 60;
+    }
+    oneof nameOneOf {
+        string name = 70;
+    }
+    oneof urlOneOf {
+        string url = 80;
+    }
+    oneof weightFromOneOf {
+        int32 weightFrom = 90;
+    }
+    oneof weightToOneOf {
+        int32 weightTo = 91;
+    }
+    oneof parentIdOneOf {
+        int32 parentId = 100;
+    }
+}

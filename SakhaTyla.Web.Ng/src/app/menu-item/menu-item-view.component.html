@@ -1,0 +1,39 @@
+﻿<mat-card class="mat-card-view" *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Menu Item') }} <app-menu-item-show [value]="menuItem"></app-menu-item-show></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
+
+  <div *ngIf="menuItem">
+    <div class="field-view">
+      <label>{{ t('Menu') }}</label>
+      <div>
+        <app-menu-show [value]="menuItem.menu"></app-menu-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Name') }}</label>
+      <div>
+        <app-text-view [value]="menuItem.name"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Url') }}</label>
+      <div>
+        <app-text-view [value]="menuItem.url"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Parent') }}</label>
+      <div>
+        <app-menu-item-show [value]="menuItem.parent"></app-menu-item-show>
+      </div>
+    </div>
+  </div>
+
+</mat-card>
