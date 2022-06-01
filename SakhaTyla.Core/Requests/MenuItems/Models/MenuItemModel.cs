@@ -51,6 +51,6 @@ namespace SakhaTyla.Core.Requests.MenuItems.Models
         public int? ParentId { get; set; }
         public MenuItems.Models.MenuItemShortModel? Parent { get; set; }
 
-        public ICollection<MenuItemModel> Children { get; set; }
+        public ICollection<MenuItemModel> Children { get; set; } = null!;
     }
 }
