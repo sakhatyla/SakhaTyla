@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookPages";
+
+message BookPageFilter {
+    oneof bookIdOneOf {
+        int32 bookId = 60;
+    }
+    oneof fileNameOneOf {
+        string fileName = 70;
+    }
+    oneof numberFromOneOf {
+        int32 numberFrom = 80;
+    }
+    oneof numberToOneOf {
+        int32 numberTo = 81;
+    }
+}

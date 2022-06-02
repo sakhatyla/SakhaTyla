@@ -37,3 +37,7 @@
   </div>
 
 </mat-card>
+
+<mat-card class="mat-card-list" *ngIf="bookPageListState">
+  <app-book-page-list [state]="bookPageListState"></app-book-page-list>
+</mat-card>

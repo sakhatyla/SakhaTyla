@@ -1,0 +1,25 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Book Page') }} <app-book-page-show [value]="bookPage"></app-book-page-show>
+  </h1>
+  <mat-dialog-content *ngIf="bookPage" class="mat-dialog-content-edit">
+
+    <form [formGroup]="bookPageForm">
+      <mat-form-field>
+        <mat-label>{{ t('File Name') }}</mat-label>
+        <app-text-edit formControlName="fileName" name="fileName" [placeholder]="t('File Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.fileName | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Number') }}</mat-label>
+        <app-number-edit formControlName="number" name="number" [placeholder]="t('Number')"></app-number-edit>
+        <mat-error>{{ error?.modelState?.number | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>

@@ -1,0 +1,61 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/BookPages/bookPageModel.proto";
+import "Protos/BookPages/bookPageFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookPages";
+
+service BookPageService {
+    rpc GetBookPages(GetBookPagesRequest) returns (BookPagePageModel);
+    rpc GetBookPage(GetBookPageRequest) returns (BookPage);
+    rpc UpdateBookPage(UpdateBookPageRequest) returns (Empty);
+    rpc CreateBookPage(CreateBookPageRequest) returns (CreatedEntity);
+    rpc DeleteBookPage(DeleteBookPageRequest) returns (Empty);
+}
+
+message CreateBookPageRequest {
+    oneof bookIdOneOf {
+        int32 bookId = 6;
+    }
+    oneof fileNameOneOf {
+        string fileName = 7;
+    }
+    oneof numberOneOf {
+        int32 number = 8;
+    }
+}
+
+message DeleteBookPageRequest {
+    int32 id = 1;
+}
+
+message GetBookPageRequest {
+    int32 id = 1;
+}
+
+message GetBookPagesRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    BookPageFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateBookPageRequest {
+    int32 id = 1;
+    oneof fileNameOneOf {
+        string fileName = 7;
+    }
+    oneof numberOneOf {
+        int32 number = 8;
+    }
+}

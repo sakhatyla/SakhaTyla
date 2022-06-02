@@ -7,6 +7,8 @@ import { ConvertStringTo } from '../core/converter.helper';
 import { Book } from '../book-core/book.model';
 import { BookService } from '../book-core/book.service';
 import { BookEditComponent } from './book-edit.component';
+import { BookPageListState } from '../book-page-core/book-page.model';
+import { BookPageFilter } from '../book-page-core/book-page-filter.model';
 
 @Component({
   selector: 'app-book-view',
@@ -16,6 +18,7 @@ import { BookEditComponent } from './book-edit.component';
 export class BookViewComponent implements OnInit {
   id: number;
   book: Book;
+  bookPageListState: BookPageListState;
 
   constructor(private dialog: MatDialog,
               private bookService: BookService,
@@ -31,7 +34,13 @@ export class BookViewComponent implements OnInit {
 
   private getBook() {
     this.bookService.getBook({ id: this.id })
-      .subscribe(book => this.book = book);
+      .subscribe(book => {
+        this.book = book;
+        const bookPageFilter = new BookPageFilter();
+        bookPageFilter.bookId = book.id;
+        this.bookPageListState = new BookPageListState();
+        this.bookPageListState.filter = bookPageFilter;
+      });
   }
 
   onEdit() {

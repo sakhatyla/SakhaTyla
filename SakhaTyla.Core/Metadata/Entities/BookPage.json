@@ -1,0 +1,48 @@
+﻿{
+  "id": "bf606588-7f45-4289-a764-b1b387402ce0",
+  "name": "BookPage",
+  "pluralName": "BookPages",
+  "displayName": "Book Page",
+  "pluralDisplayName": "Book Pages",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "d71c7592-06ae-406d-ad38-a02d5c9281da",
+      "name": "Book",
+      "displayName": "Book",
+      "type": null,
+      "size": null,
+      "entityId": "ca613b0f-a866-4418-aabb-f1740ac1f6ef",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "853677dc-ed72-4967-b09e-a4622b61b1ea",
+      "name": "FileName",
+      "displayName": "File Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "ed0cb9b9-2047-4e4f-aff1-dc98bc4a00f1",
+      "name": "Number",
+      "displayName": "Number",
+      "type": "Int32",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

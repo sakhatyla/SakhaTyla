@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
 import { TranslocoRootModule } from '../transloco-root.module';
 import { BookCoreModule } from '../book-core/book-core.module';
+import { BookPageModule } from '../book-page/book-page.module';
 
 import { BookListComponent } from './book-list.component';
 import { BookEditComponent } from './book-edit.component';
@@ -21,7 +22,8 @@ import { BooksComponent } from './books.component';
     RouterModule,
     CoreModule,
     TranslocoRootModule,
-    BookCoreModule
+    BookCoreModule,
+    BookPageModule
   ],
   exports: [
     BookListComponent,
