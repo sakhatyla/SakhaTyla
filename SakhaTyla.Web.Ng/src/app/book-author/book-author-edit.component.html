@@ -1,0 +1,35 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Book Author') }} <app-book-author-show [value]="bookAuthor"></app-book-author-show>
+  </h1>
+  <mat-dialog-content *ngIf="bookAuthor" class="mat-dialog-content-edit">
+
+    <form [formGroup]="bookAuthorForm">
+      <mat-form-field>
+        <mat-label>{{ t('Last Name') }}</mat-label>
+        <app-text-edit formControlName="lastName" name="lastName" [placeholder]="t('Last Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.lastName | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('First Name') }}</mat-label>
+        <app-text-edit formControlName="firstName" name="firstName" [placeholder]="t('First Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.firstName | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Middle Name') }}</mat-label>
+        <app-text-edit formControlName="middleName" name="middleName" [placeholder]="t('Middle Name')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.middleName | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('NickName') }}</mat-label>
+        <app-text-edit formControlName="nickName" name="nickName" [placeholder]="t('NickName')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.nickName | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>

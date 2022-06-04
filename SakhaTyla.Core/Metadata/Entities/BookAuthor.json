@@ -1,0 +1,60 @@
+﻿{
+  "id": "a52749e5-063a-44a4-990a-abac4009405b",
+  "name": "BookAuthor",
+  "pluralName": "BookAuthors",
+  "displayName": "Book Author",
+  "pluralDisplayName": "Book Authors",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "adb00e55-4f6d-496c-bd2a-dc71293f65c4",
+      "name": "LastName",
+      "displayName": "Last Name",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "8bbca482-96f4-432c-99e1-cefbe7f9f1d5",
+      "name": "FirstName",
+      "displayName": "First Name",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "5958c16a-43c8-42c1-9fcb-8847c70cffe1",
+      "name": "MiddleName",
+      "displayName": "Middle Name",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "326c1663-9241-4457-8d51-0161c1eccb0f",
+      "name": "NickName",
+      "displayName": "NickName",
+      "type": "String",
+      "size": 50,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

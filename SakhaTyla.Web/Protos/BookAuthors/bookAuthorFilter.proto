@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookAuthors";
+
+message BookAuthorFilter {
+    oneof lastNameOneOf {
+        string lastName = 60;
+    }
+    oneof firstNameOneOf {
+        string firstName = 70;
+    }
+    oneof middleNameOneOf {
+        string middleName = 80;
+    }
+    oneof nickNameOneOf {
+        string nickName = 90;
+    }
+}

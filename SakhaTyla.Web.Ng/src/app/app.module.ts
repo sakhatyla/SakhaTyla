@@ -34,6 +34,11 @@ import { TranslocoRootModule } from './transloco-root.module';
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] },
       // ADD ROUTES HERE
       {
+        path: 'book-author',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./book-author/book-author-routed.module').then(m => m.BookAuthorRoutedModule)
+      },
+      {
         path: 'book-label',
         canActivate: [AuthorizeGuard],
         loadChildren: () => import('./book-label/book-label-routed.module').then(m => m.BookLabelRoutedModule)

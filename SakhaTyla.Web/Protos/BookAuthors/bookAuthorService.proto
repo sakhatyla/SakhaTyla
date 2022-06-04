@@ -1,0 +1,70 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/BookAuthors/bookAuthorModel.proto";
+import "Protos/BookAuthors/bookAuthorFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookAuthors";
+
+service BookAuthorService {
+    rpc GetBookAuthors(GetBookAuthorsRequest) returns (BookAuthorPageModel);
+    rpc GetBookAuthor(GetBookAuthorRequest) returns (BookAuthor);
+    rpc UpdateBookAuthor(UpdateBookAuthorRequest) returns (Empty);
+    rpc CreateBookAuthor(CreateBookAuthorRequest) returns (CreatedEntity);
+    rpc DeleteBookAuthor(DeleteBookAuthorRequest) returns (Empty);
+}
+
+message CreateBookAuthorRequest {
+    oneof lastNameOneOf {
+        string lastName = 6;
+    }
+    oneof firstNameOneOf {
+        string firstName = 7;
+    }
+    oneof middleNameOneOf {
+        string middleName = 8;
+    }
+    oneof nickNameOneOf {
+        string nickName = 9;
+    }
+}
+
+message DeleteBookAuthorRequest {
+    int32 id = 1;
+}
+
+message GetBookAuthorRequest {
+    int32 id = 1;
+}
+
+message GetBookAuthorsRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    BookAuthorFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateBookAuthorRequest {
+    int32 id = 1;
+    oneof lastNameOneOf {
+        string lastName = 6;
+    }
+    oneof firstNameOneOf {
+        string firstName = 7;
+    }
+    oneof middleNameOneOf {
+        string middleName = 8;
+    }
+    oneof nickNameOneOf {
+        string nickName = 9;
+    }
+}
