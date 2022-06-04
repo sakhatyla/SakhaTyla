@@ -1,0 +1,24 @@
+﻿{
+  "id": "7bb20399-53f6-4d7a-8ba8-806a65f1a018",
+  "name": "CommentContainer",
+  "pluralName": "CommentContainers",
+  "displayName": "Comment Container",
+  "pluralDisplayName": "Comment Containers",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "d6262e05-feba-48a7-ad00-5fccafd4808c",
+      "name": "CommentCount",
+      "displayName": "Comment Count",
+      "type": "Int32",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}
