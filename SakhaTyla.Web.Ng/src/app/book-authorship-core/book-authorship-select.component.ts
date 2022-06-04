@@ -6,26 +6,26 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Observable, of } from 'rxjs';
 import { filter, debounceTime, mergeMap, map, startWith } from 'rxjs/operators';
 
-import { BookAuthor } from './book-author.model';
-import { BookAuthorService } from './book-author.service';
+import { BookAuthorship } from './book-authorship.model';
+import { BookAuthorshipService } from './book-authorship.service';
 
 @Component({
-  selector: 'app-book-author-select',
-  templateUrl: './book-author-select.component.html',
+  selector: 'app-book-authorship-select',
+  templateUrl: './book-authorship-select.component.html',
   providers: [
-    { provide: MatFormFieldControl, useExisting: BookAuthorSelectComponent }
+    { provide: MatFormFieldControl, useExisting: BookAuthorshipSelectComponent }
   ]
 })
 
-export class BookAuthorSelectComponent implements OnInit, ControlValueAccessor,
+export class BookAuthorshipSelectComponent implements OnInit, ControlValueAccessor,
   MatFormFieldControl<number | null>, OnDestroy, DoCheck {
 
   static nextId = 0;
 
   stateChanges = new Subject<void>();
   focused = false;
-  controlType = 'app-book-author-select';
-  id = `book-author-select-${BookAuthorSelectComponent.nextId++}`;
+  controlType = 'app-book-authorship-select';
+  id = `book-authorship-select-${BookAuthorshipSelectComponent.nextId++}`;
   describedBy = '';
 
   errorState = false;
@@ -36,11 +36,11 @@ export class BookAuthorSelectComponent implements OnInit, ControlValueAccessor,
 
   get shouldLabelFloat() { return this.focused || !this.empty || this.autocompleteControl.value; }
 
-  BookAuthor = BookAuthor;
+  BookAuthorship = BookAuthorship;
 
-  bookAuthors: BookAuthor[] = [];
+  bookAuthorships: BookAuthorship[] = [];
 
-  autocompleteBookAuthors: Observable<BookAuthor[]>;
+  autocompleteBookAuthorships: Observable<BookAuthorship[]>;
 
   autocompleteControl = new FormControl();
 
@@ -90,7 +90,7 @@ export class BookAuthorSelectComponent implements OnInit, ControlValueAccessor,
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  constructor(private bookAuthorService: BookAuthorService,
+  constructor(private bookAuthorshipService: BookAuthorshipService,
               private fm: FocusMonitor, private elRef: ElementRef<HTMLElement>,
               @Optional() @Self() public ngControl: NgControl) {
     fm.monitor(elRef, true).subscribe(origin => {
@@ -114,8 +114,8 @@ export class BookAuthorSelectComponent implements OnInit, ControlValueAccessor,
     this.innerValue = value;
     if (this.mode === 'autocomplete') {
       if (this.value) {
-        this.bookAuthorService.getBookAuthor({ id: this.value })
-          .subscribe(bookAuthor => this.autocompleteControl.setValue(bookAuthor));
+        this.bookAuthorshipService.getBookAuthorship({ id: this.value })
+          .subscribe(bookAuthorship => this.autocompleteControl.setValue(bookAuthorship));
       } else {
         this.autocompleteControl.setValue('');
       }
@@ -124,9 +124,9 @@ export class BookAuthorSelectComponent implements OnInit, ControlValueAccessor,
 
   ngOnInit(): void {
     if (this.mode === 'select') {
-      this.bookAuthorService.getBookAuthors({}).subscribe(bookAuthors => this.bookAuthors = bookAuthors.pageItems);
+      this.bookAuthorshipService.getBookAuthorships({}).subscribe(bookAuthorships => this.bookAuthorships = bookAuthorships.pageItems);
     } else if (this.mode === 'autocomplete') {
-      this.autocompleteBookAuthors = this.autocompleteControl.valueChanges
+      this.autocompleteBookAuthorships = this.autocompleteControl.valueChanges
         .pipe(
           map(value => {
             if (value === '') {
@@ -143,11 +143,11 @@ export class BookAuthorSelectComponent implements OnInit, ControlValueAccessor,
           debounceTime(500),
           mergeMap(val => {
             if (val.length !== 0) {
-              return this.bookAuthorService.getBookAuthors({
+              return this.bookAuthorshipService.getBookAuthorships({
                 filter: { text: val }
               }).pipe(map(res => res.pageItems));
             } else {
-              return of(<BookAuthor[]>[]);
+              return of(<BookAuthorship[]>[]);
             }
           }));
     }
@@ -172,7 +172,7 @@ export class BookAuthorSelectComponent implements OnInit, ControlValueAccessor,
     }
   }
 
-  getDisplay(bookAuthor: BookAuthor) {
-    return bookAuthor ? `${bookAuthor.lastName} ${bookAuthor.firstName} ${bookAuthor.middleName}` : '';
+  getDisplay(bookAuthorship: BookAuthorship) {
+    return bookAuthorship ? bookAuthorship.authorId : '';
   }
 }

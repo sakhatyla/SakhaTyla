@@ -70,11 +70,11 @@ export class BookLabelEditComponent implements OnInit {
   }
 
   private saveBookLabel() {
-    const book = this.bookLabelForm.value;
-    book.bookId = this.bookId;
+    const bookLabel = this.bookLabelForm.value;
+    bookLabel.bookId = this.bookId;
     const saveBookLabel$ = this.id ?
-      this.bookLabelService.updateBookLabel(book) :
-      this.bookLabelService.createBookLabel(book);
+      this.bookLabelService.updateBookLabel(bookLabel) :
+      this.bookLabelService.createBookLabel(bookLabel);
     saveBookLabel$.subscribe(() => this.dialogRef.close(true),
       error => this.onError(error));
   }

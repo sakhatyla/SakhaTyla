@@ -1,0 +1,48 @@
+﻿{
+  "id": "4ef587c6-21a7-49fd-8cc9-4854bc901a3c",
+  "name": "BookAuthorship",
+  "pluralName": "BookAuthorships",
+  "displayName": "Book Author",
+  "pluralDisplayName": "Book Authors",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "6858ecc9-cb47-4948-88c5-4c90355f8257",
+      "name": "Book",
+      "displayName": "Book",
+      "type": null,
+      "size": null,
+      "entityId": "ca613b0f-a866-4418-aabb-f1740ac1f6ef",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "c10647f3-5237-4b0c-9464-872cb068d49e",
+      "name": "Author",
+      "displayName": "Author",
+      "type": null,
+      "size": null,
+      "entityId": "a52749e5-063a-44a4-990a-abac4009405b",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "ac4c2b94-8cc8-4df4-ae71-f0e9448e5b7e",
+      "name": "Weight",
+      "displayName": "Weight",
+      "type": "Int32",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

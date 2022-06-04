@@ -1,0 +1,61 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/BookAuthorships/bookAuthorshipModel.proto";
+import "Protos/BookAuthorships/bookAuthorshipFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookAuthorships";
+
+service BookAuthorshipService {
+    rpc GetBookAuthorships(GetBookAuthorshipsRequest) returns (BookAuthorshipPageModel);
+    rpc GetBookAuthorship(GetBookAuthorshipRequest) returns (BookAuthorship);
+    rpc UpdateBookAuthorship(UpdateBookAuthorshipRequest) returns (Empty);
+    rpc CreateBookAuthorship(CreateBookAuthorshipRequest) returns (CreatedEntity);
+    rpc DeleteBookAuthorship(DeleteBookAuthorshipRequest) returns (Empty);
+}
+
+message CreateBookAuthorshipRequest {
+    oneof bookIdOneOf {
+        int32 bookId = 6;
+    }
+    oneof authorIdOneOf {
+        int32 authorId = 7;
+    }
+    oneof weightOneOf {
+        int32 weight = 8;
+    }
+}
+
+message DeleteBookAuthorshipRequest {
+    int32 id = 1;
+}
+
+message GetBookAuthorshipRequest {
+    int32 id = 1;
+}
+
+message GetBookAuthorshipsRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    BookAuthorshipFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateBookAuthorshipRequest {
+    int32 id = 1;
+    oneof authorIdOneOf {
+        int32 authorId = 7;
+    }
+    oneof weightOneOf {
+        int32 weight = 8;
+    }
+}

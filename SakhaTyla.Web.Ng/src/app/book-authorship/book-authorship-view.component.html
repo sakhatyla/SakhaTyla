@@ -1,0 +1,33 @@
+﻿<mat-card class="mat-card-view" *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Book Author') }} <app-book-authorship-show [value]="bookAuthorship"></app-book-authorship-show></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
+
+  <div *ngIf="bookAuthorship">
+    <div class="field-view">
+      <label>{{ t('Book') }}</label>
+      <div>
+        <app-book-show [value]="bookAuthorship.book"></app-book-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Author') }}</label>
+      <div>
+        <app-book-author-show [value]="bookAuthorship.author"></app-book-author-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Weight') }}</label>
+      <div>
+        <app-number-view [value]="bookAuthorship.weight"></app-number-view>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

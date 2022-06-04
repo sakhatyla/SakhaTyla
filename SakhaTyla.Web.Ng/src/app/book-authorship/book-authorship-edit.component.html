@@ -1,0 +1,25 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Book Author') }} <app-book-authorship-show [value]="bookAuthorship"></app-book-authorship-show>
+  </h1>
+  <mat-dialog-content *ngIf="bookAuthorship" class="mat-dialog-content-edit">
+
+    <form [formGroup]="bookAuthorshipForm">
+      <mat-form-field>
+        <mat-label>{{ t('Author') }}</mat-label>
+        <app-book-author-select formControlName="authorId" name="authorId" [placeholder]="t('Author')"></app-book-author-select>
+        <mat-error>{{ error?.modelState?.authorId | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Weight') }}</mat-label>
+        <app-number-edit formControlName="weight" name="weight" [placeholder]="t('Weight')"></app-number-edit>
+        <mat-error>{{ error?.modelState?.weight | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>

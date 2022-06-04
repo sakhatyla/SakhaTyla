@@ -70,11 +70,11 @@ export class BookPageEditComponent implements OnInit {
   }
 
   private saveBookPage() {
-    const book = this.bookPageForm.value;
-    book.bookId = this.bookId;
+    const bookPage = this.bookPageForm.value;
+    bookPage.bookId = this.bookId;
     const saveBookPage$ = this.id ?
-      this.bookPageService.updateBookPage(book) :
-      this.bookPageService.createBookPage(book);
+      this.bookPageService.updateBookPage(bookPage) :
+      this.bookPageService.createBookPage(bookPage);
     saveBookPage$.subscribe(() => this.dialogRef.close(true),
       error => this.onError(error));
   }

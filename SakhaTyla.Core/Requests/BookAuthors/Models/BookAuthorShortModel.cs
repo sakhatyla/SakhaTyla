@@ -14,9 +14,13 @@ namespace SakhaTyla.Core.Requests.BookAuthors.Models
 
         public string LastName { get; set; }
 
+        public string? FirstName { get; set; }
+
+        public string? MiddleName { get; set; }
+
         public override string ToString()
         {
-            return $"{LastName}";
+            return $"{LastName} {FirstName} {MiddleName}";
         }
     }
 }

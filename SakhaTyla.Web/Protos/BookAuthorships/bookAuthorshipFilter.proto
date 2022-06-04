@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookAuthorships";
+
+message BookAuthorshipFilter {
+    oneof bookIdOneOf {
+        int32 bookId = 60;
+    }
+    oneof authorIdOneOf {
+        int32 authorId = 70;
+    }
+    oneof weightFromOneOf {
+        int32 weightFrom = 80;
+    }
+    oneof weightToOneOf {
+        int32 weightTo = 81;
+    }
+}
