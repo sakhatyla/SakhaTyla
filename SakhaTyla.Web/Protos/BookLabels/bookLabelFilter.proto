@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookLabels";
+
+message BookLabelFilter {
+    oneof bookIdOneOf {
+        int32 bookId = 60;
+    }
+    oneof nameOneOf {
+        string name = 70;
+    }
+    oneof pageIdOneOf {
+        int32 pageId = 80;
+    }
+}

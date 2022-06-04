@@ -6,26 +6,26 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, Observable, of } from 'rxjs';
 import { filter, debounceTime, mergeMap, map, startWith } from 'rxjs/operators';
 
-import { BookPage } from './book-page.model';
-import { BookPageService } from './book-page.service';
+import { BookLabel } from './book-label.model';
+import { BookLabelService } from './book-label.service';
 
 @Component({
-  selector: 'app-book-page-select',
-  templateUrl: './book-page-select.component.html',
+  selector: 'app-book-label-select',
+  templateUrl: './book-label-select.component.html',
   providers: [
-    { provide: MatFormFieldControl, useExisting: BookPageSelectComponent }
+    { provide: MatFormFieldControl, useExisting: BookLabelSelectComponent }
   ]
 })
 
-export class BookPageSelectComponent implements OnInit, ControlValueAccessor,
+export class BookLabelSelectComponent implements OnInit, ControlValueAccessor,
   MatFormFieldControl<number | null>, OnDestroy, DoCheck {
 
   static nextId = 0;
 
   stateChanges = new Subject<void>();
   focused = false;
-  controlType = 'app-book-page-select';
-  id = `book-page-select-${BookPageSelectComponent.nextId++}`;
+  controlType = 'app-book-label-select';
+  id = `book-label-select-${BookLabelSelectComponent.nextId++}`;
   describedBy = '';
 
   errorState = false;
@@ -36,19 +36,16 @@ export class BookPageSelectComponent implements OnInit, ControlValueAccessor,
 
   get shouldLabelFloat() { return this.focused || !this.empty || this.autocompleteControl.value; }
 
-  BookPage = BookPage;
+  BookLabel = BookLabel;
 
-  bookPages: BookPage[] = [];
+  bookLabels: BookLabel[] = [];
 
-  autocompleteBookPages: Observable<BookPage[]>;
+  autocompleteBookLabels: Observable<BookLabel[]>;
 
   autocompleteControl = new FormControl();
 
   @Input()
   value: number | null = null;
-
-  @Input()
-  bookId: number;
 
   @Input()
   name: string;
@@ -93,7 +90,7 @@ export class BookPageSelectComponent implements OnInit, ControlValueAccessor,
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  constructor(private bookPageService: BookPageService,
+  constructor(private bookLabelService: BookLabelService,
               private fm: FocusMonitor, private elRef: ElementRef<HTMLElement>,
               @Optional() @Self() public ngControl: NgControl) {
     fm.monitor(elRef, true).subscribe(origin => {
@@ -117,8 +114,8 @@ export class BookPageSelectComponent implements OnInit, ControlValueAccessor,
     this.innerValue = value;
     if (this.mode === 'autocomplete') {
       if (this.value) {
-        this.bookPageService.getBookPage({ id: this.value })
-          .subscribe(bookPage => this.autocompleteControl.setValue(bookPage));
+        this.bookLabelService.getBookLabel({ id: this.value })
+          .subscribe(bookLabel => this.autocompleteControl.setValue(bookLabel));
       } else {
         this.autocompleteControl.setValue('');
       }
@@ -127,9 +124,9 @@ export class BookPageSelectComponent implements OnInit, ControlValueAccessor,
 
   ngOnInit(): void {
     if (this.mode === 'select') {
-      this.bookPageService.getBookPages({ filter: { bookId: this.bookId } }).subscribe(bookPages => this.bookPages = bookPages.pageItems);
+      this.bookLabelService.getBookLabels({}).subscribe(bookLabels => this.bookLabels = bookLabels.pageItems);
     } else if (this.mode === 'autocomplete') {
-      this.autocompleteBookPages = this.autocompleteControl.valueChanges
+      this.autocompleteBookLabels = this.autocompleteControl.valueChanges
         .pipe(
           map(value => {
             if (value === '') {
@@ -146,11 +143,11 @@ export class BookPageSelectComponent implements OnInit, ControlValueAccessor,
           debounceTime(500),
           mergeMap(val => {
             if (val.length !== 0) {
-              return this.bookPageService.getBookPages({
-                filter: { bookId: this.bookId, text: val }
+              return this.bookLabelService.getBookLabels({
+                filter: { text: val }
               }).pipe(map(res => res.pageItems));
             } else {
-              return of(<BookPage[]>[]);
+              return of(<BookLabel[]>[]);
             }
           }));
     }
@@ -175,7 +172,7 @@ export class BookPageSelectComponent implements OnInit, ControlValueAccessor,
     }
   }
 
-  getDisplay(bookPage: BookPage) {
-    return bookPage ? bookPage.fileName : '';
+  getDisplay(bookLabel: BookLabel) {
+    return bookLabel ? bookLabel.name : '';
   }
 }

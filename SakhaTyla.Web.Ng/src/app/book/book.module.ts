@@ -10,6 +10,7 @@ import { BookListComponent } from './book-list.component';
 import { BookEditComponent } from './book-edit.component';
 import { BookViewComponent } from './book-view.component';
 import { BooksComponent } from './books.component';
+import { BookLabelModule } from '../book-label/book-label.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BooksComponent } from './books.component';
     CoreModule,
     TranslocoRootModule,
     BookCoreModule,
-    BookPageModule
+    BookPageModule,
+    BookLabelModule,
   ],
   exports: [
     BookListComponent,

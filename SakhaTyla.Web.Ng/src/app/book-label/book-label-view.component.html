@@ -1,0 +1,33 @@
+﻿<mat-card class="mat-card-view" *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Book Label') }} <app-book-label-show [value]="bookLabel"></app-book-label-show></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onEdit()">{{ t('shared.edit') }}</button>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
+
+  <div *ngIf="bookLabel">
+    <div class="field-view">
+      <label>{{ t('Book') }}</label>
+      <div>
+        <app-book-show [value]="bookLabel.book"></app-book-show>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Name') }}</label>
+      <div>
+        <app-text-view [value]="bookLabel.name"></app-text-view>
+      </div>
+    </div>
+    <div class="field-view">
+      <label>{{ t('Page') }}</label>
+      <div>
+        <app-book-page-show [value]="bookLabel.page"></app-book-page-show>
+      </div>
+    </div>
+  </div>
+
+</mat-card>

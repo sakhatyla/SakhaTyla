@@ -1,0 +1,48 @@
+﻿{
+  "id": "5b520519-33ec-4d22-aa9e-2943943d30db",
+  "name": "BookLabel",
+  "pluralName": "BookLabels",
+  "displayName": "Book Label",
+  "pluralDisplayName": "Book Labels",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "dc3cf6cc-b54b-4912-8c02-85ab07be0c27",
+      "name": "Book",
+      "displayName": "Book",
+      "type": null,
+      "size": null,
+      "entityId": "ca613b0f-a866-4418-aabb-f1740ac1f6ef",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "160b6066-0112-4d55-ac42-17cb95d7df3a",
+      "name": "Name",
+      "displayName": "Name",
+      "type": "String",
+      "size": 200,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "1f9fb57b-730f-4bdb-b636-6469ef362d0a",
+      "name": "Page",
+      "displayName": "Page",
+      "type": null,
+      "size": null,
+      "entityId": "bf606588-7f45-4289-a764-b1b387402ce0",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

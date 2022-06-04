@@ -1,0 +1,61 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+import "Protos/BookLabels/bookLabelModel.proto";
+import "Protos/BookLabels/bookLabelFilter.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookLabels";
+
+service BookLabelService {
+    rpc GetBookLabels(GetBookLabelsRequest) returns (BookLabelPageModel);
+    rpc GetBookLabel(GetBookLabelRequest) returns (BookLabel);
+    rpc UpdateBookLabel(UpdateBookLabelRequest) returns (Empty);
+    rpc CreateBookLabel(CreateBookLabelRequest) returns (CreatedEntity);
+    rpc DeleteBookLabel(DeleteBookLabelRequest) returns (Empty);
+}
+
+message CreateBookLabelRequest {
+    oneof bookIdOneOf {
+        int32 bookId = 6;
+    }
+    oneof nameOneOf {
+        string name = 7;
+    }
+    oneof pageIdOneOf {
+        int32 pageId = 8;
+    }
+}
+
+message DeleteBookLabelRequest {
+    int32 id = 1;
+}
+
+message GetBookLabelRequest {
+    int32 id = 1;
+}
+
+message GetBookLabelsRequest {
+    oneof pageIndexOneOf {
+        int32 pageIndex = 1;
+    }
+    oneof pageSizeOneOf {
+        int32 pageSize = 2;
+    }
+    BookLabelFilter filter = 3;
+    string orderBy = 4;
+    oneof orderDirectionOneOf {
+        OrderDirection orderDirection = 5;
+    }
+}
+
+message UpdateBookLabelRequest {
+    int32 id = 1;
+    oneof nameOneOf {
+        string name = 7;
+    }
+    oneof pageIdOneOf {
+        int32 pageId = 8;
+    }
+}

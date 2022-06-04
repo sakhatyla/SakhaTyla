@@ -9,6 +9,8 @@ import { BookService } from '../book-core/book.service';
 import { BookEditComponent } from './book-edit.component';
 import { BookPageListState } from '../book-page-core/book-page.model';
 import { BookPageFilter } from '../book-page-core/book-page-filter.model';
+import { BookLabelListState } from '../book-label-core/book-label.model';
+import { BookLabelFilter } from '../book-label-core/book-label-filter.model';
 
 @Component({
   selector: 'app-book-view',
@@ -19,6 +21,7 @@ export class BookViewComponent implements OnInit {
   id: number;
   book: Book;
   bookPageListState: BookPageListState;
+  bookLabelListState: BookLabelListState;
 
   constructor(private dialog: MatDialog,
               private bookService: BookService,
@@ -40,6 +43,10 @@ export class BookViewComponent implements OnInit {
         bookPageFilter.bookId = book.id;
         this.bookPageListState = new BookPageListState();
         this.bookPageListState.filter = bookPageFilter;
+        const bookLabelilter = new BookLabelFilter();
+        bookLabelilter.bookId = book.id;
+        this.bookLabelListState = new BookLabelListState();
+        this.bookLabelListState.filter = bookLabelilter;
       });
   }
 

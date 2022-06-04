@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.BookLabels";
+
+message BookLabel {
+    int32 id = 1;
+    google.protobuf.Timestamp creationDate = 2;
+    google.protobuf.Timestamp modificationDate = 3;
+    int32 creationUserId = 4;
+    int32 modificationUserId = 5;
+    int32 bookId = 6;
+    string name = 7;
+    int32 pageId = 8;
+}
+
+message BookLabelPageModel {
+    repeated BookLabel pageItems = 1;
+    int32 totalItems = 2;
+    int32 currentPageIndex = 3;
+}
