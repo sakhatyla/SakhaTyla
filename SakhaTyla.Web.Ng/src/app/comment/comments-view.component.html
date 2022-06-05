@@ -1,0 +1,19 @@
+<mat-card class="mat-card-view" *transloco="let t">
+
+  <mat-card-actions>
+    <button mat-raised-button type="button" (click)="onBack()">{{ t('shared.back') }}</button>
+  </mat-card-actions>
+
+  <div *ngIf="commentContainer">
+    <div class="field-view" *ngIf="pageUrl">
+      <label>{{ t('Page') }}</label>
+      <div>
+        <a [href]="pageUrl">{{ pageUrl }}</a>
+      </div>
+    </div>
+    <div class="field-view">
+      <app-comment-list *ngIf="commentListState" [state]="commentListState"></app-comment-list>
+    </div>
+  </div>
+
+</mat-card>

@@ -1,0 +1,46 @@
+﻿ul {
+  list-style-type: none;
+  padding: 16px;
+
+  &:first-child {
+    padding-top: 8px;
+  }
+
+  &:last-child {
+    padding-bottom: 0px;
+  }
+
+  .comment {
+    padding-top: 8px;
+
+    .title {
+      display: flex;
+      padding-bottom: 4px;
+
+      .author {
+        font-weight: bold;
+        padding-right: 8px;
+      }
+    }
+
+    .attachments {
+      display: flex;
+      margin: 8px 0px;
+      flex-wrap: wrap;
+    }
+
+    .likes {
+      padding-top: 8px;
+      font-size: 13px;
+    }
+
+    .actions {
+      padding-top: 8px;
+
+      a {
+        cursor: pointer;
+        padding-right: 16px;
+      }
+    }
+  }
+}

@@ -34,6 +34,11 @@ import { TranslocoRootModule } from './transloco-root.module';
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] },
       // ADD ROUTES HERE
       {
+        path: 'comment',
+        canActivate: [AuthorizeGuard],
+        loadChildren: () => import('./comment/comment-routed.module').then(m => m.CommentRoutedModule)
+      },
+      {
         path: 'book-authorship',
         canActivate: [AuthorizeGuard],
         loadChildren: () => import('./book-authorship/book-authorship-routed.module').then(m => m.BookAuthorshipRoutedModule)

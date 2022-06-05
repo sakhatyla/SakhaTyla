@@ -83,7 +83,7 @@ namespace SakhaTyla.Core.Requests.Articles
             return queryable.Where(e => !e.IsDeleted);
         }
 
-        public static string ProcessText(this string text)
+        public static string ProcessArticleText(this string text)
         {
             var markdown = new Markdown();
             return markdown.Transform(text);

@@ -85,3 +85,7 @@
   </div>
 
 </mat-card>
+
+<mat-card class="mat-card-list">
+  <app-comment-list [state]="commentListState" *ngIf="id"></app-comment-list>
+</mat-card>

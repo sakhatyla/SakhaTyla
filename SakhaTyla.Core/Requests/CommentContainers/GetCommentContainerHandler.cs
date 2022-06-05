@@ -25,6 +25,7 @@ namespace SakhaTyla.Core.Requests.CommentContainers
         public async Task<CommentContainerModel?> Handle(GetCommentContainer request, CancellationToken cancellationToken)
         {
             var commentContainer = await _commentContainerRepository.GetEntities()
+                .Include(e => e.Page!.Route)
                 .Where(e => e.Id == request.Id)
                 .FirstOrDefaultAsync(cancellationToken);
             if (commentContainer == null)

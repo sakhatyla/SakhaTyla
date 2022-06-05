@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SakhaTyla.Data;
 
@@ -11,9 +12,10 @@ using SakhaTyla.Data;
 namespace SakhaTyla.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220605105719_AddComments")]
+    partial class AddComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1065,8 +1067,7 @@ namespace SakhaTyla.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CommentContainerId")
-                        .IsUnique();
+                    b.HasIndex("CommentContainerId");
 
                     b.HasIndex("CreationUserId");
 
@@ -1754,7 +1755,7 @@ namespace SakhaTyla.Data.Migrations
                         .HasForeignKey("ModificationUserId");
 
                     b.HasOne("SakhaTyla.Core.Entities.Comment", "Parent")
-                        .WithMany("Children")
+                        .WithMany()
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Author");
@@ -1892,8 +1893,8 @@ namespace SakhaTyla.Data.Migrations
             modelBuilder.Entity("SakhaTyla.Core.Entities.Page", b =>
                 {
                     b.HasOne("SakhaTyla.Core.Entities.CommentContainer", "CommentContainer")
-                        .WithOne("Page")
-                        .HasForeignKey("SakhaTyla.Core.Entities.Page", "CommentContainerId")
+                        .WithMany()
+                        .HasForeignKey("CommentContainerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -2040,16 +2041,6 @@ namespace SakhaTyla.Data.Migrations
             modelBuilder.Entity("SakhaTyla.Core.Entities.Article", b =>
                 {
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("SakhaTyla.Core.Entities.Comment", b =>
-                {
-                    b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("SakhaTyla.Core.Entities.CommentContainer", b =>
-                {
-                    b.Navigation("Page");
                 });
 
             modelBuilder.Entity("SakhaTyla.Core.Entities.MenuItem", b =>

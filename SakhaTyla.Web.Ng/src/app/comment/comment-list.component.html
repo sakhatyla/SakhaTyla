@@ -1,0 +1,37 @@
+﻿<ng-container *transloco="let t">
+
+  <mat-card-header>
+    <mat-card-title>{{ t('Comments') }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <div class="action-item">
+      <button mat-raised-button color="primary" type="button" (click)="onCreate()">{{ t('shared.create') }}</button>
+    </div>
+  </mat-card-actions>
+
+  <mat-card-content class="mat-elevation-z8" *ngIf="comments">
+    <ng-container *ngTemplateOutlet="commentsTemplate; context: { $implicit: comments }"></ng-container>
+  </mat-card-content>
+
+</ng-container>
+
+<ng-template #commentsTemplate let-items>
+  <ul>
+    <li class="comment" *ngFor="let item of items">
+      <div class="title">
+        <div class="author">
+          <app-user-show [value]="item.author"></app-user-show>
+        </div>
+        <app-datetime-view [value]="item.creationDate"></app-datetime-view>
+      </div>
+      {{ item.text }}
+      <div class="actions">
+        <a (click)="onCreate(item.id)">Reply</a>
+        <a (click)="onEdit(item.id)">Edit</a>
+        <a (click)="onDelete(item.id)">Delete</a>
+      </div>
+      <ng-container *ngTemplateOutlet="commentsTemplate; context: { $implicit: item.children }"></ng-container>
+    </li>
+  </ul>
+</ng-template>

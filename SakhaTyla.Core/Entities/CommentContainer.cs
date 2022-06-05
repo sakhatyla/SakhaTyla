@@ -14,6 +14,7 @@ namespace SakhaTyla.Core.Entities
 
         [Required()]
         public int CommentCount { get; set; }
-                
+
+        public Page? Page { get; set; }
     }
 }

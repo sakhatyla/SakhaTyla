@@ -7,6 +7,7 @@ import { ConvertStringTo } from '../core/converter.helper';
 import { Page } from '../page-core/page.model';
 import { PageService } from '../page-core/page.service';
 import { PageEditComponent } from './page-edit.component';
+import { CommentListState } from '../comment-core/comment.model';
 
 @Component({
   selector: 'app-page-view',
@@ -16,6 +17,7 @@ import { PageEditComponent } from './page-edit.component';
 export class PageViewComponent implements OnInit {
   id: number;
   page: Page;
+  commentListState = new CommentListState();
 
   constructor(private dialog: MatDialog,
               private pageService: PageService,
@@ -31,7 +33,10 @@ export class PageViewComponent implements OnInit {
 
   private getPage() {
     this.pageService.getPage({ id: this.id })
-      .subscribe(page => this.page = page);
+      .subscribe(page => {
+        this.page = page;
+        this.commentListState.filter.containerId = this.page.commentContainerId;
+      });
   }
 
   onEdit() {

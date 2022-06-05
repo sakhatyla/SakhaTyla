@@ -7,6 +7,7 @@ import { PageCoreModule } from '../page-core/page-core.module';
 import { FileCoreModule } from '../file-core/file-core.module';
 import { PageTypeModule } from '../page-type/page-type.module';
 import { RouteCoreModule } from '../route-core/route-core.module';
+import { CommentModule } from '../comment/comment.module';
 
 import { PageListComponent } from './page-list.component';
 import { PageEditComponent } from './page-edit.component';
@@ -27,7 +28,8 @@ import { PagesComponent } from './pages.component';
     FileCoreModule,
     PageTypeModule,
     PageCoreModule,
-    RouteCoreModule
+    RouteCoreModule,
+    CommentModule,
   ],
   exports: [
     PageListComponent,

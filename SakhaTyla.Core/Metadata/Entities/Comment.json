@@ -1,0 +1,96 @@
+﻿{
+  "id": "270eb751-5fc9-4ea7-ad69-c6dc1ccab366",
+  "name": "Comment",
+  "pluralName": "Comments",
+  "displayName": "Comment",
+  "pluralDisplayName": "Comments",
+  "isAbstract": false,
+  "baseEntityId": "2819f292-9f78-4e87-88ed-274c4133982a",
+  "fields": [
+    {
+      "id": "eeb19d3a-8712-457e-ae0c-0850f9007f87",
+      "name": "Container",
+      "displayName": "Container",
+      "type": null,
+      "size": null,
+      "entityId": "7bb20399-53f6-4d7a-8ba8-806a65f1a018",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "404dedd9-36e6-48a2-ab4d-ea27be53d927",
+      "name": "Text",
+      "displayName": "Text",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "239b1401-ab97-4966-8811-4d643ef0fa96",
+      "name": "TextSource",
+      "displayName": "Text Source",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "36e5df88-5e67-488d-8635-eb215218bb51",
+      "name": "Author",
+      "displayName": "Author",
+      "type": null,
+      "size": null,
+      "entityId": "51c285a8-11d0-4f3c-8b9d-534269015981",
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "545c1051-3212-4060-84a5-41d1e01db176",
+      "name": "Parent",
+      "displayName": "Parent",
+      "type": null,
+      "size": null,
+      "entityId": "270eb751-5fc9-4ea7-ad69-c6dc1ccab366",
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
+    },
+    {
+      "id": "41805508-dc4a-4939-9396-ed08731370d3",
+      "name": "TreePath",
+      "displayName": "TreePath",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    },
+    {
+      "id": "67904a1e-8481-4e90-aa4b-ac5ff1b34ba4",
+      "name": "TreeOrder",
+      "displayName": "TreeOrder",
+      "type": "String",
+      "size": null,
+      "entityId": null,
+      "isRequired": false,
+      "enumId": null,
+      "isSystem": true,
+      "properties": {}
+    }
+  ],
+  "properties": {}
+}

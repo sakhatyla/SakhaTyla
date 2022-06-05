@@ -10,6 +10,10 @@ namespace SakhaTyla.Data.Configurations
         public void Configure(EntityTypeBuilder<Page> builder)
         {
             builder.ToTable("Pages");
+
+            builder.HasOne(a => a.CommentContainer)
+                .WithOne(b => b.Page)
+                .HasForeignKey<Page>(b => b.CommentContainerId);
         }
     }
 }

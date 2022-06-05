@@ -1,0 +1,20 @@
+﻿<ng-container *transloco="let t">
+  <h1 mat-dialog-title>
+    {{ t('Comment') }} <app-comment-show [value]="comment"></app-comment-show>
+  </h1>
+  <mat-dialog-content *ngIf="comment" class="mat-dialog-content-edit">
+
+    <form [formGroup]="commentForm">
+      <mat-form-field>
+        <mat-label>{{ t('Text Source') }}</mat-label>
+        <app-text-edit formControlName="textSource" name="textSource" [placeholder]="t('Text Source')"></app-text-edit>
+        <mat-error>{{ error?.modelState?.textSource | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>{{ t('shared.save') }}</button>
+  </mat-dialog-actions>
+</ng-container>

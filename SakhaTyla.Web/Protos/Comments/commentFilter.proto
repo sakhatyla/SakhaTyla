@@ -1,0 +1,25 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "Protos/common.proto";
+
+option csharp_namespace = "SakhaTyla.Web.Protos.Comments";
+
+message CommentFilter {
+    oneof containerIdOneOf {
+        int32 containerId = 60;
+    }
+    oneof textOneOf {
+        string text = 70;
+    }
+    oneof textSourceOneOf {
+        string textSource = 80;
+    }
+    oneof authorIdOneOf {
+        int32 authorId = 90;
+    }
+    oneof parentIdOneOf {
+        int32 parentId = 100;
+    }
+}
