@@ -24,6 +24,7 @@ export class Page {
   imageId: number;
   preview: string;
   route: Route;
+  commentContainerId: number;
 }
 
 export class PageListState {

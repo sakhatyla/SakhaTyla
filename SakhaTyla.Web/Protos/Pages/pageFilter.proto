@@ -41,4 +41,7 @@ message PageFilter {
     oneof previewOneOf {
         string preview = 180;
     }
+    oneof commentContainerIdOneOf {
+        int32 commentContainerId = 190;
+    }
 }

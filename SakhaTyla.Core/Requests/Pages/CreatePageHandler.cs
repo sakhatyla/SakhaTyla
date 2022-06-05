@@ -28,6 +28,7 @@ namespace SakhaTyla.Core.Requests.Pages
         public async Task<CreatedEntity<int>> Handle(CreatePage request, CancellationToken cancellationToken)
         {
             var page = _mapper.Map<CreatePage, Page>(request);
+            page.CommentContainer = new CommentContainer();
             _pageRepository.Add(page);
             await _unitOfWork.CommitAsync(cancellationToken);
             await _pageRepository.CalculateTree(page);

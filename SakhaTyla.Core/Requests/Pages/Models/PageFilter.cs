@@ -16,5 +16,6 @@ namespace SakhaTyla.Core.Requests.Pages.Models
         public string? MetaDescription { get; set; }
         public int? ImageId { get; set; }
         public string? Preview { get; set; }
+        public int? CommentContainerId { get; set; }
     }
 }

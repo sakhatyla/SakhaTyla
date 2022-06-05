@@ -57,5 +57,9 @@ namespace SakhaTyla.Core.Entities
 
         public Route? Route { get; set; }
 
+        [Required()]
+        public int CommentContainerId { get; set; }
+        public CommentContainer CommentContainer { get; set; } = null!;
+
     }
 }

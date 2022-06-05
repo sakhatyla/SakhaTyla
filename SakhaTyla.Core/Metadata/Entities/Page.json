@@ -162,6 +162,18 @@
       "enumId": null,
       "isSystem": false,
       "properties": {}
+    },
+    {
+      "id": "cc6ea194-2bb4-40b1-acdb-458474e3f42f",
+      "name": "CommentContainer",
+      "displayName": "Comment Container",
+      "type": null,
+      "size": null,
+      "entityId": "7bb20399-53f6-4d7a-8ba8-806a65f1a018",
+      "isRequired": true,
+      "enumId": null,
+      "isSystem": false,
+      "properties": {}
     }
   ],
   "properties": {}

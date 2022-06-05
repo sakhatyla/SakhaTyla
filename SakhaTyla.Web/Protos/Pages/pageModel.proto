@@ -26,6 +26,7 @@ message Page {
     string metaDescription = 14;
     int32 imageId = 17;
     string preview = 18;
+    int32 commentContainerId = 19;
 }
 
 message PagePageModel {

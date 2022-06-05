@@ -127,6 +127,10 @@ namespace SakhaTyla.Core.Requests.Pages
             {
                 queryable = queryable.Where(e => e.Preview!.Contains(filter.Preview));
             }
+            if (filter?.CommentContainerId != null)
+            {
+                queryable = queryable.Where(e => e.CommentContainerId == filter.CommentContainerId);
+            }
             return queryable;
         }
 

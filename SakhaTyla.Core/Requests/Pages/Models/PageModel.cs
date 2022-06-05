@@ -71,5 +71,9 @@ namespace SakhaTyla.Core.Requests.Pages.Models
         public string? Preview { get; set; }
 
         public RouteShortModel? Route { get; set; }
+
+        [DisplayName("Comment Container")]
+        public int CommentContainerId { get; set; }
+        public CommentContainers.Models.CommentContainerShortModel CommentContainer { get; set; } = null!;
     }
 }

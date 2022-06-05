@@ -34,7 +34,8 @@ namespace SakhaTyla.Core.Requests.Pages
             IQueryable<Page> query = _pageRepository.GetEntities()
                 .Include(e => e.Parent)
                 .Include(e => e.Route)
-                .Include(e => e.Image);            
+                .Include(e => e.Image)
+                .Include(e => e.CommentContainer);            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
             var pages = await query.ToListAsync(cancellationToken);

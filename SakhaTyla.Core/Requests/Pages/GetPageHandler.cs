@@ -28,6 +28,7 @@ namespace SakhaTyla.Core.Requests.Pages
                 .Include(e => e.Parent)
                 .Include(e => e.Route)
                 .Include(e => e.Image)
+                .Include(e => e.CommentContainer)
                 .Where(e => e.Id == request.Id)
                 .FirstOrDefaultAsync(cancellationToken);
             if (page == null)

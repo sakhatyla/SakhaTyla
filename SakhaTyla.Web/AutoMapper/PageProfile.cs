@@ -56,7 +56,8 @@ namespace SakhaTyla.Web.AutoMapper
                 .ForMember(dest => dest.MetaKeywords, opt => opt.Condition(src => src.MetaKeywords != default))
                 .ForMember(dest => dest.MetaDescription, opt => opt.Condition(src => src.MetaDescription != default))
                 .ForMember(dest => dest.ImageId, opt => opt.Condition(src => src.ImageId != default))
-                .ForMember(dest => dest.Preview, opt => opt.Condition(src => src.Preview != default));
+                .ForMember(dest => dest.Preview, opt => opt.Condition(src => src.Preview != default))
+                .ForMember(dest => dest.CommentContainerId, opt => opt.Condition(src => src.CommentContainerId != default));
             CreateMap<PageModel<PageModel>, PagePageModel>()                
                 .ForMember(dest => dest.PageItems, opt => opt.Ignore())
                 .AfterMap((src, dest, rc) => dest.PageItems.AddRange(rc.Mapper.Map<IEnumerable<Page>>(src.PageItems)));

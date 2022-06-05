@@ -13,4 +13,5 @@ export class PageFilter extends EntityFilter {
   metaDescription?: string;
   imageId?: number;
   preview?: string;
+  commentContainerId?: number;
 }
