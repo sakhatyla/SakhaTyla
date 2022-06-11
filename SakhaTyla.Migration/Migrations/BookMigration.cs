@@ -7,6 +7,8 @@ using MediatR;
 using SakhaTyla.Core.Requests.Routes;
 using SakhaTyla.Migration.SourceDatabase;
 using SakhaTyla.Core.Requests.Books;
+using SakhaTyla.Core.Requests.BookAuthors;
+using SakhaTyla.Core.Requests.BookAuthorships;
 
 namespace SakhaTyla.Migration.Migrations
 {
@@ -14,6 +16,9 @@ namespace SakhaTyla.Migration.Migrations
     {
         private readonly SourceLoader _sourceLoader;
         private readonly IMediator _mediator;
+
+        private readonly Dictionary<int, int> _bookIdMap = new();
+        private readonly Dictionary<int, int> _bookAuthorIdMap = new();
 
         public BookMigration(SourceLoader sourceLoader, IMediator mediator)
         {
@@ -33,7 +38,44 @@ namespace SakhaTyla.Migration.Migrations
                     Cover = book.Cover,
                     Hidden = book.IsHidden,
                 };
-                await _mediator.Send(createBook);
+                var createdBook = await _mediator.Send(createBook);
+                _bookIdMap[book.Id] = createdBook.Id;
+            }
+
+            await MigrateBookAuthors();
+
+            await MigrateBookAuthorships();
+        }
+
+        private async Task MigrateBookAuthors()
+        {
+            var bookAuthors = await _sourceLoader.GetBookAuthorsAsync();
+            foreach (var bookAuthor in bookAuthors)
+            {
+                var createBookAuthor = new CreateBookAuthor()
+                {
+                    LastName = bookAuthor.LastName,
+                    FirstName = bookAuthor.FirstName,
+                    MiddleName = bookAuthor.MiddleName,
+                    NickName = bookAuthor.NickName,
+                };
+                var createdBookAuthor = await _mediator.Send(createBookAuthor);
+                _bookAuthorIdMap[bookAuthor.Id] = createdBookAuthor.Id;
+            }
+        }
+
+        private async Task MigrateBookAuthorships()
+        {
+            var bookAuthorships = await _sourceLoader.GetBookAuthorshipsAsync();
+            foreach (var bookAuthorship in bookAuthorships)
+            {
+                var createBookAuthorship = new CreateBookAuthorship()
+                {
+                    BookId = _bookIdMap[bookAuthorship.BookId],
+                    AuthorId = _bookAuthorIdMap[bookAuthorship.AuthorId],
+                    Weight = 10 - bookAuthorship.Order,
+                };
+                await _mediator.Send(createBookAuthorship);
             }
         }
     }

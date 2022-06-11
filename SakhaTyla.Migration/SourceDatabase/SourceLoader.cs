@@ -40,7 +40,7 @@ namespace SakhaTyla.Migration.SourceDatabase
     Lang,
     IsPartial
 from Pages p
-where p.IsDeleted=0 and p.IsPartial=@partial
+where p.IsDeleted = 0 and p.IsPartial = @partial
 order by p.Id", new { partial = partial });
 
             return pages.ToList();
@@ -83,10 +83,24 @@ order by Id");
     IsHidden,
     Cover
 from Books
-where IsDeleted=0 and Type=1
+where IsDeleted = 0 and Type = 1
 order by Id");
 
             return books.ToList();
+        }
+
+        public async Task<List<SrcBookAuthorship>> GetBookAuthorshipsAsync()
+        {
+            await EnsureConnection();
+            var bookAuthorships = await _connection.QueryAsync<SrcBookAuthorship>(@"select 
+    BookId,
+    AuthorId,
+    [Order]
+from BookAuthorships ba
+inner join Books b on ba.BookId = b.Id and b.Type = 1
+order by BookId, [Order]");
+
+            return bookAuthorships.ToList();
         }
     }
 }

@@ -33,7 +33,6 @@ namespace SakhaTyla.Migration
             services.AddScoped<PageMigration>();
             services.AddScoped<WidgetMigration>();
             services.AddScoped<CategoryMigration>();
-            services.AddScoped<BookAuthorMigration>();
             services.AddScoped<BookMigration>();
             services.AddScoped<SourceLoader>();
 
