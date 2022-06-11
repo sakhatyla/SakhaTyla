@@ -10,6 +10,7 @@ using SakhaTyla.Core.Requests.Books;
 using SakhaTyla.Core.Requests.BookAuthors;
 using SakhaTyla.Core.Requests.BookAuthorships;
 using SakhaTyla.Core.Requests.BookPages;
+using SakhaTyla.Core.Requests.BookLabels;
 
 namespace SakhaTyla.Migration.Migrations
 {
@@ -49,6 +50,8 @@ namespace SakhaTyla.Migration.Migrations
             await MigrateBookAuthorships();
 
             await MigrateBookPages();
+
+            await MigrateBookLabels();
         }
 
         private async Task MigrateBookAuthors()
@@ -96,6 +99,21 @@ namespace SakhaTyla.Migration.Migrations
                 };
                 var createdBookPage = await _mediator.Send(createBookPage);
                 _bookPageIdMap[bookPage.Id] = createdBookPage.Id;
+            }
+        }
+
+        private async Task MigrateBookLabels()
+        {
+            var bookLabels = await _sourceLoader.GetBookLabelsAsync();
+            foreach (var bookLabel in bookLabels)
+            {
+                var createBookLabel = new CreateBookLabel()
+                {
+                    BookId = _bookIdMap[bookLabel.BookId],
+                    Name = bookLabel.Name,
+                    PageId = _bookPageIdMap[bookLabel.PageId],
+                };
+                await _mediator.Send(createBookLabel);
             }
         }
     }

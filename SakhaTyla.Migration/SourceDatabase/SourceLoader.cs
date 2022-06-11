@@ -112,9 +112,25 @@ order by BookId, [Order]");
     FileName,
     Number
 from BookPages
+where IsDeleted = 0
 order by BookId, Number");
 
             return bookPages.ToList();
+        }
+
+        public async Task<List<SrcBookLabel>> GetBookLabelsAsync()
+        {
+            await EnsureConnection();
+            var bookLabels = await _connection.QueryAsync<SrcBookLabel>(@"select 
+    Id,
+    BookId,
+    Name,
+    PageId
+from BookLabels
+where IsDeleted = 0
+order by BookId, Name");
+
+            return bookLabels.ToList();
         }
     }
 }
