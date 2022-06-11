@@ -31,10 +31,10 @@ namespace SakhaTyla.Migration
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
-            //await _pageMigration.MigratePages();
+            await _pageMigration.MigratePageData();
             //await _widgetMigration.MigrateWidgets();
             //await _categoryMigration.MigrateCategories();
-            await _bookMigration.MigrateBooks();
+            //await _bookMigration.MigrateBookData();
 
             _logger.LogInformation($"Migration completed");
         }

@@ -46,6 +46,40 @@ order by p.Id", new { partial = partial });
             return pages.ToList();
         }
 
+        public async Task<List<SrcBlog>> GetBlogsAsync()
+        {
+            await EnsureConnection();
+            var blogs = await _connection.QueryAsync<SrcBlog>(@"select 
+    Id,
+    Title,
+    Synonym
+from Blogs
+where IsDeleted = 0
+order by Id");
+
+            return blogs.ToList();
+        }
+
+        public async Task<List<SrcPost>> GetPostsAsync()
+        {
+            await EnsureConnection();
+            var posts = await _connection.QueryAsync<SrcPost>(@"select 
+    p.Id,
+    p.Title,
+    p.Synonym,
+    p.Contents,
+    p.ContentsSource,
+    BlogId,
+    p.Preview,
+    b.Synonym as BlogSynonym
+from Posts p
+inner join Blogs b on p.BlogId = b.Id
+where p.IsDeleted = 0
+order by p.Id");
+
+            return posts.ToList();
+        }
+
         public async Task<List<SrcCategory>> GetCategoriesAsync()
         {
             await EnsureConnection();

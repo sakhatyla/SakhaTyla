@@ -29,7 +29,20 @@ namespace SakhaTyla.Migration.Migrations
             _mediator = mediator;
         }
 
-        public async Task MigrateBooks()
+        public async Task MigrateBookData()
+        {
+            await MigrateBooks();
+
+            await MigrateBookAuthors();
+
+            await MigrateBookAuthorships();
+
+            await MigrateBookPages();
+
+            await MigrateBookLabels();
+        }
+
+        private async Task MigrateBooks()
         {
             var books = await _sourceLoader.GetBooksAsync();
             foreach (var book in books)
@@ -44,14 +57,6 @@ namespace SakhaTyla.Migration.Migrations
                 var createdBook = await _mediator.Send(createBook);
                 _bookIdMap[book.Id] = createdBook.Id;
             }
-
-            await MigrateBookAuthors();
-
-            await MigrateBookAuthorships();
-
-            await MigrateBookPages();
-
-            await MigrateBookLabels();
         }
 
         private async Task MigrateBookAuthors()
