@@ -31,7 +31,8 @@ namespace SakhaTyla.Migration.SourceDatabase
         public async Task<List<SrcPage>> GetPagesAsync(bool partial)
         {
             await EnsureConnection();
-            var sections = await _connection.QueryAsync<SrcPage>(@"select 
+            var pages = await _connection.QueryAsync<SrcPage>(@"select 
+    Id,
     Title,
     Synonym,
     Contents,
@@ -42,19 +43,34 @@ from Pages p
 where p.IsDeleted=0 and p.IsPartial=@partial
 order by p.Id", new { partial = partial });
 
-            return sections.ToList();
+            return pages.ToList();
         }
 
         public async Task<List<SrcCategory>> GetCategoriesAsync()
         {
             await EnsureConnection();
-            var sections = await _connection.QueryAsync<SrcCategory>(@"select 
+            var categories = await _connection.QueryAsync<SrcCategory>(@"select 
     Id,
     Name
 from Categories
 order by Id");
 
-            return sections.ToList();
+            return categories.ToList();
+        }
+
+        public async Task<List<SrcBookAuthor>> GetBookAuthorsAsync()
+        {
+            await EnsureConnection();
+            var bookAuthors = await _connection.QueryAsync<SrcBookAuthor>(@"select 
+    Id,
+    LastName,
+    FirstName,
+    MiddleName,
+    NickName
+from BookAuthors
+order by Id");
+
+            return bookAuthors.ToList();
         }
     }
 }
