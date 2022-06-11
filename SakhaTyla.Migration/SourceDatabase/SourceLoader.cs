@@ -72,5 +72,21 @@ order by Id");
 
             return bookAuthors.ToList();
         }
+
+        public async Task<List<SrcBook>> GetBooksAsync()
+        {
+            await EnsureConnection();
+            var books = await _connection.QueryAsync<SrcBook>(@"select 
+    Id,
+    Name,
+    Synonym,
+    IsHidden,
+    Cover
+from Books
+where IsDeleted=0 and Type=1
+order by Id");
+
+            return books.ToList();
+        }
     }
 }
