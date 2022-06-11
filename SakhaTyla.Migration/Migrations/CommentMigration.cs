@@ -35,6 +35,7 @@ namespace SakhaTyla.Migration.Migrations
             var comments = await _sourceLoader.GetCommentsAsync();
             foreach (var comment in comments)
             {
+                // TODO: set creation date and modification date
                 var user = await _userRepository.GetEntities()
                     .FirstAsync(e => e.Email == comment.UserEmail);
                 var path = "blogs/" + comment.BlogSynonym + "/" + comment.PostSynonym;

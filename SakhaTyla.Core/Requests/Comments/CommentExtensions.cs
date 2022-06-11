@@ -26,9 +26,13 @@ namespace SakhaTyla.Core.Requests.Comments
                     return direction == OrderDirection.Descending
                         ? queryable.OrderByDescending(e => e.CreationDate)
                         : queryable.OrderBy(e => e.CreationDate);
+                case "TreeOrder":
+                    return direction == OrderDirection.Descending
+                        ? queryable.OrderByDescending(e => e.TreeOrder + ":")
+                        : queryable.OrderBy(e => e.TreeOrder);
                 case "":
                 case null:
-                    return queryable.OrderBy(e => e.Id);
+                    return queryable.OrderBy(e => e.TreeOrder);
                 default:
                     throw new ArgumentException("Property not found", nameof(propertyName));
             }
