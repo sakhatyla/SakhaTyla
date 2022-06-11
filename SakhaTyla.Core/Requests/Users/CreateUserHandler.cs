@@ -26,7 +26,9 @@ namespace SakhaTyla.Core.Requests.Users
         {
             var user = _mapper.Map<CreateUser, User>(request);
             user.UserName = request.Email;
-            var result = await _userManager.CreateAsync(user, request.Password);
+            var result = string.IsNullOrEmpty(request.Password) ?
+                await _userManager.CreateAsync(user) :
+                await _userManager.CreateAsync(user, request.Password);
             result.CheckIfSucceeded();
 
             if (request.RoleIds != null)

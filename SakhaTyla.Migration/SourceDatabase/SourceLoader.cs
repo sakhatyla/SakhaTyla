@@ -186,5 +186,25 @@ order by c.Id");
 
             return comments.ToList();
         }
+
+        public async Task<List<SrcUser>> GetUsersAsync()
+        {
+            await EnsureConnection();
+            var users = await _connection.QueryAsync<SrcUser>(@"select 
+    Id,
+    Email,
+    EmailConfirmed,
+    Name
+from AspNetUsers u
+where IsDeleted = 0 and
+	(
+		(select count(*) from Comments c where c.UserId=u.Id and c.IsDeleted = 0 and c.Status = 1) > 0 or
+		(select count(*) from ArticleHistories ah where ah.UserCreatedId = u.Id) > 0 or
+		(select count(*) from AspNetUserRoles ur where ur.UserId = u.Id) > 0
+	)
+order by Id");
+
+            return users.ToList();
+        }
     }
 }
