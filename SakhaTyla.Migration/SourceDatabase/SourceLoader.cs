@@ -44,5 +44,17 @@ order by p.Id", new { partial = partial });
 
             return sections.ToList();
         }
+
+        public async Task<List<SrcCategory>> GetCategoriesAsync()
+        {
+            await EnsureConnection();
+            var sections = await _connection.QueryAsync<SrcCategory>(@"select 
+    Id,
+    Name
+from Categories
+order by Id");
+
+            return sections.ToList();
+        }
     }
 }

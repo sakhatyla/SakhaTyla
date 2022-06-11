@@ -13,20 +13,24 @@ namespace SakhaTyla.Migration
         private readonly ILogger<DataMigration> _logger;
         private readonly PageMigration _pageMigration;
         private readonly WidgetMigration _widgetMigration;
+        private readonly CategoryMigration _categoryMigration;
 
         public DataMigration(ILogger<DataMigration> logger,
             PageMigration pageMigration,
-            WidgetMigration widgetMigration)
+            WidgetMigration widgetMigration,
+            CategoryMigration categoryMigration)
         {
             _logger = logger;
             _pageMigration = pageMigration;
             _widgetMigration = widgetMigration;
+            _categoryMigration = categoryMigration;
         }
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
             //await _pageMigration.MigratePages();
-            await _widgetMigration.MigrateWidgets();
+            //await _widgetMigration.MigrateWidgets();
+            await _categoryMigration.MigrateCategories();
 
             _logger.LogInformation($"Migration completed");
         }
