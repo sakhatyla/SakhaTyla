@@ -102,5 +102,19 @@ order by BookId, [Order]");
 
             return bookAuthorships.ToList();
         }
+
+        public async Task<List<SrcBookPage>> GetBookPagesAsync()
+        {
+            await EnsureConnection();
+            var bookPages = await _connection.QueryAsync<SrcBookPage>(@"select 
+    Id,
+    BookId,
+    FileName,
+    Number
+from BookPages
+order by BookId, Number");
+
+            return bookPages.ToList();
+        }
     }
 }

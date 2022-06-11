@@ -9,6 +9,7 @@ using SakhaTyla.Migration.SourceDatabase;
 using SakhaTyla.Core.Requests.Books;
 using SakhaTyla.Core.Requests.BookAuthors;
 using SakhaTyla.Core.Requests.BookAuthorships;
+using SakhaTyla.Core.Requests.BookPages;
 
 namespace SakhaTyla.Migration.Migrations
 {
@@ -19,6 +20,7 @@ namespace SakhaTyla.Migration.Migrations
 
         private readonly Dictionary<int, int> _bookIdMap = new();
         private readonly Dictionary<int, int> _bookAuthorIdMap = new();
+        private readonly Dictionary<int, int> _bookPageIdMap = new();
 
         public BookMigration(SourceLoader sourceLoader, IMediator mediator)
         {
@@ -45,6 +47,8 @@ namespace SakhaTyla.Migration.Migrations
             await MigrateBookAuthors();
 
             await MigrateBookAuthorships();
+
+            await MigrateBookPages();
         }
 
         private async Task MigrateBookAuthors()
@@ -76,6 +80,22 @@ namespace SakhaTyla.Migration.Migrations
                     Weight = 10 - bookAuthorship.Order,
                 };
                 await _mediator.Send(createBookAuthorship);
+            }
+        }
+
+        private async Task MigrateBookPages()
+        {
+            var bookPages = await _sourceLoader.GetBookPagesAsync();
+            foreach (var bookPage in bookPages)
+            {
+                var createBookPage = new CreateBookPage()
+                {
+                    BookId = _bookIdMap[bookPage.BookId],
+                    FileName = bookPage.FileName,
+                    Number = bookPage.Number,
+                };
+                var createdBookPage = await _mediator.Send(createBookPage);
+                _bookPageIdMap[bookPage.Id] = createdBookPage.Id;
             }
         }
     }
