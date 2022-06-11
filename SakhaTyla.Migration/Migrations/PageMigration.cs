@@ -73,6 +73,7 @@ namespace SakhaTyla.Migration.Migrations
             var posts = await _sourceLoader.GetPostsAsync();
             foreach (var post in posts)
             {
+                // TODO: add Date Published
                 var createPage = new CreatePage()
                 {
                     Type = Core.Enums.PageType.Article,

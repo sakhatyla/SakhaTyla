@@ -166,5 +166,25 @@ order by BookId, Name");
 
             return bookLabels.ToList();
         }
+
+        public async Task<List<SrcComment>> GetCommentsAsync()
+        {
+            await EnsureConnection();
+            var comments = await _connection.QueryAsync<SrcComment>(@"select 
+    c.Id,
+    u.Email as UserEmail,
+    c.Text,
+    c.TextSource,
+    p.Synonym as PostSynonym,
+    b.Synonym as BlogSynonym
+from Comments c
+inner join Posts p on c.CommentContainerId = p.CommentContainerId
+inner join Blogs b on p.BlogId = b.Id
+inner join AspNetUsers u on u.Id = c.UserId
+where c.IsDeleted = 0 and c.Status = 1
+order by c.Id");
+
+            return comments.ToList();
+        }
     }
 }

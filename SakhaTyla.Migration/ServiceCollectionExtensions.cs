@@ -34,6 +34,7 @@ namespace SakhaTyla.Migration
             services.AddScoped<WidgetMigration>();
             services.AddScoped<CategoryMigration>();
             services.AddScoped<BookMigration>();
+            services.AddScoped<CommentMigration>();
             services.AddScoped<SourceLoader>();
 
             services.AddTransient<IEmailSender, EmailSender>();

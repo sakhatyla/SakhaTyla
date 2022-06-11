@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using Cynosura.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using SakhaTyla.Core.Entities;
@@ -107,8 +108,9 @@ namespace SakhaTyla.Core.Requests.Comments
 
         public static string ProcessCommentText(this string text)
         {
-            text = Regex.Replace(text, "<br[\\s/]*>", " ");
-            text = Regex.Replace(text, "<.*?>", "");
+            text = HttpUtility.HtmlEncode(text);
+            text = text.Replace("\r\n", "\n");
+            text = text.Replace("\n", "<br/>");
             return text;
         }
     }
