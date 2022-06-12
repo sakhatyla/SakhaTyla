@@ -11,6 +11,7 @@ using SakhaTyla.Migration.Data;
 using Microsoft.EntityFrameworkCore;
 using Cynosura.Core.Data;
 using SakhaTyla.Core.Entities;
+using System.Text.Json;
 
 namespace SakhaTyla.Migration.Migrations
 {
@@ -22,13 +23,15 @@ namespace SakhaTyla.Migration.Migrations
         private readonly IEntityRepository<Tag> _tagRepository;
         private readonly IEntityRepository<Category> _categoryRepository;
         private readonly IEntityRepository<Language> _languageRepository;
+        private readonly IEntityRepository<User> _userRepository;
 
         public ArticleMigration(SourceLoader sourceLoader,
             IMediator mediator,
             DataContext dataContext,
             IEntityRepository<Tag> tagRepository,
             IEntityRepository<Category> categoryRepository,
-            IEntityRepository<Language> languageRepository)
+            IEntityRepository<Language> languageRepository,
+            IEntityRepository<User> userRepository)
         {
             _sourceLoader = sourceLoader;
             _mediator = mediator;
@@ -36,6 +39,7 @@ namespace SakhaTyla.Migration.Migrations
             _tagRepository = tagRepository;
             _categoryRepository = categoryRepository;
             _languageRepository = languageRepository;
+            _userRepository = userRepository;
         }
 
         public async Task MigrateArticles()
@@ -54,7 +58,15 @@ namespace SakhaTyla.Migration.Migrations
 
             var allArticleTags = await _sourceLoader.GetArticleTagsAsync();
             var articleTagsByArticleId = allArticleTags.GroupBy(e => e.ArticleId)
-                .ToDictionary(g => g.Key);
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            var allArticleHistories = await _sourceLoader.GetArticleHistoriesAsync();
+            var articleHistoriesByArticleId = allArticleHistories.GroupBy(e => e.ArticleId)
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            var users = await _userRepository.GetEntities()
+                .ToListAsync();
+            var userMap = users.ToDictionary(u => u.Email, u => u.Id);
 
             var articles = await _sourceLoader.GetArticlesAsync();
             foreach (var article in articles)
@@ -76,8 +88,61 @@ namespace SakhaTyla.Migration.Migrations
                 {
                     createOrUpdateArticle.TagIds = articleTags.Select(e => tagMap[e.TagName]).ToArray();
                 }
+                if (articleHistoriesByArticleId.TryGetValue(article.Id, out var articleHistories))
+                {
+                    createOrUpdateArticle.Changes = new List<CreateEntityChange>();
+                    SrcArticleHistory? prevArticleHistory = null;
+                    foreach (var articleHistory in articleHistories)
+                    {
+                        var change = new CreateEntityChange()
+                        {
+                            EntityName = "Article",
+                            Action = MapAction(articleHistory.Type),
+                            CreationUserId = userMap[articleHistory.UserCreatedEmail],
+                            CreationDate = articleHistory.DateCreated.UtcDateTime,
+                            From = "",
+                            To = "",
+                        };
+                        if (change.Action != Core.Enums.ChangeAction.Add)
+                        {
+                            if (prevArticleHistory == null)
+                            {
+                                throw new Exception("Previous history not found");
+                            }
+                            var fromArticle = new Article(prevArticleHistory.NewTitle!, prevArticleHistory.NewTextSource!)
+                            {
+                                Fuzzy = prevArticleHistory.NewFuzzy,
+                            };
+                            change.From = JsonSerializer.Serialize(fromArticle);
+                        }
+                        if (change.Action != Core.Enums.ChangeAction.Delete)
+                        {
+                            var toArticle = new Article(articleHistory.NewTitle!, articleHistory.NewTextSource!)
+                            {
+                                Fuzzy = articleHistory.NewFuzzy,
+                            };
+                            change.To = JsonSerializer.Serialize(toArticle);
+                        }
+                        createOrUpdateArticle.Changes.Add(change);
+                        prevArticleHistory = articleHistory;
+                    }
+                }
                 await CreateArticleAsync(createOrUpdateArticle);
             }
+        }
+
+        private Core.Enums.ChangeAction MapAction(HistoryType type)
+        {
+            switch(type)
+            {
+                case HistoryType.Created:
+                    return Core.Enums.ChangeAction.Add;
+                case HistoryType.Updated:
+                    return Core.Enums.ChangeAction.Update;
+                case HistoryType.Deleted:
+                    return Core.Enums.ChangeAction.Delete;
+            }
+            throw new Exception("Wrong type");
         }
 
         private async Task CreateArticleAsync(CreateOrUpdateArticle article)
@@ -113,6 +178,7 @@ values
 declare @articleId int = @@IDENTITY
 select @articleId as Id
 ").AsEnumerable().First();
+
             if (article.TagIds != null)
             {
                 foreach (var articleTagId in article.TagIds)
@@ -133,7 +199,35 @@ GETUTCDATE(),
 GETUTCDATE()
 )");
                 }
-            }            
+            }
+
+            if (article.Changes != null)
+            {
+                foreach (var change in article.Changes)
+                {
+                    await _dataContext.Database.ExecuteSqlInterpolatedAsync($@"
+insert into EntityChanges
+(
+EntityName,
+EntityId,
+Action,
+[From],
+[To],
+CreationDate,
+CreationUserId
+)
+values
+(
+{change.EntityName},
+{idEntity.Id},
+{change.Action}, 
+{change.From},
+{change.To},
+{change.CreationDate},
+{change.CreationUserId}
+)");
+                }
+            }
         }
     }
 
@@ -160,5 +254,22 @@ GETUTCDATE()
         public DateTime CreationDate { get; set; }
 
         public DateTime ModificationDate { get; set; }
+
+        public List<CreateEntityChange>? Changes { get; set; }
+    }
+
+    public class CreateEntityChange
+    {
+        public string EntityName { get; set; } = null!;
+
+        public Core.Enums.ChangeAction Action { get; set; }
+
+        public string? From { get; set; }
+
+        public string? To { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
+        public int? CreationUserId { get; set; }
     }
 }

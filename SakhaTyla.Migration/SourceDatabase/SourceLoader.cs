@@ -246,7 +246,6 @@ from Articles a
 inner join Languages lf on lf.Id = a.FromLanguageId
 inner join Languages lt on lt.Id = a.ToLanguageId
 left join Categories c on c.Id = a.CategoryId
-inner join ArticleTags at on at.ArticleId = a.Id and at.IsDeleted = 0
 order by a.Id");
 
             return articles.ToList();
@@ -265,6 +264,25 @@ where at.IsDeleted = 0
 order by at.ArticleId");
 
             return articleTags.ToList();
+        }
+
+        public async Task<List<SrcArticleHistory>> GetArticleHistoriesAsync()
+        {
+            await EnsureConnection();
+            var articleHistories = await _connection.QueryAsync<SrcArticleHistory>(@"select 
+    ah.Id,
+    ah.ArticleId,
+    ah.NewTitle,
+    ah.NewTextSource,
+    u.Email as UserCreatedEmail,
+    ah.DateCreated,
+    ah.Type,
+    ah.NewFuzzy
+from ArticleHistories ah
+inner join AspNetUsers u on u.Id = ah.UserCreatedId
+order by ah.Id");
+
+            return articleHistories.ToList();
         }
     }
 }
