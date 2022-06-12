@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SakhaTyla.Core.Entities;
+using SakhaTyla.Core.Security;
 
 namespace SakhaTyla.Data
 {
@@ -22,13 +23,16 @@ namespace SakhaTyla.Data
         {
             await _dataContext.Database.MigrateAsync();
 
-            var administratorRoleName = "Administrator";
-            if (await _roleManager.FindByNameAsync(administratorRoleName) == null)
+            var roles = GetRoles();
+            foreach (var role in roles)
             {
-                await _roleManager.CreateAsync(new Role(administratorRoleName) 
-                { 
-                    Name = administratorRoleName,
-                });
+                if (await _roleManager.FindByNameAsync(role.Name) == null)
+                {
+                    await _roleManager.CreateAsync(new Role(role.DisplayName)
+                    {
+                        Name = role.Name,
+                    });
+                }
             }
 
             var administratorEmail = "admin@cynosura.dev";
@@ -42,9 +46,24 @@ namespace SakhaTyla.Data
                     EmailConfirmed = true
                 };
                 await _userManager.CreateAsync(user);
-                await _userManager.AddToRoleAsync(user, administratorRoleName);
+                await _userManager.AddToRoleAsync(user, RoleConfig.Administrator);
                 await _userManager.AddPasswordAsync(user, "Admin123!");
             }
+        }
+
+        private static Role[] GetRoles()
+        {
+            return new[]
+            {
+                new Role("Administrator")
+                {
+                    Name = RoleConfig.Administrator,
+                },
+                new Role("Editor")
+                {
+                    Name = RoleConfig.Editor,
+                },
+            };
         }
     }
 }
