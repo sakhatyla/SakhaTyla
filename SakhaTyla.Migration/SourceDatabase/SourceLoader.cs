@@ -223,5 +223,48 @@ order by UserId");
 
             return userRoles.ToList();
         }
+
+        public async Task<List<SrcArticle>> GetArticlesAsync()
+        {
+            await EnsureConnection();
+            var articles = await _connection.QueryAsync<SrcArticle>(@"select 
+    a.Id,
+    a.Title,
+    a.Text,
+    a.TextSource,
+    a.FromLanguageId,
+    lf.Name as FromLanguageName,
+    a.ToLanguageId,
+    lt.Name as ToLanguageName,
+    a.IsDeleted,
+    a.Fuzzy,
+    a.CategoryId,
+    c.Name as CategoryName,
+    a.DateCreated,
+    a.DateModified
+from Articles a
+inner join Languages lf on lf.Id = a.FromLanguageId
+inner join Languages lt on lt.Id = a.ToLanguageId
+left join Categories c on c.Id = a.CategoryId
+inner join ArticleTags at on at.ArticleId = a.Id and at.IsDeleted = 0
+order by a.Id");
+
+            return articles.ToList();
+        }
+
+        public async Task<List<SrcArticleTag>> GetArticleTagsAsync()
+        {
+            await EnsureConnection();
+            var articleTags = await _connection.QueryAsync<SrcArticleTag>(@"select 
+    at.ArticleId,
+    at.TagId,
+    t.Name as TagName
+from ArticleTags at
+inner join Tags t on t.Id = at.TagId
+where at.IsDeleted = 0
+order by at.ArticleId");
+
+            return articleTags.ToList();
+        }
     }
 }

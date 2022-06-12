@@ -17,6 +17,7 @@ namespace SakhaTyla.Migration
         private readonly BookMigration _bookMigration;
         private readonly CommentMigration _commentMigration;
         private readonly UserMigration _userMigration;
+        private readonly ArticleMigration _articleMigration;
 
         public DataMigration(ILogger<DataMigration> logger,
             PageMigration pageMigration,
@@ -24,7 +25,8 @@ namespace SakhaTyla.Migration
             CategoryMigration categoryMigration,
             BookMigration bookMigration,
             CommentMigration commentMigration,
-            UserMigration userMigration)
+            UserMigration userMigration,
+            ArticleMigration articleMigration)
         {
             _logger = logger;
             _pageMigration = pageMigration;
@@ -33,6 +35,7 @@ namespace SakhaTyla.Migration
             _bookMigration = bookMigration;
             _commentMigration = commentMigration;
             _userMigration = userMigration;
+            _articleMigration = articleMigration;
         }
 
         public async Task RunAsync(CancellationToken cancellationToken)
@@ -41,8 +44,9 @@ namespace SakhaTyla.Migration
             //await _widgetMigration.MigrateWidgets();
             //await _categoryMigration.MigrateCategories();
             //await _bookMigration.MigrateBookData();
-            await _userMigration.MigrateUsers();
+            //await _userMigration.MigrateUsers();
             //await _commentMigration.MigrateComments();
+            await _articleMigration.MigrateArticles();
 
             _logger.LogInformation($"Migration completed");
         }
