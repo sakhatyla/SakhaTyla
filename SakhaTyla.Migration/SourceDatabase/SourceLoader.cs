@@ -209,5 +209,19 @@ order by Id");
 
             return users.ToList();
         }
+
+        public async Task<List<SrcUserRole>> GetUserRolesAsync()
+        {
+            await EnsureConnection();
+            var userRoles = await _connection.QueryAsync<SrcUserRole>(@"select 
+    UserId,
+    RoleId,
+    r.Name as RoleName
+from AspNetUserRoles ur
+inner join AspNetRoles r on ur.RoleId = r.Id
+order by UserId");
+
+            return userRoles.ToList();
+        }
     }
 }
