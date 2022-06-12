@@ -23,5 +23,7 @@ namespace SakhaTyla.Migration.SourceDatabase
         public string Preview { get; set; } = null!;
 
         public string? BlogSynonym { get; set; }
+
+        public DateTimeOffset DatePublished { get; set; }
     }
 }

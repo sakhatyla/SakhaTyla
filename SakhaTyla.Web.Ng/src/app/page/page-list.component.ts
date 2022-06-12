@@ -30,7 +30,6 @@ export class PageListComponent implements OnInit {
     'name',
     'route',
     'modificationDate',
-    'publicationDate',
     'action'
   ];
   selectedIds = new Set<number>();

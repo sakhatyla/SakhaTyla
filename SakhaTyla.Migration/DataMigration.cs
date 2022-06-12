@@ -37,12 +37,12 @@ namespace SakhaTyla.Migration
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
-            //await _pageMigration.MigratePageData();
+            await _pageMigration.MigratePageData();
             //await _widgetMigration.MigrateWidgets();
             //await _categoryMigration.MigrateCategories();
             //await _bookMigration.MigrateBookData();
             //await _userMigration.MigrateUsers();
-            await _commentMigration.MigrateComments();
+            //await _commentMigration.MigrateComments();
 
             _logger.LogInformation($"Migration completed");
         }

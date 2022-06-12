@@ -73,7 +73,6 @@ namespace SakhaTyla.Migration.Migrations
             var posts = await _sourceLoader.GetPostsAsync();
             foreach (var post in posts)
             {
-                // TODO: add Date Published
                 var createPage = new CreatePage()
                 {
                     Type = Core.Enums.PageType.Article,
@@ -85,6 +84,7 @@ namespace SakhaTyla.Migration.Migrations
                     Body = post.Contents,
                     ParentId = _pageIdMap[post.BlogId],
                     Preview = post.Preview,
+                    PublicationDate = post.DatePublished.UtcDateTime,
                 };
                 await _mediator.Send(createPage);
             }

@@ -71,6 +71,7 @@ order by Id");
     p.ContentsSource,
     BlogId,
     p.Preview,
+    p.DatePublished,
     b.Synonym as BlogSynonym
 from Posts p
 inner join Blogs b on p.BlogId = b.Id
