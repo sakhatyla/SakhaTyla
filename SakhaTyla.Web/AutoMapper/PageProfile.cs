@@ -25,7 +25,8 @@ namespace SakhaTyla.Web.AutoMapper
                 .ForMember(dest => dest.MetaKeywords, opt => opt.Condition(src => src.MetaKeywordsOneOfCase == CreatePageRequest.MetaKeywordsOneOfOneofCase.MetaKeywords))
                 .ForMember(dest => dest.MetaDescription, opt => opt.Condition(src => src.MetaDescriptionOneOfCase == CreatePageRequest.MetaDescriptionOneOfOneofCase.MetaDescription))
                 .ForMember(dest => dest.ImageId, opt => opt.Condition(src => src.ImageIdOneOfCase == CreatePageRequest.ImageIdOneOfOneofCase.ImageId))
-                .ForMember(dest => dest.Preview, opt => opt.Condition(src => src.PreviewOneOfCase == CreatePageRequest.PreviewOneOfOneofCase.Preview));
+                .ForMember(dest => dest.Preview, opt => opt.Condition(src => src.PreviewOneOfCase == CreatePageRequest.PreviewOneOfOneofCase.Preview))
+                .ForMember(dest => dest.PublicationDate, opt => opt.Condition(src => src.PublicationDateOneOfCase == CreatePageRequest.PublicationDateOneOfOneofCase.PublicationDate));
             CreateMap<DeletePageRequest, DeletePage>();
             CreateMap<GetPageRequest, GetPage>();
             CreateMap<GetPagesRequest, GetPages>()
@@ -43,7 +44,8 @@ namespace SakhaTyla.Web.AutoMapper
                 .ForMember(dest => dest.MetaKeywords, opt => opt.Condition(src => src.MetaKeywordsOneOfCase == UpdatePageRequest.MetaKeywordsOneOfOneofCase.MetaKeywords))
                 .ForMember(dest => dest.MetaDescription, opt => opt.Condition(src => src.MetaDescriptionOneOfCase == UpdatePageRequest.MetaDescriptionOneOfOneofCase.MetaDescription))
                 .ForMember(dest => dest.ImageId, opt => opt.Condition(src => src.ImageIdOneOfCase == UpdatePageRequest.ImageIdOneOfOneofCase.ImageId))
-                .ForMember(dest => dest.Preview, opt => opt.Condition(src => src.PreviewOneOfCase == UpdatePageRequest.PreviewOneOfOneofCase.Preview));
+                .ForMember(dest => dest.Preview, opt => opt.Condition(src => src.PreviewOneOfCase == UpdatePageRequest.PreviewOneOfOneofCase.Preview))
+                .ForMember(dest => dest.PublicationDate, opt => opt.Condition(src => src.PublicationDateOneOfCase == UpdatePageRequest.PublicationDateOneOfOneofCase.PublicationDate));
 
             CreateMap<PageModel, Page>()
                 .ForMember(dest => dest.Type, opt => opt.Condition(src => src.Type != default))
@@ -57,7 +59,8 @@ namespace SakhaTyla.Web.AutoMapper
                 .ForMember(dest => dest.MetaDescription, opt => opt.Condition(src => src.MetaDescription != default))
                 .ForMember(dest => dest.ImageId, opt => opt.Condition(src => src.ImageId != default))
                 .ForMember(dest => dest.Preview, opt => opt.Condition(src => src.Preview != default))
-                .ForMember(dest => dest.CommentContainerId, opt => opt.Condition(src => src.CommentContainerId != default));
+                .ForMember(dest => dest.CommentContainerId, opt => opt.Condition(src => src.CommentContainerId != default))
+                .ForMember(dest => dest.PublicationDate, opt => opt.Condition(src => src.PublicationDate != default));
             CreateMap<PageModel<PageModel>, PagePageModel>()                
                 .ForMember(dest => dest.PageItems, opt => opt.Ignore())
                 .AfterMap((src, dest, rc) => dest.PageItems.AddRange(rc.Mapper.Map<IEnumerable<Page>>(src.PageItems)));

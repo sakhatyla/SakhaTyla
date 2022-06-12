@@ -27,6 +27,7 @@ message Page {
     int32 imageId = 17;
     string preview = 18;
     int32 commentContainerId = 19;
+    google.protobuf.Timestamp publicationDate = 20;
 }
 
 message PagePageModel {

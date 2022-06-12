@@ -113,6 +113,12 @@
           <app-datetime-view [value]="item.modificationDate"></app-datetime-view>
         </td>
       </ng-container>
+      <ng-container matColumnDef="publicationDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('Publication Date') }}</th>
+        <td mat-cell *matCellDef="let item">
+          <app-datetime-view [value]="item.publicationDate"></app-datetime-view>
+        </td>
+      </ng-container>
 
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef></th>

@@ -69,6 +69,10 @@ namespace SakhaTyla.Core.Requests.Pages
                     return direction == OrderDirection.Descending
                         ? queryable.OrderByDescending(e => e.Route!.Path)
                         : queryable.OrderBy(e => e.Route!.Path);
+                case "PublicationDate":
+                    return direction == OrderDirection.Descending
+                        ? queryable.OrderByDescending(e => e.PublicationDate)
+                        : queryable.OrderBy(e => e.PublicationDate);
                 case "":
                 case null:
                     return queryable.OrderBy(e => e.Id);
@@ -130,6 +134,14 @@ namespace SakhaTyla.Core.Requests.Pages
             if (filter?.CommentContainerId != null)
             {
                 queryable = queryable.Where(e => e.CommentContainerId == filter.CommentContainerId);
+            }
+            if (filter?.PublicationDateFrom != null)
+            {
+                queryable = queryable.Where(e => e.PublicationDate >= filter.PublicationDateFrom);
+            }
+            if (filter?.PublicationDateTo != null)
+            {
+                queryable = queryable.Where(e => e.PublicationDate <= filter.PublicationDateTo);
             }
             return queryable;
         }

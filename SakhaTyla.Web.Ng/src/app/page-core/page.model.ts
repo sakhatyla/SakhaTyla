@@ -25,6 +25,7 @@ export class Page {
   preview: string;
   route: Route;
   commentContainerId: number;
+  publicationDate: Date;
 }
 
 export class PageListState {

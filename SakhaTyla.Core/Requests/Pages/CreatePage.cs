@@ -33,5 +33,7 @@ namespace SakhaTyla.Core.Requests.Pages
         public string? Preview { get; set; }
 
         public UpdateRoute? Route { get; set; }
+
+        public DateTime? PublicationDate { get; set; }
     }
 }

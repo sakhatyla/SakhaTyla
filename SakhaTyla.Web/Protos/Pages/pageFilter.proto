@@ -44,4 +44,10 @@ message PageFilter {
     oneof commentContainerIdOneOf {
         int32 commentContainerId = 190;
     }
+    oneof publicationDateFromOneOf {
+        google.protobuf.Timestamp publicationDateFrom = 200;
+    }
+    oneof publicationDateToOneOf {
+        google.protobuf.Timestamp publicationDateTo = 201;
+    }
 }

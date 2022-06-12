@@ -20,6 +20,7 @@ namespace SakhaTyla.Core.Requests.Pages
             RuleFor(x => x.ImageId);
             RuleFor(x => x.Preview);
             RuleFor(x => x.Route).NotEmpty().SetValidator(new UpdateRouteValidator(localizer)!).WithName(x => localizer["Route"]);
+            RuleFor(x => x.PublicationDate);
         }
 
     }

@@ -1,4 +1,4 @@
-﻿<ng-container *transloco="let t">
+<ng-container *transloco="let t">
   <h1 mat-dialog-title>
     {{ t('Page') }} <app-page-show [value]="page"></app-page-show>
   </h1>
@@ -66,6 +66,11 @@
         <mat-label>{{ t('Meta Description') }}</mat-label>
         <app-text-edit formControlName="metaDescription" name="metaDescription" [placeholder]="t('Meta Description')"></app-text-edit>
         <mat-error>{{ error?.modelState?.metaDescription | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('Publication Date') }}</mat-label>
+        <app-datetime-edit formControlName="publicationDate" name="publicationDate" [placeholder]="t('Publication Date')"></app-datetime-edit>
+        <mat-error>{{ error?.modelState?.publicationDate | modelError }}</mat-error>
       </mat-form-field>
     </form>
 

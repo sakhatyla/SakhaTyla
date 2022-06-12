@@ -61,5 +61,8 @@ namespace SakhaTyla.Core.Entities
         public int CommentContainerId { get; set; }
         public CommentContainer CommentContainer { get; set; } = null!;
 
+
+        public DateTime? PublicationDate { get; set; }
+                
     }
 }

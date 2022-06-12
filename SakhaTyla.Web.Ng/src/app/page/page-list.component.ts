@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
@@ -30,6 +30,7 @@ export class PageListComponent implements OnInit {
     'name',
     'route',
     'modificationDate',
+    'publicationDate',
     'action'
   ];
   selectedIds = new Set<number>();

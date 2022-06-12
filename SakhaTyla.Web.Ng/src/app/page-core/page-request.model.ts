@@ -33,6 +33,7 @@ export class UpdatePage {
   metaDescription: string;
   imageId: number;
   preview: string;
+  publicationDate: Date;
 }
 
 export class CreatePage {
@@ -47,6 +48,7 @@ export class CreatePage {
   metaDescription: string;
   imageId: number;
   preview: string;
+  publicationDate: Date;
 }
 
 export class DeletePage {

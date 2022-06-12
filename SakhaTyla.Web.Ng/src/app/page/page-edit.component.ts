@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
@@ -37,7 +37,8 @@ export class PageEditComponent implements OnInit {
     metaKeywords: [],
     metaDescription: [],
     imageId: [],
-    preview: []
+    preview: [],
+    publicationDate: []
   });
   page: Page;
   error: Error;

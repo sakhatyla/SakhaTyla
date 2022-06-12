@@ -51,6 +51,9 @@ message CreatePageRequest {
     oneof previewOneOf {
         string preview = 18;
     }
+    oneof publicationDateOneOf {
+        google.protobuf.Timestamp publicationDate = 20;
+    }
 }
 
 message DeletePageRequest {
@@ -109,5 +112,8 @@ message UpdatePageRequest {
     }
     oneof previewOneOf {
         string preview = 18;
+    }
+    oneof publicationDateOneOf {
+        google.protobuf.Timestamp publicationDate = 20;
     }
 }

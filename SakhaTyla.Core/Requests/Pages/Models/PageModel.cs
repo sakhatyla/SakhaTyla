@@ -75,5 +75,8 @@ namespace SakhaTyla.Core.Requests.Pages.Models
         [DisplayName("Comment Container")]
         public int CommentContainerId { get; set; }
         public CommentContainers.Models.CommentContainerShortModel CommentContainer { get; set; } = null!;
+
+        [DisplayName("Publication Date")]
+        public DateTime? PublicationDate { get; set; }
     }
 }
