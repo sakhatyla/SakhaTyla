@@ -176,6 +176,8 @@ order by BookId, Name");
     u.Email as UserEmail,
     c.Text,
     c.TextSource,
+    c.DateCreated,
+    c.DateModified,
     p.Synonym as PostSynonym,
     b.Synonym as BlogSynonym
 from Comments c

@@ -19,5 +19,9 @@ namespace SakhaTyla.Migration.SourceDatabase
         public string PostSynonym { get; set; } = null!;
 
         public string BlogSynonym { get; set; } = null!;
+
+        public DateTimeOffset DateCreated { get; set; }
+
+        public DateTimeOffset DateModified { get; set; }
     }
 }

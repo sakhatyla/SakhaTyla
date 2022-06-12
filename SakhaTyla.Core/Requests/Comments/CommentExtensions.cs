@@ -93,8 +93,7 @@ namespace SakhaTyla.Core.Requests.Comments
 
         private async static Task CalculateTree(IEntityRepository<Comment> commentRepository, IEnumerable<Comment> comments, string path, string order)
         {
-            var sortedComments = comments.OrderByDescending(t => t.AuthorId != null ? 0 : 1)
-                .ThenByDescending(t => t.Id)
+            var sortedComments = comments.OrderByDescending(t => t.Id)
                 .ToList();
             var format = CommonHelper.MultiplyString("0", CommonHelper.GetDigitCount(sortedComments.Count));
             var i = 1;
