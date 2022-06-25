@@ -8,6 +8,9 @@
   <ItemGroup>
     <PackageReference Include="Cynosura.Messaging" Version="0.4.0-b372" />
     <PackageReference Include="EPPlus" Version="5.1.0" />
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00011" />
+    <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00011" />
+    <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00011" />
     <PackageReference Include="MailKit" Version="2.15.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
   </ItemGroup>

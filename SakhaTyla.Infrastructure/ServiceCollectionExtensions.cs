@@ -5,8 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SakhaTyla.Core.Email;
 using SakhaTyla.Core.Formatters;
+using SakhaTyla.Core.Search;
 using SakhaTyla.Infrastructure.Email;
 using SakhaTyla.Infrastructure.Formatters;
+using SakhaTyla.Infrastructure.Search;
 
 namespace SakhaTyla.Infrastructure
 {
@@ -17,6 +19,10 @@ namespace SakhaTyla.Infrastructure
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<EmailSenderOptions>(configuration.GetSection("EmailSender"));
             services.AddTransient<IExcelFormatter, ExcelFormatter>();
+            services.Configure<LuceneOptions>(configuration.GetSection("Lucene"));
+            services.AddSingleton<LuceneContext>();
+            services.AddSingleton<ISearchIndexWriter, LuceneIndexWriter>();
+            services.AddTransient<ISearchIndexReader, LuceneIndexReader>();
             return services;
         }
     }

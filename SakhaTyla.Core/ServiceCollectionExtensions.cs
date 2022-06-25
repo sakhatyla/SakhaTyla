@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SakhaTyla.Core.FileStorage;
+using SakhaTyla.Core.Indexers;
 using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Messaging.WorkerRuns;
 using SakhaTyla.Core.Workers;
@@ -30,6 +31,8 @@ namespace SakhaTyla.Core
             services.Configure<FileSystemStorageSettings>(configuration.GetSection("FileSystemStorage"));
             services.AddTransient<IWorkerRunner, WorkerRunner>();
             services.AddTransient<TestWorker>();
+            services.AddTransient<SearchIndexerWorker>();
+            services.AddTransient<ArticleIndexer>();
             return services; 
         }
 
