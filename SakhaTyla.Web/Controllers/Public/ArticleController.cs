@@ -26,5 +26,11 @@ namespace SakhaTyla.Web.Controllers.Public
         {
             return await _mediator.Send(searchArticlesByTitle);
         }
+
+        [HttpPost("SearchArticlesByText")]
+        public async Task<List<ArticleModel>> SearchArticlesByTextAsync([FromBody] SearchArticlesByText searchArticlesByText)
+        {
+            return await _mediator.Send(searchArticlesByText);
+        }
     }
 }

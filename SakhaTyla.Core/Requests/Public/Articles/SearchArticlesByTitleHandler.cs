@@ -38,31 +38,14 @@ namespace SakhaTyla.Core.Requests.Public.Articles
             {
                 filters.Add(new ValueFilter(ArticleSearch.ToLanguageCodeField, request.ToLanguageCode));
             }
-            var result = _searchIndexReader.Search(query, new[] { ArticleSearch.TitleField }, 100, filters: filters.ToArray(), languages: GetLanguages(query).ToArray());
+            var result = _searchIndexReader.Search(query, new[] { ArticleSearch.TitleField }, 100, filters: filters.ToArray(), languages: ArticleSearch.GetLanguages(query).ToArray());
             var articles = result.Documents.Select(ArticleSearch.GetArticle).ToList();
             var models = ExactMatchFirst(articles, query)
                 .Select(e => _mapper.Map<Article, ArticleModel>(e))
                 .ToList();
             // TODO: search in database if nothing found in index
+            // TODO: group results by language
             return Task.FromResult(models);
-        }
-
-        private List<string> GetLanguages(string query)
-        {
-            var result = new List<string>();
-            if (Regex.IsMatch(query, "[a-z]", RegexOptions.IgnoreCase))
-            {
-                result.Add("en");
-            }
-            if (Regex.IsMatch(query, "[а-яё]", RegexOptions.IgnoreCase))
-            {
-                result.Add("ru");
-            }
-            if (Regex.IsMatch(query, "[а-яҥҕөһү]", RegexOptions.IgnoreCase))
-            {
-                result.Add("sah");
-            }
-            return result;
         }
 
         private IEnumerable<Article> ExactMatchFirst(IEnumerable<Article> articles, string query)

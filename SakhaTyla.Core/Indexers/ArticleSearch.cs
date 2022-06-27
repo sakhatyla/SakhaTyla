@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SakhaTyla.Core.Entities;
 using SakhaTyla.Core.Search;
@@ -57,6 +58,24 @@ namespace SakhaTyla.Core.Indexers
             document.Fields[ToLanguageCodeField] = new DocumentField(article.ToLanguage.Code, stored: false, analyzed: false);
             document.Fields[CategoryNameField] = new DocumentField(article.Category?.Name ?? "", analyzed: false);
             return document;
+        }
+
+        public static List<string> GetLanguages(string query)
+        {
+            var result = new List<string>();
+            if (Regex.IsMatch(query, "[a-z]", RegexOptions.IgnoreCase))
+            {
+                result.Add("en");
+            }
+            if (Regex.IsMatch(query, "[а-яё]", RegexOptions.IgnoreCase))
+            {
+                result.Add("ru");
+            }
+            if (Regex.IsMatch(query, "[а-яҥҕөһү]", RegexOptions.IgnoreCase))
+            {
+                result.Add("sah");
+            }
+            return result;
         }
     }
 }
