@@ -20,6 +20,7 @@ namespace SakhaTyla.Core.AutoMapper
                 .ForMember(dest => dest.Title, o => o.MapFrom(src => src.Title!.Trim().ToLower()))
                 .ForMember(dest => dest.Text, o => o.MapFrom(src => src.TextSource!.ProcessArticleText()))
                 .AfterMap((source, destination, context) => context.Mapper.UpdateCollection(source.TagIds, destination.Tags, (int a) => a, (ArticleTag a) => a.TagId));
+            CreateMap<Article, Requests.Public.Articles.Models.ArticleModel>();
         }
     }
 }

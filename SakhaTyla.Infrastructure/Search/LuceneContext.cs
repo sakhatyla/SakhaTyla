@@ -59,17 +59,16 @@ namespace SakhaTyla.Infrastructure.Search
             return analyzer;
         }
 
-        public IEnumerable<Analyzer> GuessAnalyzers(string query)
+        public IEnumerable<Analyzer> GetAnalyzers(string[]? languages)
         {
             var result = new List<Analyzer>();
-            //if (Regex.IsMatch(query, "[a-z]", RegexOptions.IgnoreCase))
-            //{
-            //    result.Add(_luceneContext.GetAnalyzer());
-            //}
-            //if (Regex.IsMatch(query, "[а-яё]", RegexOptions.IgnoreCase))
-            //{
-            //    result.Add(_luceneContext.GetAnalyzer("RU"));
-            //}
+            if (languages != null)
+            {
+                foreach (var language in languages)
+                {
+                    result.Add(GetAnalyzerByLanguage(language));
+                }
+            }
             if (result.Count == 0)
                 result.Add(GetAnalyzer());
             return result;

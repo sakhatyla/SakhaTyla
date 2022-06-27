@@ -6,7 +6,7 @@ namespace SakhaTyla.Core.Search
 {
     public interface ISearchIndexReader
     {
-        SearchResult Search(string query, string[] fields, int top, int offset = 0, string? type = null, SearchFilter[]? filters = null, bool matchAll = false);
+        SearchResult Search(string query, string[] fields, int top, int offset = 0, string? type = null, SearchFilter[]? filters = null, bool matchAll = false, string[]? languages = null);
     }
 
     public abstract class SearchFilter

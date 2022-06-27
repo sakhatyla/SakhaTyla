@@ -35,10 +35,10 @@ namespace SakhaTyla.Infrastructure.Search
             return DirectoryReader.Open(directory);
         }
 
-        public SearchResult Search(string query, string[] fields, int top, int offset = 0, string? type = null, SearchFilter[]? filters = null, bool matchAll = false)
+        public SearchResult Search(string query, string[] fields, int top, int offset = 0, string? type = null, SearchFilter[]? filters = null, bool matchAll = false, string[]? languages = null)
         {
             var searcher = new IndexSearcher(_reader);
-            var q = BuildQuery(query, fields, matchAll);
+            var q = BuildQuery(query, fields, matchAll, languages);
             var topDocs = searcher.Search(q, GetFilter(type, filters), offset + top);
             var hits = topDocs.ScoreDocs.Skip(offset);
             var documents = new List<IndexedDocument>();
@@ -66,10 +66,10 @@ namespace SakhaTyla.Infrastructure.Search
             return new SearchResult(documents, topDocs.TotalHits);
         }
 
-        private Query BuildQuery(string query, string[] fields, bool matchAll)
+        private Query BuildQuery(string query, string[] fields, bool matchAll, string[]? languages)
         {
             query = QueryParserBase.Escape(query);
-            var queries = _luceneContext.GuessAnalyzers(query)
+            var queries = _luceneContext.GetAnalyzers(languages)
                 .Select(a =>
                 {
                     var parser = new MultiFieldQueryParser(_options.Version, fields, a);
