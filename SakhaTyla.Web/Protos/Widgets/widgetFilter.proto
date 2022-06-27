@@ -1,8 +1,5 @@
 ﻿syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
-import "Protos/common.proto";
 import "Protos/WidgetType/widgetType.proto";
 
 option csharp_namespace = "SakhaTyla.Web.Protos.Widgets";

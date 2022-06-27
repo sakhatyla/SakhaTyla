@@ -1,7 +1,5 @@
 ﻿syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
 import "Protos/common.proto";
 import "Protos/Menus/menuModel.proto";
 import "Protos/Menus/menuFilter.proto";

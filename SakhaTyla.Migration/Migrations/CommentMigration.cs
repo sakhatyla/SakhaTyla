@@ -83,7 +83,7 @@ namespace SakhaTyla.Migration.Migrations
 
         private async Task CreateCommentAsync(int containerId, string treePath, string treeOrder, CreateOrUpdateComment comment)
         {
-            var idEntity = _dataContext.Set<IdEntity>().FromSqlInterpolated($@"
+            var idEntity = await _dataContext.Set<IdEntity>().FromSqlInterpolated($@"
 insert into Comments
 (
 ContainerId,
@@ -109,7 +109,7 @@ values
 
 declare @commentId int = @@IDENTITY
 select @commentId as Id
-").AsEnumerable().FirstOrDefault();
+").FirstOrDefaultAsync();
         }
 
         private async Task CountComments(int commentContainerId)

@@ -1,8 +1,6 @@
 ﻿syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
-import "Protos/common.proto";
 import "Protos/WorkerRunStatus/workerRunStatus.proto";
 
 option csharp_namespace = "SakhaTyla.Web.Protos.WorkerRuns";
