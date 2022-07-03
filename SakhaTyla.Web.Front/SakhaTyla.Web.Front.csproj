@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cynosura.Web" Version="0.4.0-b372" />
+    <PackageReference Include="OrchardCore.Localization.Core" Version="1.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SakhaTyla.Core\SakhaTyla.Core.csproj" />
+    <ProjectReference Include="..\SakhaTyla.Data\SakhaTyla.Data.csproj" />
+    <ProjectReference Include="..\SakhaTyla.Infrastructure\SakhaTyla.Infrastructure.csproj" />
+    <ProjectReference Include="..\SakhaTyla.Web.Common\SakhaTyla.Web.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Cynosura.Web.Infrastructure;
 using SakhaTyla.Core.Infrastructure;
 
-namespace SakhaTyla.Web.Infrastructure
+namespace SakhaTyla.Web.Common.Infrastructure
 {
     public class ValidationExceptionHandler : IExceptionHandler
     {

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cynosura.Web" Version="0.4.0-b372" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SakhaTyla.Core\SakhaTyla.Core.csproj" />
+    <ProjectReference Include="..\SakhaTyla.Infrastructure\SakhaTyla.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
