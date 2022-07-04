@@ -24,8 +24,21 @@ namespace SakhaTyla.Core.Requests.Menus
 
         public async Task<MenuModel?> Handle(GetMenu request, CancellationToken cancellationToken)
         {
-            var menu = await _menuRepository.GetEntities()
-                .Where(e => e.Id == request.Id)
+            var query = _menuRepository.GetEntities();
+            if (request.Id != null)
+            {
+                query = query.Where(e => e.Id == request.Id);
+            }
+            else if (!string.IsNullOrEmpty(request.Code))
+            {
+                query = query
+                    .Where(e => e.Code == request.Code);
+            }
+            else
+            {
+                return null;
+            }
+            var menu = await query
                 .FirstOrDefaultAsync(cancellationToken);
             if (menu == null)
             {

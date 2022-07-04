@@ -1,0 +1,49 @@
+﻿@using SakhaTyla.Core.Requests.MenuItems
+@using SakhaTyla.Core.Requests.MenuItems.Models
+@using SakhaTyla.Core.Requests.Menus
+@using SakhaTyla.Core.Requests.Widgets
+@inject MediatR.IMediator Mediator
+@{
+    var mainMenu = await Mediator.Send(new GetMenu() { Code = "main" });
+    List<MenuItemModel>? mainMenuItems = null;
+    if (mainMenu != null)
+    {
+        var menuItems = await Mediator.Send(new GetMenuItems()
+        {
+            Filter = new MenuItemFilter()
+            {
+                MenuId = mainMenu.Id,
+            },
+        });
+        mainMenuItems = menuItems.PageItems.Where(e => e.ParentId == null).ToList();
+    }
+}
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">SakhaTyla.Ru</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @if (mainMenuItems != null)
+            {
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @foreach (var menuItem in mainMenuItems)
+                        {
+                            var path = Context.Request.Path.Value!;
+                            var active = (menuItem.Url == "/" && menuItem.Url == path) ||
+                                (menuItem.Url != "/" && path.StartsWith(menuItem.Url!));
+                            <li class="nav-item">
+                                <a class="nav-link @(active ? "active" : "")" href="@menuItem.Url">@menuItem.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </nav>
+</header>
+

@@ -4,4 +4,9 @@
     var footerWidget = await Mediator.Send(new GetWidget() { Code = "footer" });
 }
 
-<partial name="_WidgetPartial" model="footerWidget" />
+<footer class="border-top footer text-muted">
+    <div class="container">
+        <partial name="_WidgetPartial" model="footerWidget" />
+    </div>
+</footer>
+

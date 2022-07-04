@@ -6,6 +6,7 @@ namespace SakhaTyla.Core.Requests.Menus
 {
     public class GetMenu : IRequest<MenuModel?>
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
+        public string? Code { get; set; }
     }
 }
