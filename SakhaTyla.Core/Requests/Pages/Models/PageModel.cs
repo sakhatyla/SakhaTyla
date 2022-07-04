@@ -78,5 +78,28 @@ namespace SakhaTyla.Core.Requests.Pages.Models
 
         [DisplayName("Publication Date")]
         public DateTime? PublicationDate { get; set; }
+
+        public string GetShortName()
+        {
+            if (!string.IsNullOrEmpty(ShortName))
+                return ShortName;
+            return Name;
+        }
+
+        public string GetHeader()
+        {
+            if (!string.IsNullOrEmpty(Header))
+                return Header;
+            return Name;
+        }
+
+        public string GetTitle()
+        {
+            if (!string.IsNullOrEmpty(MetaTitle))
+                return MetaTitle;
+            if (!string.IsNullOrEmpty(Header))
+                return Header;
+            return Name;
+        }
     }
 }

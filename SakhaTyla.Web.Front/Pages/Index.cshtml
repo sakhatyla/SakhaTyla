@@ -1,8 +1,16 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = Model.PageModel?.GetTitle();
+    ViewData["Keywords"] = Model.PageModel?.MetaKeywords;
+    ViewData["Description"] = Model.PageModel?.MetaDescription;
 }
 
-<div class="text-center">
-</div>
+<article>
+    @if (Model.Sections != null)
+    {
+        <div>
+            <partial name="Page/_HtmlPartial" for="Sections" />
+        </div>
+    }
+</article>

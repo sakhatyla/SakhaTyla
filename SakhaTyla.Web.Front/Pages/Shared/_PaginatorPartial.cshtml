@@ -1,0 +1,37 @@
+﻿@model Models.PaginatorModel
+
+@{ 
+    var firstPageIndex = 0;
+    var lastPageIndex = (Model.Length - 1) / Model.PageSize;
+    var startIndex = Math.Max(Model.PageIndex - 2, firstPageIndex + 1);
+    var endIndex = Math.Min(Model.PageIndex + 2, lastPageIndex - 1);
+}
+
+@if (Model.Length > 0)
+{
+    <ul class="pagination">
+        <li class="page-item@(Model.PageIndex == firstPageIndex ? " active" : "")">
+            <a class="page-link" href="@Model.GeneratePageUrl(firstPageIndex)">@($"{firstPageIndex + 1}")</a>
+        </li>
+        @if (startIndex > firstPageIndex + 1)
+        {
+            <li class="page-item"><span class="page-link">...</span></li>
+        }
+        @for (var i = startIndex; i <= endIndex; i++)
+        {
+            <li class="page-item@(Model.PageIndex == i ? " active" : "")">
+                <a class="page-link" href="@Model.GeneratePageUrl(i)"><span>@($"{i + 1}")</span></a>
+            </li>
+        }
+        @if (endIndex < lastPageIndex - 1)
+        {
+            <li class="page-item"><span class="page-link">...</span></li>
+        }
+        @if (firstPageIndex != lastPageIndex)
+        {
+            <li class="page-item@(Model.PageIndex == lastPageIndex ? " active" : "")">
+                <a class="page-link" href="@Model.GeneratePageUrl(lastPageIndex)">@($"{lastPageIndex + 1}")</a>
+            </li>
+        }
+    </ul>
+}

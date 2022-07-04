@@ -96,7 +96,7 @@ namespace SakhaTyla.Web.Front
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                //endpoints.MapFallbackToPage("{*path}", "/Page");
+                endpoints.MapFallbackToPage("{*path}", "/Page");
             });
         }
     }

@@ -1,0 +1,29 @@
+﻿@page
+@model SakhaTyla.Web.Front.Pages.AppPageModel
+@{
+    ViewData["Title"] = Model.PageModel.GetTitle();
+    ViewData["Keywords"] = Model.PageModel.MetaKeywords;
+    ViewData["Description"] = Model.PageModel.MetaDescription;
+}
+
+<partial name="_BreadcrumbsPartial" for="BreadcrumbsModel" />
+
+@if (Model.PageModel.Type == Core.Enums.PageType.Blog)
+{
+    <partial name="Page/_ArticlesPartial" for="ArticlesModel" />
+}
+else
+{
+    <article>
+        @if (Model.PageModel.Image != null)
+        {
+            <div>
+                <img src="@Model.PageModel.Image.Url">
+            </div>
+        }
+        <h1>@Model.PageModel.GetHeader()</h1>
+        <div>
+            <partial name="Page/_HtmlPartial" for="Sections" />
+        </div>
+    </article>
+}

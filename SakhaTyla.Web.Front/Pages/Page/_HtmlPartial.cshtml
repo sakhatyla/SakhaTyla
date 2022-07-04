@@ -1,0 +1,17 @@
+﻿@model List<Models.HtmlSection>
+
+@foreach (var section in Model)
+{
+    if (section.SystemWidget != null)
+    {
+        @await Html.PartialAsync(section.SystemWidget.ViewName, section.SystemWidget.GetModel())
+    }
+    else if (section.Widget != null)
+    {
+        <partial name="_WidgetPartial" model="section.Widget" />
+    }
+    else
+    {
+        @Html.Raw(section.Html)
+    }
+}

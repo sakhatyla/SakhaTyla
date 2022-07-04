@@ -71,8 +71,8 @@ namespace SakhaTyla.Core.Requests.Pages
                         : queryable.OrderBy(e => e.Route!.Path);
                 case "PublicationDate":
                     return direction == OrderDirection.Descending
-                        ? queryable.OrderByDescending(e => e.PublicationDate)
-                        : queryable.OrderBy(e => e.PublicationDate);
+                        ? queryable.OrderByDescending(e => e.PublicationDate ?? e.CreationDate)
+                        : queryable.OrderBy(e => e.PublicationDate ?? e.CreationDate);
                 case "":
                 case null:
                     return queryable.OrderBy(e => e.Id);

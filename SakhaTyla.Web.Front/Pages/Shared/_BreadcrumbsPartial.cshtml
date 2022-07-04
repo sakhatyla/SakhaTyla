@@ -1,0 +1,19 @@
+﻿@inject IUrlHelper Url
+@model Models.BreadcrumbsModel
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/">Главная</a>
+        </li>
+        @foreach (var parent in Model.Parents)
+        {
+            <li class="breadcrumb-item">
+                <a href="@parent.Url">@parent.Name</a>
+            </li>
+        }
+        <li class="breadcrumb-item active" aria-current="page">
+            @Model.Name
+        </li>
+    </ol>
+</nav>
