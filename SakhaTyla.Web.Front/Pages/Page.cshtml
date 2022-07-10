@@ -10,6 +10,7 @@
 
 @if (Model.PageModel.Type == Core.Enums.PageType.Blog)
 {
+    <h1>@Model.PageModel.GetHeader()</h1>
     <partial name="Page/_ArticlesPartial" for="ArticlesModel" />
 }
 else
