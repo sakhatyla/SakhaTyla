@@ -39,5 +39,12 @@ namespace SakhaTyla.Core.Requests.BookAuthors.Models
 
         [DisplayName("NickName")]
         public string? NickName { get; set; }
+
+        public string GetFullName()
+        {
+            return LastName + " "
+                + (!string.IsNullOrEmpty(FirstName) ? FirstName[0] + "." : "")
+                + (!string.IsNullOrEmpty(MiddleName) ? MiddleName[0] + "." : "");
+        }
     }
 }

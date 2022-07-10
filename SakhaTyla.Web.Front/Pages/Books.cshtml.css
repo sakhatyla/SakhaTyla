@@ -1,0 +1,23 @@
+﻿.book {
+    padding-bottom: 2em;
+}
+
+    .book::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+.book-cover {
+    float: left;
+    width: 128px;
+    height: 128px;
+}
+
+.book-authors {
+    margin-left: 0;
+}
+
+    .book-authors li {
+        list-style: none;
+    }

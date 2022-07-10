@@ -30,7 +30,7 @@ namespace SakhaTyla.Core.Requests.Books
                         : queryable.OrderBy(e => e.Cover);
                 case "":
                 case null:
-                    return queryable.OrderBy(e => e.Id);
+                    return queryable.OrderBy(e => e.Name);
                 default:
                     throw new ArgumentException("Property not found", nameof(propertyName));
             }

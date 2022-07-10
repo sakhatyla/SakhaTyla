@@ -25,7 +25,9 @@ namespace SakhaTyla.Core.Requests.Books
 
         public async Task<PageModel<BookModel>> Handle(GetBooks request, CancellationToken cancellationToken)
         {
-            IQueryable<Book> query = _bookRepository.GetEntities();            
+            IQueryable<Book> query = _bookRepository.GetEntities()
+                .Include(e => e.Authors)
+                .ThenInclude(e => e.Author);            
             query = query.Filter(request.Filter);
             query = query.OrderBy(request.OrderBy, request.OrderDirection);
             var books = await query.ToPagedListAsync(request.PageIndex, request.PageSize, cancellationToken);

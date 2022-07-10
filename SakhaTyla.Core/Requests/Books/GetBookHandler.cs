@@ -25,6 +25,8 @@ namespace SakhaTyla.Core.Requests.Books
         public async Task<BookModel?> Handle(GetBook request, CancellationToken cancellationToken)
         {
             var book = await _bookRepository.GetEntities()
+                .Include(e => e.Authors)
+                .ThenInclude(e => e.Author)
                 .Where(e => e.Id == request.Id)
                 .FirstOrDefaultAsync(cancellationToken);
             if (book == null)

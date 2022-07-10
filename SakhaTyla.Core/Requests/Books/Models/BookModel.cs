@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using SakhaTyla.Core.Requests.BookAuthorships.Models;
 
 namespace SakhaTyla.Core.Requests.Books.Models
 {
@@ -40,5 +41,7 @@ namespace SakhaTyla.Core.Requests.Books.Models
 
         [DisplayName("Cover")]
         public string? Cover { get; set; }
+
+        public List<BookAuthorshipModel> Authors { get; set; }
     }
 }

@@ -28,5 +28,6 @@ namespace SakhaTyla.Core.Entities
         [StringLength(100)]
         public string? Cover { get; set; }
                 
+        public ICollection<BookAuthorship> Authors { get; set; }
     }
 }

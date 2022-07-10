@@ -1,0 +1,49 @@
+﻿@page "/books"
+@using SakhaTyla.Core.Requests.Books.Models
+@model SakhaTyla.Web.Front.Pages.BooksModel
+@{
+    ViewData["Title"] = "Books";
+
+    void Book(BookModel book) 
+    {
+        var url = Url.Page("/Book", new { Synonym = book.Synonym });
+        <div class="book">
+            <div class="book-cover">
+                @if (!string.IsNullOrEmpty(book.Cover))
+                {
+                    <a href="@url"><img src="@book.Cover" alt="@book.Name" /></a>
+                }
+                else
+                {
+                    <text>&nbsp;</text>
+                }
+            </div>
+            <div class="book-name">
+                <a href="@url">@book.Name</a>
+            </div>            
+            <ul class="book-authors">
+                @foreach (var author in book.Authors)
+                {
+                    <li>@author.Author.GetFullName()</li>
+                }
+            </ul>
+        </div>
+    }
+}
+
+<partial name="_BreadcrumbsPartial" for="BreadcrumbsModel" />
+
+<h1>Books</h1>
+
+<div>
+    @for (var i = 0; i < Model.Books.PageItems.Count; i += 2)
+    {
+        <div class="row">
+            <div class="col-sm-6">@{ Book(Model.Books.PageItems[i]); }</div>
+            @if (Model.Books.PageItems.Count > i + 1)
+            {
+                <div class="col-sm-6 col-md-6">@{ Book(Model.Books.PageItems[i+1]); }</div>
+            }
+        </div>
+    }
+</div>
