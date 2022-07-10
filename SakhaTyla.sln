@@ -26,9 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Migration", "SakhaTyla.Migration\SakhaTyla.Migration.csproj", "{C797E3FE-D238-4FFC-885D-D310DBAF98B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakhaTyla.Web.Front", "SakhaTyla.Web.Front\SakhaTyla.Web.Front.csproj", "{3E59B841-3A5A-4B7B-B577-971228936927}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Web.Front", "SakhaTyla.Web.Front\SakhaTyla.Web.Front.csproj", "{3E59B841-3A5A-4B7B-B577-971228936927}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakhaTyla.Web.Common", "SakhaTyla.Web.Common\SakhaTyla.Web.Common.csproj", "{F0C71587-0745-44B0-B2FC-635E332006EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakhaTyla.Web.Common", "SakhaTyla.Web.Common\SakhaTyla.Web.Common.csproj", "{F0C71587-0745-44B0-B2FC-635E332006EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
