@@ -22,7 +22,10 @@ namespace SakhaTyla.Web.Front.Pages
         public IndexModel(IMediator mediator)
         {
             _mediator = mediator;
-            _systemWidgets = new List<SystemWidget>();
+            _systemWidgets = new List<SystemWidget>()
+            {
+                new SystemWidget("recent-books", "Page/_RecentBooksPartial"),
+            };
         }
 
         public async Task OnGetAsync()

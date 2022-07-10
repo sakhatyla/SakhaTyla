@@ -42,7 +42,7 @@
             <div class="col-sm-6">@{ Book(Model.Books.PageItems[i]); }</div>
             @if (Model.Books.PageItems.Count > i + 1)
             {
-                <div class="col-sm-6 col-md-6">@{ Book(Model.Books.PageItems[i+1]); }</div>
+                <div class="col-sm-6">@{ Book(Model.Books.PageItems[i+1]); }</div>
             }
         </div>
     }

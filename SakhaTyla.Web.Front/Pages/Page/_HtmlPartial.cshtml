@@ -4,7 +4,7 @@
 {
     if (section.SystemWidget != null)
     {
-        @await Html.PartialAsync(section.SystemWidget.ViewName, section.SystemWidget.GetModel())
+        @await Html.PartialAsync(section.SystemWidget.ViewName, section.SystemWidget.GetModel != null ? section.SystemWidget.GetModel() : null)
     }
     else if (section.Widget != null)
     {

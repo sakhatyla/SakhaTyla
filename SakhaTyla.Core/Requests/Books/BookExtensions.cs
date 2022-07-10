@@ -28,6 +28,10 @@ namespace SakhaTyla.Core.Requests.Books
                     return direction == OrderDirection.Descending
                         ? queryable.OrderByDescending(e => e.Cover)
                         : queryable.OrderBy(e => e.Cover);
+                case "Id":
+                    return direction == OrderDirection.Descending
+                        ? queryable.OrderByDescending(e => e.Id)
+                        : queryable.OrderBy(e => e.Id);
                 case "":
                 case null:
                     return queryable.OrderBy(e => e.Name);
