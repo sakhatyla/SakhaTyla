@@ -15,9 +15,9 @@
         Type = PageType.Article,
         ParentId = Model.Page.Id
     };
-    if (query.ContainsKey("Page"))
+    if (query.ContainsKey("page"))
     {
-        var success = int.TryParse(query["Page"], out var pageNumberValue);
+        var success = int.TryParse(query["page"], out var pageNumberValue);
         if (success)
         {
             pageNumber = pageNumberValue;
@@ -31,7 +31,7 @@
         OrderBy = "PublicationDate",
         OrderDirection = OrderDirection.Descending,
     });
-    var paginatorModel = new PaginatorModel(page => $"/{Model.Page.Route!.Path}?Page={page + 1}")
+    var paginatorModel = new PaginatorModel(page => $"/{Model.Page.Route!.Path}?page={page + 1}")
     {
         PageSize = pageSize,
         PageIndex = articles.CurrentPageIndex,
