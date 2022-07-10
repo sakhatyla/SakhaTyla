@@ -1,6 +1,5 @@
 @using SakhaTyla.Core.Requests.Books
 @inject MediatR.IMediator Mediator
-@model Models.ArticlesModel
 
 @{
     var books = await Mediator.Send(new GetBooks()

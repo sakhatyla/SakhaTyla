@@ -44,6 +44,7 @@ namespace SakhaTyla.Web.Front.Pages
             _systemWidgets = new List<SystemWidget>()
             {
                 new SystemWidget("recent-books", "Page/_RecentBooksPartial"),
+                new SystemWidget("recent-articles", "Page/_RecentArticlesPartial"),
             };
         }
 

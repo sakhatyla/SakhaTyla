@@ -9,7 +9,7 @@ namespace SakhaTyla.Web.Front.Models
         public WidgetModel? Widget { get; set; }
         public SystemWidget? SystemWidget { get; set; }
 
-        public static List<HtmlSection> BreakToSections(string? html, List<WidgetModel> widgets, List<SystemWidget> systemWidgets = null)
+        public static List<HtmlSection> BreakToSections(string? html, List<WidgetModel> widgets, List<SystemWidget>? systemWidgets = null)
         {
             if (string.IsNullOrEmpty(html))
             {
