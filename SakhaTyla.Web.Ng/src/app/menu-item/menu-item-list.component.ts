@@ -89,6 +89,15 @@ export class MenuItemListComponent implements OnInit {
         error => this.onError(error));
   }
 
+  updateWeight(menuItems: MenuItem[]): void {
+    this.menuItemService.updateMenuItemWeight({
+      menuId: this.state.filter.menuId,
+      parentId: menuItems[0].parentId,
+      ids: menuItems.map((m) => m.id)
+    })
+      .subscribe();
+  }
+
   onError(error: Error) {
     if (error) {
       this.noticeHelper.showError(error);

@@ -39,7 +39,8 @@ namespace SakhaTyla.Core.Requests.MenuItems
                         : queryable.OrderBy(e => e.Parent!.Name);
                 case "":
                 case null:
-                    return queryable.OrderBy(e => e.Id);
+                    return queryable.OrderBy(e => e.TreeOrder)
+                        .ThenBy(e => e.Id);
                 default:
                     throw new ArgumentException("Property not found", nameof(propertyName));
             }
