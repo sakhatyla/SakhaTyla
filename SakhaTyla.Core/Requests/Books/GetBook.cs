@@ -6,6 +6,8 @@ namespace SakhaTyla.Core.Requests.Books
 {
     public class GetBook : IRequest<BookModel?>
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
+
+        public string? Synonym { get; set; }
     }
 }

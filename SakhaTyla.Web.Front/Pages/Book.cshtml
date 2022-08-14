@@ -1,0 +1,30 @@
+﻿@page "/books/{synonym}"
+@model SakhaTyla.Web.Front.Pages.BookPageModel
+@{
+    ViewData["Title"] = Model.Book.GetFullName();
+}
+
+<partial name="_BreadcrumbsPartial" for="BreadcrumbsModel" />
+
+<h1>@Model.Book.GetFullName()</h1>
+
+<div class="book-container">
+    <ul class="book-labels">
+        @foreach (var label in Model.BookLabels)
+        {
+            <li><a href="@Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = label.Page.Number })">@label.Name</a></li>
+        }
+    </ul>
+
+    <div class="book-controls">
+        <div class="book-slider-container">
+            <input type="range" class="form-range" min="@Model.Book.FirstPage" max="@Model.Book.LastPage" value="@Model.BookPage.Number" id="bookRange">
+        </div>
+        <a class="book-prev btn btn-primary" href="@(Model.BookPage.Number > Model.Book.FirstPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number - 1 }) : null)">&lt;</a>
+        <a class="book-next btn btn-primary" href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number + 1 }) : null)">&gt;</a>
+    </div>
+
+    <div class="book-page">
+        <a href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number + 1 }) : null)"><img src="@Model.BookPage.FileName" alt="Page @Model.BookPage.Number" /></a>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using SakhaTyla.Core.Requests.BookAuthorships.Models;
 
 namespace SakhaTyla.Core.Requests.Books.Models
@@ -43,5 +44,14 @@ namespace SakhaTyla.Core.Requests.Books.Models
         public string? Cover { get; set; }
 
         public List<BookAuthorshipModel> Authors { get; set; }
+
+        public string GetFullName()
+        {
+            return $"{Name} ({string.Join(", ", Authors.Select(a => a.Author.GetFullName()))})";
+        }
+
+        public int? FirstPage { get; set; }
+
+        public int? LastPage { get; set; }
     }
 }

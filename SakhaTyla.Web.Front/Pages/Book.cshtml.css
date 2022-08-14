@@ -1,0 +1,31 @@
+﻿.book-container {
+    max-width: 900px;
+}
+
+ul.book-labels {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+    ul.book-labels li {
+        display: inline;
+    }
+
+    ul.book-labels a {
+        padding: 3px;
+    }
+
+.book-controls {
+    display: flex;
+    margin-bottom: 10px;
+    gap: 10px;
+    align-items: center;
+}
+
+    .book-controls .book-slider-container {
+        flex-grow: 1;
+    }
+
+.book-page img {
+    max-width: 100%;
+}

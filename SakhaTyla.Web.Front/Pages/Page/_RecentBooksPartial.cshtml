@@ -17,7 +17,7 @@
     @foreach (var book in books.PageItems)
     {
         <li>
-            <a asp-page="./Book" asp-route-synonym="@book.Synonym">@book.Name @book.Authors.Select(a => "(" + a.Author.GetFullName() + ")").FirstOrDefault()</a>
+            <a asp-page="./Book" asp-route-synonym="@book.Synonym">@book.GetFullName()</a>
         </li>
     }
 </ul>

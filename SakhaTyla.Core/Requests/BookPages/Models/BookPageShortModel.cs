@@ -14,6 +14,8 @@ namespace SakhaTyla.Core.Requests.BookPages.Models
 
         public string FileName { get; set; }
 
+        public int Number { get; set; }
+
         public override string ToString()
         {
             return $"{FileName}";
