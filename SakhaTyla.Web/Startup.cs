@@ -23,6 +23,7 @@ using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Data;
 using SakhaTyla.Infrastructure;
 using SakhaTyla.Web.Infrastructure;
+using System.Linq;
 
 namespace SakhaTyla.Web
 {
@@ -164,7 +165,8 @@ namespace SakhaTyla.Web
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins(Configuration["Cors:Origin"])
+                var config = Configuration.GetSection("Cors:Origin");
+                builder.WithOrigins(config.GetChildren().Select(c => c.Value).ToArray())
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .WithExposedHeaders("Content-Disposition");

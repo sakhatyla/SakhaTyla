@@ -7,6 +7,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SakhaTyla.Core.Common;
 using SakhaTyla.Core.FileStorage;
 using SakhaTyla.Core.Indexers;
 using SakhaTyla.Core.Infrastructure;
@@ -33,6 +34,7 @@ namespace SakhaTyla.Core
             services.AddTransient<TestWorker>();
             services.AddTransient<SearchIndexerWorker>();
             services.AddTransient<ArticleIndexer>();
+            services.Configure<ServerOptions>(configuration.GetSection("Server"));
             return services; 
         }
 

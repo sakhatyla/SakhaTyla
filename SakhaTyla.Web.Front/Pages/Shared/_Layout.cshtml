@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Extensions.Options
+@using SakhaTyla.Core.Common
+@inject IOptions<ServerOptions> ServerOptions
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,6 +25,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        var serverOptions = { apiUrl: '@ServerOptions.Value.ApiUrl' };
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

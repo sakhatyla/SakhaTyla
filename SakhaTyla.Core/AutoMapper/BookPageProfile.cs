@@ -13,6 +13,7 @@ namespace SakhaTyla.Core.AutoMapper
             CreateMap<BookPage, BookPageShortModel>();
             CreateMap<CreateBookPage, BookPage>();
             CreateMap<UpdateBookPage, BookPage>();
+            CreateMap<BookPage, Requests.Public.BookPages.Models.BookPageModel>();
         }
     }
 }
