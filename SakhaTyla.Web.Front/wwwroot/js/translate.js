@@ -15,4 +15,9 @@
 
         $('#query').keydown();
     });
+
+    $(document).on('click', '.article-more a', function () {
+        $(this).parent().hide().next().show();
+        return false;
+    });
 });
