@@ -17,7 +17,7 @@
             <div class="article-text">@Html.Raw(article.Text)</div>
             @if (article.Category != null)
             {
-                <div class="article-category">Категория: @article.Category.Name</div>
+                <div class="article-category">Category: @article.Category.Name</div>
             }
         </div>
     }
@@ -36,16 +36,16 @@
         }
     }
 }
-else 
+else if (!string.IsNullOrEmpty(Model.Query))
 {
-    <p>Перевод не найден.</p>
+    <p>Translation not found.</p>
 }
 
 @if (Model.Translation != null && Model.Translation.MoreArticles != null && Model.Translation.MoreArticles.Count > 0) 
 {
     <hr />
     
-    <p>Еще переводы:</p>
+    <p>More translations:</p>
 
     foreach (var article in Model.Translation.MoreArticles)
     {
