@@ -20,8 +20,8 @@
         <div class="book-slider-container">
             <input type="range" class="form-range" min="@Model.Book.FirstPage" max="@Model.Book.LastPage" value="@Model.BookPage.Number" id="bookRange">
         </div>
-        <a class="book-prev btn btn-primary" href="@(Model.BookPage.Number > Model.Book.FirstPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number - 1 }) : null)" data-page="@(Model.BookPage.Number > Model.Book.FirstPage ? (Model.BookPage.Number - 1) : null)">&lt;</a>
-        <a class="book-next btn btn-primary" href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number + 1 }) : null)"  data-page="@(Model.BookPage.Number < Model.Book.LastPage ? (Model.BookPage.Number + 1) : null)">&gt;</a>
+        <a class="book-prev btn btn-primary" href="@(Model.BookPage.Number > Model.Book.FirstPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number - 1 }) : null)" data-page="@(Model.BookPage.Number > Model.Book.FirstPage ? (Model.BookPage.Number - 1) : null)"><i class="fa-solid fa-arrow-left"></i></a>
+        <a class="book-next btn btn-primary" href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number + 1 }) : null)"  data-page="@(Model.BookPage.Number < Model.Book.LastPage ? (Model.BookPage.Number + 1) : null)"><i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
     <div class="book-page">
