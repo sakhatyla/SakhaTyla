@@ -8,9 +8,9 @@ using Microsoft.Extensions.Localization;
 
 namespace SakhaTyla.Core.Requests.Public.Articles
 {
-    public class SearchArticlesByTextValidator : AbstractValidator<SearchArticlesByText>
+    public class TranslateValidator : AbstractValidator<Translate>
     {
-        public SearchArticlesByTextValidator(IStringLocalizer<SharedResource> localizer)
+        public TranslateValidator(IStringLocalizer<SharedResource> localizer)
         {
             RuleFor(x => x.Query).NotEmpty().WithName(x => localizer["Query"]);
         }

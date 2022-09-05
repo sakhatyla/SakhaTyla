@@ -9,24 +9,25 @@ using AutoMapper;
 using MediatR;
 using SakhaTyla.Core.Entities;
 using SakhaTyla.Core.Indexers;
+using SakhaTyla.Core.Requests.Languages.Models;
 using SakhaTyla.Core.Requests.Public.Articles.Models;
 using SakhaTyla.Core.Search;
 
 namespace SakhaTyla.Core.Requests.Public.Articles
 {
-    public class SearchArticlesByTitleHandler : IRequestHandler<SearchArticlesByTitle, List<ArticleModel>>
+    public class TranslateHandler : IRequestHandler<Translate, TranslateModel>
     {
         private readonly ISearchIndexReader _searchIndexReader;
         private readonly IMapper _mapper;
 
-        public SearchArticlesByTitleHandler(ISearchIndexReader searchIndexReader,
+        public TranslateHandler(ISearchIndexReader searchIndexReader,
             IMapper mapper)
         {
             _searchIndexReader = searchIndexReader;
             _mapper = mapper;
         }
 
-        public Task<List<ArticleModel>> Handle(SearchArticlesByTitle request, CancellationToken cancellationToken)
+        public Task<TranslateModel> Handle(Translate request, CancellationToken cancellationToken)
         {
             var query = request.Query!;
             var filters = new List<SearchFilter>();
@@ -44,8 +45,25 @@ namespace SakhaTyla.Core.Requests.Public.Articles
                 .Select(e => _mapper.Map<Article, ArticleModel>(e))
                 .ToList();
             // TODO: search in database if nothing found in index
-            // TODO: group results by language
-            return Task.FromResult(models);
+            var articleGroups = models.GroupBy(a => new { FromLanguageName = a.FromLanguage.Name, ToLanguageName = a.ToLanguage.Name })
+                .Select(a => new ArticleGroupModel()
+                {
+                    FromLanguage = new LanguageShortModel(a.Key.FromLanguageName),
+                    ToLanguage = new LanguageShortModel(a.Key.ToLanguageName),
+                    Articles = a.ToList(),
+                })
+                .ToList();
+            var model = new TranslateModel(query)
+            {
+                Articles = articleGroups,
+            };
+            result = _searchIndexReader.Search(query, new[] { ArticleSearch.TextSourceFromField, ArticleSearch.TextSourceToField }, 100, languages: ArticleSearch.GetLanguages(query).ToArray());
+            var moreArticles = result.Documents.Select(ArticleSearch.GetArticle).ToList();
+            model.MoreArticles = moreArticles.Select(e => _mapper.Map<Article, ArticleModel>(e))
+                .Where(e => models.All(a => a.Id != e.Id))
+                .Take(10)
+                .ToList();
+            return Task.FromResult(model);
         }
 
         private IEnumerable<Article> ExactMatchFirst(IEnumerable<Article> articles, string query)

@@ -19,6 +19,8 @@ namespace SakhaTyla.Web.Front.Pages
 
         public List<WidgetModel> Widgets { get; set; } = null!;
 
+        public TranslateFormModel? TranslateForm { get; set; } = new TranslateFormModel();
+
         public IndexModel(IMediator mediator)
         {
             _mediator = mediator;

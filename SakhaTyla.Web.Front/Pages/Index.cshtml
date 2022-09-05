@@ -6,6 +6,8 @@
     ViewData["Description"] = Model.PageModel?.MetaDescription;
 }
 
+<partial name="Shared/_TranslateFormPartial" for="TranslateForm" />
+
 <article>
     @if (Model.Sections != null)
     {

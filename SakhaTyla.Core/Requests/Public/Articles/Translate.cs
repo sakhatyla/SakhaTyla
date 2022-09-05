@@ -8,7 +8,7 @@ using SakhaTyla.Core.Requests.Public.Articles.Models;
 
 namespace SakhaTyla.Core.Requests.Public.Articles
 {
-    public class SearchArticlesByTitle : IRequest<List<ArticleModel>>
+    public class Translate : IRequest<TranslateModel>
     {
         public string? Query { get; set; }
 

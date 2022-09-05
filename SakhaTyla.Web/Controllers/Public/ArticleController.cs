@@ -21,16 +21,10 @@ namespace SakhaTyla.Web.Controllers.Public
             _mediator = mediator;
         }
 
-        [HttpPost("SearchArticlesByTitle")]
-        public async Task<List<ArticleModel>> SearchArticlesByTitleAsync([FromBody] SearchArticlesByTitle searchArticlesByTitle)
+        [HttpPost("Translate")]
+        public async Task<TranslateModel> TranslateAsync([FromBody] Translate translate)
         {
-            return await _mediator.Send(searchArticlesByTitle);
-        }
-
-        [HttpPost("SearchArticlesByText")]
-        public async Task<List<ArticleModel>> SearchArticlesByTextAsync([FromBody] SearchArticlesByText searchArticlesByText)
-        {
-            return await _mediator.Send(searchArticlesByText);
+            return await _mediator.Send(translate);
         }
     }
 }

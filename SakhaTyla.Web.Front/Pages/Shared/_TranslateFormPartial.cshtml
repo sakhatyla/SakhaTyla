@@ -1,0 +1,20 @@
+﻿@model Models.TranslateFormModel
+
+<form asp-page="Translate" method="get">
+    <div class="translate-letters">
+        Якутские буквы:
+        <span class="letters">
+            <button class="btn btn-light" type="button">ҥ</button>
+            <button class="btn btn-light" type="button">ҕ</button>
+            <button class="btn btn-light" type="button">ө</button>
+            <button class="btn btn-light" type="button">һ</button>
+            <button class="btn btn-light" type="button">ү</button>
+        </span>
+    </div>
+    <div class="translate-box">
+        <div class="translate-box-text">
+            <input type="text" name="q" value="@Model.Query" class="translate-text form-control form-control-lg" spellcheck="false" autocomplete="off" />            
+        </div>
+        <button class="btn btn-primary btn-lg translate-button" type="submit" title="Перевести">O-</button>
+    </div>
+</form>
