@@ -28,3 +28,7 @@
         <a href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number + 1 }) : null)" data-page="@(Model.BookPage.Number < Model.Book.LastPage ? (Model.BookPage.Number + 1) : null)"><img src="@Model.BookPage.FileName" alt="Page @Model.BookPage.Number" /></a>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/book.js" asp-append-version="true"></script>
+}
