@@ -1,6 +1,7 @@
-﻿@model Models.TranslateFormModel
+﻿@using SakhaTyla.Core.Requests.Public.Articles
+@model Models.TranslateFormModel
 
-<form asp-page="Translate" method="get">
+<form asp-page="Translate" method="get" id="translateForm">
     <div class="translate-letters">
         Sakha letters:
         <span class="letters">
@@ -13,7 +14,7 @@
     </div>
     <div class="translate-box">
         <div class="translate-box-text">
-            <input type="text" name="q" id="query" value="@Model.Query" class="translate-text form-control form-control-lg" spellcheck="false" autocomplete="off" />            
+            <input type="text" name="q" id="query" value="@Model.Query" class="translate-text form-control form-control-lg" spellcheck="false" autocomplete="off" data-min-length="@Suggest.MinLength" />            
         </div>
         <button class="btn btn-primary btn-lg translate-button" type="submit" title="Перевести"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
