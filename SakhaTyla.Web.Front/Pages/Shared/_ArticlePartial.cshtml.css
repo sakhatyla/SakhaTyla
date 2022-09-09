@@ -1,0 +1,29 @@
+﻿.article {
+    margin-bottom: 1em;
+}
+
+    .article .article-title {
+        font-size: 1.2em;
+        margin: 0.5em 0;
+    }
+
+        .article .article-title i {
+            font-size: 0.7em;
+            color: #999;
+        }
+
+    .article .article-text {
+        margin-left: 1em;
+    }
+
+    .article .article-category {
+        font-style: italic;
+        margin-left: 1em;
+    }
+
+    .article h1, .article h2, .article h3, .article h4 {
+        font-size: 1em;
+    }
+
+    .article p {
+    }

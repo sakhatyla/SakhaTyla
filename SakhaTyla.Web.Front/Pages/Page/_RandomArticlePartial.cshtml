@@ -1,0 +1,15 @@
+﻿@using Models
+@using SakhaTyla.Core.Requests.Public.Articles
+@using SakhaTyla.Core.Requests.Public.Articles.Models
+@inject MediatR.IMediator Mediator
+@{
+    var article = await Mediator.Send(new GetRandomArticle());
+    var articleModel = new ArticlePartialModel(article)
+    {
+        ShowLanguage = true
+    };
+}
+
+<h2>Random Article</h2>
+
+<partial name="Shared/_ArticlePartial" model="articleModel" />

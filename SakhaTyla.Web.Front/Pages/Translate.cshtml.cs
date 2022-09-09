@@ -37,5 +37,13 @@ namespace SakhaTyla.Web.Front.Pages
 
             return Page();
         }
+
+        public ArticlePartialModel GetArticlePartialModel(ArticleModel article, bool showLanguage)
+        {
+            return new ArticlePartialModel(article)
+            {
+                ShowLanguage = showLanguage
+            };
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace SakhaTyla.Web.Front.Pages
             {
                 new SystemWidget("recent-books", "Page/_RecentBooksPartial"),
                 new SystemWidget("recent-articles", "Page/_RecentArticlesPartial"),
+                new SystemWidget("random-article", "Page/_RandomArticlePartial"),
             };
         }
 

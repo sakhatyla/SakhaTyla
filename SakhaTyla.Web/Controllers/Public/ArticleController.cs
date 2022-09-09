@@ -32,5 +32,11 @@ namespace SakhaTyla.Web.Controllers.Public
         {
             return await _mediator.Send(suggestArticles);
         }
+
+        [HttpPost("GetRandomArticle")]
+        public async Task<ArticleModel> SuggestAsync([FromBody] GetRandomArticle getRandomArticle)
+        {
+            return await _mediator.Send(getRandomArticle);
+        }
     }
 }

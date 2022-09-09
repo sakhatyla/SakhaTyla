@@ -43,7 +43,7 @@ namespace SakhaTyla.Core.Requests.Books.Models
         [DisplayName("Cover")]
         public string? Cover { get; set; }
 
-        public List<BookAuthorshipModel> Authors { get; set; }
+        public List<BookAuthorshipModel> Authors { get; set; } = null!;
 
         public string GetFullName()
         {

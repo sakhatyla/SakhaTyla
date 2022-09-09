@@ -3,24 +3,6 @@
 @model SakhaTyla.Web.Front.Pages.TranslateModel
 @{
     ViewData["Title"] = Model.Query;
-
-    void Article(ArticleModel article, bool main)
-    {
-        <div class="article" style="@(main ? null : "display: none")">
-            <h3 class="article-title">
-                @article.Title 
-                @if (!main)
-                {
-                    <i>(@article.FromLanguage.Name &rarr; @article.ToLanguage.Name)</i>
-                }
-            </h3>
-            <div class="article-text">@Html.Raw(article.Text)</div>
-            @if (article.Category != null)
-            {
-                <div class="article-category">Category: @article.Category.Name</div>
-            }
-        </div>
-    }
 }
 
 <partial name="Shared/_TranslateFormPartial" for="TranslateForm" />
@@ -32,7 +14,7 @@
         <h2>@articleGroup.FromLanguage.Name &rarr; @articleGroup.ToLanguage.Name</h2>
         foreach(var article in articleGroup.Articles)
         {
-            Article(article, true);
+            <partial name="Shared/_ArticlePartial" model="Model.GetArticlePartialModel(article, false)" />
         }
     }
 }
@@ -52,7 +34,9 @@ else if (!string.IsNullOrEmpty(Model.Query))
         <div class="article-more">
             <a asp-page="Translate" asp-route-q="@article.Title">@article.Title</a>
         </div>
-        Article(article, false);
+        <div style="display: none">
+            <partial name="Shared/_ArticlePartial" model="Model.GetArticlePartialModel(article, true)" />
+        </div>
     }
 }
 
