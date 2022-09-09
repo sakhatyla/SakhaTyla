@@ -2,7 +2,7 @@
     $('#query').autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: serverOptions.apiUrl + '/api/public/Suggest',
+                url: serverOptions.apiUrl + '/api/public/SuggestArticles',
                 type: 'POST',
                 data: JSON.stringify({ query: request.term }),
                 contentType: 'application/json',

@@ -12,18 +12,18 @@ using SakhaTyla.Core.Requests.Public.Articles.Models;
 
 namespace SakhaTyla.Core.Requests.Public.Articles
 {
-    public class SuggestHandler : IRequestHandler<Suggest, List<ArticleSuggestModel>>
+    public class SuggestArticlesHandler : IRequestHandler<SuggestArticles, List<ArticleSuggestModel>>
     {
         private readonly IEntityRepository<Article> _articleRepository;
 
-        public SuggestHandler(IEntityRepository<Article> articleRepository)
+        public SuggestArticlesHandler(IEntityRepository<Article> articleRepository)
         {
             _articleRepository = articleRepository;
         }
 
-        public async Task<List<ArticleSuggestModel>> Handle(Suggest request, CancellationToken cancellationToken)
+        public async Task<List<ArticleSuggestModel>> Handle(SuggestArticles request, CancellationToken cancellationToken)
         {
-            if (request.Query!.Length < Suggest.MinLength)
+            if (request.Query!.Length < SuggestArticles.MinLength)
             {
                 return new List<ArticleSuggestModel>();
             }

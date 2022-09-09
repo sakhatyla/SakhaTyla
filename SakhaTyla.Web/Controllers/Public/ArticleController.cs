@@ -27,10 +27,10 @@ namespace SakhaTyla.Web.Controllers.Public
             return await _mediator.Send(translate);
         }
 
-        [HttpPost("Suggest")]
-        public async Task<List<ArticleSuggestModel>> SuggestAsync([FromBody] Suggest suggest)
+        [HttpPost("SuggestArticles")]
+        public async Task<List<ArticleSuggestModel>> SuggestAsync([FromBody] SuggestArticles suggestArticles)
         {
-            return await _mediator.Send(suggest);
+            return await _mediator.Send(suggestArticles);
         }
     }
 }

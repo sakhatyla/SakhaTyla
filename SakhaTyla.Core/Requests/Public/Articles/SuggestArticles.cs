@@ -8,7 +8,7 @@ using SakhaTyla.Core.Requests.Public.Articles.Models;
 
 namespace SakhaTyla.Core.Requests.Public.Articles
 {
-    public class Suggest : IRequest<List<ArticleSuggestModel>>
+    public class SuggestArticles : IRequest<List<ArticleSuggestModel>>
     {
         public const int MinLength = 2;
 
