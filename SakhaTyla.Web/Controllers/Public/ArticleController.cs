@@ -28,13 +28,13 @@ namespace SakhaTyla.Web.Controllers.Public
         }
 
         [HttpPost("SuggestArticles")]
-        public async Task<List<ArticleSuggestModel>> SuggestAsync([FromBody] SuggestArticles suggestArticles)
+        public async Task<List<ArticleSuggestModel>> SuggestArticlesAsync([FromBody] SuggestArticles suggestArticles)
         {
             return await _mediator.Send(suggestArticles);
         }
 
         [HttpPost("GetRandomArticle")]
-        public async Task<ArticleModel> SuggestAsync([FromBody] GetRandomArticle getRandomArticle)
+        public async Task<ArticleModel> GetRandomArticleAsync([FromBody] GetRandomArticle getRandomArticle)
         {
             return await _mediator.Send(getRandomArticle);
         }
