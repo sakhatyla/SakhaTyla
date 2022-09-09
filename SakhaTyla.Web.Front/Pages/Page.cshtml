@@ -27,4 +27,9 @@ else
             <partial name="Page/_HtmlPartial" for="Sections" />
         </div>
     </article>
+
+    @if (Model.PageModel.Type == Core.Enums.PageType.Article)
+    {
+        <partial name="Page/_CommentsPartial" for="CommentsModel" />
+    }    
 }

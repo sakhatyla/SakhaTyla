@@ -38,6 +38,14 @@ namespace SakhaTyla.Web.Front.Pages
             }
         }
 
+        public CommentsModel CommentsModel
+        {
+            get
+            {
+                return new CommentsModel() { CommentContainerId = PageModel.CommentContainerId };
+            }
+        }
+
         public AppPageModel(IMediator mediator)
         {
             _mediator = mediator;

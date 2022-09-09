@@ -1,0 +1,36 @@
+﻿@using SakhaTyla.Core.Common
+@using SakhaTyla.Core.Requests.Comments;
+@using SakhaTyla.Core.Requests.Comments.Models;
+@model Models.CommentsModel
+@inject MediatR.IMediator Mediator;
+
+@{
+    var comments = await Mediator.Send(new GetComments()
+    {
+        Filter = new CommentFilter()
+        {
+            ContainerId = Model!.CommentContainerId
+        }
+    });
+}
+
+<h3 id="comments">
+    @if (comments.PageItems.Count > 0)
+    {
+        <text>@comments.PageItems.Count comments</text>
+    }
+    else
+    {
+        <text>No comments</text>
+    }
+</h3>
+@foreach (var comment in comments.PageItems)
+{
+    <div class="comment">
+        <div class="comment-header">
+            @comment.Author.FirstName @comment.Author.LastName
+            @comment.CreationDate.ToApplicationTime().ToString("g")
+        </div>
+        <p>@Html.Raw(comment.Text)</p>
+    </div>
+}
