@@ -8,13 +8,13 @@ namespace SakhaTyla.Core.ChatBots
 {
     public class ChatBotMessage
     {
-        public ChatBotMessage(string text, ChatBotUser from)
+        public ChatBotMessage(string text, ChatBotChat chat)
         {
             Text = text;
-            From = from;
+            Chat = chat;
         }
 
         public string Text { get; set; }
-        public ChatBotUser From { get; set; }
+        public ChatBotChat Chat { get; set; }
     }
 }

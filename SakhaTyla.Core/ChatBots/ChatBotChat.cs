@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace SakhaTyla.Core.ChatBots
 {
-    public class ChatBotUser
+    public class ChatBotChat
     {
-        public ChatBotUser(string id)
+        public ChatBotChat(string id)
         {
             Id = id;
         }
 
         public string Id { get; set; }
+        public bool Private { get; set; }
     }
 }

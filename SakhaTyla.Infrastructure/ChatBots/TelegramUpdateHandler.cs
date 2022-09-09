@@ -10,6 +10,7 @@ using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace SakhaTyla.Infrastructure.ChatBots
 {
@@ -52,7 +53,11 @@ namespace SakhaTyla.Infrastructure.ChatBots
             if (message.Text is not { } messageText)
                 return;
 
-            await _chatBotMessageHandler.ProcessMessage(new ChatBotMessage(messageText, new ChatBotUser($"{message.From?.Id}")), cancellationToken);
+            var chat = new ChatBotChat($"{message.Chat.Id}")
+            {
+                Private = message.Chat.Type == ChatType.Private,
+            };
+            await _chatBotMessageHandler.ProcessMessage(new ChatBotMessage(messageText, chat), cancellationToken);
         }
 
         // Process Inline Keyboard callback data

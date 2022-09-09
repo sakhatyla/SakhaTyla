@@ -46,6 +46,8 @@ namespace SakhaTyla.Worker
 
                     services.AddOptions();
 
+                    services.AddMemoryCache();
+
                     services.AddWorker(hostContext.Configuration);
                     services.AddInfrastructure(hostContext.Configuration);
                     services.AddData();

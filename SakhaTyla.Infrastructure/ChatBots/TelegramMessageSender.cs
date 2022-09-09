@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SakhaTyla.Core.ChatBots;
 using Telegram.Bot;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace SakhaTyla.Infrastructure.ChatBots
 {
@@ -17,9 +19,14 @@ namespace SakhaTyla.Infrastructure.ChatBots
             _botClient = botClient;
         }
 
-        public async Task SendMessage(string id, string text)
+        public async Task SendMessage(string chatId, string text, bool html = false, ReplyButton[]? replyButtons = null)
         {
-            await _botClient.SendTextMessageAsync(long.Parse(id), text);
+            IReplyMarkup? replyMarkup = null;
+            if (replyButtons != null)
+            {
+                replyMarkup = new InlineKeyboardMarkup(replyButtons.Select(b => InlineKeyboardButton.WithCallbackData(b.Text, b.Data)));
+            }
+            await _botClient.SendTextMessageAsync(long.Parse(chatId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
     }
 }
