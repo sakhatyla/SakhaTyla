@@ -1,4 +1,5 @@
 @inject MediatR.IMediator Mediator
+@using SakhaTyla.Core.Common
 @using SakhaTyla.Core.Infrastructure
 @using SakhaTyla.Core.Requests.Pages.Models
 @using SakhaTyla.Core.Enums
@@ -42,20 +43,37 @@
 <div>
     @foreach (var article in articles.PageItems)
     {
-    <article class="blog-post">
-        @if (article.Image != null)
-        {
-            <div>
-                <a href="/@article.Route!.Path">
-                    <img src="@article.Image.Url">
-                </a>
+        <article class="blog-post">
+            @if (article.Image != null)
+            {
+                <div>
+                    <a href="/@article.Route!.Path">
+                        <img src="@article.Image.Url">
+                    </a>
+                </div>
+            }
+            <h2 class="post-title">
+                <a href="/@article.Route!.Path">@article.Name</a>
+            </h2>
+            @Html.Raw(article.Preview)
+            <div class="post-footer">
+                <span>
+                    @article.PublicationDate.ToApplicationTime()?.ToString("D")
+                </span>
+                <span>
+                    <a href="/@article.Route!.Path#comments">
+                    @if (article.CommentContainer.CommentCount > 0)
+                    {
+                        <text>@article.CommentContainer.CommentCount comments</text>
+                    }
+                    else
+                    {
+                        <text>No comments</text>
+                    }
+                    </a>
+                </span>
             </div>
-        }
-        <h2 class="post-title">
-            <a href="/@article.Route!.Path">@article.Name</a>
-        </h2>
-        @Html.Raw(article.Preview)
-    </article>
+        </article>
     }
     <partial name="Shared/_PaginatorPartial" for="@paginatorModel" />
 </div>

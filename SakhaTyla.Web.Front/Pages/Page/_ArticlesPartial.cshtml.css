@@ -1,3 +1,16 @@
 ﻿.blog-post {
     margin-bottom: 3em;
 }
+
+.post-footer {
+    font-size: 0.95em;
+    border: 1px solid #C7C7C7;
+    padding: 5px;
+    margin-top: 1em;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+    .post-footer > span {
+        margin-right: 15px;
+    }
