@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
+using SakhaTyla.Core;
 using SakhaTyla.Core.Requests.BookLabels;
 using SakhaTyla.Core.Requests.BookLabels.Models;
 using SakhaTyla.Core.Requests.BookPages;
@@ -13,10 +15,13 @@ namespace SakhaTyla.Web.Front.Pages
     public class BookPageModel : PageModel
     {
         private readonly IMediator _mediator;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-        public BookPageModel(IMediator mediator)
+        public BookPageModel(IMediator mediator,
+            IStringLocalizer<SharedResource> localizer)
         {
             _mediator = mediator;
+            _localizer = localizer;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -34,7 +39,7 @@ namespace SakhaTyla.Web.Front.Pages
             {
                 return new BreadcrumbsModel(Book.Name, new List<BreadcrumbModel>()
                 {
-                    new BreadcrumbModel("Books", Url.Page("/Books")!),
+                    new BreadcrumbModel(_localizer["Books"], Url.Page("/Books")!),
                 });
             }
         }

@@ -1,5 +1,7 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @using SakhaTyla.Core.Requests.Books
 @inject MediatR.IMediator Mediator
+@inject IViewLocalizer Localizer
 
 @{
     var books = await Mediator.Send(new GetBooks()
@@ -11,7 +13,7 @@
     });
 }
 
-<h2>Books</h2>
+<h2>@Localizer["Books"]</h2>
 
 <ul>
     @foreach (var book in books.PageItems)

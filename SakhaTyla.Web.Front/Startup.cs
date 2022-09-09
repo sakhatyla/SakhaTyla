@@ -4,6 +4,7 @@ using System.Text.Unicode;
 using Cynosura.Web;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.WebEncoders;
 using SakhaTyla.Core;
@@ -43,7 +44,9 @@ namespace SakhaTyla.Web.Front
                 .AddMvcOptions(o =>
                 {
                     o.Filters.Add(typeof(ExceptionLoggerFilter), 10);
-                });
+                })
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             services.AddRazorPages();
 
             services.AddHttpContextAccessor();

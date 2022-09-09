@@ -1,8 +1,10 @@
-﻿@using SakhaTyla.Core.Common
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using SakhaTyla.Core.Common
 @using SakhaTyla.Core.Requests.Comments;
 @using SakhaTyla.Core.Requests.Comments.Models;
 @model Models.CommentsModel
-@inject MediatR.IMediator Mediator;
+@inject MediatR.IMediator Mediator
+@inject IViewLocalizer Localizer
 
 @{
     var comments = await Mediator.Send(new GetComments()
@@ -17,11 +19,11 @@
 <h3 id="comments">
     @if (comments.PageItems.Count > 0)
     {
-        <text>@comments.PageItems.Count comments</text>
+        @Localizer.Plural(comments.PageItems.Count, "{0} comment", "{0} comments")
     }
     else
     {
-        <text>No comments</text>
+        @Localizer["No comments"]
     }
 </h3>
 @foreach (var comment in comments.PageItems)

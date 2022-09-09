@@ -1,0 +1,32 @@
+﻿msgid "Books"
+msgstr "Книги"
+
+msgid "No comments"
+msgstr "Нет комментариев"
+
+msgid "{0} comment"
+msgid_plural "{0} comments"
+msgstr[0] "{0} комментарий"
+msgstr[1] "{0} комментария"
+msgstr[2] "{0} комментариев"
+
+msgid "Sakha letters"
+msgstr "Якутские буквы"
+
+msgid "Translate"
+msgstr "Перевести"
+
+msgid "News"
+msgstr "Новости"
+
+msgid "Random Article"
+msgstr "Случайная статья"
+
+msgid "SakhaTyla.Ru - Sakha Dictionary"
+msgstr "SakhaTyla.Ru - Якутский словарь"
+
+msgid "Translation not found."
+msgstr "Перевод не найден."
+
+msgid "More translations"
+msgstr "Еще переводы"

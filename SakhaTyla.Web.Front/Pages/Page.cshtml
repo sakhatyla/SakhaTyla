@@ -1,4 +1,5 @@
 ﻿@page
+@using SakhaTyla.Core.Common
 @model SakhaTyla.Web.Front.Pages.AppPageModel
 @{
     ViewData["Title"] = Model.PageModel.GetTitle();
@@ -26,10 +27,21 @@ else
         <div>
             <partial name="Page/_HtmlPartial" for="Sections" />
         </div>
+
+        @if (Model.PageModel.Type == Core.Enums.PageType.Article)
+        {
+            <div class="post-footer">
+                <span>
+                    @Model.PageModel.PublicationDate.ToApplicationTime()?.ToString("D")
+                </span>
+            </div>
+        }
     </article>
 
     @if (Model.PageModel.Type == Core.Enums.PageType.Article)
     {
-        <partial name="Page/_CommentsPartial" for="CommentsModel" />
+        <div class="page-comments">
+            <partial name="Page/_CommentsPartial" for="CommentsModel" />
+        </div>
     }    
 }

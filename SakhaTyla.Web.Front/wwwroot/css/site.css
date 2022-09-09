@@ -20,3 +20,17 @@ body {
 h1 {
     margin-bottom: 1em;
 }
+
+.page-comments {
+    margin-top: 3em;
+}
+
+.post-footer {
+    font-size: 0.95em;
+    border: 1px solid #C7C7C7;
+    padding: 5px;
+    margin-top: 1em;
+    display: inline-flex;
+    gap: 15px;
+    border-radius: 3px;
+}

@@ -1,10 +1,12 @@
 @inject MediatR.IMediator Mediator
+@using Microsoft.AspNetCore.Mvc.Localization
 @using SakhaTyla.Core.Common
 @using SakhaTyla.Core.Infrastructure
 @using SakhaTyla.Core.Requests.Pages.Models
 @using SakhaTyla.Core.Enums
 @using SakhaTyla.Core.Requests.Pages
 @using SakhaTyla.Web.Front.Models
+@inject IViewLocalizer Localizer
 @model Models.ArticlesModel
 
 @{
@@ -64,11 +66,11 @@
                     <a href="/@article.Route!.Path#comments">
                     @if (article.CommentContainer.CommentCount > 0)
                     {
-                        <text>@article.CommentContainer.CommentCount comments</text>
+                        @Localizer.Plural(article.CommentContainer.CommentCount, "{0} comment", "{0} comments")
                     }
                     else
                     {
-                        <text>No comments</text>
+                        @Localizer["No comments"]
                     }
                     </a>
                 </span>

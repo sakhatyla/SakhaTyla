@@ -1,5 +1,7 @@
 ﻿@page "/translate"
+@using Microsoft.AspNetCore.Mvc.Localization
 @using SakhaTyla.Core.Requests.Public.Articles.Models
+@inject IViewLocalizer Localizer
 @model SakhaTyla.Web.Front.Pages.TranslateModel
 @{
     ViewData["Title"] = Model.Query;
@@ -20,14 +22,14 @@
 }
 else if (!string.IsNullOrEmpty(Model.Query))
 {
-    <p>Translation not found.</p>
+    <p>@Localizer["Translation not found."]</p>
 }
 
 @if (Model.Translation != null && Model.Translation.MoreArticles != null && Model.Translation.MoreArticles.Count > 0) 
 {
     <hr />
     
-    <p>More translations:</p>
+    <p>@Localizer["More translations"]:</p>
 
     foreach (var article in Model.Translation.MoreArticles)
     {

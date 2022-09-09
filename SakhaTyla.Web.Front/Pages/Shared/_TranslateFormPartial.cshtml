@@ -1,9 +1,11 @@
-﻿@using SakhaTyla.Core.Requests.Public.Articles
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using SakhaTyla.Core.Requests.Public.Articles
+@inject IViewLocalizer Localizer
 @model Models.TranslateFormModel
 
 <form asp-page="Translate" method="get" id="translateForm">
     <div class="translate-letters">
-        Sakha letters:
+        @Localizer["Sakha letters"]:
         <span class="letters">
             <button class="btn btn-light" type="button">ҥ</button>
             <button class="btn btn-light" type="button">ҕ</button>
@@ -16,6 +18,6 @@
         <div class="translate-box-text">
             <input type="text" name="q" id="query" value="@Model.Query" class="translate-text form-control form-control-lg" spellcheck="false" autocomplete="off" data-min-length="@SuggestArticles.MinLength" />            
         </div>
-        <button class="btn btn-primary btn-lg translate-button" type="submit" title="Перевести"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="btn btn-primary btn-lg translate-button" type="submit" title="@Localizer["Translate"]"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 </form>

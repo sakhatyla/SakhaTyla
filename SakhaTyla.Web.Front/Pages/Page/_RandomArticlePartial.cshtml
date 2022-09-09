@@ -1,7 +1,9 @@
-﻿@using Models
+﻿@using Microsoft.AspNetCore.Mvc.Localization
 @using SakhaTyla.Core.Requests.Public.Articles
 @using SakhaTyla.Core.Requests.Public.Articles.Models
+@using Models
 @inject MediatR.IMediator Mediator
+@inject IViewLocalizer Localizer
 @{
     var article = await Mediator.Send(new GetRandomArticle());
     var articleModel = new ArticlePartialModel(article)
@@ -10,6 +12,6 @@
     };
 }
 
-<h2>Random Article</h2>
+<h2>@Localizer["Random Article"]</h2>
 
 <partial name="Shared/_ArticlePartial" model="articleModel" />

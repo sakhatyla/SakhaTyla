@@ -1,6 +1,8 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @using SakhaTyla.Core.Requests.Pages
 @using SakhaTyla.Core.Requests.Pages.Models
 @inject MediatR.IMediator Mediator
+@inject IViewLocalizer Localizer
 
 @{
     var articles = await Mediator.Send(new GetPages()
@@ -16,7 +18,7 @@
     });
 }
 
-<h2>News</h2>
+<h2>@Localizer["News"]</h2>
 
 <ul>
     @foreach (var article in articles.PageItems)

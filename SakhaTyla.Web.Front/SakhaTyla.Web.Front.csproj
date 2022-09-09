@@ -18,4 +18,10 @@
     <ProjectReference Include="..\SakhaTyla.Web.Common\SakhaTyla.Web.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Localization\ru.po">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
