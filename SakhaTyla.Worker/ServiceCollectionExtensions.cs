@@ -7,13 +7,16 @@ using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Quartz;
 using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Security;
+using SakhaTyla.Infrastructure.ChatBots;
 using SakhaTyla.Infrastructure.Messaging;
 using SakhaTyla.Worker.Infrastructure;
 using SakhaTyla.Worker.Jobs;
 using SakhaTyla.Worker.WorkerInfos;
+using Telegram.Bot;
 
 namespace SakhaTyla.Worker
 {
@@ -46,6 +49,14 @@ namespace SakhaTyla.Worker
             services.AddTransient<WorkerInfoSheduler>();
             services.AddTransient<IHostedService, WorkerInfoShedulerService>();
             services.AddTransient<StartWorkerRunJob>();
+            services.AddHttpClient("telegram_bot_client")
+                .AddTypedClient<ITelegramBotClient>((httpClient, sp) =>
+                {
+                    var settings = sp.GetService<IOptions<TelegramSettings>>()?.Value;
+                    TelegramBotClientOptions options = new(settings!.BotToken);
+                    return new TelegramBotClient(options, httpClient);
+                });
+            services.AddHostedService<TelegramService>();
             return services;
         }
     }

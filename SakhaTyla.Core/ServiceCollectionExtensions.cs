@@ -7,11 +7,13 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SakhaTyla.Core.ChatBots;
 using SakhaTyla.Core.Common;
 using SakhaTyla.Core.FileStorage;
 using SakhaTyla.Core.Indexers;
 using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Messaging.WorkerRuns;
+using SakhaTyla.Core.TranslateChatBot;
 using SakhaTyla.Core.Workers;
 
 namespace SakhaTyla.Core
@@ -35,6 +37,7 @@ namespace SakhaTyla.Core
             services.AddTransient<SearchIndexerWorker>();
             services.AddTransient<ArticleIndexer>();
             services.Configure<ServerOptions>(configuration.GetSection("Server"));
+            services.AddTransient<IChatBotMessageHandler, TranslateChatBotMessageHandler>();
             return services; 
         }
 
