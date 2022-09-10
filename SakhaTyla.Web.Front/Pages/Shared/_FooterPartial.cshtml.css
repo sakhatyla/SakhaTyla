@@ -3,9 +3,25 @@
     bottom: 0;
     width: 100%;
     white-space: nowrap;
-    line-height: 60px;
+    height: 95px;
+    padding-top: 10px;
 }
 
 .border-top {
     border-top: 1px solid #e5e5e5;
+}
+
+.footer-main, .footer-social {
+    text-align: center;
+}
+
+
+@media (min-width: 576px) {
+    .footer-main {
+        text-align: left;
+    }
+
+    .footer-social {
+        text-align: right;
+    }
 }

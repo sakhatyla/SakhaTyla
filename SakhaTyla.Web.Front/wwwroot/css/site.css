@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 105px;
 }
 
 h1 {
@@ -34,3 +34,11 @@ h1 {
     gap: 15px;
     border-radius: 3px;
 }
+
+.footer-social {
+    font-size: 2em;
+}
+
+    .footer-social a {
+        color: black;
+    }

@@ -2,11 +2,20 @@
 @inject MediatR.IMediator Mediator
 @{
     var footerWidget = await Mediator.Send(new GetWidget() { Code = "footer" });
+    var footerSocialWidget = await Mediator.Send(new GetWidget() { Code = "footer-social" });
 }
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        <partial name="_WidgetPartial" model="footerWidget" />
+        <div class="row">
+            <div class="col-sm-6 footer-main">
+                <partial name="_WidgetPartial" model="footerWidget" />
+            </div>
+            <div class="col-sm-6 footer-social">
+                <partial name="_WidgetPartial" model="footerSocialWidget" />
+            </div>
+        </div>
+        
     </div>
 </footer>
 
