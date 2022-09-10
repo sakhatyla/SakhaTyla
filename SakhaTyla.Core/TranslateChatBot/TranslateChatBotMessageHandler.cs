@@ -37,6 +37,11 @@ namespace SakhaTyla.Core.TranslateChatBot
         {
             var text = message.Text;
 
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
             if (text == "/start")
             {
                 await _chatBotMessageSender.SendMessage(message.Chat.Id, "Чтобы получить перевод слов, просто напишите их мне");
@@ -55,6 +60,48 @@ namespace SakhaTyla.Core.TranslateChatBot
             }            
         }
 
+        public async Task ProcessCallbackQuery(ChatBotCallbackQuery callbackQuery, CancellationToken cancellationToken)
+        {
+            if (callbackQuery.Message != null && !string.IsNullOrEmpty(callbackQuery.Data))
+            {
+                var info = ArticleInlineInfo.ParseCode(callbackQuery.Data);
+                if (info != null)
+                {
+                    var articleTranslate = GetTranslateFromCache(info.Id);
+                    if (articleTranslate != null)
+                    {
+                        if (info.Type == ArticleInlineInfoType.Articles)
+                        {
+                            var group = articleTranslate.Articles.Skip(info.GroupNumber).FirstOrDefault();
+                            if (@group != null)
+                            {
+                                var articles = @group.Articles.ToList();
+                                var article = articles.Skip(info.ArticleNumber).FirstOrDefault();
+                                if (article != null)
+                                {
+                                    info.TotalArticles = articles.Count;
+                                    await EditArticle(callbackQuery.Message.Chat.Id, callbackQuery.Message.MessageId, article, info);
+                                }
+                            }                            
+                        }
+                        else if (info.Type == ArticleInlineInfoType.MoreArticles)
+                        {
+                            if (articleTranslate.MoreArticles != null)
+                            {
+                                var article = articleTranslate.MoreArticles.Skip(info.ArticleNumber).FirstOrDefault();
+                                if (article != null)
+                                {
+                                    info.TotalArticles = articleTranslate.MoreArticles.Count;
+                                    await EditArticle(callbackQuery.Message.Chat.Id, callbackQuery.Message.MessageId, article, info);
+                                }
+                            }   
+                        }
+                    }
+                }
+            }            
+            await _chatBotMessageSender.AnswerCallbackQuery(callbackQuery.Id);
+        }
+
         private async Task SendRandomArticle(string chatId)
         {
             var article = await _mediator.Send(new GetRandomArticle());
@@ -63,18 +110,28 @@ namespace SakhaTyla.Core.TranslateChatBot
 
         private async Task SendArticle(string chatId, ArticleModel article, ArticleInlineInfo? articleInlineInfo = null)
         {
-            ReplyButton[]? replyButtons = null;
-            if (articleInlineInfo != null)
+            await _chatBotMessageSender.SendMessage(chatId, article.GetPreparedText(), html: true, replyButtons: GetReplyButtons(articleInlineInfo));
+        }
+
+        private async Task EditArticle(string chatId, string messageId, ArticleModel article, ArticleInlineInfo? articleInlineInfo = null)
+        {
+            await _chatBotMessageSender.EditMessage(chatId, messageId, article.GetPreparedText(), html: true, replyButtons: GetReplyButtons(articleInlineInfo));
+        }
+
+        private ReplyButton[]? GetReplyButtons(ArticleInlineInfo? articleInlineInfo)
+        {
+            if (articleInlineInfo == null)
             {
-                var buttons = articleInlineInfo.GetButtons();
-                if (buttons != null)
-                {
-                    replyButtons = buttons
-                        .Select(b => new ReplyButton(b.DisplayText, b.Code))
-                        .ToArray();
-                }                
+                return null;
             }
-            await _chatBotMessageSender.SendMessage(chatId, article.GetPreparedText(), html: true, replyButtons: replyButtons);
+            var buttons = articleInlineInfo.GetButtons();
+            if (buttons != null)
+            {
+                return buttons
+                    .Select(b => new ReplyButton(b.DisplayText, b.Code))
+                    .ToArray();
+            }
+            return null;
         }
 
         private async Task Translate(string chatId, bool @private, string query)
@@ -90,7 +147,7 @@ namespace SakhaTyla.Core.TranslateChatBot
             });
             if (result.Articles.Count > 0)
             {
-                var id = CacheArticle(result);
+                var id = CacheTranslate(result);
                 var groupIndex = 0;
                 foreach (var articleGroup in result.Articles)
                 {
@@ -109,7 +166,7 @@ namespace SakhaTyla.Core.TranslateChatBot
             }
             else if (result.MoreArticles != null && result.MoreArticles.Count > 0)
             {
-                var id = CacheArticle(result);
+                var id = CacheTranslate(result);
                 var inlineInfo = @private ? new ArticleInlineInfo()
                 {
                     Id = id,
@@ -125,11 +182,20 @@ namespace SakhaTyla.Core.TranslateChatBot
             }
         }
 
-        private Guid CacheArticle(TranslateModel translate)
+        private Guid CacheTranslate(TranslateModel translate)
         {
             var id = Guid.NewGuid();
             _cache.Set(id, translate, TimeSpan.FromHours(1));
             return id;
+        }
+
+        private TranslateModel? GetTranslateFromCache(Guid id)
+        {
+            if (_cache.TryGetValue(id, out TranslateModel value))
+            {
+                return value;
+            }
+            return null;
         }
     }
 }

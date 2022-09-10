@@ -9,6 +9,8 @@ namespace SakhaTyla.Core.ChatBots
     public interface IChatBotMessageSender
     {
         Task SendMessage(string chatId, string text, bool html = false, ReplyButton[]? replyButtons = null);
+        Task EditMessage(string chatId, string messageId, string text, bool html = false, ReplyButton[]? replyButtons = null);
+        Task AnswerCallbackQuery(string callbackQueryId);
     }
 
     public class ReplyButton

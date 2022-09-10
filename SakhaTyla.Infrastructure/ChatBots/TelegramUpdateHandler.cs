@@ -53,18 +53,15 @@ namespace SakhaTyla.Infrastructure.ChatBots
             if (message.Text is not { } messageText)
                 return;
 
-            var chat = new ChatBotChat($"{message.Chat.Id}")
-            {
-                Private = message.Chat.Type == ChatType.Private,
-            };
-            await _chatBotMessageHandler.ProcessMessage(new ChatBotMessage(messageText, chat), cancellationToken);
+            await _chatBotMessageHandler.ProcessMessage(ToChatBotMessage(message), cancellationToken);
         }
 
         // Process Inline Keyboard callback data
-        private Task BotOnCallbackQueryReceived(CallbackQuery callbackQuery, CancellationToken cancellationToken)
+        private async Task BotOnCallbackQueryReceived(CallbackQuery callbackQuery, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received inline keyboard callback from: {CallbackQueryId}", callbackQuery.Id);
-            return Task.CompletedTask;
+
+            await _chatBotMessageHandler.ProcessCallbackQuery(new ChatBotCallbackQuery(callbackQuery.Id, callbackQuery.Message != null ? ToChatBotMessage(callbackQuery.Message) : null, callbackQuery.Data), cancellationToken);
         }
 
         #region Inline Mode
@@ -102,6 +99,19 @@ namespace SakhaTyla.Infrastructure.ChatBots
             // Cooldown in case of network connection error
             if (exception is RequestException)
                 await Task.Delay(TimeSpan.FromSeconds(2), cancellationToken);
+        }
+
+        private ChatBotChat ToChatBotChat(Chat chat)
+        {
+            return new ChatBotChat($"{chat.Id}")
+            {
+                Private = chat.Type == ChatType.Private,
+            };
+        }
+
+        private ChatBotMessage ToChatBotMessage(Message message)
+        {
+            return new ChatBotMessage($"{message.MessageId}", ToChatBotChat(message.Chat), message.Text);
         }
     }
 }

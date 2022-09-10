@@ -9,8 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Quartz;
+using SakhaTyla.Core.ChatBots;
 using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Security;
+using SakhaTyla.Core.TranslateChatBot;
 using SakhaTyla.Infrastructure.ChatBots;
 using SakhaTyla.Infrastructure.Messaging;
 using SakhaTyla.Worker.Infrastructure;
@@ -57,6 +59,11 @@ namespace SakhaTyla.Worker
                     return new TelegramBotClient(options, httpClient);
                 });
             services.AddHostedService<TelegramService>();
+            services.AddScoped<TelegramReceiverService>();
+            services.AddScoped<TelegramUpdateHandler>();
+            services.Configure<TelegramSettings>(configuration.GetSection("Telegram"));
+            services.AddTransient<IChatBotMessageSender, TelegramMessageSender>();
+            services.AddTransient<IChatBotMessageHandler, TranslateChatBotMessageHandler>();
             return services;
         }
     }

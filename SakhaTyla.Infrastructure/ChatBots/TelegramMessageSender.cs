@@ -28,5 +28,20 @@ namespace SakhaTyla.Infrastructure.ChatBots
             }
             await _botClient.SendTextMessageAsync(long.Parse(chatId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
+
+        public async Task EditMessage(string chatId, string messageId, string text, bool html = false, ReplyButton[]? replyButtons = null)
+        {
+            InlineKeyboardMarkup? replyMarkup = null;
+            if (replyButtons != null)
+            {
+                replyMarkup = new InlineKeyboardMarkup(replyButtons.Select(b => InlineKeyboardButton.WithCallbackData(b.Text, b.Data)));
+            }
+            await _botClient.EditMessageTextAsync(long.Parse(chatId), int.Parse(messageId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
+        }
+
+        public async Task AnswerCallbackQuery(string callbackQueryId)
+        {
+            await _botClient.AnswerCallbackQueryAsync(callbackQueryId);
+        }
     }
 }
