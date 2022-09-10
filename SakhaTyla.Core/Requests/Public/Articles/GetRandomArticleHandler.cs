@@ -9,6 +9,7 @@ using Cynosura.Core.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SakhaTyla.Core.Entities;
+using SakhaTyla.Core.Requests.Articles;
 using SakhaTyla.Core.Requests.Public.Articles.Models;
 
 namespace SakhaTyla.Core.Requests.Public.Articles
@@ -34,6 +35,7 @@ namespace SakhaTyla.Core.Requests.Public.Articles
                 .Include(e => e.FromLanguage)
                 .Include(e => e.ToLanguage)
                 .Include(e => e.Category)
+                .DefaultFilter()
                 .OrderBy(a => a.Id)
                 .Skip(i)
                 .FirstAsync();

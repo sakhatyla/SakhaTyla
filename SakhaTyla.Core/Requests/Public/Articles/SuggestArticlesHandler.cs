@@ -8,6 +8,7 @@ using Cynosura.Core.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SakhaTyla.Core.Entities;
+using SakhaTyla.Core.Requests.Articles;
 using SakhaTyla.Core.Requests.Public.Articles.Models;
 
 namespace SakhaTyla.Core.Requests.Public.Articles
@@ -28,6 +29,7 @@ namespace SakhaTyla.Core.Requests.Public.Articles
                 return new List<ArticleSuggestModel>();
             }
             var suggestions = await _articleRepository.GetEntities()
+                .DefaultFilter()
                 .Where(a => a.Title.StartsWith(request.Query))
                 .GroupBy(a => a.Title)
                 .Take(10)
