@@ -20,22 +20,22 @@ namespace SakhaTyla.Infrastructure.ChatBots
             _botClient = botClient;
         }
 
-        public async Task SendMessage(string chatId, string text, bool html = false, ReplyButton[]? replyButtons = null)
+        public async Task SendMessage(string chatId, string text, bool html = false, IReplyButtons? replyButtons = null)
         {
             IReplyMarkup? replyMarkup = null;
             if (replyButtons != null)
             {
-                replyMarkup = new InlineKeyboardMarkup(replyButtons.Select(b => InlineKeyboardButton.WithCallbackData(b.Text, b.Data)));
+                replyMarkup = FromReplyButtons(replyButtons);
             }
             await _botClient.SendTextMessageAsync(long.Parse(chatId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
 
-        public async Task EditMessage(string chatId, string messageId, string text, bool html = false, ReplyButton[]? replyButtons = null)
+        public async Task EditMessage(string chatId, string messageId, string text, bool html = false, InlineReplyButtons? replyButtons = null)
         {
             InlineKeyboardMarkup? replyMarkup = null;
             if (replyButtons != null)
             {
-                replyMarkup = new InlineKeyboardMarkup(replyButtons.Select(b => InlineKeyboardButton.WithCallbackData(b.Text, b.Data)));
+                replyMarkup = FromInlineReplyButtons(replyButtons);
             }
             await _botClient.EditMessageTextAsync(long.Parse(chatId), int.Parse(messageId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
@@ -52,6 +52,32 @@ namespace SakhaTyla.Infrastructure.ChatBots
                 HideUrl = true,
             });
             await _botClient.AnswerInlineQueryAsync(inlineQueryId, inlineQueryResults);
+        }
+
+        private IReplyMarkup FromReplyButtons(IReplyButtons replyButtons)
+        {
+            if (replyButtons is InlineReplyButtons inlineReplyButtons)
+            {
+                return FromInlineReplyButtons(inlineReplyButtons);
+            }
+            else if (replyButtons is TextReplyButtons textInlineReplyButtons)
+            {
+                return FromTextReplyButtons(textInlineReplyButtons);
+            }
+            throw new NotImplementedException();
+        }
+
+        private InlineKeyboardMarkup FromInlineReplyButtons(InlineReplyButtons inlineReplyButtons)
+        {
+            return new InlineKeyboardMarkup(inlineReplyButtons.Buttons.Select(b => InlineKeyboardButton.WithCallbackData(b.Text, b.Data)));
+        }
+
+        private ReplyKeyboardMarkup FromTextReplyButtons(TextReplyButtons textReplyButtons)
+        {
+            return new ReplyKeyboardMarkup(textReplyButtons.Buttons.Select(b => new KeyboardButton(b.Text) { }))
+            {
+                ResizeKeyboard = true
+            };
         }
     }
 }

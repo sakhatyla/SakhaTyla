@@ -43,7 +43,7 @@ namespace SakhaTyla.Core.TranslateChatBot
 
             if (text == "/start")
             {
-                await _chatBotMessageSender.SendMessage(message.Chat.Id, "Чтобы получить перевод слов, просто напишите их мне");
+                await _chatBotMessageSender.SendMessage(message.Chat.Id, "Чтобы получить перевод слов, просто напишите их мне", replyButtons: GetMainButtons());
             }
             else if (text == RandomButtonText)
             {
@@ -119,6 +119,11 @@ namespace SakhaTyla.Core.TranslateChatBot
             await _chatBotMessageSender.AnswerInlineQuery(inlineQuery.Id, results);
         }
 
+        private TextReplyButtons GetMainButtons()
+        {
+            return new TextReplyButtons(new[] { new TextReplyButton(RandomButtonText) });
+        }
+
         private async Task SendRandomArticle(string chatId)
         {
             var article = await _mediator.Send(new GetRandomArticle());
@@ -135,7 +140,7 @@ namespace SakhaTyla.Core.TranslateChatBot
             await _chatBotMessageSender.EditMessage(chatId, messageId, article.GetPreparedText(), html: true, replyButtons: GetReplyButtons(articleInlineInfo));
         }
 
-        private ReplyButton[]? GetReplyButtons(ArticleInlineInfo? articleInlineInfo)
+        private InlineReplyButtons? GetReplyButtons(ArticleInlineInfo? articleInlineInfo)
         {
             if (articleInlineInfo == null)
             {
@@ -144,9 +149,8 @@ namespace SakhaTyla.Core.TranslateChatBot
             var buttons = articleInlineInfo.GetButtons();
             if (buttons != null)
             {
-                return buttons
-                    .Select(b => new ReplyButton(b.DisplayText, b.Code))
-                    .ToArray();
+                return new InlineReplyButtons(buttons
+                    .Select(b => new InlineReplyButton(b.DisplayText, b.Code)));
             }
             return null;
         }

@@ -51,7 +51,7 @@ namespace SakhaTyla.Worker
             services.AddTransient<WorkerInfoSheduler>();
             services.AddTransient<IHostedService, WorkerInfoShedulerService>();
             services.AddTransient<StartWorkerRunJob>();
-            services.AddHttpClient("telegram_bot_client")
+            services.AddHttpClient("TelegramBotClient")
                 .AddTypedClient<ITelegramBotClient>((httpClient, sp) =>
                 {
                     var settings = sp.GetService<IOptions<TelegramSettings>>()?.Value;
