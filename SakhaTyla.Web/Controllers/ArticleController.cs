@@ -36,13 +36,6 @@ namespace SakhaTyla.Web.Controllers
             return await _mediator.Send(getArticle);
         }
 
-        [HttpPost("ExportArticles")]
-        public async Task<FileResult> ExportArticlesAsync([FromBody] ExportArticles exportArticles)
-        {
-            var file = await _mediator.Send(exportArticles);
-            return File(file.Content, file.ContentType, file.Name);
-        }
-
         [Authorize("WriteArticle")]
         [HttpPost("UpdateArticle")]
         public async Task<Unit> UpdateArticleAsync([FromBody] UpdateArticle updateArticle)
