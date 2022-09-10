@@ -81,9 +81,9 @@ namespace SakhaTyla.Migration.Migrations
             }
         }
 
-        private async Task CreateCommentAsync(int containerId, string treePath, string treeOrder, CreateOrUpdateComment comment)
+        private Task CreateCommentAsync(int containerId, string treePath, string treeOrder, CreateOrUpdateComment comment)
         {
-            var idEntity = await _dataContext.Set<IdEntity>().FromSqlInterpolated($@"
+            var idEntity = _dataContext.Set<IdEntity>().FromSqlInterpolated($@"
 insert into Comments
 (
 ContainerId,
@@ -109,7 +109,8 @@ values
 
 declare @commentId int = @@IDENTITY
 select @commentId as Id
-").FirstOrDefaultAsync();
+").AsEnumerable().FirstOrDefault();
+            return Task.CompletedTask;
         }
 
         private async Task CountComments(int commentContainerId)
