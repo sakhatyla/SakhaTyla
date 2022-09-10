@@ -1,0 +1,7 @@
+﻿@using SakhaTyla.Core.Requests.Widgets
+@inject MediatR.IMediator Mediator
+@{
+    var counterScriptWidget = await Mediator.Send(new GetWidget() { Code = "counter-script" });
+}
+
+<partial name="_WidgetPartial" model="counterScriptWidget" />
