@@ -12,6 +12,18 @@
           <input matInput id="text" type="text" name="text" [placeholder]="t('shared.text')"
             [(ngModel)]="state.filter.text" />
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ t('From Language') }}</mat-label>
+          <app-language-select name="fromLanguageId" [placeholder]="t('From Language')" [(ngModel)]="state.filter.fromLanguageId"></app-language-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ t('To Language') }}</mat-label>
+          <app-language-select name="fromLanguageId" [placeholder]="t('To Language')" [(ngModel)]="state.filter.toLanguageId"></app-language-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ t('Category') }}</mat-label>
+          <app-category-select name="categoryId" [placeholder]="t('Category')" [(ngModel)]="state.filter.categoryId"></app-category-select>
+        </mat-form-field>
         <button mat-raised-button type="submit" color="primary">{{ t('shared.search') }}</button>
         <button mat-raised-button type="reset" (click)="onReset()">{{ t('shared.reset') }}</button>
       </form>
