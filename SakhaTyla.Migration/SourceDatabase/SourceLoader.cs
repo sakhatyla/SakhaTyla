@@ -157,13 +157,14 @@ order by BookId, Number");
         {
             await EnsureConnection();
             var bookLabels = await _connection.QueryAsync<SrcBookLabel>(@"select 
-    Id,
-    BookId,
-    Name,
-    PageId
-from BookLabels
-where IsDeleted = 0
-order by BookId, Name");
+    l.Id,
+    l.BookId,
+    l.Name,
+    l.PageId
+from BookLabels l
+inner join BookPages p on p.Id = l.PageId
+where l.IsDeleted = 0
+order by l.BookId, p.Number");
 
             return bookLabels.ToList();
         }

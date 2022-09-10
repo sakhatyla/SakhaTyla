@@ -40,12 +40,14 @@ namespace SakhaTyla.Migration
 
         public async Task RunAsync(CancellationToken cancellationToken)
         {
-            await _pageMigration.MigratePageData();
-            await _widgetMigration.MigrateWidgets();
-            await _categoryMigration.MigrateCategories();
-            await _userMigration.MigrateUsers();
-            await _commentMigration.MigrateComments();
-            //await _bookMigration.MigrateBookData();
+            //await _pageMigration.MigratePageData();
+            //await _widgetMigration.MigrateWidgets();
+            //await _categoryMigration.MigrateCategories();
+            //await _userMigration.MigrateUsers();
+            //await _commentMigration.MigrateComments();
+
+            await _bookMigration.MigrateBookData();
+
             //await _articleMigration.MigrateArticles();
 
             _logger.LogInformation($"Migration completed");

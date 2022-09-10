@@ -26,7 +26,7 @@ namespace SakhaTyla.Core.Requests.BookLabels
                         : queryable.OrderBy(e => e.Page.FileName);
                 case "":
                 case null:
-                    return queryable.OrderBy(e => e.Id);
+                    return queryable.OrderBy(e => e.Page.Number);
                 default:
                     throw new ArgumentException("Property not found", nameof(propertyName));
             }
