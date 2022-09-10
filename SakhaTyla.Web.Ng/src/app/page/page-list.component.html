@@ -12,6 +12,10 @@
           <input matInput id="text" type="text" name="text" [placeholder]="t('shared.text')"
             [(ngModel)]="state.filter.text" />
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ t('Type') }}</mat-label>
+          <app-page-type-select name="type" [placeholder]="t('Type')" [(ngModel)]="state.filter.type"></app-page-type-select>
+        </mat-form-field>
         <button mat-raised-button type="submit" color="primary">{{ t('shared.search') }}</button>
         <button mat-raised-button type="reset" (click)="onReset()">{{ t('shared.reset') }}</button>
       </form>

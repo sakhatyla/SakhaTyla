@@ -77,6 +77,7 @@ export class ArticleListComponent implements OnInit {
     this.state.filter.fromLanguageId = null;
     this.state.filter.toLanguageId = null;
     this.state.filter.categoryId = null;
+    this.state.filter.tagId = null;
     this.getArticles();
   }
 

@@ -24,6 +24,10 @@
           <mat-label>{{ t('Category') }}</mat-label>
           <app-category-select name="categoryId" [placeholder]="t('Category')" [(ngModel)]="state.filter.categoryId"></app-category-select>
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ t('Tag') }}</mat-label>
+          <app-tag-select name="tagId" [placeholder]="t('Tag')" [(ngModel)]="state.filter.tagId"></app-tag-select>
+        </mat-form-field>
         <button mat-raised-button type="submit" color="primary">{{ t('shared.search') }}</button>
         <button mat-raised-button type="reset" (click)="onReset()">{{ t('shared.reset') }}</button>
       </form>

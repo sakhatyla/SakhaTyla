@@ -75,6 +75,10 @@ namespace SakhaTyla.Core.Requests.Articles
             {
                 queryable = queryable.Where(e => e.CategoryId == filter.CategoryId);
             }
+            if (filter?.TagId != null)
+            {
+                queryable = queryable.Where(e => e.Tags.Any(t => t.TagId == filter.TagId));
+            }
             return queryable;
         }
 

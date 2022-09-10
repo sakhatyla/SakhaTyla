@@ -10,5 +10,6 @@ namespace SakhaTyla.Core.Requests.Articles.Models
         public int? ToLanguageId { get; set; }
         public bool? Fuzzy { get; set; }
         public int? CategoryId { get; set; }
+        public int? TagId { get; set; } 
     }
 }

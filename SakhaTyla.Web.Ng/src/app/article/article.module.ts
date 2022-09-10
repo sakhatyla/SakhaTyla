@@ -14,6 +14,7 @@ import { ArticleViewComponent } from './article-view.component';
 import { ArticlesComponent } from './articles.component';
 import { ArticleChangesComponent } from './article-changes.component';
 import { ArticleTagCoreModule } from '../article-tag-core/article-tag-core.module';
+import { TagCoreModule } from '../tag-core/tag-core.module';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { ArticleTagCoreModule } from '../article-tag-core/article-tag-core.modul
         ArticleCoreModule,
         EntityChangeModule,
         ArticleTagCoreModule,
+        TagCoreModule,
     ],
     exports: [
         ArticleListComponent,

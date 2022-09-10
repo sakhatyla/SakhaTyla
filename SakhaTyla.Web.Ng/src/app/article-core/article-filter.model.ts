@@ -6,4 +6,5 @@ export class ArticleFilter extends EntityFilter {
     toLanguageId?: number;
     fuzzy?: boolean;
     categoryId?: number;
+    tagId?: number;
 }
