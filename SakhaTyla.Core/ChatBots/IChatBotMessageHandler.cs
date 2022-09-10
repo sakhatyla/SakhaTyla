@@ -10,6 +10,9 @@ namespace SakhaTyla.Core.ChatBots
     public interface IChatBotMessageHandler
     {
         Task ProcessMessage(ChatBotMessage message, CancellationToken cancellationToken);
+
         Task ProcessCallbackQuery(ChatBotCallbackQuery callbackQuery, CancellationToken cancellationToken);
+
+        Task ProcessInlineQuery(ChatBotInlineQuery inlineQuery, CancellationToken cancellationToken);
     }
 }

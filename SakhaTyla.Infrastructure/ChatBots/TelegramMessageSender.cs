@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SakhaTyla.Core.ChatBots;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace SakhaTyla.Infrastructure.ChatBots
@@ -42,6 +43,15 @@ namespace SakhaTyla.Infrastructure.ChatBots
         public async Task AnswerCallbackQuery(string callbackQueryId)
         {
             await _botClient.AnswerCallbackQueryAsync(callbackQueryId);
+        }
+
+        public async Task AnswerInlineQuery(string inlineQueryId, Core.ChatBots.InlineQueryResult[] results)
+        {
+            var inlineQueryResults = results.Select(r => new InlineQueryResultArticle(r.Id, r.Title, new InputTextMessageContent(r.Text))
+            {
+                HideUrl = true,
+            });
+            await _botClient.AnswerInlineQueryAsync(inlineQueryId, inlineQueryResults);
         }
     }
 }

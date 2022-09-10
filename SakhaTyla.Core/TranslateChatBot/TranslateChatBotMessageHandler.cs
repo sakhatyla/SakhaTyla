@@ -21,7 +21,6 @@ namespace SakhaTyla.Core.TranslateChatBot
         private const string SadFace = "\uD83D\uDE1E";
         private const string FlushedFace = "\uD83D\uDE33";
         private const string RandomButtonText = "\uD83C\uDFB2 Случайное слово";
-        private const int MaxCacheSize = 10;
         private const int MaxQuerySize = 250;
 
         public TranslateChatBotMessageHandler(IChatBotMessageSender chatBotMessageSender,
@@ -100,6 +99,24 @@ namespace SakhaTyla.Core.TranslateChatBot
                 }
             }            
             await _chatBotMessageSender.AnswerCallbackQuery(callbackQuery.Id);
+        }
+
+        public async Task ProcessInlineQuery(ChatBotInlineQuery inlineQuery, CancellationToken cancellationToken)
+        {
+            var query = inlineQuery.Query;
+            InlineQueryResult[] results;
+            if (query.Length >= SuggestArticles.MinLength)
+            {
+                var suggestions = await _mediator.Send(new SuggestArticles() { Query = query });
+                results = suggestions
+                    .Select(s => new InlineQueryResult(s.Title, s.Title, s.Title))
+                    .ToArray();
+            }
+            else
+            {
+                results = new InlineQueryResult[0];
+            }
+            await _chatBotMessageSender.AnswerInlineQuery(inlineQuery.Id, results);
         }
 
         private async Task SendRandomArticle(string chatId)

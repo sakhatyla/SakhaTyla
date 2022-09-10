@@ -66,10 +66,11 @@ namespace SakhaTyla.Infrastructure.ChatBots
 
         #region Inline Mode
 
-        private Task BotOnInlineQueryReceived(InlineQuery inlineQuery, CancellationToken cancellationToken)
+        private async Task BotOnInlineQueryReceived(InlineQuery inlineQuery, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received inline query from: {InlineQueryFromId}", inlineQuery.From.Id);
-            return Task.CompletedTask;
+
+            await _chatBotMessageHandler.ProcessInlineQuery(new ChatBotInlineQuery(inlineQuery.Id, inlineQuery.Query), cancellationToken);
         }
 
         private Task BotOnChosenInlineResultReceived(ChosenInlineResult chosenInlineResult, CancellationToken cancellationToken)
