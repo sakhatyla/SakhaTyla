@@ -26,7 +26,7 @@ namespace SakhaTyla.Core.Requests.Comments
         public async Task<PageModel<CommentModel>> Handle(GetComments request, CancellationToken cancellationToken)
         {
             IQueryable<Comment> query = _commentRepository.GetEntities()
-                .Include(e => e.Container)
+                .Include(e => e.Container.Page)
                 .Include(e => e.Author)
                 .Include(e => e.Parent);            
             query = query.Filter(request.Filter);

@@ -8,6 +8,7 @@ import { Page } from '../page-core/page.model';
 import { PageService } from '../page-core/page.service';
 import { PageEditComponent } from './page-edit.component';
 import { CommentListState } from '../comment-core/comment.model';
+import { PageType } from '../page-type/page-type.model';
 
 @Component({
   selector: 'app-page-view',
@@ -18,6 +19,8 @@ export class PageViewComponent implements OnInit {
   id: number;
   page: Page;
   commentListState = new CommentListState();
+
+  PageType = PageType;
 
   constructor(private dialog: MatDialog,
               private pageService: PageService,

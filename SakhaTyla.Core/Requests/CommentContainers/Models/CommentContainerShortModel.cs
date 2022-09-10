@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SakhaTyla.Core.Requests.Pages.Models;
 
 namespace SakhaTyla.Core.Requests.CommentContainers.Models
 {
@@ -11,6 +12,8 @@ namespace SakhaTyla.Core.Requests.CommentContainers.Models
         }
 
         public int Id { get; set; }
+
+        public PageShortModel? Page { get; set; }
 
         public int CommentCount { get; set; }
 

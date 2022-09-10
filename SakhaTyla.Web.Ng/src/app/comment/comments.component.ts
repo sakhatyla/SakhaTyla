@@ -25,6 +25,7 @@ export class CommentsComponent implements OnInit {
   columns = [
     'creationDate',
     'page',
+    'author',
     'text',
     'action'
   ];

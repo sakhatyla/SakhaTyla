@@ -92,6 +92,6 @@
 
 </mat-card>
 
-<mat-card class="mat-card-list" *ngIf="page">
+<mat-card class="mat-card-list" *ngIf="page && page.type == PageType.Article">
   <app-comment-list [state]="commentListState" *ngIf="id"></app-comment-list>
 </mat-card>
