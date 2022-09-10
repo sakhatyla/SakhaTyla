@@ -27,14 +27,15 @@ namespace SakhaTyla.Core.Requests.Public.Articles
 
         public async Task<ArticleModel> Handle(GetRandomArticle request, CancellationToken cancellationToken)
         {
-            var max = _articleRepository.GetEntities().Max(a => a.Id);
+            var count = await _articleRepository.GetEntities().CountAsync();
             var rnd = new Random();
-            var id = rnd.Next(max + 1);
+            var i = rnd.Next(count);
             var article = await _articleRepository.GetEntities()
                 .Include(e => e.FromLanguage)
                 .Include(e => e.ToLanguage)
                 .Include(e => e.Category)
-                .Where(a => a.Id >= id)
+                .OrderBy(a => a.Id)
+                .Skip(i)
                 .FirstAsync();
             return _mapper.Map<ArticleModel>(article);
         }
