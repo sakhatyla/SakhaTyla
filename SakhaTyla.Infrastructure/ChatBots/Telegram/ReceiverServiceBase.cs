@@ -35,7 +35,6 @@ namespace SakhaTyla.Infrastructure.ChatBots.Telegram
         /// <returns></returns>
         public async Task ReceiveAsync(CancellationToken stoppingToken)
         {
-            // ToDo: we can inject ReceiverOptions through IOptions container
             var receiverOptions = new ReceiverOptions()
             {
                 AllowedUpdates = Array.Empty<UpdateType>(),
