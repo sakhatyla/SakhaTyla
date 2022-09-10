@@ -17,6 +17,14 @@ body {
   margin-bottom: 105px;
 }
 
+.navbar .navbar-brand {
+    background-image: url('../images/logo-60.png');
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: 30px;
+    padding-left: 40px;
+}
+
 h1 {
     margin-bottom: 1em;
 }
