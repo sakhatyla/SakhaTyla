@@ -15,5 +15,7 @@ namespace SakhaTyla.Migration.SourceDatabase
         public bool EmailConfirmed { get; set; }
 
         public string Name { get; set; } = null!;
+
+        public string? PasswordHash { get; set; }
     }
 }

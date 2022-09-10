@@ -17,14 +17,20 @@ namespace SakhaTyla.Migration.Migrations
         private readonly SourceLoader _sourceLoader;
         private readonly IMediator _mediator;
         private readonly IEntityRepository<Role> _roleRepository;
+        private readonly IEntityRepository<User> _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public UserMigration(SourceLoader sourceLoader, 
             IMediator mediator,
-            IEntityRepository<Role> roleRepository)
+            IEntityRepository<Role> roleRepository,
+            IEntityRepository<User> userRepository,
+            IUnitOfWork unitOfWork)
         {
             _sourceLoader = sourceLoader;
             _mediator = mediator;
             _roleRepository = roleRepository;
+            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task MigrateUsers()
@@ -47,7 +53,16 @@ namespace SakhaTyla.Migration.Migrations
                         .Select(e => roles.First(r => r.Name == e.RoleName).Id)
                         .ToList(),
                 };
-                await _mediator.Send(createUser);
+                var createdUser = await _mediator.Send(createUser);
+
+                if (user.PasswordHash != null)
+                {
+                    var newUser = await _userRepository.GetEntities()
+                        .Where(e => e.Id == createdUser.Id)
+                        .FirstAsync();
+                    newUser.PasswordHash = user.PasswordHash;
+                    await _unitOfWork.CommitAsync();
+                }
             }
         }
     }

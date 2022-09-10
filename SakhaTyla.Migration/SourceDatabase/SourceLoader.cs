@@ -197,7 +197,8 @@ order by c.Id");
     Id,
     Email,
     EmailConfirmed,
-    Name
+    Name,
+    PasswordHash
 from AspNetUsers u
 where IsDeleted = 0 and
 	(
