@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using SakhaTyla.Core.Requests.ArticleTags.Models;
+using SakhaTyla.Core.Requests.EntityChanges;
 
 namespace SakhaTyla.Core.Requests.Articles.Models
 {
+    [TrackedEntityModel]
     public class ArticleModel
     {
         public ArticleModel(string title, string text, string textSource)

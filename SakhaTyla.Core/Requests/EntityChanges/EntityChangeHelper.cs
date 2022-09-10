@@ -77,7 +77,7 @@ namespace SakhaTyla.Core.Requests.EntityChanges
         {
             return CoreHelper.GetPlatformAndAppAssemblies()
                 .SelectMany(a => a.GetTypes())
-                .Where(t => t.Name == $"{entityName}Model")
+                .Where(t => t.Name == $"{entityName}Model" && Attribute.GetCustomAttribute(t, typeof(TrackedEntityModelAttribute)) != null)
                 .First();
         }
     }

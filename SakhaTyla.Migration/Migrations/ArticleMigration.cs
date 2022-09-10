@@ -147,7 +147,7 @@ namespace SakhaTyla.Migration.Migrations
 
         private async Task CreateArticleAsync(CreateOrUpdateArticle article)
         {
-            var idEntity = await _dataContext.Set<IdEntity>().FromSqlInterpolated($@"
+            var idEntity = _dataContext.Set<IdEntity>().FromSqlInterpolated($@"
 insert into Articles
 (
 Title,
@@ -177,7 +177,7 @@ values
 
 declare @articleId int = @@IDENTITY
 select @articleId as Id
-").FirstAsync();
+").AsEnumerable().First();
 
             if (article.TagIds != null)
             {

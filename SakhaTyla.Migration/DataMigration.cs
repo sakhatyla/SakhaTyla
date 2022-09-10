@@ -46,9 +46,9 @@ namespace SakhaTyla.Migration
             //await _userMigration.MigrateUsers();
             //await _commentMigration.MigrateComments();
 
-            await _bookMigration.MigrateBookData();
+            //await _bookMigration.MigrateBookData();
 
-            //await _articleMigration.MigrateArticles();
+            await _articleMigration.MigrateArticles();
 
             _logger.LogInformation($"Migration completed");
         }
