@@ -1,3 +1,4 @@
 ﻿.blog-post {
     margin-bottom: 3em;
+    overflow: hidden;
 }
