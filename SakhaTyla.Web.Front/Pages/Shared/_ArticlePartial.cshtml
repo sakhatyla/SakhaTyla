@@ -1,4 +1,6 @@
-﻿@model Models.ArticlePartialModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Models.ArticlePartialModel
 
 <div class="article">
     <h3 class="article-title">
@@ -11,6 +13,6 @@
     <div class="article-text">@Html.Raw(Model.Article.Text)</div>
     @if (Model.Article.Category != null)
     {
-        <div class="article-category">Category: @Model.Article.Category.Name</div>
+        <div class="article-category">@Localizer["Category"]: @Model.Article.Category.Name</div>
     }
 </div>

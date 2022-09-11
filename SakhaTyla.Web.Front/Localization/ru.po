@@ -33,3 +33,6 @@ msgstr "Еще переводы"
 
 msgid "Page {0}"
 msgstr "Страница {0}"
+
+msgid "Category"
+msgstr "Категория"
