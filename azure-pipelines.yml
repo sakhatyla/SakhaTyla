@@ -51,6 +51,8 @@ stages:
               image: 'bacrhub.azurecr.io/sakhatyla_web:$(Build.BuildNumber)'
             webng:
               image: 'bacrhub.azurecr.io/sakhatyla_webng:$(Build.BuildNumber)'
+            site:
+              image: 'bacrhub.azurecr.io/sakhatyla_site:$(Build.BuildNumber)'
             worker:
               image: 'bacrhub.azurecr.io/sakhatyla_worker:$(Build.BuildNumber)'
     - task: PublishPipelineArtifact@1
