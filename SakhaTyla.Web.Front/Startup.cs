@@ -5,6 +5,7 @@ using Cynosura.Web;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.WebEncoders;
 using SakhaTyla.Core;
@@ -93,6 +94,11 @@ namespace SakhaTyla.Web.Front
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            var options = new RewriteOptions();
+            options = options
+                .AddRedirect("^blogs/([a-z0-9/\\-\\._]+)/page([0-9]+)$", $"blogs/$1?page=$2", 301);
+            app.UseRewriter(options);
 
             app.UseRouting();
 
