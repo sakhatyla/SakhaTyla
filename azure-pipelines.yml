@@ -19,6 +19,7 @@ stages:
         azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
         azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
         dockerComposeFile: '**/docker-compose.yaml'
+        projectName: 'sakhatyla'
         action: 'Build services'
         additionalImageTags: '$(Build.BuildNumber)'
         includeLatestTag: true
@@ -29,6 +30,7 @@ stages:
         azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
         azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
         dockerComposeFile: '**/docker-compose.yaml'
+        projectName: 'sakhatyla'
         action: 'Push services'
         additionalImageTags: '$(Build.BuildNumber)'
         includeLatestTag: true
@@ -229,6 +231,7 @@ stages:
                 additionalDockerComposeFiles: |
                   docker-compose.Release.yaml
                   docker-compose.$(Environment.Name).yaml
+                projectName: 'sakhatyla'
                 action: 'Run a Docker Compose command'
                 dockerComposeCommand: 'pull'
             - task: file-creator@5
@@ -260,5 +263,6 @@ stages:
                 additionalDockerComposeFiles: |
                   docker-compose.Release.yaml
                   docker-compose.$(Environment.Name).yaml
+                projectName: 'sakhatyla'
                 action: 'Run a Docker Compose command'
                 dockerComposeCommand: 'up -d --always-recreate-deps'
