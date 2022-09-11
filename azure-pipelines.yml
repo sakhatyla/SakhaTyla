@@ -146,7 +146,7 @@ stages:
                       environment:
                         ASPNETCORE_URLS: 'http://+:5000'
                         ConnectionStrings__DefaultConnection: 'Server=tcp:$(DbHost),1433;Initial Catalog=$(DbName);Persist Security Info=False;User ID=$(DbUser);Password=$(DbPassword);MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
-                        Services__SakhaTyla_Core_FileStorage_IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
+                        Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
                         AWSS3Storage__AccessKey: '$(S3AccessKey)'
                         AWSS3Storage__SecretKey: '$(S3SecretKey)'
                         AWSS3Storage__BucketName: '$(S3BucketName)'
