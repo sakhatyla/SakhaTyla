@@ -24,6 +24,7 @@ using SakhaTyla.Data;
 using SakhaTyla.Infrastructure;
 using SakhaTyla.Web.Infrastructure;
 using System.Linq;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace SakhaTyla.Web
 {
@@ -114,6 +115,14 @@ namespace SakhaTyla.Web
 
             services.AddGrpc();
 
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
+
             services.AddWeb(Configuration);
             services.AddInfrastructure(Configuration);
             services.AddData();
@@ -131,6 +140,7 @@ namespace SakhaTyla.Web
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseForwardedHeaders();
                 app.UseHsts();
             }
 
