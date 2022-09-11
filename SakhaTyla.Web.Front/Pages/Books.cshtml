@@ -1,10 +1,8 @@
 ﻿@page "/books"
 @using SakhaTyla.Core.Requests.Books.Models
-@using Microsoft.AspNetCore.Mvc.Localization
 @model SakhaTyla.Web.Front.Pages.BooksModel
-@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = Localizer["Books"];
+    ViewData["Title"] = Model.Title;
 
     void Book(BookModel book) 
     {
@@ -35,7 +33,7 @@
 
 <partial name="_BreadcrumbsPartial" for="BreadcrumbsModel" />
 
-<h1>@Localizer["Books"]</h1>
+<h1>@Model.Title</h1>
 
 <div>
     @for (var i = 0; i < Model.Books.PageItems.Count; i += 2)

@@ -22,13 +22,15 @@ namespace SakhaTyla.Web.Front.Pages
             _localizer = localizer;
         }
 
+        public string Title => _localizer["Books"];
+
         public PageModel<BookModel> Books { get; set; } = null!;
 
         public BreadcrumbsModel BreadcrumbsModel
         {
             get
             {
-                return new BreadcrumbsModel(_localizer["Books"]);
+                return new BreadcrumbsModel(Title);
             }
         }
 
