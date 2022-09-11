@@ -157,8 +157,8 @@ stages:
                         Lucene__IndexPath: /index
                         Lucene__HunspellPath: /var/hunspell
                         Server__ApiUrl: '$(IdUrl)'
-                        VIRTUAL_HOST: '$(SiteHost)'
-                        LETSENCRYPT_HOST: '$(SiteHost)'
+                        VIRTUAL_HOST: '$(SiteHost),$(SiteWwwHost)'
+                        LETSENCRYPT_HOST: '$(SiteHost),$(SiteWwwHost)'
                         LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
                       volumes:
                         - ./hunspell:/var/hunspell
