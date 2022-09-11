@@ -206,6 +206,7 @@ stages:
                         - '80:80'
                         - '443:443'
                       volumes:
+                        - ./nginx/custom.conf:/etc/nginx/conf.d/st_custom.conf:ro
                         - certs:/etc/nginx/certs:ro
                         - conf:/etc/nginx/conf.d
                         - vhost:/etc/nginx/vhost.d
@@ -257,6 +258,15 @@ stages:
                   {
                     "apiBaseUrl": "$(IdUrl)"
                   }
+            - task: file-creator@5
+              displayName: create custom nginx conf
+              inputs:
+                fileoverwrite: true
+                filepath: '$(AppDirectory)/nginx/custom.conf'
+                filecontent: |
+                  gzip on;
+                  gzip_types application/json application/xml text/plain text/css text/json text/xml image/svg+xml;
+                  gzip_vary on;
             - task: DownloadSecureFile@1
               displayName: download sakhatyla.pfx
               inputs:
