@@ -6,6 +6,7 @@ using Lucene.Net.Analysis.En;
 using Lucene.Net.Analysis.Miscellaneous;
 using Lucene.Net.Analysis.Ru;
 using Lucene.Net.Analysis.Standard;
+using Lucene.Net.Analysis.Util;
 using Lucene.Net.Util;
 using Microsoft.Extensions.Options;
 using SakhaTyla.Infrastructure.Search.Analyzers;
@@ -19,11 +20,16 @@ namespace SakhaTyla.Infrastructure.Search
         private readonly Analyzer _defaultAnalyzer;
         private readonly Dictionary<string, Analyzer> _languageAnalyzers = new();
 
+        private readonly Dictionary<string, string> _stopwords = new() 
+        { 
+            { "ru", "а,без,бы,в,во,вот,да,до,если,же,за,из,к,как,ко,ли,либо,на,не,ни,но,ну,о,об,от,по,под,при,с,со,так,то,того,тоже,у,уже,хотя,чего,чей,чем,что,чтобы,чье,чья,сущ,прил,гл,нареч,безл,сов,несов,союз,мест,уст,перен,б,книжн,ся,дат" } 
+        };
+
         public LuceneContext(IOptions<LuceneOptions> options)
         {
             _options = options.Value;
             _defaultAnalyzer = new StandardAnalyzer(_options.Version);
-            _languageAnalyzers["ru"] = new RussianAnalyzer(_options.Version); // TODO: add custom stopwords
+            _languageAnalyzers["ru"] = new RussianAnalyzer(_options.Version, MakeStopwords(_stopwords["ru"]));
             _languageAnalyzers["en"] = new EnglishAnalyzer(_options.Version);
             _languageAnalyzers["sah"] = new SakhaAnalyzer(_options.Version, _options.HunspellPath!);
         }
@@ -72,6 +78,11 @@ namespace SakhaTyla.Infrastructure.Search
             if (result.Count == 0)
                 result.Add(GetAnalyzer());
             return result;
+        }
+
+        private CharArraySet MakeStopwords(string stopwords)
+        {
+            return new CharArraySet(_options.Version, stopwords.Split(","), true);
         }
     }
 }
