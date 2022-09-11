@@ -16,7 +16,7 @@ stages:
       displayName: docker-compose build
       inputs:
         containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+        azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
         azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
         dockerComposeFile: '**/docker-compose.yaml'
         action: 'Build services'
@@ -26,7 +26,7 @@ stages:
       displayName: docker-compose push
       inputs:
         containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+        azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
         azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
         dockerComposeFile: '**/docker-compose.yaml'
         action: 'Push services'
@@ -223,13 +223,12 @@ stages:
               displayName: docker-compose pull
               inputs:
                 containerregistrytype: 'Azure Container Registry'
-                azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+                azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
                 azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
                 dockerComposeFile: '$(AppDirectory)/docker-compose.yaml'
                 additionalDockerComposeFiles: |
                   docker-compose.Release.yaml
                   docker-compose.$(Environment.Name).yaml
-                projectName: '$(Build.Repository.Name)'
                 action: 'Run a Docker Compose command'
                 dockerComposeCommand: 'pull'
             - task: file-creator@5
@@ -255,12 +254,11 @@ stages:
               displayName: docker-compose up
               inputs:
                 containerregistrytype: 'Azure Container Registry'
-                azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+                azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
                 azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
                 dockerComposeFile: '$(AppDirectory)/docker-compose.yaml'
                 additionalDockerComposeFiles: |
                   docker-compose.Release.yaml
                   docker-compose.$(Environment.Name).yaml
-                projectName: '$(Build.Repository.Name)'
                 action: 'Run a Docker Compose command'
                 dockerComposeCommand: 'up -d --always-recreate-deps'
