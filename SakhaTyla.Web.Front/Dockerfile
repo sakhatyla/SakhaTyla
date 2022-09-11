@@ -8,7 +8,7 @@ COPY SakhaTyla.Infrastructure/*.csproj ./SakhaTyla.Infrastructure/
 COPY SakhaTyla.Web.Common/*.csproj ./SakhaTyla.Web.Common/
 COPY SakhaTyla.Web.Front/*.csproj ./SakhaTyla.Web.Front/
 
-RUN dotnet restore SakhaTyla.Web/SakhaTyla.Web.csproj
+RUN dotnet restore SakhaTyla.Web.Front/SakhaTyla.Web.Front.csproj
 
 COPY SakhaTyla.Core/. ./SakhaTyla.Core/
 COPY SakhaTyla.Data/. ./SakhaTyla.Data/
