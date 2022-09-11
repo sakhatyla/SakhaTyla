@@ -6,6 +6,8 @@ namespace SakhaTyla.Core.Search
 {
     public class Document
     {
+        public const string DefaultLanguage = "default";
+
         public Document(string id)
         {
             Id = id;

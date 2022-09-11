@@ -6,7 +6,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Cynosura.Core.Data;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SakhaTyla.Core.Entities;
 using SakhaTyla.Core.Indexers;
 using SakhaTyla.Core.Requests.Languages.Models;
@@ -19,15 +21,18 @@ namespace SakhaTyla.Core.Requests.Public.Articles
     {
         private readonly ISearchIndexReader _searchIndexReader;
         private readonly IMapper _mapper;
+        private readonly IEntityRepository<Article> _articleRepository;
 
         public TranslateHandler(ISearchIndexReader searchIndexReader,
-            IMapper mapper)
+            IMapper mapper,
+            IEntityRepository<Article> articleRepository)
         {
             _searchIndexReader = searchIndexReader;
             _mapper = mapper;
+            _articleRepository = articleRepository;
         }
 
-        public Task<TranslateModel> Handle(Translate request, CancellationToken cancellationToken)
+        public async Task<TranslateModel> Handle(Translate request, CancellationToken cancellationToken)
         {
             var query = request.Query!;
             var filters = new List<SearchFilter>();
@@ -43,8 +48,7 @@ namespace SakhaTyla.Core.Requests.Public.Articles
             var articles = result.Documents.Select(ArticleSearch.GetArticle).ToList();
             var models = ExactMatchFirst(articles, query)
                 .Select(e => _mapper.Map<Article, ArticleModel>(e))
-                .ToList();
-            // TODO: search in database if nothing found in index
+                .ToList();            
             var articleGroups = models.GroupBy(a => new { FromLanguageName = a.FromLanguage.Name, ToLanguageName = a.ToLanguage.Name })
                 .Select(a => new ArticleGroupModel()
                 {
@@ -53,17 +57,57 @@ namespace SakhaTyla.Core.Requests.Public.Articles
                     Articles = a.ToList(),
                 })
                 .ToList();
+
+            if (articleGroups.Count == 0)
+            {
+                articleGroups = await SearchInDatabase(query, request.FromLanguageCode, request.ToLanguageCode);
+            }
+
             var model = new TranslateModel(query)
             {
                 Articles = articleGroups,
             };
+
             result = _searchIndexReader.Search(query, new[] { ArticleSearch.TextSourceFromField, ArticleSearch.TextSourceToField }, 100, languages: ArticleSearch.GetLanguages(query).ToArray());
             var moreArticles = result.Documents.Select(ArticleSearch.GetArticle).ToList();
             model.MoreArticles = moreArticles.Select(e => _mapper.Map<Article, ArticleModel>(e))
                 .Where(e => models.All(a => a.Id != e.Id))
                 .Take(10)
                 .ToList();
-            return Task.FromResult(model);
+
+            return model;
+        }
+
+        private async Task<List<ArticleGroupModel>> SearchInDatabase(string query, string? fromLanguageCode, string? toLanguageCode)
+        {
+            var query1 = query + "=";
+            var query2 = query + ",";
+            var query3 = query + "-";
+            var articleQuery = _articleRepository.GetEntities()
+                .Include(a => a.FromLanguage)
+                .Include(a => a.ToLanguage)
+                .Where(a => a.Title == query || a.Title.StartsWith(query1) || a.Title.StartsWith(query2) || a.Title.StartsWith(query3));
+            if (fromLanguageCode != null)
+                articleQuery = articleQuery.Where(a => a.FromLanguage.Code == fromLanguageCode);
+            if (toLanguageCode != null)
+                articleQuery = articleQuery.Where(a => a.ToLanguage.Code == toLanguageCode);
+            var articles = await articleQuery.ToListAsync();
+
+            return articles.GroupBy(a => new { FromLanguageName = a.FromLanguage.Name, ToLanguageName = a.ToLanguage.Name })
+                .Select(g => new ArticleGroupModel()
+                {
+                    FromLanguage = new LanguageShortModel(g.Key.FromLanguageName),
+                    ToLanguage = new LanguageShortModel(g.Key.ToLanguageName),
+                    Articles = g.OrderBy(a => a.Title)
+                        .Select(a => new ArticleModel(a.Title, a.Text)
+                        {
+                            Id = a.Id,
+                            FromLanguage = new LanguageShortModel(a.FromLanguage.Name),
+                            ToLanguage = new LanguageShortModel(a.ToLanguage.Name),
+                        })
+                        .ToList()
+                })
+                .ToList();
         }
 
         private IEnumerable<Article> ExactMatchFirst(IEnumerable<Article> articles, string query)

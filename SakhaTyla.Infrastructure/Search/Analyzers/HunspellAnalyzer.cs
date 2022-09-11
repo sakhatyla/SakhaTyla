@@ -8,6 +8,7 @@ using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Core;
 using Lucene.Net.Analysis.Hunspell;
 using Lucene.Net.Analysis.Standard;
+using Lucene.Net.Analysis.Util;
 using Lucene.Net.Util;
 
 namespace SakhaTyla.Infrastructure.Search.Analyzers
@@ -15,12 +16,14 @@ namespace SakhaTyla.Infrastructure.Search.Analyzers
     public abstract class HunspellAnalyzer : Analyzer
     {
         protected readonly LuceneVersion MatchVersion;
+        private readonly CharArraySet? _stopwords;
         private readonly string _hunspellPath;
         private readonly Dictionary _dictionary;
 
-        public HunspellAnalyzer(LuceneVersion matchVersion, string language, string hunspellPath)
+        public HunspellAnalyzer(LuceneVersion matchVersion, CharArraySet? stopwords, string language, string hunspellPath)
         {
             MatchVersion = matchVersion;
+            _stopwords = stopwords;
             _hunspellPath = hunspellPath;
             _dictionary = GetDictionary(language);
         }
@@ -44,6 +47,11 @@ namespace SakhaTyla.Infrastructure.Search.Analyzers
             Tokenizer tokenizer = new StandardTokenizer(MatchVersion, reader);
             TokenFilter filter = new StandardFilter(MatchVersion, tokenizer);
             filter = new LowerCaseFilter(MatchVersion, filter);
+            filter = new ReplaceYoFilter(filter);
+            if (_stopwords != null)
+            {
+                filter = new StopFilter(MatchVersion, filter, _stopwords);
+            }   
             filter = new HunspellStemFilter(filter, _dictionary);
             return new TokenStreamComponents(tokenizer, filter);
         }

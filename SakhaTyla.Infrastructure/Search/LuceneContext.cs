@@ -4,11 +4,10 @@ using System.Text;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.En;
 using Lucene.Net.Analysis.Miscellaneous;
-using Lucene.Net.Analysis.Ru;
-using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Analysis.Util;
 using Lucene.Net.Util;
 using Microsoft.Extensions.Options;
+using SakhaTyla.Core.Search;
 using SakhaTyla.Infrastructure.Search.Analyzers;
 
 namespace SakhaTyla.Infrastructure.Search
@@ -29,7 +28,7 @@ namespace SakhaTyla.Infrastructure.Search
         {
             _options = options.Value;
             _defaultAnalyzer = new StandardAnalyzer(_options.Version);
-            _languageAnalyzers["ru"] = new RussianAnalyzer(_options.Version, MakeStopwords(_stopwords["ru"]));
+            _languageAnalyzers["ru"] = new RussianAnalyzer(_options.Version, MakeStopwords(_stopwords["ru"]), _options.HunspellPath!);
             _languageAnalyzers["en"] = new EnglishAnalyzer(_options.Version);
             _languageAnalyzers["sah"] = new SakhaAnalyzer(_options.Version, _options.HunspellPath!);
         }
@@ -42,7 +41,7 @@ namespace SakhaTyla.Infrastructure.Search
                 {
                     return analyzer;
                 }
-                if (language == "default")
+                if (language == Document.DefaultLanguage)
                 {
                     return _defaultAnalyzer;
                 }

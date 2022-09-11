@@ -48,7 +48,7 @@ namespace SakhaTyla.Core.Indexers
                 Type = DocumentType,
                 Language = article.FromLanguage.Code,
             };
-            document.Fields[TitleField] = new DocumentField(article.Title); // TODO: use standard analyzer?
+            document.Fields[TitleField] = new DocumentField(article.Title) { Language = Document.DefaultLanguage };
             document.Fields[TextField] = new DocumentField(article.Text, analyzed: false);
             document.Fields[TextSourceFromField] = new DocumentField(article.TextSource, stored: false);
             document.Fields[TextSourceToField] = new DocumentField(article.TextSource, stored: false) { Language = article.ToLanguage.Code };
