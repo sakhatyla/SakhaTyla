@@ -1,0 +1,266 @@
+trigger: 
+- master
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Build
+    
+  jobs:
+  - job: Build
+    steps:
+    - task: DockerCompose@0
+      displayName: docker-compose build
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+        azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
+        dockerComposeFile: '**/docker-compose.yaml'
+        action: 'Build services'
+        additionalImageTags: '$(Build.BuildNumber)'
+        includeLatestTag: true
+    - task: DockerCompose@0
+      displayName: docker-compose push
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+        azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
+        dockerComposeFile: '**/docker-compose.yaml'
+        action: 'Push services'
+        additionalImageTags: '$(Build.BuildNumber)'
+        includeLatestTag: true
+    - task: CopyFiles@2
+      displayName: copy docker-compose.yaml
+      inputs:
+        Contents: 'docker-compose.yaml'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+    - task: file-creator@5
+      displayName: create docker-compose.Release.yaml
+      inputs:
+        fileoverwrite: true
+        filepath: '$(Build.ArtifactStagingDirectory)/docker-compose.Release.yaml'
+        filecontent: |
+          version: '3'
+          services:
+            web:
+              image: 'bacrhub.azurecr.io/sakhatyla_web:$(Build.BuildNumber)'
+            webng:
+              image: 'bacrhub.azurecr.io/sakhatyla_webng:$(Build.BuildNumber)'
+            worker:
+              image: 'bacrhub.azurecr.io/sakhatyla_worker:$(Build.BuildNumber)'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        path: $(Build.ArtifactStagingDirectory)
+        artifact: DockerCompose
+
+- stage: Production
+  variables:
+  - group: SakhaTyla-Production
+  jobs:
+  - deployment: DeployApp
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment:
+      name: Production
+      resourceType: VirtualMachine
+    variables:
+      DbHost: db
+      DbName: SakhaTyla-$(Environment.Name)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: DockerCompose
+            - task: CopyFiles@2
+              displayName: copy artifacts
+              inputs:
+                SourceFolder: '$(Pipeline.Workspace)/DockerCompose/'
+                Contents: '**'
+                TargetFolder: '$(AppDirectory)'
+                OverWrite: true
+            - task: file-creator@5
+              displayName: create docker-compose.Environment.yaml
+              inputs:
+                fileoverwrite: true
+                filepath: '$(AppDirectory)/docker-compose.$(Environment.Name).yaml'
+                filecontent: |
+                  version: '3'
+                  services:
+                    web:
+                      environment:
+                        ASPNETCORE_URLS: 'http://+:5000'
+                        ConnectionStrings__DefaultConnection: 'Server=tcp:$(DbHost),1433;Initial Catalog=$(DbName);Persist Security Info=False;User ID=$(DbUser);Password=$(DbPassword);MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
+                        IdentityServer__Clients__SakhaTyla.Web.Ng__RedirectUri: '$(Url)/authentication/login-callback'
+                        IdentityServer__Clients__SakhaTyla.Web.Ng__LogoutUri: '$(Url)/authentication/logout-callback'
+                        IdentityServer__Key__Type: File
+                        IdentityServer__Key__FilePath: '$(CertificatePath)'
+                        IdentityServer__Key__Password: '$(CertificatePassword)'
+                        Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
+                        AWSS3Storage__AccessKey: '$(S3AccessKey)'
+                        AWSS3Storage__SecretKey: '$(S3SecretKey)'
+                        AWSS3Storage__BucketName: '$(S3BucketName)'
+                        AWSS3Storage__ServiceUrl: '$(S3ServiceUrl)'
+                        Messaging__ConnectionUrl: 'rabbitmq://mq'
+                        Messaging__Username: '$(MqUsername)'
+                        Messaging__Password: '$(MqPassword)'
+                        Authority: '$(IdUrl)'
+                        Cors__Origin__0: '$(Url)'
+                        Cors__Origin__1: '$(SiteUrl)'
+                        Lucene__IndexPath: /index
+                        Lucene__HunspellPath: /var/hunspell
+                        EmailSender__DefaultFrom: 'SakhaTyla.Ru <sakhatranslate@sakhatyla.ru>'
+                        EmailSender__SmtpServer: '$(EmailSmtpServer)'
+                        EmailSender__SmtpPort: '$(EmailSmtpPort)'
+                        EmailSender__UserName: '$(EmailUsername)'
+                        EmailSender__Password: '$(EmailPassword)'
+                        EmailSender__EnableSsl: 'true'
+                        VIRTUAL_HOST: '$(IdHost)'
+                        LETSENCRYPT_HOST: '$(IdHost)'
+                        LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
+                      volumes:
+                        - ./cert:/var/cert
+                        - ./hunspell:/var/hunspell
+                        - index:/index
+                        - dpkeys:/root/.aspnet/DataProtection-Keys
+                      restart: always
+                    webng:
+                      build:
+                        context: .
+                      volumes:
+                        - ./webng/config.json:/usr/share/nginx/html/assets/config.json
+                      environment:
+                        VIRTUAL_HOST: '$(Host)'
+                        LETSENCRYPT_HOST: '$(Host)'
+                        LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
+                      restart: always
+                    site:
+                      environment:
+                        ASPNETCORE_URLS: 'http://+:5000'
+                        ConnectionStrings__DefaultConnection: 'Server=tcp:$(DbHost),1433;Initial Catalog=$(DbName);Persist Security Info=False;User ID=$(DbUser);Password=$(DbPassword);MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
+                        Services__SakhaTyla_Core_FileStorage_IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
+                        AWSS3Storage__AccessKey: '$(S3AccessKey)'
+                        AWSS3Storage__SecretKey: '$(S3SecretKey)'
+                        AWSS3Storage__BucketName: '$(S3BucketName)'
+                        AWSS3Storage__ServiceUrl: '$(S3ServiceUrl)'
+                        Messaging__ConnectionUrl: 'rabbitmq://mq'
+                        Messaging__Username: '$(MqUsername)'
+                        Messaging__Password: '$(MqPassword)'
+                        Lucene__IndexPath: /index
+                        Lucene__HunspellPath: /var/hunspell
+                        Server__ApiUrl: '$(IdUrl)'
+                        VIRTUAL_HOST: '$(SiteHost)'
+                        LETSENCRYPT_HOST: '$(SiteHost)'
+                        LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
+                      volumes:
+                        - ./hunspell:/var/hunspell
+                        - index:/index
+                        - dpkeys:/root/.aspnet/DataProtection-Keys
+                      restart: always
+                    worker:
+                      environment:
+                        ConnectionStrings__DefaultConnection: 'Server=tcp:$(DbHost),1433;Initial Catalog=$(DbName);Persist Security Info=False;User ID=$(DbUser);Password=$(DbPassword);MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
+                        Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
+                        AWSS3Storage__AccessKey: '$(S3AccessKey)'
+                        AWSS3Storage__SecretKey: '$(S3SecretKey)'
+                        AWSS3Storage__BucketName: '$(S3BucketName)'
+                        AWSS3Storage__ServiceUrl: '$(S3ServiceUrl)'
+                        Messaging__ConnectionUrl: 'rabbitmq://mq'
+                        Messaging__Username: '$(MqUsername)'
+                        Messaging__Password: '$(MqPassword)'
+                        Lucene__IndexPath: /index
+                        Lucene__HunspellPath: /var/hunspell
+                        Telegram__BotToken: '$(TelegramBotToken)'
+                      volumes:
+                        - ./hunspell:/var/hunspell
+                        - index:/index
+                      restart: always
+                    db:
+                      ports:
+                        - '0.0.0.0:1433:1433'
+                      environment:
+                        ACCEPT_EULA: 'Y'
+                        SA_PASSWORD: '$(DbPassword)'
+                        MSSQL_PID: 'Express'
+                      volumes:
+                        - db:/var/opt/mssql
+                      restart: always
+                    mq:
+                      environment:
+                        RABBITMQ_DEFAULT_USER: '$(MqUsername)'
+                        RABBITMQ_DEFAULT_PASS: '$(MqPassword)'
+                      volumes:
+                        - mq:/var/lib/rabbitmq
+                      restart: always
+                    proxy:
+                      image: jwilder/nginx-proxy
+                      ports:
+                        - '80:80'
+                        - '443:443'
+                      volumes:
+                        - certs:/etc/nginx/certs:ro
+                        - conf:/etc/nginx/conf.d
+                        - vhost:/etc/nginx/vhost.d
+                        - dhparam:/etc/nginx/dhparam
+                        - html:/usr/share/nginx/html
+                        - /var/run/docker.sock:/tmp/docker.sock:ro
+                      restart: always
+                  volumes:
+                    db:
+                    mq:
+                    index:
+                    dpkeys:
+                    conf:
+                    vhost:
+                    html:
+                    dhparam:
+                    certs:
+            - task: DockerCompose@0
+              displayName: docker-compose pull
+              inputs:
+                containerregistrytype: 'Azure Container Registry'
+                azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+                azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
+                dockerComposeFile: '$(AppDirectory)/docker-compose.yaml'
+                additionalDockerComposeFiles: |
+                  docker-compose.Release.yaml
+                  docker-compose.$(Environment.Name).yaml
+                projectName: '$(Build.Repository.Name)'
+                action: 'Run a Docker Compose command'
+                dockerComposeCommand: 'pull'
+            - task: file-creator@5
+              displayName: create config.json
+              inputs:
+                fileoverwrite: true
+                filepath: '$(AppDirectory)/webng/config.json'
+                filecontent: |
+                  {
+                    "apiBaseUrl": "$(IdUrl)"
+                  }
+            - task: DownloadSecureFile@1
+              displayName: download sakhatyla.pfx
+              inputs:
+                secureFile: 'sakhatyla.pfx'
+            - task: CopyFiles@2
+              displayName: copy cert
+              inputs:
+                SourceFolder: '$(Agent.TempDirectory)'
+                Contents: 'sakhatyla.pfx'
+                TargetFolder: '$(AppDirectory)/cert/'
+            - task: DockerCompose@0
+              displayName: docker-compose up
+              inputs:
+                containerregistrytype: 'Azure Container Registry'
+                azureSubscription: 'bacr (c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+                azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
+                dockerComposeFile: '$(AppDirectory)/docker-compose.yaml'
+                additionalDockerComposeFiles: |
+                  docker-compose.Release.yaml
+                  docker-compose.$(Environment.Name).yaml
+                projectName: '$(Build.Repository.Name)'
+                action: 'Run a Docker Compose command'
+                dockerComposeCommand: 'up -d --always-recreate-deps'

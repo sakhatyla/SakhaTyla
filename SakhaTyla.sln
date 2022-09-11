@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48F41545-21BC-4CA3-A882-690B13AD506D}"
 	ProjectSection(SolutionItems) = preProject
 		.cynosura.json = .cynosura.json
+		azure-pipelines.yml = azure-pipelines.yml
 		docker-compose.Development.yaml = docker-compose.Development.yaml
 		docker-compose.yaml = docker-compose.yaml
 	EndProjectSection

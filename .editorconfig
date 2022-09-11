@@ -190,3 +190,6 @@ csharp_space_between_parentheses = false
 csharp_prefer_braces = true:silent
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
+
+[*.yml]
+indent_size = 2

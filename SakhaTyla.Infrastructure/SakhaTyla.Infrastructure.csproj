@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.8.8" />
     <PackageReference Include="Cynosura.Messaging" Version="0.4.0-b372" />
     <PackageReference Include="EPPlus" Version="5.1.0" />
     <PackageReference Include="Lucene.Net" Version="4.8.0-beta00011" />
@@ -14,6 +15,7 @@
     <PackageReference Include="MailKit" Version="2.15.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+    <PackageReference Include="System.Linq.Async" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
