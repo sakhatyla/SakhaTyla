@@ -193,6 +193,29 @@ stages:
                       volumes:
                         - db:/var/opt/mssql
                       restart: always
+                    backup:
+                      image: bacr/backuputil
+                      environment:
+                        SqlBackup__ConnectionString: 'Server=tcp:$(DbHost),1433;User ID=$(DbUser);Password=$(DbPassword);MultipleActiveResultSets=false'
+                        SqlBackup__Database: '$(DbName)'
+                        SqlBackup__BackupPath: /var/opt/mssql/backup
+                        DbBackupJob__BackupPath: /db/backup
+                        DbBackupJob__StoragePath: backup
+                        DbBackupJob__Archive: 'true'
+                        Services__BackupUtil.Storage.IStorage: BackupUtil.Storage.AWSS3Storage
+                        AWSS3Storage__AccessKey: $(S3AccessKey)
+                        AWSS3Storage__SecretKey: $(S3SecretKey)
+                        AWSS3Storage__BucketName: sakhatyla
+                        AWSS3Storage__ServiceUrl: '$(S3ServiceUrl)'
+                        BackupSchedulerJob__Db__0__Type: Full
+                        BackupSchedulerJob__Db__0__Cron: '0 0 0 1 * ?'
+                        BackupSchedulerJob__Db__1__Type: Differential
+                        BackupSchedulerJob__Db__1__Cron: '0 0 1 ? * SUN'
+                        BackupSchedulerJob__Db__2__Type: TransactionLog
+                        BackupSchedulerJob__Db__2__Cron: '0 0 2 * * ?'
+                      volumes:
+                        - db:/db
+                      restart: always
                     mq:
                       environment:
                         RABBITMQ_DEFAULT_USER: '$(MqUsername)'
