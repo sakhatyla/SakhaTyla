@@ -30,3 +30,6 @@ msgstr "Перевод не найден."
 
 msgid "More translations"
 msgstr "Еще переводы"
+
+msgid "Page {0}"
+msgstr "Страница {0}"

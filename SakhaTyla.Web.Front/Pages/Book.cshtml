@@ -1,5 +1,7 @@
-﻿@page "/books/{synonym}"
+﻿@page "/books/{synonym}/{p:int?}"
+@using Microsoft.AspNetCore.Mvc.Localization
 @model SakhaTyla.Web.Front.Pages.BookPageModel
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = Model.Book.GetFullName();
 }
@@ -12,7 +14,7 @@
     <ul class="book-labels">
         @foreach (var label in Model.BookLabels)
         {
-            <li><a href="@Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = label.Page.Number })" data-page="@label.Page.Number">@label.Name</a></li>
+            <li><a href="@Url.Page("/Book", new { Synonym = Model.Book.Synonym, P = label.Page.Number })" data-page="@label.Page.Number">@label.Name</a></li>
         }
     </ul>
 
@@ -20,12 +22,12 @@
         <div class="book-slider-container">
             <input type="range" class="form-range" min="@Model.Book.FirstPage" max="@Model.Book.LastPage" value="@Model.BookPage.Number" id="bookRange">
         </div>
-        <a class="book-prev btn btn-primary" href="@(Model.BookPage.Number > Model.Book.FirstPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number - 1 }) : null)" data-page="@(Model.BookPage.Number > Model.Book.FirstPage ? (Model.BookPage.Number - 1) : null)"><i class="fa-solid fa-arrow-left"></i></a>
-        <a class="book-next btn btn-primary" href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number + 1 }) : null)"  data-page="@(Model.BookPage.Number < Model.Book.LastPage ? (Model.BookPage.Number + 1) : null)"><i class="fa-solid fa-arrow-right"></i></a>
+        <a class="book-prev btn btn-primary" href="@(Model.BookPage.Number > Model.Book.FirstPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, P = Model.BookPage.Number - 1 }) : null)" data-page="@(Model.BookPage.Number > Model.Book.FirstPage ? (Model.BookPage.Number - 1) : null)"><i class="fa-solid fa-arrow-left"></i></a>
+        <a class="book-next btn btn-primary" href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, P = Model.BookPage.Number + 1 }) : null)"  data-page="@(Model.BookPage.Number < Model.Book.LastPage ? (Model.BookPage.Number + 1) : null)"><i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
     <div class="book-page">
-        <a href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, PageNumber = Model.BookPage.Number + 1 }) : null)" data-page="@(Model.BookPage.Number < Model.Book.LastPage ? (Model.BookPage.Number + 1) : null)"><img src="@Model.BookPage.FileName" alt="Page @Model.BookPage.Number" /></a>
+        <a href="@(Model.BookPage.Number < Model.Book.LastPage ? Url.Page("/Book", new { Synonym = Model.Book.Synonym, P = Model.BookPage.Number + 1 }) : null)" data-page="@(Model.BookPage.Number < Model.Book.LastPage ? (Model.BookPage.Number + 1) : null)"><img src="@Model.BookPage.FileName" alt="@Localizer["Page {0}", Model.BookPage.Number]" /></a>
     </div>
 </div>
 

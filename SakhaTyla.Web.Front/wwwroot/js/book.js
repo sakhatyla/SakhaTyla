@@ -9,7 +9,7 @@
     var lastPage = $('.book-container').data('last-page');
 
     function goToPage(page) {
-        window.history.pushState({ page: page }, '', "/books/" + synonym + '?PageNumber=' + page);
+        window.history.pushState({ page: page }, '', "/books/" + synonym + '/' + page);
         loadPage(page);
     }
 
@@ -25,11 +25,11 @@
                 bookSlider.val(page);
                 $('.book-page img').attr('src', data.fileName);
                 $('.book-page a').data('page', page < lastPage ? page + 1 : null);
-                $('.book-page a').attr('href', page < lastPage ? '/books/' + synonym + '?PageNumber=' + (page + 1) : null);
+                $('.book-page a').attr('href', page < lastPage ? '/books/' + synonym + '/' + (page + 1) : null);
                 $('.book-controls .book-prev').data('page', page > firstPage ? page - 1 : null);
-                $('.book-controls .book-prev').attr('href', page > firstPage ? '/books/' + synonym + '?PageNumber=' + (page - 1) : null);
+                $('.book-controls .book-prev').attr('href', page > firstPage ? '/books/' + synonym + '/' + (page - 1) : null);
                 $('.book-controls .book-next').data('page', page < lastPage ? page + 1 : null);
-                $('.book-controls .book-next').attr('href', page < lastPage ? '/books/' + synonym + '?PageNumber=' + (page + 1) : null);
+                $('.book-controls .book-next').attr('href', page < lastPage ? '/books/' + synonym + '/' + (page + 1) : null);
             }
         });
     }

@@ -24,7 +24,6 @@ namespace SakhaTyla.Web.Front.Pages
             _localizer = localizer;
         }
 
-        [BindProperty(SupportsGet = true)]
         public int? PageNumber { get; set; }
 
         public BookModel Book { get; set; } = null!;
@@ -44,8 +43,9 @@ namespace SakhaTyla.Web.Front.Pages
             }
         }
 
-        public async Task<IActionResult> OnGetAsync(string synonym)
+        public async Task<IActionResult> OnGetAsync(string synonym, int? p)
         {
+            PageNumber = p;
             var book = await _mediator.Send(new GetBook() { Synonym = synonym });
             if (book == null)
             {
