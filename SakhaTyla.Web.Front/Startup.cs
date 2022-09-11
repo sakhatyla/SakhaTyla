@@ -97,7 +97,8 @@ namespace SakhaTyla.Web.Front
 
             var options = new RewriteOptions();
             options = options
-                .AddRedirect("^blogs/([a-z0-9/\\-\\._]+)/page([0-9]+)$", $"blogs/$1?page=$2", 301);
+                .AddRedirect("^blogs/([a-z0-9/\\-\\._]+)/page([0-9]+)$", $"blogs/$1?page=$2", 301)
+                .AddRedirectToNonWwwPermanent();
             app.UseRewriter(options);
 
             app.UseRouting();
