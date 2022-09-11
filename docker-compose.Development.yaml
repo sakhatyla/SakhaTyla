@@ -20,6 +20,13 @@ services:
       - '0.0.0.0:5010:80'
     volumes:
       - ./volumes/webng/config.json:/usr/share/nginx/html/assets/config.json
+  site:
+    environment:
+      ASPNETCORE_URLS: 'http://+:5000'
+      ConnectionStrings__DefaultConnection: 'Server=tcp:db,1433;Database=RemBitTeh;User ID=sa;Password=Qwerty123!;MultipleActiveResultSets=false'
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - '0.0.0.0:5020:5000'
   worker:
     environment:
       ConnectionStrings__DefaultConnection: 'Server=tcp:db,1433;Database=SakhaTyla;User ID=sa;Password=Qwerty123!;MultipleActiveResultSets=false'

@@ -9,6 +9,12 @@ services:
   webng:
     build:
       context: SakhaTyla.Web.Ng
+  site:
+    build:
+      context: .
+      dockerfile: SakhaTyla.Web.Front/Dockerfile
+    depends_on:
+      - db
   worker:
     build:
       context: .
