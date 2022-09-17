@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = Model.PageModel.GetTitle();
     ViewData["Keywords"] = Model.PageModel.MetaKeywords;
-    ViewData["Description"] = Model.PageModel.MetaDescription;
+    ViewData["Description"] = Model.PageModel.GetDescription();
 }
 
 <partial name="_BreadcrumbsPartial" for="BreadcrumbsModel" />

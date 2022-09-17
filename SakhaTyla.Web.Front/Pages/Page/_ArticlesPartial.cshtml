@@ -57,7 +57,7 @@
             <h2 class="post-title">
                 <a href="/@article.Route!.Path">@article.Name</a>
             </h2>
-            @Html.Raw(article.Preview)
+            @Html.Raw(article.GetPreview())
             <div class="post-footer">
                 <span>
                     @article.PublicationDate.ToApplicationTime()?.ToString("D")

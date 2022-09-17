@@ -10,9 +10,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@(!string.IsNullOrEmpty(ViewData["Title"] as string) ? ViewData["Title"] + " - " : "")@Localizer["SakhaTyla.Ru - Sakha Dictionary"]</title>
+    <meta name="keywords" content="@(ViewData["Keywords"] ?? "")" />
+    <meta name="description" content="@(ViewData["Description"] ?? "")" />
     <meta property="og:title" content="@(!string.IsNullOrEmpty(ViewData["Title"] as string) ? ViewData["Title"] + " - " : "")@Localizer["SakhaTyla.Ru - Sakha Dictionary"]">
     <meta property="og:type" content="website">
     <meta property="og:url" content="@Context.Request.GetEncodedUrl()">
+    <meta property="og:description" content="@(ViewData["Description"] ?? "")">
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
+using SakhaTyla.Core.Common;
+using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Requests.Routes.Models;
 
 namespace SakhaTyla.Core.Requests.Pages.Models
@@ -100,6 +103,32 @@ namespace SakhaTyla.Core.Requests.Pages.Models
             if (!string.IsNullOrEmpty(Header))
                 return Header;
             return Name;
+        }
+
+        public string? GetPreview()
+        {
+            if (!string.IsNullOrEmpty(Preview))
+            {
+                return Preview;
+            }
+            return Body;
+        }
+
+        public string? GetDescription()
+        {
+            if (!string.IsNullOrEmpty(MetaDescription))
+            {
+                return MetaDescription;
+            }    
+            var preview = GetPreview();
+            if (string.IsNullOrEmpty(preview))
+            {
+                return null;
+            }
+            preview = Regex.Replace(preview, "<br[\\s/]*>", " ");
+            preview = Regex.Replace(preview, "<.*?>", "");
+            preview = Regex.Replace(preview, "\n", " ");
+            return preview.GetShortText(SeoConstants.DescriptionMaxLength);
         }
     }
 }
