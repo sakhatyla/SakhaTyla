@@ -28,7 +28,9 @@ namespace SakhaTyla.Core.Requests.Public.Articles
 
         public async Task<ArticleModel> Handle(GetRandomArticle request, CancellationToken cancellationToken)
         {
-            var count = await _articleRepository.GetEntities().CountAsync();
+            var count = await _articleRepository.GetEntities()                
+                .DefaultFilter()
+                .CountAsync();
             var rnd = new Random();
             var i = rnd.Next(count);
             var article = await _articleRepository.GetEntities()
