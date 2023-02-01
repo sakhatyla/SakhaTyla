@@ -109,6 +109,7 @@ namespace SakhaTyla.Web
                     }
                 });
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
+                c.CustomSchemaIds(type => type.ToString());
             });
 
             services.AddFluentValidationRulesToSwagger();
