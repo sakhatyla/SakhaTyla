@@ -1,0 +1,7 @@
+﻿@using SakhaTyla.Core.Requests.Widgets
+@inject MediatR.IMediator Mediator
+@{
+    var counterHeadWidget = await Mediator.Send(new GetWidget() { Code = "counter-head" });
+}
+
+<partial name="_WidgetPartial" model="counterHeadWidget" />
