@@ -8,6 +8,8 @@ using SakhaTyla.Core.Requests.BookLabels.Models;
 using SakhaTyla.Core.Requests.BookPages;
 using SakhaTyla.Core.Requests.Books;
 using SakhaTyla.Core.Requests.Books.Models;
+using SakhaTyla.Core.Requests.Widgets;
+using SakhaTyla.Core.Requests.Widgets.Models;
 using SakhaTyla.Web.Front.Models;
 
 namespace SakhaTyla.Web.Front.Pages
@@ -42,6 +44,8 @@ namespace SakhaTyla.Web.Front.Pages
                 });
             }
         }
+
+        public WidgetModel? BookPageAfterWidget { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string synonym, int? p)
         {
@@ -78,6 +82,7 @@ namespace SakhaTyla.Web.Front.Pages
                 }
             });
             BookLabels = bookLabels.PageItems;
+            BookPageAfterWidget = await _mediator.Send(new GetWidget() { Code = "bookpage-after" });
             return Page();
         }
     }
