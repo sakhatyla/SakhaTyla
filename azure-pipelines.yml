@@ -16,7 +16,7 @@ stages:
       displayName: docker-compose build
       inputs:
         containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+        azureSubscription: 'bacr(1)(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
         azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
         dockerComposeFile: '**/docker-compose.yaml'
         projectName: 'sakhatyla'
@@ -27,7 +27,7 @@ stages:
       displayName: docker-compose push
       inputs:
         containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+        azureSubscription: 'bacr(1)(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
         azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
         dockerComposeFile: '**/docker-compose.yaml'
         projectName: 'sakhatyla'
@@ -263,7 +263,7 @@ stages:
               displayName: docker-compose pull
               inputs:
                 containerregistrytype: 'Azure Container Registry'
-                azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+                azureSubscription: 'bacr(1)(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
                 azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
                 dockerComposeFile: '$(AppDirectory)/docker-compose.yaml'
                 additionalDockerComposeFiles: |
@@ -304,7 +304,7 @@ stages:
               displayName: docker-compose up
               inputs:
                 containerregistrytype: 'Azure Container Registry'
-                azureSubscription: 'bacr(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
+                azureSubscription: 'bacr(1)(c4530747-c19d-4a6d-b3b6-8fa1904c8b65)'
                 azureContainerRegistry: '{"loginServer":"bacrhub.azurecr.io", "id" : "/subscriptions/c4530747-c19d-4a6d-b3b6-8fa1904c8b65/resourceGroups/bacr/providers/Microsoft.ContainerRegistry/registries/bacrhub"}'
                 dockerComposeFile: '$(AppDirectory)/docker-compose.yaml'
                 additionalDockerComposeFiles: |
