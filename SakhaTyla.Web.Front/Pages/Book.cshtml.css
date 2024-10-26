@@ -26,6 +26,10 @@ ul.book-labels {
         flex-grow: 1;
     }
 
-.book-page img {
-    max-width: 100%;
+.book-page {
+    margin-bottom: 20px;
 }
+
+    .book-page img {
+        max-width: 100%;
+    }
