@@ -1,3 +1,13 @@
-﻿.article-more {
+﻿.translations-widget {
+    max-height: 60vh;
+}
+
+@media (max-width: 991.98px) {
+    .translations-widget {
+        max-height: 70vh;
+    }
+}
+
+.article-more {
     margin-bottom: 0.5em;
 }

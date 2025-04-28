@@ -25,6 +25,8 @@ namespace SakhaTyla.Web.Front.Pages
 
         public Core.Requests.Public.Articles.Models.TranslateModel? Translation { get; set; }
 
+        public WidgetModel? TranslateInsideWidget { get; set; }
+
         public WidgetModel? TranslateAfterWidget { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -38,6 +40,8 @@ namespace SakhaTyla.Web.Front.Pages
                     Query = Query,
                 });
             }
+
+            TranslateInsideWidget = await _mediator.Send(new GetWidget() { Code = "translate-inside" });
 
             TranslateAfterWidget = await _mediator.Send(new GetWidget() { Code = "translate-after" });
 

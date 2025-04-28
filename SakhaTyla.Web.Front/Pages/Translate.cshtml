@@ -9,21 +9,28 @@
 
 <partial name="Shared/_TranslateFormPartial" for="TranslateForm" />
 
-@if (Model.Translation != null && Model.Translation.Articles.Count > 0) 
-{
-    foreach (var articleGroup in Model.Translation.Articles)
-    {
-        <h2>@articleGroup.FromLanguage.Name &rarr; @articleGroup.ToLanguage.Name</h2>
-        foreach(var article in articleGroup.Articles)
+<div class="translations row">
+    <div class="translations-content col">
+        @if (Model.Translation != null && Model.Translation.Articles.Count > 0) 
         {
-            <partial name="Shared/_ArticlePartial" model="Model.GetArticlePartialModel(article, false)" />
+            foreach (var articleGroup in Model.Translation.Articles)
+            {
+                <h2>@articleGroup.FromLanguage.Name &rarr; @articleGroup.ToLanguage.Name</h2>
+                foreach(var article in articleGroup.Articles)
+                {
+                    <partial name="Shared/_ArticlePartial" model="Model.GetArticlePartialModel(article, false)" />
+                }
+            }
         }
-    }
-}
-else if (!string.IsNullOrEmpty(Model.Query))
-{
-    <p>@Localizer["Translation not found."]</p>
-}
+        else if (!string.IsNullOrEmpty(Model.Query))
+        {
+            <p>@Localizer["Translation not found."]</p>
+        }
+    </div>
+    <div class="translations-widget col-lg-3 mb-3">
+        <partial name="_WidgetPartial" for="TranslateInsideWidget" />
+    </div>
+</div>
 
 @if (Model.Translation != null && Model.Translation.MoreArticles != null && Model.Translation.MoreArticles.Count > 0) 
 {
