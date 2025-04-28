@@ -12,7 +12,7 @@ stages:
   jobs:
   - job: Build
     steps:
-    - task: DockerCompose@0
+    - task: DockerCompose@1
       displayName: docker-compose build
       inputs:
         containerregistrytype: 'Azure Container Registry'
@@ -23,7 +23,7 @@ stages:
         action: 'Build services'
         additionalImageTags: '$(Build.BuildNumber)'
         includeLatestTag: true
-    - task: DockerCompose@0
+    - task: DockerCompose@1
       displayName: docker-compose push
       inputs:
         containerregistrytype: 'Azure Container Registry'
@@ -45,7 +45,6 @@ stages:
         fileoverwrite: true
         filepath: '$(Build.ArtifactStagingDirectory)/docker-compose.Release.yaml'
         filecontent: |
-          version: '3'
           services:
             web:
               image: 'bacrhub.azurecr.io/sakhatyla_web:$(Build.BuildNumber)'
@@ -93,14 +92,13 @@ stages:
                 fileoverwrite: true
                 filepath: '$(AppDirectory)/docker-compose.$(Environment.Name).yaml'
                 filecontent: |
-                  version: '3'
                   services:
                     web:
                       environment:
                         ASPNETCORE_URLS: 'http://+:5000'
                         ConnectionStrings__DefaultConnection: 'Server=tcp:$(DbHost),1433;Initial Catalog=$(DbName);Persist Security Info=False;User ID=$(DbUser);Password=$(DbPassword);MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
-                        IdentityServer__Clients__SakhaTyla.Web.Ng__RedirectUri: '$(Url)/authentication/login-callback'
-                        IdentityServer__Clients__SakhaTyla.Web.Ng__LogoutUri: '$(Url)/authentication/logout-callback'
+                        IdentityServer__Clients__SakhaTyla.Web.Ng__RedirectUri: '$(AdminUrl)/authentication/login-callback'
+                        IdentityServer__Clients__SakhaTyla.Web.Ng__LogoutUri: '$(AdminUrl)/authentication/logout-callback'
                         IdentityServer__Key__Type: File
                         IdentityServer__Key__FilePath: '$(CertificatePath)'
                         IdentityServer__Key__Password: '$(CertificatePassword)'
@@ -113,7 +111,7 @@ stages:
                         Messaging__Username: '$(MqUsername)'
                         Messaging__Password: '$(MqPassword)'
                         Authority: '$(IdUrl)'
-                        Cors__Origin__0: '$(Url)'
+                        Cors__Origin__0: '$(AdminUrl)'
                         Cors__Origin__1: '$(SiteUrl)'
                         Lucene__IndexPath: /index
                         Lucene__HunspellPath: /var/hunspell
@@ -138,8 +136,8 @@ stages:
                       volumes:
                         - ./webng/config.json:/usr/share/nginx/html/assets/config.json
                       environment:
-                        VIRTUAL_HOST: '$(Host)'
-                        LETSENCRYPT_HOST: '$(Host)'
+                        VIRTUAL_HOST: '$(AdminHost)'
+                        LETSENCRYPT_HOST: '$(AdminHost)'
                         LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
                       restart: always
                     site:
@@ -259,7 +257,7 @@ stages:
                     html:
                     dhparam:
                     certs:
-            - task: DockerCompose@0
+            - task: DockerCompose@1
               displayName: docker-compose pull
               inputs:
                 containerregistrytype: 'Azure Container Registry'
@@ -300,7 +298,7 @@ stages:
                 SourceFolder: '$(Agent.TempDirectory)'
                 Contents: 'sakhatyla.pfx'
                 TargetFolder: '$(AppDirectory)/cert/'
-            - task: DockerCompose@0
+            - task: DockerCompose@1
               displayName: docker-compose up
               inputs:
                 containerregistrytype: 'Azure Container Registry'

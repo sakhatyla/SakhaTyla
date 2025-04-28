@@ -1,5 +1,4 @@
-﻿version: '3'
-services:
+﻿services:
   web:
     environment:
       ASPNETCORE_URLS: 'http://+:5000;https://+:5001'
