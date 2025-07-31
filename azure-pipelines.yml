@@ -222,29 +222,24 @@ stages:
                         - mq:/var/lib/rabbitmq
                       restart: always
                     proxy:
-                      image: jwilder/nginx-proxy
+                      image: nginxproxy/nginx-proxy
                       ports:
                         - '80:80'
                         - '443:443'
                       volumes:
                         - ./nginx/custom.conf:/etc/nginx/conf.d/st_custom.conf:ro
                         - certs:/etc/nginx/certs:ro
-                        - conf:/etc/nginx/conf.d
-                        - vhost:/etc/nginx/vhost.d
-                        - dhparam:/etc/nginx/dhparam
                         - html:/usr/share/nginx/html
                         - /var/run/docker.sock:/tmp/docker.sock:ro
-                      restart: always
                       labels:
-                        - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+                        - "com.github.nginx-proxy.nginx"
+                      restart: always
                     letsencrypt:
-                      image: jrcs/letsencrypt-nginx-proxy-companion
+                      image: nginxproxy/acme-companion
                       volumes:
                         - certs:/etc/nginx/certs:rw
-                        - conf:/etc/nginx/conf.d
-                        - vhost:/etc/nginx/vhost.d
-                        - dhparam:/etc/nginx/dhparam
                         - html:/usr/share/nginx/html
+                        - acme:/etc/acme.sh
                         - /var/run/docker.sock:/var/run/docker.sock:ro
                       restart: always
                   volumes:
@@ -252,11 +247,9 @@ stages:
                     mq:
                     index:
                     dpkeys:
-                    conf:
-                    vhost:
                     html:
-                    dhparam:
                     certs:
+                    acme:
             - task: DockerCompose@1
               displayName: docker-compose pull
               inputs:
