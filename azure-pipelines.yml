@@ -142,6 +142,31 @@ stages:
                 additionalDockerComposeFiles: |
                   docker-compose.Release.yaml
                   docker-compose.$(Environment.Name).yaml
+                dockerComposeFileArgs: |
+                  DbHost=$(DbHost)
+                  DbName=$(DbName)
+                  DbUser=$(DbUser)
+                  DbPassword=$(DbPassword)
+                  AdminUrl=$(AdminUrl
+                  AdminHost=$(AdminHost)
+                  IdUrl=$(IdUrl)
+                  IdHost=$(IdUrl)
+                  SiteUrl=$(SiteUrl)
+                  SiteHost=$(SiteHost
+                  SiteWwwHost=$(SiteWwwHost)
+                  CertificatePath=$(CertificatePath)
+                  CertificatePassword=$(CertificatePassword)
+                  S3AccessKey=$(S3AccessKey)
+                  S3SecretKey=$(S3SecretKey)
+                  S3BucketName=$(S3BucketName)
+                  S3ServiceUrl=$(S3ServiceUrl)
+                  MqUsername=$(MqUsername)
+                  MqPassword=$(MqPassword)
+                  EmailSmtpServer=$(EmailSmtpServer)
+                  EmailSmtpPort=$(EmailSmtpPort)
+                  EmailUsername=$(EmailUsername)
+                  EmailPassword=$(EmailPassword)
+                  TelegramBotToken=$(TelegramBotToken)
                 projectName: 'sakhatyla'
                 action: 'Run a Docker Compose command'
                 dockerComposeCommand: 'up -d --always-recreate-deps'
