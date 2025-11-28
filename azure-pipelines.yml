@@ -147,7 +147,7 @@ stages:
                   DB_NAME=$(DbName)
                   DB_USER=$(DbUser)
                   DB_PASSWORD=$(DbPassword)
-                  ADMIN_URL=$(AdminUrl
+                  ADMIN_URL=$(AdminUrl)
                   ADMIN_HOST=$(AdminHost)
                   ID_URL=$(IdUrl)
                   ID_HOST=$(IdHost)
