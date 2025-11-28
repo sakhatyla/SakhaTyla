@@ -117,6 +117,7 @@ services:
       - '443:443'
     volumes:
       - ./nginx/custom.conf:/etc/nginx/conf.d/st_custom.conf:ro
+      - ${EXT_APP_DIRECTORY}/web_nginx.conf:/etc/nginx/vhost.d/${EXT_APP_HOST}:ro
       - certs:/etc/nginx/certs:ro
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro

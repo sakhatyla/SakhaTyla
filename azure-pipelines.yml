@@ -167,6 +167,8 @@ stages:
                   EMAIL_USERNAME=$(EmailUsername)
                   EMAIL_PASSWORD=$(EmailPassword)
                   TELEGRAM_BOT_TOKEN=$(TelegramBotToken)
+                  EXT_APP_DIRECTORY=$(ExtAppDirectory)
+                  EXT_APP_HOST=$(ExtAppHost)
                 projectName: 'sakhatyla'
                 action: 'Run a Docker Compose command'
                 dockerComposeCommand: 'up -d --always-recreate-deps'
