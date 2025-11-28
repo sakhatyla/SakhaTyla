@@ -2,33 +2,33 @@
   web:
     environment:
       ASPNETCORE_URLS: 'http://+:5000'
-      ConnectionStrings__DefaultConnection: 'Server=tcp:${DbHost},1433;Initial Catalog=${DbName};Persist Security Info=False;User ID=${DbUser};Password=${DbPassword};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
-      IdentityServer__Clients__SakhaTyla.Web.Ng__RedirectUri: '${AdminUrl}/authentication/login-callback'
-      IdentityServer__Clients__SakhaTyla.Web.Ng__LogoutUri: '${AdminUrl}/authentication/logout-callback'
+      ConnectionStrings__DefaultConnection: 'Server=tcp:${DB_HOST},1433;Initial Catalog=${DB_NAME};Persist Security Info=False;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
+      IdentityServer__Clients__SakhaTyla.Web.Ng__RedirectUri: '${ADMIN_URL}/authentication/login-callback'
+      IdentityServer__Clients__SakhaTyla.Web.Ng__LogoutUri: '${ADMIN_URL}/authentication/logout-callback'
       IdentityServer__Key__Type: File
-      IdentityServer__Key__FilePath: '${CertificatePath}'
-      IdentityServer__Key__Password: '${CertificatePassword}'
+      IdentityServer__Key__FilePath: '${CERTIFICATE_PATH}'
+      IdentityServer__Key__Password: '${CERTIFICATE_PASSWORD}'
       Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
-      AWSS3Storage__AccessKey: '${S3AccessKey}'
-      AWSS3Storage__SecretKey: '${S3SecretKey}'
-      AWSS3Storage__BucketName: '${S3BucketName}'
-      AWSS3Storage__ServiceUrl: '${S3ServiceUrl}'
+      AWSS3Storage__AccessKey: '${S3_ACCESS_KEY}'
+      AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
+      AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
+      AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
       Messaging__ConnectionUrl: 'rabbitmq://mq'
-      Messaging__Username: '${MqUsername}'
-      Messaging__Password: '${MqPassword}'
-      Authority: '${IdUrl}'
-      Cors__Origin__0: '${AdminUrl}'
-      Cors__Origin__1: '${SiteUrl}'
+      Messaging__Username: '${MQ_USERNAME}'
+      Messaging__Password: '${MQ_PASSWORD}'
+      Authority: '${ID_URL}'
+      Cors__Origin__0: '${ADMIN_URL}'
+      Cors__Origin__1: '${SITE_URL}'
       Lucene__IndexPath: /index
       Lucene__HunspellPath: /var/hunspell
       EmailSender__DefaultFrom: 'SakhaTyla.Ru <sakhatranslate@sakhatyla.ru>'
-      EmailSender__SmtpServer: '${EmailSmtpServer}'
-      EmailSender__SmtpPort: '${EmailSmtpPort}'
-      EmailSender__UserName: '${EmailUsername}'
-      EmailSender__Password: '${EmailPassword}'
+      EmailSender__SmtpServer: '${EMAIL_SMTP_SERVER}'
+      EmailSender__SmtpPort: '${EMAIL_SMTP_PORT}'
+      EmailSender__UserName: '${EMAIL_USERNAME}'
+      EmailSender__Password: '${EMAIL_PASSWORD}'
       EmailSender__EnableSsl: 'true'
-      VIRTUAL_HOST: '${IdHost}'
-      LETSENCRYPT_HOST: '${IdHost}'
+      VIRTUAL_HOST: '${ID_HOST}'
+      LETSENCRYPT_HOST: '${ID_HOST}'
       LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
     volumes:
       - ./cert:/var/cert
@@ -42,27 +42,27 @@
     volumes:
       - ./webng/config.json:/usr/share/nginx/html/assets/config.json
     environment:
-      VIRTUAL_HOST: '${AdminHost}'
-      LETSENCRYPT_HOST: '${AdminHost}'
+      VIRTUAL_HOST: '${ADMIN_HOST}'
+      LETSENCRYPT_HOST: '${ADMIN_HOST}'
       LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
     restart: always
   site:
     environment:
       ASPNETCORE_URLS: 'http://+:5000'
-      ConnectionStrings__DefaultConnection: 'Server=tcp:${DbHost},1433;Initial Catalog=${DbName};Persist Security Info=False;User ID=${DbUser};Password=${DbPassword};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
+      ConnectionStrings__DefaultConnection: 'Server=tcp:${DB_HOST},1433;Initial Catalog=${DB_NAME};Persist Security Info=False;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
       Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
-      AWSS3Storage__AccessKey: '${S3AccessKey}'
-      AWSS3Storage__SecretKey: '${S3SecretKey}'
-      AWSS3Storage__BucketName: '${S3BucketName}'
-      AWSS3Storage__ServiceUrl: '${S3ServiceUrl}'
+      AWSS3Storage__AccessKey: '${S3_ACCESS_KEY}'
+      AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
+      AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
+      AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
       Messaging__ConnectionUrl: 'rabbitmq://mq'
-      Messaging__Username: '${MqUsername}'
-      Messaging__Password: '${MqPassword}'
+      Messaging__Username: '${MQ_USERNAME}'
+      Messaging__Password: '${MQ_PASSWORD}'
       Lucene__IndexPath: /index
       Lucene__HunspellPath: /var/hunspell
-      Server__ApiUrl: '${IdUrl}'
-      VIRTUAL_HOST: '${SiteHost},${SiteWwwHost}'
-      LETSENCRYPT_HOST: '${SiteHost},${SiteWwwHost}'
+      Server__ApiUrl: '${ID_URL}'
+      VIRTUAL_HOST: '${SITE_HOST},${SITE_WWW_HOST}'
+      LETSENCRYPT_HOST: '${SITE_HOST},${SITE_WWW_HOST}'
       LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'
     volumes:
       - ./hunspell:/var/hunspell
@@ -71,18 +71,18 @@
     restart: always
   worker:
     environment:
-      ConnectionStrings__DefaultConnection: 'Server=tcp:${DbHost},1433;Initial Catalog=${DbName};Persist Security Info=False;User ID=${DbUser};Password=${DbPassword};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
+      ConnectionStrings__DefaultConnection: 'Server=tcp:${DB_HOST},1433;Initial Catalog=${DB_NAME};Persist Security Info=False;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
       Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
-      AWSS3Storage__AccessKey: '${S3AccessKey}'
-      AWSS3Storage__SecretKey: '${S3SecretKey}'
-      AWSS3Storage__BucketName: '${S3BucketName}'
-      AWSS3Storage__ServiceUrl: '${S3ServiceUrl}'
+      AWSS3Storage__AccessKey: '${S3_ACCESS_KEY}'
+      AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
+      AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
+      AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
       Messaging__ConnectionUrl: 'rabbitmq://mq'
-      Messaging__Username: '${MqUsername}'
-      Messaging__Password: '${MqPassword}'
+      Messaging__Username: '${MQ_USERNAME}'
+      Messaging__Password: '${MQ_PASSWORD}'
       Lucene__IndexPath: /index
       Lucene__HunspellPath: /var/hunspell
-      Telegram__BotToken: '${TelegramBotToken}'
+      Telegram__BotToken: '${TELEGRAM_BOT_TOKEN}'
     volumes:
       - ./hunspell:/var/hunspell
       - index:/index
@@ -92,7 +92,7 @@
       - '0.0.0.0:1433:1433'
     environment:
       ACCEPT_EULA: 'Y'
-      SA_PASSWORD: '${DbPassword}'
+      SA_PASSWORD: '${DB_PASSWORD}'
       MSSQL_PID: 'Express'
     volumes:
       - db:/var/opt/mssql
@@ -100,17 +100,17 @@
   backup:
     image: bacr/backuputil
     environment:
-      SqlBackup__ConnectionString: 'Server=tcp:${DbHost},1433;User ID=${DbUser};Password=${DbPassword};MultipleActiveResultSets=false'
-      SqlBackup__Database: '${DbName}'
+      SqlBackup__ConnectionString: 'Server=tcp:${DB_HOST},1433;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=false'
+      SqlBackup__Database: '${DB_NAME}'
       SqlBackup__BackupPath: /var/opt/mssql/backup
       DbBackupJob__BackupPath: /db/backup
       DbBackupJob__StoragePath: backup
       DbBackupJob__Archive: 'true'
       Services__BackupUtil.Storage.IStorage: BackupUtil.Storage.AWSS3Storage
-      AWSS3Storage__AccessKey: ${S3AccessKey}
-      AWSS3Storage__SecretKey: ${S3SecretKey}
+      AWSS3Storage__AccessKey: ${S3_ACCESS_KEY}
+      AWSS3Storage__SecretKey: ${S3_SECRET_KEY}
       AWSS3Storage__BucketName: sakhatyla
-      AWSS3Storage__ServiceUrl: '${S3ServiceUrl}'
+      AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
       BackupSchedulerJob__Db__0__Type: Full
       BackupSchedulerJob__Db__0__Cron: '0 0 0 1 * ?'
       BackupSchedulerJob__Db__1__Type: Differential
@@ -122,8 +122,8 @@
     restart: always
   mq:
     environment:
-      RABBITMQ_DEFAULT_USER: '${MqUsername}'
-      RABBITMQ_DEFAULT_PASS: '${MqPassword}'
+      RABBITMQ_DEFAULT_USER: '${MQ_USERNAME}'
+      RABBITMQ_DEFAULT_PASS: '${MQ_PASSWORD}'
     volumes:
       - mq:/var/lib/rabbitmq
     restart: always
