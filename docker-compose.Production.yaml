@@ -1,26 +1,29 @@
-﻿services:
+﻿x-env: &env
+  ConnectionStrings__DefaultConnection: 'Server=tcp:${DB_HOST},1433;Initial Catalog=${DB_NAME};Persist Security Info=False;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
+  Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
+  AWSS3Storage__AccessKey: '${S3_ACCESS_KEY}'
+  AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
+  AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
+  AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
+  Messaging__ConnectionUrl: 'rabbitmq://mq'
+  Messaging__Username: '${MQ_USERNAME}'
+  Messaging__Password: '${MQ_PASSWORD}'
+  Lucene__IndexPath: /index
+  Lucene__HunspellPath: /var/hunspell
+
+services:
   web:
     environment:
+      <<: *env
       ASPNETCORE_URLS: 'http://+:5000'
-      ConnectionStrings__DefaultConnection: 'Server=tcp:${DB_HOST},1433;Initial Catalog=${DB_NAME};Persist Security Info=False;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
       IdentityServer__Clients__SakhaTyla.Web.Ng__RedirectUri: '${ADMIN_URL}/authentication/login-callback'
       IdentityServer__Clients__SakhaTyla.Web.Ng__LogoutUri: '${ADMIN_URL}/authentication/logout-callback'
       IdentityServer__Key__Type: File
       IdentityServer__Key__FilePath: '${CERTIFICATE_PATH}'
       IdentityServer__Key__Password: '${CERTIFICATE_PASSWORD}'
-      Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
-      AWSS3Storage__AccessKey: '${S3_ACCESS_KEY}'
-      AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
-      AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
-      AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
-      Messaging__ConnectionUrl: 'rabbitmq://mq'
-      Messaging__Username: '${MQ_USERNAME}'
-      Messaging__Password: '${MQ_PASSWORD}'
       Authority: '${ID_URL}'
       Cors__Origin__0: '${ADMIN_URL}'
       Cors__Origin__1: '${SITE_URL}'
-      Lucene__IndexPath: /index
-      Lucene__HunspellPath: /var/hunspell
       EmailSender__DefaultFrom: 'SakhaTyla.Ru <sakhatranslate@sakhatyla.ru>'
       EmailSender__SmtpServer: '${EMAIL_SMTP_SERVER}'
       EmailSender__SmtpPort: '${EMAIL_SMTP_PORT}'
@@ -48,18 +51,8 @@
     restart: always
   site:
     environment:
+      <<: *env
       ASPNETCORE_URLS: 'http://+:5000'
-      ConnectionStrings__DefaultConnection: 'Server=tcp:${DB_HOST},1433;Initial Catalog=${DB_NAME};Persist Security Info=False;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
-      Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
-      AWSS3Storage__AccessKey: '${S3_ACCESS_KEY}'
-      AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
-      AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
-      AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
-      Messaging__ConnectionUrl: 'rabbitmq://mq'
-      Messaging__Username: '${MQ_USERNAME}'
-      Messaging__Password: '${MQ_PASSWORD}'
-      Lucene__IndexPath: /index
-      Lucene__HunspellPath: /var/hunspell
       Server__ApiUrl: '${ID_URL}'
       VIRTUAL_HOST: '${SITE_HOST},${SITE_WWW_HOST}'
       LETSENCRYPT_HOST: '${SITE_HOST},${SITE_WWW_HOST}'
@@ -71,17 +64,7 @@
     restart: always
   worker:
     environment:
-      ConnectionStrings__DefaultConnection: 'Server=tcp:${DB_HOST},1433;Initial Catalog=${DB_NAME};Persist Security Info=False;User ID=${DB_USER};Password=${DB_PASSWORD};MultipleActiveResultSets=False;Encrypt=False;Connection Timeout=30;'
-      Services__SakhaTyla.Core.FileStorage.IFileStorage: SakhaTyla.Infrastructure.FileStorage.AWSS3Storage
-      AWSS3Storage__AccessKey: '${S3_ACCESS_KEY}'
-      AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
-      AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
-      AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
-      Messaging__ConnectionUrl: 'rabbitmq://mq'
-      Messaging__Username: '${MQ_USERNAME}'
-      Messaging__Password: '${MQ_PASSWORD}'
-      Lucene__IndexPath: /index
-      Lucene__HunspellPath: /var/hunspell
+      <<: *env
       Telegram__BotToken: '${TELEGRAM_BOT_TOKEN}'
     volumes:
       - ./hunspell:/var/hunspell
