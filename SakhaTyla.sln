@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.cynosura.json = .cynosura.json
 		azure-pipelines.yml = azure-pipelines.yml
 		docker-compose.Development.yaml = docker-compose.Development.yaml
+		docker-compose.Production.yaml = docker-compose.Production.yaml
 		docker-compose.yaml = docker-compose.yaml
 	EndProjectSection
 EndProject
