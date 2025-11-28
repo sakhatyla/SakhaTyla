@@ -150,7 +150,7 @@ stages:
                   AdminUrl=$(AdminUrl
                   AdminHost=$(AdminHost)
                   IdUrl=$(IdUrl)
-                  IdHost=$(IdUrl)
+                  IdHost=$(IdHost)
                   SiteUrl=$(SiteUrl)
                   SiteHost=$(SiteHost
                   SiteWwwHost=$(SiteWwwHost)
