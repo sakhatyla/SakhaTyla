@@ -12,7 +12,7 @@
     <title>@(!string.IsNullOrEmpty(ViewData["Title"] as string) ? ViewData["Title"] + " - " : "")@Localizer["SakhaTyla.Ru - Sakha Dictionary"]</title>
     <meta name="keywords" content="@(ViewData["Keywords"] ?? "")" />
     <meta name="description" content="@(ViewData["Description"] ?? "")" />
-    <meta property="og:title" content="@(!string.IsNullOrEmpty(ViewData["Title"] as string) ? ViewData["Title"] + " - " : "")@Localizer["SakhaTyla.Ru - Sakha Dictionary"]">
+    <meta property="og:title" content="@(ViewData["Title"] ?? "")">
     <meta property="og:type" content="website">
     <meta property="og:url" content="@Context.Request.GetEncodedUrl()">
     <meta property="og:image" content="https://sakhatyla.ru/images/logo-60.png">
