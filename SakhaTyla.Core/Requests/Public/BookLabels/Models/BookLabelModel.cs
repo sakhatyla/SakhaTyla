@@ -1,3 +1,5 @@
+﻿using SakhaTyla.Core.Requests.Public.BookPages.Models;
+
 namespace SakhaTyla.Core.Requests.Public.BookLabels.Models
 {
     public class BookLabelModel
@@ -14,5 +16,6 @@ namespace SakhaTyla.Core.Requests.Public.BookLabels.Models
         public string Name { get; set; }
 
         public int PageId { get; set; }
+        public BookPageModel Page { get; set; } = null!;
     }
 }

@@ -24,9 +24,18 @@ namespace SakhaTyla.Core.Requests.Public.BookPages
 
         public async Task<BookPageModel?> Handle(GetBookPageByNumber request, CancellationToken cancellationToken)
         {
-            var bookPage = await _bookPageRepository.GetEntities()
-                .Include(e => e.Book)
-                .Where(e => e.Book.Synonym == request.Synonym && e.Number == request.Number)
+            IQueryable<BookPage> query = _bookPageRepository.GetEntities()
+                .Include(e => e.Book);
+            if (request.Id != null)
+            {
+                query = query.Where(e => e.BookId == request.Id);
+            }
+            else if (!string.IsNullOrEmpty(request.Synonym))
+            {
+                query = query.Where(e => e.Book.Synonym == request.Synonym);
+            }
+            var bookPage = await query
+                .Where(e => e.Number == request.Number)
                 .FirstOrDefaultAsync(cancellationToken);
             if (bookPage == null)
             {
