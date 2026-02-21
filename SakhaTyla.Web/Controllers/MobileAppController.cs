@@ -21,7 +21,7 @@ namespace SakhaTyla.Web.Controllers
         {
             if (!_settings.TryGetValue(request.Key, out var value))
                 return NotFound();
-            return Ok(value);
+            return Ok(new { value });
         }
     }
 
