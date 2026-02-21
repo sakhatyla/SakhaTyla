@@ -104,7 +104,7 @@ stages:
         TELEGRAM_BOT_TOKEN=$(TelegramBotToken)
         EXT_APP_DIRECTORY=$(ExtAppDirectory)
         EXT_APP_HOST=$(ExtAppHost)
-        MOBILE_APP_ANDROID_AD_UNIT_ID=$(MobileAppAndroidAdUnitId))
+        MOBILE_APP_ANDROID_AD_UNIT_ID=$(MobileAppAndroidAdUnitId)
         MOBILE_APP_IOS_AD_UNIT_ID=$(MobileAppiOsAdUnitId)
     strategy:
       runOnce:
