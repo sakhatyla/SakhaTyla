@@ -30,6 +30,7 @@ services:
       EmailSender__UserName: '${EMAIL_USERNAME}'
       EmailSender__Password: '${EMAIL_PASSWORD}'
       EmailSender__EnableSsl: 'true'
+      MobileApp__androidAdUnitId: '${MOBILE_APP_ANDROID_AD_UNIT_ID}'
       VIRTUAL_HOST: '${ID_HOST}'
       LETSENCRYPT_HOST: '${ID_HOST}'
       LETSENCRYPT_EMAIL: 'sakhatranslate@sakhatyla.ru'

@@ -30,6 +30,7 @@ namespace SakhaTyla.Web
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<MassTransitServiceOptions>(configuration.GetSection("Messaging"));
+            services.Configure<Dictionary<string, string>>("MobileApp", configuration.GetSection("MobileApp"));
             services.AddCynosuraMessaging(null, x =>
             {
                 x.AddRabbitMqBus((context, sbc) =>
