@@ -149,6 +149,8 @@ stages:
                 fileoverwrite: true
                 filepath: '$(AppDirectory)/nginx/custom.conf'
                 filecontent: |
+                  client_max_body_size 30m;
+
                   gzip on;
                   gzip_types application/json application/xml text/plain text/css text/json text/xml image/svg+xml;
                   gzip_vary on;
