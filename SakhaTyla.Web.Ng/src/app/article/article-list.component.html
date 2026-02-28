@@ -8,6 +8,11 @@
     <div class="action-item">
       <form (ngSubmit)="onSearch()">
         <mat-form-field>
+          <mat-label>{{ t('Title') }}</mat-label>
+          <input matInput id="title" type="title" name="title" [placeholder]="t('Title')"
+            [(ngModel)]="state.filter.title" />
+        </mat-form-field>
+        <mat-form-field>
           <mat-label>{{ t('shared.text') }}</mat-label>
           <input matInput id="text" type="text" name="text" [placeholder]="t('shared.text')"
             [(ngModel)]="state.filter.text" />
