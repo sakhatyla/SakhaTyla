@@ -11,6 +11,7 @@ using SakhaTyla.Core.Entities;
 using SakhaTyla.Core.FileStorage;
 using SakhaTyla.Core.Formatters;
 using SakhaTyla.Core.Indexers;
+using SakhaTyla.Core.Infrastructure;
 using SakhaTyla.Core.Messaging.Articles;
 using SakhaTyla.Core.Requests.Articles;
 using SakhaTyla.Core.Requests.Articles.Models;
@@ -25,8 +26,11 @@ namespace SakhaTyla.Core.Workers
         private readonly IFileStorage _fileStorage;
         private readonly IExcelFormatter _excelFormatter;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IDataContext _dataContext;
         private readonly IMessagingService _messagingService;
         private readonly ILogger<ArticleImportWorker> _logger;
+
+        private const int BatchSize = 1000;
 
         public ArticleImportWorker(IEntityRepository<Article> articleRepository,
             IEntityRepository<Category> categoryRepository,
@@ -34,6 +38,7 @@ namespace SakhaTyla.Core.Workers
             IFileStorage fileStorage,
             IExcelFormatter excelFormatter,
             IUnitOfWork unitOfWork,
+            IDataContext dataContext,
             IMessagingService messagingService,
             ILogger<ArticleImportWorker> logger)
         {
@@ -43,6 +48,7 @@ namespace SakhaTyla.Core.Workers
             _fileStorage = fileStorage;
             _excelFormatter = excelFormatter;
             _unitOfWork = unitOfWork;
+            _dataContext = dataContext;
             _messagingService = messagingService;
             _logger = logger;
         }
@@ -76,6 +82,7 @@ namespace SakhaTyla.Core.Workers
             var categories = await _categoryRepository.GetEntities().ToListAsync(workerContext.CancellationToken);
 
             var count = 0;
+            var batchCount = 0;
             foreach (var model in importModels)
             {
                 if (string.IsNullOrEmpty(model.Title) || string.IsNullOrEmpty(model.TextSource))
@@ -111,6 +118,13 @@ namespace SakhaTyla.Core.Workers
                 await _messagingService.SendAsync(UpdateArticleIndex.QueueName,
                     new UpdateArticleIndex() { Id = article.Id, Action = IndexAction.Add });
                 count++;
+                batchCount++;
+
+                if (batchCount >= BatchSize)
+                {
+                    _dataContext.ClearChangeTracker();
+                    batchCount = 0;
+                }
             }
 
             workerContext.Result = $"Imported {count} articles";

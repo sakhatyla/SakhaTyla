@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using Cynosura.Core.Data;
 using Cynosura.EF;
-using SakhaTyla.Core.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SakhaTyla.Core.Entities;
+using SakhaTyla.Core.Infrastructure;
 
 namespace SakhaTyla.Data
 {
@@ -22,6 +23,7 @@ namespace SakhaTyla.Data
             services.AddEntityRepositories<BaseEntity>(typeof(BaseEntityRepository<>));
             services.AddTransient<IUserStore<User>, CustomUserStore>();
             services.AddTransient<IRoleStore<Role>, CustomRoleStore>();
+            services.AddScoped<IDataContext>(sp => sp.GetRequiredService<DataContext>());
             services.AddCynosuraEF();
             return services;
         }

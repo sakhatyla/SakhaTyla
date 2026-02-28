@@ -18,7 +18,7 @@ using SakhaTyla.Core.Infrastructure;
 
 namespace SakhaTyla.Data
 {
-    public class DataContext : IdentityDbContext<User, Role, int>, IPersistedGrantDbContext
+    public class DataContext : IdentityDbContext<User, Role, int>, IPersistedGrantDbContext, IDataContext
     {
         private readonly IOptions<OperationalStoreOptions> _operationalStoreOptions;
 
@@ -90,6 +90,11 @@ namespace SakhaTyla.Data
         }
 
         Task<int> IPersistedGrantDbContext.SaveChangesAsync() => SaveChangesAsync();
+
+        public void ClearChangeTracker()
+        {
+            ChangeTracker.Clear();
+        }
 
         public class SaveEventArgs
         {
