@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SakhaTyla.Core.Entities;
 using SakhaTyla.Core.Security;
+using SakhaTyla.Core.Workers;
 
 namespace SakhaTyla.Data
 {
@@ -13,17 +14,20 @@ namespace SakhaTyla.Data
         private readonly DataContext _dataContext;
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly IEntityRepository<WorkerInfo> _workerInfoRepository;
         private readonly IEntityRepository<FileGroup> _fileGroupRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public DatabaseInitializer(DataContext dataContext, RoleManager<Role> roleManager,
             UserManager<User> userManager,
+            IEntityRepository<WorkerInfo> workerInfoRepository,
             IEntityRepository<FileGroup> fileGroupRepository,
             IUnitOfWork unitOfWork)
         {
             _dataContext = dataContext;
             _roleManager = roleManager;
             _userManager = userManager;
+            _workerInfoRepository = workerInfoRepository;
             _fileGroupRepository = fileGroupRepository;
             _unitOfWork = unitOfWork;
         }
@@ -59,6 +63,15 @@ namespace SakhaTyla.Data
                 await _userManager.AddPasswordAsync(user, "Admin123!");
             }
 
+            var workers = GetWorkers();
+            foreach (var worker in workers)
+            {
+                if (!await _workerInfoRepository.GetEntities().AnyAsync(e => e.ClassName == worker.ClassName))
+                {
+                    _workerInfoRepository.Add(worker);
+                }
+            }
+
             var fileGroups = GetFileGroups();
             foreach (var fileGroup in fileGroups)
             {
@@ -83,6 +96,14 @@ namespace SakhaTyla.Data
                 {
                     Name = RoleConfig.Editor,
                 },
+            };
+        }
+
+        private static WorkerInfo[] GetWorkers()
+        {
+            return new[]
+            {
+                new WorkerInfo("Article Import", typeof(ArticleImportWorker).FullName!)
             };
         }
 
