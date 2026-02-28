@@ -2,42 +2,48 @@
 import { OrderDirection } from '../core/models/order-direction.model';
 
 export class GetArticles {
-    pageIndex?: number;
-    pageSize?: number;
-    filter?: ArticleFilter;
-    orderBy?: string;
-    orderDirection?: OrderDirection;
+  pageIndex?: number;
+  pageSize?: number;
+  filter?: ArticleFilter;
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }
 
 export class GetArticle {
-    id: number;
+  id: number;
 }
 
 export class ExportArticles {
-    filter?: ArticleFilter;
-    orderBy?: string;
-    orderDirection?: OrderDirection;
+  filter?: ArticleFilter;
+  orderBy?: string;
+  orderDirection?: OrderDirection;
 }
 
 export class UpdateArticle {
-    id: number;
-    title: string;
-    textSource: string;
-    fromLanguageId: number;
-    toLanguageId: number;
-    fuzzy: boolean;
-    categoryId: number;
+  id: number;
+  title: string;
+  textSource: string;
+  fromLanguageId: number;
+  toLanguageId: number;
+  fuzzy: boolean;
+  categoryId: number;
 }
 
 export class CreateArticle {
-    title: string;
-    textSource: string;
-    fromLanguageId: number;
-    toLanguageId: number;
-    fuzzy: boolean;
-    categoryId: number;
+  title: string;
+  textSource: string;
+  fromLanguageId: number;
+  toLanguageId: number;
+  fuzzy: boolean;
+  categoryId: number;
 }
 
 export class DeleteArticle {
-    id: number;
+  id: number;
+}
+
+export class ImportArticles {
+  fromLanguageId: number;
+  toLanguageId: number;
+  fileId: number;
 }

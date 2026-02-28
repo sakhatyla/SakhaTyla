@@ -10,7 +10,7 @@ import { FileResult } from '../core/file-result.model';
 
 import { Article } from './article.model';
 import { GetArticles, GetArticle, ExportArticles,
-  UpdateArticle, CreateArticle, DeleteArticle } from './article-request.model';
+  UpdateArticle, CreateArticle, DeleteArticle, ImportArticles } from './article-request.model';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
@@ -49,5 +49,10 @@ export class ArticleService {
   deleteArticle(deleteArticle: DeleteArticle): Observable<{}> {
     const url = `${this.apiUrl}/DeleteArticle`;
     return this.httpClient.post(url, deleteArticle);
+  }
+
+  importArticles(importArticles: ImportArticles): Observable<{}> {
+    const url = `${this.apiUrl}/ImportArticles`;
+    return this.httpClient.post(url, importArticles);
   }
 }

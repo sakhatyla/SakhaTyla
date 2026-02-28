@@ -1,0 +1,26 @@
+<ng-container *transloco="let t">
+  <h1 mat-dialog-title>{{ t('Import Articles') }}</h1>
+  <mat-dialog-content class="mat-dialog-content-edit">
+    <form [formGroup]="importForm">
+      <mat-form-field>
+        <mat-label>{{ t('From Language') }}</mat-label>
+        <app-language-select formControlName="fromLanguageId" name="fromLanguageId" [placeholder]="t('From Language')"></app-language-select>
+        <mat-error>{{ error?.modelState?.fromLanguageId | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('To Language') }}</mat-label>
+        <app-language-select formControlName="toLanguageId" name="toLanguageId" [placeholder]="t('To Language')"></app-language-select>
+        <mat-error>{{ error?.modelState?.toLanguageId | modelError }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t('File') }}</mat-label>
+        <app-file-select formControlName="fileId" name="fileId" groupName="ImportFiles" [placeholder]="t('File')"></app-file-select>
+        <mat-error>{{ error?.modelState?.fileId | modelError }}</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions-edit">
+    <button mat-raised-button mat-dialog-close>{{ t('shared.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="onImport()" cdkFocusInitial>{{ t('Import') }}</button>
+  </mat-dialog-actions>
+</ng-container>

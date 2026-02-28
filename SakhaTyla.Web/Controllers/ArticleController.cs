@@ -56,5 +56,12 @@ namespace SakhaTyla.Web.Controllers
         {
             return await _mediator.Send(deleteArticle);
         }
+
+        [Authorize("WriteArticle")]
+        [HttpPost("ImportArticles")]
+        public async Task<Unit> ImportArticlesAsync([FromBody] ImportArticles importArticles)
+        {
+            return await _mediator.Send(importArticles);
+        }
     }
 }

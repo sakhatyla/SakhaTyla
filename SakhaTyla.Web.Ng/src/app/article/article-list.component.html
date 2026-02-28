@@ -34,6 +34,7 @@
     </div>
     <div class="action-item">
       <button mat-raised-button color="primary" type="button" (click)="onCreate()">{{ t('shared.create') }}</button>
+      <button mat-raised-button color="primary" type="button" (click)="onImport()">{{ t('Import') }}</button>
       <button mat-raised-button color="primary" type="button" (click)="onViewChanges()">{{ t('shared.changes') }}</button>
       <button mat-raised-button type="button" *ngIf="selectedIds.size > 0" (click)="onDeleteSelected()">{{ t('shared.delete') }}</button>
     </div>

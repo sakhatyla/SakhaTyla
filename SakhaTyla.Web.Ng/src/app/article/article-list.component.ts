@@ -15,6 +15,7 @@ import { OrderDirectionManager } from '../core/models/order-direction.model';
 import { Article, ArticleListState } from '../article-core/article.model';
 import { ArticleService } from '../article-core/article.service';
 import { ArticleEditComponent } from './article-edit.component';
+import { ArticleImportComponent } from './article-import.component';
 import { ArticleChangesComponent } from './article-changes.component';
 
 @Component({
@@ -83,6 +84,12 @@ export class ArticleListComponent implements OnInit {
 
   onCreate() {
     ArticleEditComponent.show(this.dialog, null).subscribe(() => {
+      this.getArticles();
+    });
+  }
+
+  onImport() {
+    ArticleImportComponent.show(this.dialog).subscribe(() => {
       this.getArticles();
     });
   }

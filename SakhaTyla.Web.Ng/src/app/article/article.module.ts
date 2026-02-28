@@ -10,39 +10,44 @@ import { EntityChangeModule } from '../entity-change/entity-change.module';
 
 import { ArticleListComponent } from './article-list.component';
 import { ArticleEditComponent } from './article-edit.component';
+import { ArticleImportComponent } from './article-import.component';
 import { ArticleViewComponent } from './article-view.component';
 import { ArticlesComponent } from './articles.component';
 import { ArticleChangesComponent } from './article-changes.component';
 import { ArticleTagCoreModule } from '../article-tag-core/article-tag-core.module';
 import { TagCoreModule } from '../tag-core/tag-core.module';
+import { FileCoreModule } from '../file-core/file-core.module';
 
 @NgModule({
-    declarations: [
-        ArticleListComponent,
-        ArticleEditComponent,
-        ArticleViewComponent,
-        ArticlesComponent,
-        ArticleChangesComponent,
-    ],
-    imports: [
-        RouterModule,
-        CoreModule,
-        TranslocoRootModule,
-        LanguageCoreModule,
-        CategoryCoreModule,
-        ArticleCoreModule,
-        EntityChangeModule,
-        ArticleTagCoreModule,
-        TagCoreModule,
-    ],
-    exports: [
-        ArticleListComponent,
-    ],
-    providers: [
-    ],
-    entryComponents: [
-        ArticleEditComponent
-    ]
+  declarations: [
+    ArticleListComponent,
+    ArticleEditComponent,
+    ArticleImportComponent,
+    ArticleViewComponent,
+    ArticlesComponent,
+    ArticleChangesComponent,
+  ],
+  imports: [
+    RouterModule,
+    CoreModule,
+    TranslocoRootModule,
+    LanguageCoreModule,
+    CategoryCoreModule,
+    ArticleCoreModule,
+    EntityChangeModule,
+    ArticleTagCoreModule,
+    TagCoreModule,
+    FileCoreModule,
+  ],
+  exports: [
+    ArticleListComponent,
+  ],
+  providers: [
+  ],
+  entryComponents: [
+    ArticleEditComponent,
+    ArticleImportComponent
+  ]
 })
 export class ArticleModule {
 
