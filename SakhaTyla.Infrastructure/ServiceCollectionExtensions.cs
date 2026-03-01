@@ -7,6 +7,7 @@ using SakhaTyla.Core.Email;
 using SakhaTyla.Core.Formatters;
 using SakhaTyla.Core.Search;
 using SakhaTyla.Infrastructure.Email;
+using SakhaTyla.Infrastructure.FileStorage;
 using SakhaTyla.Infrastructure.Formatters;
 using SakhaTyla.Infrastructure.Search;
 
@@ -23,6 +24,7 @@ namespace SakhaTyla.Infrastructure
             services.AddSingleton<LuceneContext>();
             services.AddSingleton<ISearchIndexWriter, LuceneIndexWriter>();
             services.AddTransient<ISearchIndexReader, LuceneIndexReader>();
+            services.Configure<AWSS3StorageSettings>(configuration.GetSection("AWSS3Storage"));
 
             return services;
         }
