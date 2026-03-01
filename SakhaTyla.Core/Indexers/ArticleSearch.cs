@@ -49,7 +49,7 @@ namespace SakhaTyla.Core.Indexers
                 Language = article.FromLanguage.Code,
             };
             document.Fields[TitleField] = new DocumentField(article.Title) { Language = Document.DefaultLanguage };
-            document.Fields[TextField] = new DocumentField(article.Text, analyzed: false);
+            document.Fields[TextField] = new DocumentField(article.Text);
             document.Fields[TextSourceFromField] = new DocumentField(article.TextSource, stored: false);
             document.Fields[TextSourceToField] = new DocumentField(article.TextSource, stored: false) { Language = article.ToLanguage.Code };
             document.Fields[FromLanguageNameField] = new DocumentField(article.FromLanguage.Name, analyzed: false);
