@@ -17,8 +17,6 @@ import { $model.Entity.Name$Module } from '../$model.Entity.NameKebab$/$model.En
     $model.Entity.Name$Module,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class $model.Entity.Name$RoutedModule {

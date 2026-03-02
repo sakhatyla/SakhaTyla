@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Inject } from '@angular/core';
+﻿import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -15,7 +15,7 @@ class DialogData {
     templateUrl: './article-changes.component.html',
     styleUrls: ['./article-changes.component.scss']
 })
-export class ArticleChangesComponent implements OnInit {
+export class ArticleChangesComponent {
     entityName: string;
     entityId: number;
     state: EntityChangeListState = new EntityChangeListState();
@@ -33,8 +33,5 @@ export class ArticleChangesComponent implements OnInit {
         });
         return dialogRef.afterClosed()
             .pipe(filter(res => res === true));
-    }
-
-    ngOnInit(): void {
     }
 }

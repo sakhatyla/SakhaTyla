@@ -16,8 +16,6 @@ import { ArticleModule } from '../article/article.module';
     ArticleModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class ArticleRoutedModule {

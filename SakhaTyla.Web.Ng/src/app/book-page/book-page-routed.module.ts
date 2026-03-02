@@ -16,8 +16,6 @@ import { BookPageModule } from '../book-page/book-page.module';
     BookPageModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class BookPageRoutedModule {

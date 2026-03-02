@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { Article, ArticleListState } from '../article-core/article.model';
 import { ArticleService } from '../article-core/article.service';
@@ -26,7 +29,7 @@ import { ArticleChangesComponent } from './article-changes.component';
 export class ArticleListComponent implements OnInit {
   content: Page<Article>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'title',
     'text',
@@ -35,6 +38,17 @@ export class ArticleListComponent implements OnInit {
     'fuzzy',
     'category',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('articleColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'title', displayName: this.translocoService.translate('Title') },
+    { name: 'text', displayName: this.translocoService.translate('Text') },
+    { name: 'fromLanguage', displayName: this.translocoService.translate('From Language') },
+    { name: 'toLanguage', displayName: this.translocoService.translate('To Language') },
+    { name: 'fuzzy', displayName: this.translocoService.translate('Fuzzy') },
+    { name: 'category', displayName: this.translocoService.translate('Category') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -48,7 +62,9 @@ export class ArticleListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private articleService: ArticleService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
   ) {
   }
 

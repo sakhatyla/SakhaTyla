@@ -16,8 +16,6 @@ import { WorkerScheduleTaskModule } from '../worker-schedule-task/worker-schedul
     WorkerScheduleTaskModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class WorkerScheduleTaskRoutedModule {

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page as PageModel, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { Page, PageListState } from '../page-core/page.model';
 import { PageService } from '../page-core/page.service';
@@ -24,13 +27,30 @@ import { PageEditComponent } from './page-edit.component';
 export class PageListComponent implements OnInit {
   content: PageModel<Page>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'type',
     'name',
     'route',
     'modificationDate',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('pageColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'type', displayName: this.translocoService.translate('Type') },
+    { name: 'name', displayName: this.translocoService.translate('Name') },
+    { name: 'shortName', displayName: this.translocoService.translate('Short Name') },
+    { name: 'parent', displayName: this.translocoService.translate('Parent') },
+    { name: 'header', displayName: this.translocoService.translate('Header') },
+    { name: 'body', displayName: this.translocoService.translate('Body') },
+    { name: 'metaTitle', displayName: this.translocoService.translate('Meta Title') },
+    { name: 'metaKeywords', displayName: this.translocoService.translate('Meta Keywords') },
+    { name: 'metaDescription', displayName: this.translocoService.translate('Meta Description') },
+    { name: 'image', displayName: this.translocoService.translate('Image') },
+    { name: 'preview', displayName: this.translocoService.translate('Preview') },
+    { name: 'publicationDate', displayName: this.translocoService.translate('Publication Date') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -44,7 +64,9 @@ export class PageListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private pageService: PageService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

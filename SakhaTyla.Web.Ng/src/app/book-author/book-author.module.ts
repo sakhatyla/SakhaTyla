@@ -27,9 +27,6 @@ import { BookAuthorsComponent } from './book-authors.component';
     BookAuthorListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    BookAuthorEditComponent
   ]
 })
 export class BookAuthorModule {

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { BookAuthorship, BookAuthorshipListState } from '../book-authorship-core/book-authorship.model';
 import { BookAuthorshipService } from '../book-authorship-core/book-authorship.service';
@@ -24,11 +27,18 @@ import { BookAuthorshipEditComponent } from './book-authorship-edit.component';
 export class BookAuthorshipListComponent implements OnInit {
   content: Page<BookAuthorship>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'author',
     'weight',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('bookAuthorshipColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'author', displayName: this.translocoService.translate('Author') },
+    { name: 'weight', displayName: this.translocoService.translate('Weight') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -42,7 +52,9 @@ export class BookAuthorshipListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private bookAuthorshipService: BookAuthorshipService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

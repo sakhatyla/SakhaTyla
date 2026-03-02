@@ -16,8 +16,6 @@ import { BookAuthorModule } from '../book-author/book-author.module';
     BookAuthorModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class BookAuthorRoutedModule {

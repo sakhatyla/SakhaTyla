@@ -16,8 +16,6 @@ import { FileGroupModule } from '../file-group/file-group.module';
     FileGroupModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class FileGroupRoutedModule {

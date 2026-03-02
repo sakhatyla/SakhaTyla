@@ -18,8 +18,6 @@ import { UserModule } from './user.module';
   exports: [
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class UserRoutedModule {

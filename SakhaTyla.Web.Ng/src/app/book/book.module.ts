@@ -33,9 +33,6 @@ import { BooksComponent } from './books.component';
     BookListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    BookEditComponent
   ]
 })
 export class BookModule {

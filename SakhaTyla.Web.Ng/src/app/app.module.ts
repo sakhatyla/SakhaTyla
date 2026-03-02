@@ -143,7 +143,7 @@ import { TranslocoRootModule } from './transloco-root.module';
         canActivate: [AuthorizeGuard],
         loadChildren: () => import('./user/user-routed.module').then(m => m.UserRoutedModule)
       },
-    ]),
+], { relativeLinkResolution: 'legacy' }),
     MaterialModule,
     QuillModule.forRoot(),
     CoreModule,

@@ -35,9 +35,6 @@ import { PagesComponent } from './pages.component';
     PageListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    PageEditComponent
   ]
 })
 export class PageModule {

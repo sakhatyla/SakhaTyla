@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { WorkerInfo, WorkerInfoListState } from '../worker-info-core/worker-info.model';
 import { WorkerInfoService } from '../worker-info-core/worker-info.service';
@@ -24,11 +27,18 @@ import { WorkerInfoEditComponent } from './worker-info-edit.component';
 export class WorkerInfoListComponent implements OnInit {
   content: Page<WorkerInfo>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'name',
     'className',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('workerInfoColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'name', displayName: this.translocoService.translate('Name') },
+    { name: 'className', displayName: this.translocoService.translate('Class Name') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -42,7 +52,9 @@ export class WorkerInfoListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private workerInfoService: WorkerInfoService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

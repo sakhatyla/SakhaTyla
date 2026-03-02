@@ -141,9 +141,8 @@ export class FileSelectComponent implements OnInit, ControlValueAccessor,
     }
   }
 
-  onFileChange(event: EventTarget) {
-    const eventObj = event as MSInputMethodContext;
-    const input = eventObj.target as HTMLInputElement;
+  onFileChange(event: any) {
+    const input = event.target as HTMLInputElement;
     const file = input.files[0];
     if (file) {
       this.fileService.createFile({ groupId: this.group.id, file: input.files[0] })

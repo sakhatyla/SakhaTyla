@@ -16,8 +16,6 @@ import { MenuItemModule } from '../menu-item/menu-item.module';
     MenuItemModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class MenuItemRoutedModule {

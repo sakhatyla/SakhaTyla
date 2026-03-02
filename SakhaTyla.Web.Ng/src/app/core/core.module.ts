@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { OwlDateTimeModule, OwlMomentDateTimeModule, OWL_DATE_TIME_FORMATS } from '@danielmoncada/angular-datetime-picker';
+import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS } from '@danielmoncada/angular-datetime-picker';
+import { OwlMomentDateTimeModule } from '@danielmoncada/angular-datetime-picker-moment-adapter';
 import { QuillModule } from 'ngx-quill';
 import { MaterialModule } from '../material.module';
 
@@ -40,6 +41,8 @@ import { SortDirectionPipe } from './pipes/sort-direction.pipe';
 import { SelectItemDirective } from './directives/select-item.directive';
 import { SelectAllItemsDirective } from './directives/select-all-items.directive';
 import { TreeComponent } from './tree.component';
+import { ColumnSettingsComponent } from './column-settings.component';
+import { StoredValueService } from './stored-value.service';
 
 export const MY_MOMENT_FORMATS = {
   parseInput: 'L LT',
@@ -74,7 +77,8 @@ export const MY_MOMENT_FORMATS = {
     TimeEditComponent,
     TimeViewComponent,
     HtmlEditComponent,
-    TreeComponent
+    TreeComponent,
+    ColumnSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -101,10 +105,8 @@ export const MY_MOMENT_FORMATS = {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true
-    }
-  ],
-  entryComponents: [
-    ModalComponent
+    },
+    StoredValueService,
   ],
   exports: [
     CommonModule,
@@ -131,7 +133,8 @@ export const MY_MOMENT_FORMATS = {
     TimeEditComponent,
     TimeViewComponent,
     HtmlEditComponent,
-    TreeComponent
+    TreeComponent,
+    ColumnSettingsComponent,
   ]
 })
 export class CoreModule {

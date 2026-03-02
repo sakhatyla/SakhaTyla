@@ -32,9 +32,6 @@ import { $model.Entity.PluralName$Component } from './$model.Entity.PluralNameKe
     $model.Entity.Name$ListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    $model.Entity.Name$EditComponent
   ]
 })
 export class $model.Entity.Name$Module {

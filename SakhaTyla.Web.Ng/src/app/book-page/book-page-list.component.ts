@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { BookPage, BookPageListState } from '../book-page-core/book-page.model';
 import { BookPageService } from '../book-page-core/book-page.service';
@@ -24,11 +27,18 @@ import { BookPageEditComponent } from './book-page-edit.component';
 export class BookPageListComponent implements OnInit {
   content: Page<BookPage>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'fileName',
     'number',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('bookPageColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'fileName', displayName: this.translocoService.translate('File Name') },
+    { name: 'number', displayName: this.translocoService.translate('Number') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -42,7 +52,9 @@ export class BookPageListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private bookPageService: BookPageService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

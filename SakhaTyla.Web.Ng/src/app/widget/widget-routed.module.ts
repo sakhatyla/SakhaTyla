@@ -16,8 +16,6 @@ import { WidgetModule } from '../widget/widget.module';
     WidgetModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class WidgetRoutedModule {

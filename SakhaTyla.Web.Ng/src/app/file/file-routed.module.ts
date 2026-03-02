@@ -16,8 +16,6 @@ import { FileModule } from '../file/file.module';
     FileModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class FileRoutedModule {

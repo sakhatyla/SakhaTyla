@@ -16,8 +16,6 @@ import { WorkerInfoModule } from '../worker-info/worker-info.module';
     WorkerInfoModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class WorkerInfoRoutedModule {

@@ -16,8 +16,6 @@ import { CommentsViewComponent } from './comments-view.component';
     CommentModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class CommentRoutedModule {

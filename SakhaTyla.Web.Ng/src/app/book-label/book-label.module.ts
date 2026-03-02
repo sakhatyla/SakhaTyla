@@ -31,9 +31,6 @@ import { BookLabelsComponent } from './book-labels.component';
     BookLabelListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    BookLabelEditComponent
   ]
 })
 export class BookLabelModule {

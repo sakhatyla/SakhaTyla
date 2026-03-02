@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { FileGroup, FileGroupListState } from '../file-group-core/file-group.model';
 import { FileGroupService } from '../file-group-core/file-group.service';
@@ -24,13 +27,22 @@ import { FileGroupEditComponent } from './file-group-edit.component';
 export class FileGroupListComponent implements OnInit {
   content: Page<FileGroup>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'name',
     'type',
     'location',
     'accept',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('fileGroupColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'name', displayName: this.translocoService.translate('Name') },
+    { name: 'type', displayName: this.translocoService.translate('Type') },
+    { name: 'location', displayName: this.translocoService.translate('Location') },
+    { name: 'accept', displayName: this.translocoService.translate('Accept') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -44,7 +56,9 @@ export class FileGroupListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private fileGroupService: FileGroupService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

@@ -31,9 +31,6 @@ import { BookAuthorshipsComponent } from './book-authorships.component';
     BookAuthorshipListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    BookAuthorshipEditComponent
   ]
 })
 export class BookAuthorshipModule {

@@ -27,9 +27,6 @@ import { TagsComponent } from './tags.component';
     TagListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    TagEditComponent
   ]
 })
 export class TagModule {

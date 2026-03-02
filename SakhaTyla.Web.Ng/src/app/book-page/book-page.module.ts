@@ -29,9 +29,6 @@ import { BookPagesComponent } from './book-pages.component';
     BookPageListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    BookPageEditComponent
   ]
 })
 export class BookPageModule {

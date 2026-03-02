@@ -29,9 +29,6 @@ import { FileGroupsComponent } from './file-groups.component';
     FileGroupListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    FileGroupEditComponent
   ]
 })
 export class FileGroupModule {

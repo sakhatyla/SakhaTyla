@@ -29,9 +29,6 @@ import { MenuItemsComponent } from './menu-items.component';
     MenuItemListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    MenuItemEditComponent
   ]
 })
 export class MenuItemModule {

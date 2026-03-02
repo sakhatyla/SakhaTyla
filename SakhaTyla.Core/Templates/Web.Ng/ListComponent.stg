@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -12,6 +13,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { $model.Entity.Name$, $model.Entity.Name$ListState } from '../$model.Entity.NameKebab$-core/$model.Entity.NameKebab$.model';
 import { $model.Entity.Name$Service } from '../$model.Entity.NameKebab$-core/$model.Entity.NameKebab$.service';
@@ -25,10 +28,16 @@ import { $model.Entity.Name$EditComponent } from './$model.Entity.NameKebab$-edi
 export class $model.Entity.Name$ListComponent implements OnInit {
   content: Page<$model.Entity.Name$>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     $model.Entity.AllFields:field(); separator="\r\n"$
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('$model.Entity.NameLower$Columns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    $model.Entity.AllFields:fieldDescription(); separator="\r\n"$
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -42,7 +51,9 @@ export class $model.Entity.Name$ListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private $model.Entity.NameLower$Service: $model.Entity.Name$Service,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 
@@ -135,4 +146,8 @@ export class $model.Entity.Name$ListComponent implements OnInit {
 
 field(field) ::= <<
 '$field.NameLower$',
+>>
+
+fieldDescription(field) ::= <<
+{ name: '$field.NameLower$', displayName: this.translocoService.translate('$field.DisplayName$') },
 >>

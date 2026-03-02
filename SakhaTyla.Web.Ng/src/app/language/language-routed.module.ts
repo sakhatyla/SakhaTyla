@@ -16,8 +16,6 @@ import { LanguageModule } from '../language/language.module';
     LanguageModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class LanguageRoutedModule {

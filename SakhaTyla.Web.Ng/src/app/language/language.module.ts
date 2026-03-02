@@ -27,9 +27,6 @@ import { LanguagesComponent } from './languages.component';
     LanguageListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    LanguageEditComponent
   ]
 })
 export class LanguageModule {

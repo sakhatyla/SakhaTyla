@@ -30,9 +30,6 @@ import { EntityChangesComponent } from './entity-changes.component';
     EntityChangeValueDirective,
   ],
   providers: [
-  ],
-  entryComponents: [
-    EntityChangesComponent
   ]
 })
 export class EntityChangeModule {

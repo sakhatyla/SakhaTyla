@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Inject } from '@angular/core';
+﻿import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -15,7 +15,7 @@ class DialogData {
   templateUrl: './entity-changes.component.html',
   styleUrls: ['./entity-changes.component.scss']
 })
-export class EntityChangesComponent implements OnInit {
+export class EntityChangesComponent {
   entityName: string;
   entityId: number;
   state: EntityChangeListState = new EntityChangeListState();
@@ -35,6 +35,4 @@ export class EntityChangesComponent implements OnInit {
       .pipe(filter(res => res === true));
   }
 
-  ngOnInit(): void {
-  }
 }

@@ -29,9 +29,6 @@ import { WorkerInfosComponent } from './worker-infos.component';
     WorkerInfoListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    WorkerInfoEditComponent
   ]
 })
 export class WorkerInfoModule {

@@ -27,9 +27,6 @@ import { CategoriesComponent } from './categories.component';
     CategoryListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    CategoryEditComponent
   ]
 })
 export class CategoryModule {

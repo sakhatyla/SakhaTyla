@@ -18,8 +18,6 @@ import { RoleModule } from './role.module';
   exports: [
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class RoleRoutedModule {

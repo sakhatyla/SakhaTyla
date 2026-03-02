@@ -1,7 +1,8 @@
-.vs/
+﻿.vs/
 .idea/
 .git/
 **/bin/
 **/obj/
 **/out/
 **/node_modules
+SakhaTyla.Web/wwwroot/static/

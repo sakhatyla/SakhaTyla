@@ -31,9 +31,6 @@ import { WorkerRunsComponent } from './worker-runs.component';
     WorkerRunListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    WorkerRunEditComponent
   ]
 })
 export class WorkerRunModule {

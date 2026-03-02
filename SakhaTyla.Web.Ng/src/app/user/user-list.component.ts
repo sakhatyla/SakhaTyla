@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { User, UserListState } from '../user-core/user.model';
 import { UserService } from '../user-core/user.service';
@@ -24,7 +27,7 @@ import { UserEditComponent } from './user-edit.component';
 export class UserListComponent implements OnInit {
   content: Page<User>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'userName',
     'email',
@@ -32,6 +35,17 @@ export class UserListComponent implements OnInit {
     'firstName',
     'lastName',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('userColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'userName', displayName: this.translocoService.translate('UserName') },
+    { name: 'email', displayName: this.translocoService.translate('Email') },
+    { name: 'emailConfirmed', displayName: this.translocoService.translate('Email Confirmed') },
+    { name: 'firstName', displayName: this.translocoService.translate('First Name') },
+    { name: 'lastName', displayName: this.translocoService.translate('Last Name') },
+    { name: 'roles', displayName: this.translocoService.translate('Roles') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -45,7 +59,9 @@ export class UserListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private userService: UserService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

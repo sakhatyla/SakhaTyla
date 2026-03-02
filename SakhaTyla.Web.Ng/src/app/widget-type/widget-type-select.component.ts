@@ -16,7 +16,7 @@ import { WidgetType, WidgetTypeDisplay } from './widget-type.model';
   ]
 })
 
-export class WidgetTypeSelectComponent implements OnInit, ControlValueAccessor,
+export class WidgetTypeSelectComponent implements ControlValueAccessor,
   MatFormFieldControl<WidgetType | null>, OnDestroy, DoCheck {
 
   static nextId = 0;
@@ -97,10 +97,6 @@ export class WidgetTypeSelectComponent implements OnInit, ControlValueAccessor,
 
   writeValue(value) {
     this.innerValue = value;
-  }
-
-  ngOnInit(): void {
-
   }
 
   ngOnDestroy() {

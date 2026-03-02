@@ -29,9 +29,6 @@ import { WidgetsComponent } from './widgets.component';
     WidgetListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    WidgetEditComponent
   ]
 })
 export class WidgetModule {

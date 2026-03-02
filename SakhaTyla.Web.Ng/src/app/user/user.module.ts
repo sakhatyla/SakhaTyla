@@ -29,9 +29,6 @@ import { UsersComponent } from './users.component';
     UserListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    UserEditComponent
   ]
 })
 export class UserModule {

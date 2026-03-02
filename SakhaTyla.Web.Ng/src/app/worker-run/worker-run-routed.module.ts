@@ -16,8 +16,6 @@ import { WorkerRunModule } from '../worker-run/worker-run.module';
     WorkerRunModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class WorkerRunRoutedModule {

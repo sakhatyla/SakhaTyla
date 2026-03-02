@@ -16,7 +16,7 @@ import { WorkerRunStatus, WorkerRunStatusDisplay } from './worker-run-status.mod
   ]
 })
 
-export class WorkerRunStatusSelectComponent implements OnInit, ControlValueAccessor,
+export class WorkerRunStatusSelectComponent implements ControlValueAccessor,
   MatFormFieldControl<WorkerRunStatus | null>, OnDestroy, DoCheck {
 
   static nextId = 0;
@@ -97,10 +97,6 @@ export class WorkerRunStatusSelectComponent implements OnInit, ControlValueAcces
 
   writeValue(value) {
     this.innerValue = value;
-  }
-
-  ngOnInit(): void {
-
   }
 
   ngOnDestroy() {

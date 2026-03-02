@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { ArticleService } from '../article-core/article.service';
   templateUrl: './article-import.component.html',
   styleUrls: ['./article-import.component.scss']
 })
-export class ArticleImportComponent implements OnInit {
+export class ArticleImportComponent {
   importForm = this.fb.group({
     fromLanguageId: [],
     toLanguageId: [],
@@ -36,9 +36,6 @@ export class ArticleImportComponent implements OnInit {
     });
     return dialogRef.afterClosed()
       .pipe(filter(res => res === true));
-  }
-
-  ngOnInit(): void {
   }
 
   onImport(): void {

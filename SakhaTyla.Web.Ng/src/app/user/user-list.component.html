@@ -77,7 +77,9 @@
       </ng-container>
 
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef>
+          <app-column-settings [(columns)]="columns.value" [defaultColumns]="defaultColumns" [columnDescriptions]="columnDescriptions"></app-column-settings>
+        </th>
         <td mat-cell *matCellDef="let item">
           <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="actionMenu">
             <mat-icon>more_vert</mat-icon>
@@ -89,8 +91,8 @@
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let item; columns: columns;" [routerLink]="[baseRoute, item.id]"></tr>
+      <tr mat-header-row *matHeaderRowDef="columns.value"></tr>
+      <tr mat-row *matRowDef="let item; columns: columns.value;" [routerLink]="[baseRoute, item.id]"></tr>
 
     </table>
 

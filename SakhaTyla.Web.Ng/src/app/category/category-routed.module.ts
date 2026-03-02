@@ -16,8 +16,6 @@ import { CategoryModule } from '../category/category.module';
     CategoryModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class CategoryRoutedModule {

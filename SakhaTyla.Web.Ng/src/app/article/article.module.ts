@@ -43,10 +43,6 @@ import { FileCoreModule } from '../file-core/file-core.module';
     ArticleListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    ArticleEditComponent,
-    ArticleImportComponent
   ]
 })
 export class ArticleModule {

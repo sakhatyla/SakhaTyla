@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { File, FileListState } from '../file-core/file.model';
 import { FileService } from '../file-core/file.service';
@@ -24,13 +27,22 @@ import { FileEditComponent } from './file-edit.component';
 export class FileListComponent implements OnInit {
   content: Page<File>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'name',
     'contentType',
     'url',
     'group',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('fileColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'name', displayName: this.translocoService.translate('Name') },
+    { name: 'contentType', displayName: this.translocoService.translate('Content Type') },
+    { name: 'url', displayName: this.translocoService.translate('Url') },
+    { name: 'group', displayName: this.translocoService.translate('Group') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -44,7 +56,9 @@ export class FileListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private fileService: FileService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

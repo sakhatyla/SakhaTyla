@@ -10,7 +10,7 @@ namespace SakhaTyla.Worker.Infrastructure
     {
         public LocalizedString this[string name] => new LocalizedString(name, name);
 
-        public LocalizedString this[string name, params object[] arguments] => new LocalizedString(name, name);
+        public LocalizedString this[string name, params object[] arguments] => new LocalizedString(name, string.Format(name, arguments));
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {

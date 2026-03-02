@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="columnsMenu">
+  <mat-icon matListIcon>settings</mat-icon>
+</button>
+<mat-menu #columnsMenu="matMenu">
+  <section [formGroup]="settingColumns" class="columns-menu-section">
+    <ng-container *ngFor="let columnDescription of columnDescriptions">
+      <mat-checkbox *ngIf="!columnDescription.isSystem" formControlName="{{ columnDescription.name }}"
+      (click)="$event.stopPropagation()">{{ columnDescription.displayName }}</mat-checkbox>
+    </ng-container>
+
+  </section>
+
+  <div class="columns-menu-div">
+    <button mat-raised-button class="button-default" (click)="toDefaultColumns()">Вернуть по умолчанию</button>
+    <button mat-raised-button color="primary" (click)="applySelectedColumns()">Применить</button>
+  </div>
+</mat-menu>

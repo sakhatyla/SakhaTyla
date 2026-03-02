@@ -8,9 +8,9 @@ using SakhaTyla.Core.Messaging.WorkerInfos;
 
 namespace SakhaTyla.Worker.Consumers
 {
-    class ScheduleWorkerInfoConsumerDefinition : ConsumerDefinition<ScheduleWorkerInfoConsumer>
+    public class ScheduleWorkerInfoConsumerDefinition : ConsumerDefinition<ScheduleWorkerInfoConsumer>
     {
-        protected ScheduleWorkerInfoConsumerDefinition()
+        public ScheduleWorkerInfoConsumerDefinition()
         {
             EndpointName = ScheduleWorkerInfo.QueueName;
         }

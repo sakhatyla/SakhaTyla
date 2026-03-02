@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { BookAuthor, BookAuthorListState } from '../book-author-core/book-author.model';
 import { BookAuthorService } from '../book-author-core/book-author.service';
@@ -24,13 +27,22 @@ import { BookAuthorEditComponent } from './book-author-edit.component';
 export class BookAuthorListComponent implements OnInit {
   content: Page<BookAuthor>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'lastName',
     'firstName',
     'middleName',
     'nickName',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('bookAuthorColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'lastName', displayName: this.translocoService.translate('Last Name') },
+    { name: 'firstName', displayName: this.translocoService.translate('First Name') },
+    { name: 'middleName', displayName: this.translocoService.translate('Middle Name') },
+    { name: 'nickName', displayName: this.translocoService.translate('NickName') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -44,7 +56,9 @@ export class BookAuthorListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private bookAuthorService: BookAuthorService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

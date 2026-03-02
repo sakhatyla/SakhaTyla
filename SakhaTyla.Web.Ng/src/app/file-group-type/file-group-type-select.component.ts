@@ -16,7 +16,7 @@ import { FileGroupType, FileGroupTypeDisplay } from './file-group-type.model';
   ]
 })
 
-export class FileGroupTypeSelectComponent implements OnInit, ControlValueAccessor,
+export class FileGroupTypeSelectComponent implements ControlValueAccessor,
   MatFormFieldControl<FileGroupType | null>, OnDestroy, DoCheck {
 
   static nextId = 0;
@@ -97,10 +97,6 @@ export class FileGroupTypeSelectComponent implements OnInit, ControlValueAccesso
 
   writeValue(value) {
     this.innerValue = value;
-  }
-
-  ngOnInit(): void {
-
   }
 
   ngOnDestroy() {

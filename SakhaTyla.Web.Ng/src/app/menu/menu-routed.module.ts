@@ -16,8 +16,6 @@ import { MenuModule } from '../menu/menu.module';
     MenuModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class MenuRoutedModule {

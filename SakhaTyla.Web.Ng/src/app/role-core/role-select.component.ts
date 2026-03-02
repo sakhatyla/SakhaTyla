@@ -173,6 +173,6 @@ export class RoleSelectComponent implements OnInit, ControlValueAccessor,
   }
 
   getDisplay(role: Role) {
-    return role ? role.name : '';
+    return role ? role.displayName : '';
   }
 }

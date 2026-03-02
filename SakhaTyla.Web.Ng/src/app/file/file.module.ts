@@ -29,9 +29,6 @@ import { FilesComponent } from './files.component';
     FileListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    FileEditComponent
   ]
 })
 export class FileModule {

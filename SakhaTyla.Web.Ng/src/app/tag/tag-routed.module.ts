@@ -16,8 +16,6 @@ import { TagModule } from '../tag/tag.module';
     TagModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class TagRoutedModule {

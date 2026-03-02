@@ -27,9 +27,6 @@ import { RolesComponent } from './roles.component';
     RoleListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    RoleEditComponent
   ]
 })
 export class RoleModule {

@@ -16,7 +16,7 @@ import { PageType, PageTypeDisplay } from './page-type.model';
   ]
 })
 
-export class PageTypeSelectComponent implements OnInit, ControlValueAccessor,
+export class PageTypeSelectComponent implements ControlValueAccessor,
   MatFormFieldControl<PageType | null>, OnDestroy, DoCheck {
 
   static nextId = 0;
@@ -97,10 +97,6 @@ export class PageTypeSelectComponent implements OnInit, ControlValueAccessor,
 
   writeValue(value) {
     this.innerValue = value;
-  }
-
-  ngOnInit(): void {
-
   }
 
   ngOnDestroy() {

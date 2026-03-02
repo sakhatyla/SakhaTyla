@@ -16,8 +16,6 @@ import { PageModule } from '../page/page.module';
     PageModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class PageRoutedModule {

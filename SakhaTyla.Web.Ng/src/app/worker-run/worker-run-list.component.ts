@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { TranslocoService } from '@ngneat/transloco';
 
 import { ModalHelper } from '../core/modal.helper';
 import { StoreService } from '../core/store.service';
@@ -11,6 +12,8 @@ import { Error } from '../core/error.model';
 import { Page, PageSettings } from '../core/page.model';
 import { NoticeHelper } from '../core/notice.helper';
 import { OrderDirectionManager } from '../core/models/order-direction.model';
+import { ColumnDescription } from '../core/column-settings.component';
+import { StoredValueService } from '../core/stored-value.service';
 
 import { WorkerRun, WorkerRunListState } from '../worker-run-core/worker-run.model';
 import { WorkerRunService } from '../worker-run-core/worker-run.service';
@@ -24,13 +27,25 @@ import { WorkerRunEditComponent } from './worker-run-edit.component';
 export class WorkerRunListComponent implements OnInit {
   content: Page<WorkerRun>;
   pageSizeOptions = PageSettings.pageSizeOptions;
-  columns = [
+  defaultColumns = [
     'select',
     'workerInfo',
     'status',
     'startDateTime',
     'endDateTime',
     'action'
+  ];
+  columns = this.storedValueService.getStoredValue('workerRunColumns', this.defaultColumns);
+  columnDescriptions: ColumnDescription[] = [
+    { name: 'select', isSystem: true },
+    { name: 'workerInfo', displayName: this.translocoService.translate('Worker') },
+    { name: 'status', displayName: this.translocoService.translate('Status') },
+    { name: 'startDateTime', displayName: this.translocoService.translate('Start Date') },
+    { name: 'endDateTime', displayName: this.translocoService.translate('End Date') },
+    { name: 'data', displayName: this.translocoService.translate('Data') },
+    { name: 'result', displayName: this.translocoService.translate('Result') },
+    { name: 'resultData', displayName: this.translocoService.translate('Result Data') },
+    { name: 'action', isSystem: true },
   ];
   selectedIds = new Set<number>();
 
@@ -44,7 +59,9 @@ export class WorkerRunListComponent implements OnInit {
     private dialog: MatDialog,
     private modalHelper: ModalHelper,
     private workerRunService: WorkerRunService,
-    private noticeHelper: NoticeHelper
+    private noticeHelper: NoticeHelper,
+    private translocoService: TranslocoService,
+    private storedValueService: StoredValueService
     ) {
   }
 

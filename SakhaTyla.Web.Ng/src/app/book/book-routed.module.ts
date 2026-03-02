@@ -16,8 +16,6 @@ import { BookModule } from '../book/book.module';
     BookModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class BookRoutedModule {

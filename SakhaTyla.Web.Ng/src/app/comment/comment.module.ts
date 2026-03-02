@@ -29,9 +29,6 @@ import { CommentsViewComponent } from './comments-view.component';
     CommentListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    CommentEditComponent
   ]
 })
 export class CommentModule {

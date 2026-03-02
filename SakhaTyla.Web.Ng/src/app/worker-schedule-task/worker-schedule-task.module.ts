@@ -29,9 +29,6 @@ import { WorkerScheduleTasksComponent } from './worker-schedule-tasks.component'
     WorkerScheduleTaskListComponent,
   ],
   providers: [
-  ],
-  entryComponents: [
-    WorkerScheduleTaskEditComponent
   ]
 })
 export class WorkerScheduleTaskModule {

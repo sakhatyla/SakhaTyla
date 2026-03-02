@@ -16,8 +16,6 @@ import { BookLabelModule } from '../book-label/book-label.module';
     BookLabelModule,
   ],
   providers: [
-  ],
-  entryComponents: [
   ]
 })
 export class BookLabelRoutedModule {
