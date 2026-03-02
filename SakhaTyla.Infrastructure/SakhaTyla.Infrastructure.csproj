@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.7.8.8" />
     <PackageReference Include="Cynosura.Messaging" Version="0.5.0-b489" />
-    <PackageReference Include="EPPlus" Version="5.1.0" />
+    <PackageReference Include="EPPlus" Version="7.0.10" />
     <PackageReference Include="Lucene.Net" Version="4.8.0-beta00011" />
     <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00011" />
     <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00011" />

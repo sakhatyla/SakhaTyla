@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OfficeOpenXml;
 using SakhaTyla.Core.Email;
 using SakhaTyla.Core.Formatters;
 using SakhaTyla.Core.Search;
@@ -25,6 +26,8 @@ namespace SakhaTyla.Infrastructure
             services.AddSingleton<ISearchIndexWriter, LuceneIndexWriter>();
             services.AddTransient<ISearchIndexReader, LuceneIndexReader>();
             services.Configure<AWSS3StorageSettings>(configuration.GetSection("AWSS3Storage"));
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             return services;
         }
