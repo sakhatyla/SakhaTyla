@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Requests.Pages
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeletePage request, CancellationToken cancellationToken)
+        public async Task Handle(DeletePage request, CancellationToken cancellationToken)
         {
             var page = await _pageRepository.GetEntities()
                 .Include(e => e.CommentContainer)
@@ -41,7 +41,6 @@ namespace SakhaTyla.Core.Requests.Pages
             _pageRepository.Delete(page);
             _commentContainerRepository.Delete(page.CommentContainer);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

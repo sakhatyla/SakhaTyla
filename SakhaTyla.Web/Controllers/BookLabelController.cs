@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteBookLabel")]
         [HttpPost("UpdateBookLabel")]
-        public async Task<Unit> UpdateBookLabelAsync([FromBody] UpdateBookLabel updateBookLabel)
+        public async Task UpdateBookLabelAsync([FromBody] UpdateBookLabel updateBookLabel)
         {
-            return await _mediator.Send(updateBookLabel);
+            await _mediator.Send(updateBookLabel);
         }
 
         [Authorize("WriteBookLabel")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteBookLabel")]
         [HttpPost("DeleteBookLabel")]
-        public async Task<Unit> DeleteBookLabelAsync([FromBody] DeleteBookLabel deleteBookLabel)
+        public async Task DeleteBookLabelAsync([FromBody] DeleteBookLabel deleteBookLabel)
         {
-            return await _mediator.Send(deleteBookLabel);
+            await _mediator.Send(deleteBookLabel);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
@@ -35,7 +35,6 @@ export class FileListComponent implements OnInit {
     'group',
     'action'
   ];
-  columns = this.storedValueService.getStoredValue('fileColumns', this.defaultColumns);
   columnDescriptions: ColumnDescription[] = [
     { name: 'select', isSystem: true },
     { name: 'name', displayName: this.translocoService.translate('Name') },
@@ -44,6 +43,8 @@ export class FileListComponent implements OnInit {
     { name: 'group', displayName: this.translocoService.translate('Group') },
     { name: 'action', isSystem: true },
   ];
+  columns = this.storedValueService.getStoredValue('fileColumns', this.defaultColumns,
+    ColumnDescription.filter(this.columnDescriptions));
   selectedIds = new Set<number>();
 
   @Input()

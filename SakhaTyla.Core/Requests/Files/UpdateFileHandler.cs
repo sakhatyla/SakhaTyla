@@ -35,7 +35,7 @@ namespace SakhaTyla.Core.Requests.Files
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateFile request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateFile request, CancellationToken cancellationToken)
         {
             var file = await _fileRepository.GetEntities()
                 .Include(e => e.Group)
@@ -68,7 +68,6 @@ namespace SakhaTyla.Core.Requests.Files
                 throw new NotSupportedException($"Group type {file.Group.Type} not supported");
             }
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

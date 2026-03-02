@@ -20,15 +20,15 @@ export class ExportBookLabels {
 }
 
 export class UpdateBookLabel {
-  id: number;
-  name: string;
-  pageId: number;
+  id?: number;
+  name?: string;
+  pageId?: number;
 }
 
 export class CreateBookLabel {
-  bookId: number;
-  name: string;
-  pageId: number;
+  bookId?: number;
+  name?: string;
+  pageId?: number;
 }
 
 export class DeleteBookLabel {

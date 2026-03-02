@@ -20,11 +20,11 @@ export class ExportMenuItems {
 }
 
 export class UpdateMenuItem {
-  id: number;
-  menuId: number;
-  name: string;
-  url: string;
-  parentId: number;
+  id?: number;
+  menuId?: number;
+  name?: string;
+  url?: string;
+  parentId?: number;
 }
 
 export class UpdateMenuItemWeight {
@@ -35,10 +35,10 @@ export class UpdateMenuItemWeight {
 
 
 export class CreateMenuItem {
-  menuId: number;
-  name: string;
-  url: string;
-  parentId: number;
+  menuId?: number;
+  name?: string;
+  url?: string;
+  parentId?: number;
 }
 
 export class DeleteMenuItem {

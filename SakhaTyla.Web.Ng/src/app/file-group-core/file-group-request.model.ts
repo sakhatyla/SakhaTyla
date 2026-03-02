@@ -22,18 +22,18 @@ export class ExportFileGroups {
 }
 
 export class UpdateFileGroup {
-  id: number;
-  name: string;
-  type: FileGroupType;
-  location: string;
-  accept: string;
+  id?: number;
+  name?: string;
+  type?: FileGroupType;
+  location?: string;
+  accept?: string;
 }
 
 export class CreateFileGroup {
-  name: string;
-  type: FileGroupType;
-  location: string;
-  accept: string;
+  name?: string;
+  type?: FileGroupType;
+  location?: string;
+  accept?: string;
 }
 
 export class DeleteFileGroup {

@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteFileGroup")]
         [HttpPost("UpdateFileGroup")]
-        public async Task<Unit> UpdateFileGroupAsync([FromBody] UpdateFileGroup updateFileGroup)
+        public async Task UpdateFileGroupAsync([FromBody] UpdateFileGroup updateFileGroup)
         {
-            return await _mediator.Send(updateFileGroup);
+            await _mediator.Send(updateFileGroup);
         }
 
         [Authorize("WriteFileGroup")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteFileGroup")]
         [HttpPost("DeleteFileGroup")]
-        public async Task<Unit> DeleteFileGroupAsync([FromBody] DeleteFileGroup deleteFileGroup)
+        public async Task DeleteFileGroupAsync([FromBody] DeleteFileGroup deleteFileGroup)
         {
-            return await _mediator.Send(deleteFileGroup);
+            await _mediator.Send(deleteFileGroup);
         }
     }
 }

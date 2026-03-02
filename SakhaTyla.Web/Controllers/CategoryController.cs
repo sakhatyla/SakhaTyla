@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteCategory")]
         [HttpPost("UpdateCategory")]
-        public async Task<Unit> UpdateCategoryAsync([FromBody] UpdateCategory updateCategory)
+        public async Task UpdateCategoryAsync([FromBody] UpdateCategory updateCategory)
         {
-            return await _mediator.Send(updateCategory);
+            await _mediator.Send(updateCategory);
         }
 
         [Authorize("WriteCategory")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteCategory")]
         [HttpPost("DeleteCategory")]
-        public async Task<Unit> DeleteCategoryAsync([FromBody] DeleteCategory deleteCategory)
+        public async Task DeleteCategoryAsync([FromBody] DeleteCategory deleteCategory)
         {
-            return await _mediator.Send(deleteCategory);
+            await _mediator.Send(deleteCategory);
         }
     }
 }

@@ -4,7 +4,7 @@
 
 <mat-toolbar color="primary" *transloco="let t; read: 'app'">
   <mat-toolbar-row>
-    <button mat-icon-button *ngIf="isHandset$ | async" (click)="sidenav.toggle()">
+    <button mat-icon-button *ngIf="isHandset.matches" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span>SakhaTyla</span>
@@ -35,8 +35,8 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+  <mat-sidenav #sidenav fixedInViewport="true" [attr.role]="isHandset.matches ? 'dialog' : 'navigation'"
+    [mode]="isHandset.matches ? 'over' : 'side'" [opened]="isHandset.matches === false">
     <app-nav-menu (click)="toggle(sidenav)"></app-nav-menu>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -21,34 +21,34 @@ export class ExportPages {
 }
 
 export class UpdatePage {
-  id: number;
-  type: PageType;
-  name: string;
-  shortName: string;
-  parentId: number;
-  header: string;
-  body: string;
-  metaTitle: string;
-  metaKeywords: string;
-  metaDescription: string;
-  imageId: number;
-  preview: string;
-  publicationDate: Date;
+  id?: number;
+  type?: PageType;
+  name?: string;
+  shortName?: string;
+  parentId?: number;
+  header?: string;
+  body?: string;
+  metaTitle?: string;
+  metaKeywords?: string;
+  metaDescription?: string;
+  imageId?: number;
+  preview?: string;
+  publicationDate?: Date;
 }
 
 export class CreatePage {
-  type: PageType;
-  name: string;
-  shortName: string;
-  parentId: number;
-  header: string;
-  body: string;
-  metaTitle: string;
-  metaKeywords: string;
-  metaDescription: string;
-  imageId: number;
-  preview: string;
-  publicationDate: Date;
+  type?: PageType;
+  name?: string;
+  shortName?: string;
+  parentId?: number;
+  header?: string;
+  body?: string;
+  metaTitle?: string;
+  metaKeywords?: string;
+  metaDescription?: string;
+  imageId?: number;
+  preview?: string;
+  publicationDate?: Date;
 }
 
 export class DeletePage {

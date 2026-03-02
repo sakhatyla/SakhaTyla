@@ -22,7 +22,7 @@ namespace SakhaTyla.Core.Messaging.Articles
             _articleIndexer = articleIndexer;
         }
 
-        public async Task<Unit> Handle(UpdateArticleIndex request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateArticleIndex request, CancellationToken cancellationToken)
         {
             if (request.Action == IndexAction.Add)
             {
@@ -37,7 +37,6 @@ namespace SakhaTyla.Core.Messaging.Articles
                 await _articleIndexer.IndexArticleAsync(IndexAction.Delete, request.Id);
             }
             _searchIndexWriter.Commit();
-            return Unit.Value;
         }
     }
 }

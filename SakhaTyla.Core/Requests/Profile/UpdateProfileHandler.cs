@@ -35,7 +35,7 @@ namespace SakhaTyla.Core.Requests.Profile
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateProfile request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateProfile request, CancellationToken cancellationToken)
         {
             var userInfo = await _userInfoProvider.GetUserInfoAsync();
             var user = await _userManager.Users
@@ -48,7 +48,6 @@ namespace SakhaTyla.Core.Requests.Profile
 
             var result = await _userManager.UpdateAsync(user);
             result.CheckIfSucceeded();
-            return Unit.Value;
         }
     }
 }

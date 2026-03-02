@@ -36,8 +36,11 @@ namespace SakhaTyla.Core.Requests.Users
                 foreach (var roleId in request.RoleIds)
                 {
                     var role = await _roleManager.FindByIdAsync(roleId.ToString());
-                    result = await _userManager.AddToRoleAsync(user, role.ToString());
-                    result.CheckIfSucceeded();
+                    if (role != null)
+                    {
+                        result = await _userManager.AddToRoleAsync(user, role.ToString());
+                        result.CheckIfSucceeded();
+                    }
                 }
             }
             return new CreatedEntity<int>(user.Id);

@@ -32,7 +32,7 @@ namespace SakhaTyla.Core.Requests.MenuItems
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateMenuItemWeight request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateMenuItemWeight request, CancellationToken cancellationToken)
         {
             var menuItems = await _menuItemRepository.GetEntities()
                 .Where(e => e.MenuId == request.MenuId && e.ParentId == request.ParentId)
@@ -50,7 +50,6 @@ namespace SakhaTyla.Core.Requests.MenuItems
             await _unitOfWork.CommitAsync();
             await _menuItemRepository.CalculateTree(menuItems.First());
             await _unitOfWork.CommitAsync();
-            return Unit.Value;
         }
 
     }

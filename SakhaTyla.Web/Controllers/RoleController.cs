@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteRole")]
         [HttpPost("UpdateRole")]
-        public async Task<Unit> UpdateRoleAsync([FromBody] UpdateRole updateRole)
+        public async Task UpdateRoleAsync([FromBody] UpdateRole updateRole)
         {
-            return await _mediator.Send(updateRole);
+            await _mediator.Send(updateRole);
         }
 
         [Authorize("WriteRole")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteRole")]
         [HttpPost("DeleteRole")]
-        public async Task<Unit> DeleteRoleAsync([FromBody] DeleteRole deleteRole)
+        public async Task DeleteRoleAsync([FromBody] DeleteRole deleteRole)
         {
-            return await _mediator.Send(deleteRole);
+            await _mediator.Send(deleteRole);
         }
     }
 }

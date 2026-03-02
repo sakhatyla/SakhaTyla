@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Comments
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateComment request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateComment request, CancellationToken cancellationToken)
         {
             var comment = await _commentRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -40,7 +40,6 @@ namespace SakhaTyla.Core.Requests.Comments
             }
             _mapper.Map(request, comment);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

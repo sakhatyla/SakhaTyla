@@ -46,8 +46,8 @@ namespace $model.Solution.Namespace$.Web.Services
         public override async Task<Empty> Update$model.Entity.Name$(Update$model.Entity.Name$Request update$model.Entity.Name$Request, ServerCallContext context)
         {
             var update$model.Entity.Name$ = _mapper.Map<Update$model.Entity.Name$Request, Update$model.Entity.Name$>(update$model.Entity.Name$Request);
-            var model = await _mediator.Send(update$model.Entity.Name$);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(update$model.Entity.Name$);
+            return new Empty();
         }
 
         [Authorize("Write$model.Entity.Name$")]
@@ -62,8 +62,8 @@ namespace $model.Solution.Namespace$.Web.Services
         public override async Task<Empty> Delete$model.Entity.Name$(Delete$model.Entity.Name$Request delete$model.Entity.Name$Request, ServerCallContext context)
         {
             var delete$model.Entity.Name$ = _mapper.Map<Delete$model.Entity.Name$Request, Delete$model.Entity.Name$>(delete$model.Entity.Name$Request);
-            var model = await _mediator.Send(delete$model.Entity.Name$);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(delete$model.Entity.Name$);
+            return new Empty();
         }
     }
 }

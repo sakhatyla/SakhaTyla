@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateLanguage(UpdateLanguageRequest updateLanguageRequest, ServerCallContext context)
         {
             var updateLanguage = _mapper.Map<UpdateLanguageRequest, UpdateLanguage>(updateLanguageRequest);
-            var model = await _mediator.Send(updateLanguage);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateLanguage);
+            return new Empty();
         }
 
         [Authorize("WriteLanguage")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteLanguage(DeleteLanguageRequest deleteLanguageRequest, ServerCallContext context)
         {
             var deleteLanguage = _mapper.Map<DeleteLanguageRequest, DeleteLanguage>(deleteLanguageRequest);
-            var model = await _mediator.Send(deleteLanguage);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteLanguage);
+            return new Empty();
         }
     }
 }

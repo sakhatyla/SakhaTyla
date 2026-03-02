@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.WorkerRuns
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteWorkerRun request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteWorkerRun request, CancellationToken cancellationToken)
         {
             var workerRun = await _workerRunRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.WorkerRuns
             }
             _workerRunRepository.Delete(workerRun);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

@@ -30,7 +30,7 @@ namespace SakhaTyla.Core.Requests.WorkerScheduleTasks
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteWorkerScheduleTask request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteWorkerScheduleTask request, CancellationToken cancellationToken)
         {
             var workerScheduleTask = await _workerScheduleTaskRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -45,7 +45,6 @@ namespace SakhaTyla.Core.Requests.WorkerScheduleTasks
             {
                 Id = workerScheduleTask.WorkerInfoId
             });
-            return Unit.Value;
         }
 
     }

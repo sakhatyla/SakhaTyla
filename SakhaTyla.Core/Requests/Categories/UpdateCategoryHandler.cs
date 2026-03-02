@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Categories
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateCategory request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateCategory request, CancellationToken cancellationToken)
         {
             var category = await _categoryRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -40,7 +40,6 @@ namespace SakhaTyla.Core.Requests.Categories
             }
             _mapper.Map(request, category);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

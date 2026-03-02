@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Widgets
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateWidget request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateWidget request, CancellationToken cancellationToken)
         {
             var widget = await _widgetRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -40,7 +40,6 @@ namespace SakhaTyla.Core.Requests.Widgets
             }
             _mapper.Map(request, widget);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

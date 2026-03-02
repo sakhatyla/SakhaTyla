@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateMenu(UpdateMenuRequest updateMenuRequest, ServerCallContext context)
         {
             var updateMenu = _mapper.Map<UpdateMenuRequest, UpdateMenu>(updateMenuRequest);
-            var model = await _mediator.Send(updateMenu);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateMenu);
+            return new Empty();
         }
 
         [Authorize("WriteMenu")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteMenu(DeleteMenuRequest deleteMenuRequest, ServerCallContext context)
         {
             var deleteMenu = _mapper.Map<DeleteMenuRequest, DeleteMenu>(deleteMenuRequest);
-            var model = await _mediator.Send(deleteMenu);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteMenu);
+            return new Empty();
         }
     }
 }

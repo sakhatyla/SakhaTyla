@@ -25,15 +25,15 @@ export class ExportComments {
 }
 
 export class UpdateComment {
-  id: number;
-  textSource: string;
+  id?: number;
+  textSource?: string;
 }
 
 export class CreateComment {
-  containerId: number;
-  textSource: string;
-  authorId: number;
-  parentId: number;
+  containerId?: number;
+  textSource?: string;
+  authorId?: number;
+  parentId?: number;
 }
 
 export class DeleteComment {

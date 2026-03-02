@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 COPY *.sln .
@@ -18,6 +18,7 @@ COPY SakhaTyla.Web.Common/. ./SakhaTyla.Web.Common/
 
 RUN dotnet publish SakhaTyla.Web/SakhaTyla.Web.csproj -c Release -o ./out
 
+<<<<<<< HEAD
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
 RUN apt-get update && \
@@ -25,6 +26,9 @@ RUN apt-get update && \
   apt-get install -y libgdiplus libc6-dev && \
   ln -s /usr/lib/libgdiplus.so /usr/lib/gdiplus.dll
 
+=======
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+>>>>>>> upgrade
 WORKDIR /app
 COPY --from=build-env /app/out .
 

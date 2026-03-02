@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Menus
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateMenu request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateMenu request, CancellationToken cancellationToken)
         {
             var menu = await _menuRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -40,7 +40,6 @@ namespace SakhaTyla.Core.Requests.Menus
             }
             _mapper.Map(request, menu);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateBookAuthorship(UpdateBookAuthorshipRequest updateBookAuthorshipRequest, ServerCallContext context)
         {
             var updateBookAuthorship = _mapper.Map<UpdateBookAuthorshipRequest, UpdateBookAuthorship>(updateBookAuthorshipRequest);
-            var model = await _mediator.Send(updateBookAuthorship);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateBookAuthorship);
+            return new Empty();
         }
 
         [Authorize("WriteBookAuthorship")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteBookAuthorship(DeleteBookAuthorshipRequest deleteBookAuthorshipRequest, ServerCallContext context)
         {
             var deleteBookAuthorship = _mapper.Map<DeleteBookAuthorshipRequest, DeleteBookAuthorship>(deleteBookAuthorshipRequest);
-            var model = await _mediator.Send(deleteBookAuthorship);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteBookAuthorship);
+            return new Empty();
         }
     }
 }

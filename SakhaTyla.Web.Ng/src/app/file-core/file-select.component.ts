@@ -1,7 +1,7 @@
 ﻿import { Component, Input, OnInit, forwardRef, OnDestroy, ElementRef, Optional, Self, DoCheck } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material/form-field';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacyFormFieldControl as MatFormFieldControl } from '@angular/material/legacy-form-field';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';

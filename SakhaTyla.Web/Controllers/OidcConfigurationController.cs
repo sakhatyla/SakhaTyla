@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+﻿using Cynosura.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

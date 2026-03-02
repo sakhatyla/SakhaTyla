@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteBookAuthor")]
         [HttpPost("UpdateBookAuthor")]
-        public async Task<Unit> UpdateBookAuthorAsync([FromBody] UpdateBookAuthor updateBookAuthor)
+        public async Task UpdateBookAuthorAsync([FromBody] UpdateBookAuthor updateBookAuthor)
         {
-            return await _mediator.Send(updateBookAuthor);
+            await _mediator.Send(updateBookAuthor);
         }
 
         [Authorize("WriteBookAuthor")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteBookAuthor")]
         [HttpPost("DeleteBookAuthor")]
-        public async Task<Unit> DeleteBookAuthorAsync([FromBody] DeleteBookAuthor deleteBookAuthor)
+        public async Task DeleteBookAuthorAsync([FromBody] DeleteBookAuthor deleteBookAuthor)
         {
-            return await _mediator.Send(deleteBookAuthor);
+            await _mediator.Send(deleteBookAuthor);
         }
     }
 }

@@ -20,18 +20,18 @@ export class ExportBooks {
 }
 
 export class UpdateBook {
-  id: number;
-  name: string;
-  synonym: string;
-  hidden: boolean;
-  cover: string;
+  id?: number;
+  name?: string;
+  synonym?: string;
+  hidden?: boolean;
+  cover?: string;
 }
 
 export class CreateBook {
-  name: string;
-  synonym: string;
-  hidden: boolean;
-  cover: string;
+  name?: string;
+  synonym?: string;
+  hidden?: boolean;
+  cover?: string;
 }
 
 export class DeleteBook {

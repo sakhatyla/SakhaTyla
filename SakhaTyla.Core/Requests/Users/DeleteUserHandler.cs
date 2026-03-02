@@ -19,7 +19,7 @@ namespace SakhaTyla.Core.Requests.Users
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteUser request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteUser request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(request.Id.ToString());
             if (user == null)
@@ -28,7 +28,6 @@ namespace SakhaTyla.Core.Requests.Users
             }
             var result = await _userManager.DeleteAsync(user);
             result.CheckIfSucceeded();
-            return Unit.Value;
         }
     }
 }

@@ -82,7 +82,7 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var result = await _userManager.CreateAsync(user, Input.Password!);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -95,7 +95,7 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl },
                         protocol: Request.Scheme)!;
 
-                    await _emailSender.SendEmailAsync(Input.Email, _stringLocalizer["Confirm your email"],
+                    await _emailSender.SendEmailAsync(Input.Email!, _stringLocalizer["Confirm your email"],
                          _stringLocalizer["Please confirm your account by <a href='{0}'>clicking here</a>.", HtmlEncoder.Default.Encode(callbackUrl)]);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)

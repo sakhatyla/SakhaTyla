@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.Comments
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteComment request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteComment request, CancellationToken cancellationToken)
         {
             var comment = await _commentRepository.GetEntities()
                 .Include(e => e.Container)
@@ -38,7 +38,6 @@ namespace SakhaTyla.Core.Requests.Comments
             _commentRepository.Delete(comment);
             comment.Container.CommentCount--;
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

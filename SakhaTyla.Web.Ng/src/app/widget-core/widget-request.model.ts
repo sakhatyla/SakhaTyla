@@ -21,18 +21,18 @@ export class ExportWidgets {
 }
 
 export class UpdateWidget {
-  id: number;
-  name: string;
-  code: string;
-  body: string;
-  type: WidgetType;
+  id?: number;
+  name?: string;
+  code?: string;
+  body?: string;
+  type?: WidgetType;
 }
 
 export class CreateWidget {
-  name: string;
-  code: string;
-  body: string;
-  type: WidgetType;
+  name?: string;
+  code?: string;
+  body?: string;
+  type?: WidgetType;
 }
 
 export class DeleteWidget {

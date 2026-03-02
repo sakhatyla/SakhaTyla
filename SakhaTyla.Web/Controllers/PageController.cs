@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WritePage")]
         [HttpPost("UpdatePage")]
-        public async Task<Unit> UpdatePageAsync([FromBody] UpdatePage updatePage)
+        public async Task UpdatePageAsync([FromBody] UpdatePage updatePage)
         {
-            return await _mediator.Send(updatePage);
+            await _mediator.Send(updatePage);
         }
 
         [Authorize("WritePage")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WritePage")]
         [HttpPost("DeletePage")]
-        public async Task<Unit> DeletePageAsync([FromBody] DeletePage deletePage)
+        public async Task DeletePageAsync([FromBody] DeletePage deletePage)
         {
-            return await _mediator.Send(deletePage);
+            await _mediator.Send(deletePage);
         }
     }
 }

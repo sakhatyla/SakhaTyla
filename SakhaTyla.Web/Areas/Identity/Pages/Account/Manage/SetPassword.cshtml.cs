@@ -74,7 +74,7 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var addPasswordResult = await _userManager.AddPasswordAsync(user, Input.NewPassword);
+            var addPasswordResult = await _userManager.AddPasswordAsync(user, Input.NewPassword!);
             if (!addPasswordResult.Succeeded)
             {
                 foreach (var error in addPasswordResult.Errors)

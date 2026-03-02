@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.BookAuthorships
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateBookAuthorship request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateBookAuthorship request, CancellationToken cancellationToken)
         {
             var bookAuthorship = await _bookAuthorshipRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -40,7 +40,6 @@ namespace SakhaTyla.Core.Requests.BookAuthorships
             }
             _mapper.Map(request, bookAuthorship);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

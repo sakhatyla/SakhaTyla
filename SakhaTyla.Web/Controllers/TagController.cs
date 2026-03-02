@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteTag")]
         [HttpPost("UpdateTag")]
-        public async Task<Unit> UpdateTagAsync([FromBody] UpdateTag updateTag)
+        public async Task UpdateTagAsync([FromBody] UpdateTag updateTag)
         {
-            return await _mediator.Send(updateTag);
+            await _mediator.Send(updateTag);
         }
 
         [Authorize("WriteTag")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteTag")]
         [HttpPost("DeleteTag")]
-        public async Task<Unit> DeleteTagAsync([FromBody] DeleteTag deleteTag)
+        public async Task DeleteTagAsync([FromBody] DeleteTag deleteTag)
         {
-            return await _mediator.Send(deleteTag);
+            await _mediator.Send(deleteTag);
         }
     }
 }

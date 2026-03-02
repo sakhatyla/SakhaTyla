@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatLegacyCheckbox as MatCheckbox } from '@angular/material/legacy-checkbox';
 
 @Directive({
   selector: '[appSelectAllItems]'

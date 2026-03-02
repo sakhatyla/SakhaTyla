@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateComment(UpdateCommentRequest updateCommentRequest, ServerCallContext context)
         {
             var updateComment = _mapper.Map<UpdateCommentRequest, UpdateComment>(updateCommentRequest);
-            var model = await _mediator.Send(updateComment);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateComment);
+            return new Empty();
         }
 
         [Authorize("WriteComment")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteComment(DeleteCommentRequest deleteCommentRequest, ServerCallContext context)
         {
             var deleteComment = _mapper.Map<DeleteCommentRequest, DeleteComment>(deleteCommentRequest);
-            var model = await _mediator.Send(deleteComment);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteComment);
+            return new Empty();
         }
     }
 }

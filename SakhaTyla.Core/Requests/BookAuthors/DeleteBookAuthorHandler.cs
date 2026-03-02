@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.BookAuthors
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteBookAuthor request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteBookAuthor request, CancellationToken cancellationToken)
         {
             var bookAuthor = await _bookAuthorRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.BookAuthors
             }
             _bookAuthorRepository.Delete(bookAuthor);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

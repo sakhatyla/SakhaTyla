@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.WorkerInfos
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteWorkerInfo request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteWorkerInfo request, CancellationToken cancellationToken)
         {
             var workerInfo = await _workerInfoRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.WorkerInfos
             }
             _workerInfoRepository.Delete(workerInfo);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

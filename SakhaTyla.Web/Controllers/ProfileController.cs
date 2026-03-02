@@ -31,9 +31,9 @@ namespace SakhaTyla.Web.Controllers
         }
 
         [HttpPost("UpdateProfile")]
-        public async Task<Unit> UpdateProfileAsync([FromBody] UpdateProfile updateProfile)
+        public async Task UpdateProfileAsync([FromBody] UpdateProfile updateProfile)
         {
-            return await _mediator.Send(updateProfile);
+            await _mediator.Send(updateProfile);
         }
     }
 }

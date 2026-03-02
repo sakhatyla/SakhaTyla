@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateTag(UpdateTagRequest updateTagRequest, ServerCallContext context)
         {
             var updateTag = _mapper.Map<UpdateTagRequest, UpdateTag>(updateTagRequest);
-            var model = await _mediator.Send(updateTag);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateTag);
+            return new Empty();
         }
 
         [Authorize("WriteTag")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteTag(DeleteTagRequest deleteTagRequest, ServerCallContext context)
         {
             var deleteTag = _mapper.Map<DeleteTagRequest, DeleteTag>(deleteTagRequest);
-            var model = await _mediator.Send(deleteTag);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteTag);
+            return new Empty();
         }
     }
 }

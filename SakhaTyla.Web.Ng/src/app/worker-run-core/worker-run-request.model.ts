@@ -21,8 +21,8 @@ export class ExportWorkerRuns {
 }
 
 export class CreateWorkerRun {
-  workerInfoId: number;
-  data: string;
+  workerInfoId?: number;
+  data?: string;
 }
 
 export class DeleteWorkerRun {

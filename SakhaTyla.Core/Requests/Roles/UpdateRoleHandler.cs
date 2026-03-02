@@ -22,7 +22,7 @@ namespace SakhaTyla.Core.Requests.Roles
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateRole request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateRole request, CancellationToken cancellationToken)
         {
             var role = await _roleManager.FindByIdAsync(request.Id.ToString());
             if (role == null)
@@ -32,7 +32,6 @@ namespace SakhaTyla.Core.Requests.Roles
             _mapper.Map(request, role);
             var result = await _roleManager.UpdateAsync(role);
             result.CheckIfSucceeded();
-            return Unit.Value;
         }
     }
 }

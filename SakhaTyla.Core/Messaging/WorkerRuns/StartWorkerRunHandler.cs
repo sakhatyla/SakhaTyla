@@ -33,7 +33,7 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<Unit> Handle(StartWorkerRun request, CancellationToken cancellationToken)
+        public async Task Handle(StartWorkerRun request, CancellationToken cancellationToken)
         {
             var workerRun = await _workerRunRepository.GetEntities()
                 .Include(e => e.WorkerInfo)
@@ -44,7 +44,7 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
                 if (workerRun.Status != Enums.WorkerRunStatus.New)
                 {
                     _logger.LogError($"Can't start WorkerRun {request.WorkerRunId} (status is {workerRun.Status})");
-                    return Unit.Value;
+                    return;
                 }
 
                 await SetWorkerRunStartAsync(workerRun.Id);
@@ -77,7 +77,6 @@ namespace SakhaTyla.Core.Messaging.WorkerRuns
             {
                 _logger.LogError($"WorkerRun {request.WorkerRunId} not found");
             }
-            return Unit.Value;
         }
 
         private async Task SetWorkerRunStartAsync(int workerRunId)

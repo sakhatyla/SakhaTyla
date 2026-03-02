@@ -39,6 +39,10 @@ namespace SakhaTyla.Data
 
         public DbSet<Key> Keys { get; set; } = null!;
 
+        public DbSet<ServerSideSession> ServerSideSessions { get; set; } = null!;
+
+        public DbSet<PushedAuthorizationRequest> PushedAuthorizationRequests { get; set; } = null!;
+
         public override int SaveChanges()
         {
             var e = new SaveEventArgs();

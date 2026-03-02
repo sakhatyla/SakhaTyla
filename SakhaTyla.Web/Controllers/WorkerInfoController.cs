@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteWorkerInfo")]
         [HttpPost("UpdateWorkerInfo")]
-        public async Task<Unit> UpdateWorkerInfoAsync([FromBody] UpdateWorkerInfo updateWorkerInfo)
+        public async Task UpdateWorkerInfoAsync([FromBody] UpdateWorkerInfo updateWorkerInfo)
         {
-            return await _mediator.Send(updateWorkerInfo);
+            await _mediator.Send(updateWorkerInfo);
         }
 
         [Authorize("WriteWorkerInfo")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteWorkerInfo")]
         [HttpPost("DeleteWorkerInfo")]
-        public async Task<Unit> DeleteWorkerInfoAsync([FromBody] DeleteWorkerInfo deleteWorkerInfo)
+        public async Task DeleteWorkerInfoAsync([FromBody] DeleteWorkerInfo deleteWorkerInfo)
         {
-            return await _mediator.Send(deleteWorkerInfo);
+            await _mediator.Send(deleteWorkerInfo);
         }
     }
 }

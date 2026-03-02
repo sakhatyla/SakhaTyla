@@ -20,25 +20,25 @@ export class ExportWorkerScheduleTasks {
 }
 
 export class UpdateWorkerScheduleTask {
-  id: number;
-  seconds: string;
-  minutes: string;
-  hours: string;
-  dayOfMonth: string;
-  month: string;
-  dayOfWeek: string;
-  year: string;
+  id?: number;
+  seconds?: string;
+  minutes?: string;
+  hours?: string;
+  dayOfMonth?: string;
+  month?: string;
+  dayOfWeek?: string;
+  year?: string;
 }
 
 export class CreateWorkerScheduleTask {
-  workerInfoId: number;
-  seconds: string;
-  minutes: string;
-  hours: string;
-  dayOfMonth: string;
-  month: string;
-  dayOfWeek: string;
-  year: string;
+  workerInfoId?: number;
+  seconds?: string;
+  minutes?: string;
+  hours?: string;
+  dayOfMonth?: string;
+  month?: string;
+  dayOfWeek?: string;
+  year?: string;
 }
 
 export class DeleteWorkerScheduleTask {

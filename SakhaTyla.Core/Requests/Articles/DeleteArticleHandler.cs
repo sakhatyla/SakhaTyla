@@ -31,7 +31,7 @@ namespace SakhaTyla.Core.Requests.Articles
             _messagingService = messagingService;
         }
 
-        public async Task<Unit> Handle(DeleteArticle request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteArticle request, CancellationToken cancellationToken)
         {
             var article = await _articleRepository.GetEntities()
                 .DefaultFilter()
@@ -44,7 +44,6 @@ namespace SakhaTyla.Core.Requests.Articles
             article.IsDeleted = true;
             await _unitOfWork.CommitAsync(cancellationToken);
             await _messagingService.SendAsync(UpdateArticleIndex.QueueName, new UpdateArticleIndex() { Id = article.Id, Action = IndexAction.Delete });
-            return Unit.Value;
         }
 
     }

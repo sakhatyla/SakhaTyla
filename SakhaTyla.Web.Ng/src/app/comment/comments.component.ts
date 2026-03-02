@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { mergeMap } from 'rxjs/operators';
 
 import { ModalHelper } from '../core/modal.helper';

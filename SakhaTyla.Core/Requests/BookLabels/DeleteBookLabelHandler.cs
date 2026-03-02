@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.BookLabels
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteBookLabel request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteBookLabel request, CancellationToken cancellationToken)
         {
             var bookLabel = await _bookLabelRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.BookLabels
             }
             _bookLabelRepository.Delete(bookLabel);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

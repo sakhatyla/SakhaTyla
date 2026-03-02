@@ -20,14 +20,14 @@ export class ExportWorkerInfos {
 }
 
 export class UpdateWorkerInfo {
-  id: number;
-  name: string;
-  className: string;
+  id?: number;
+  name?: string;
+  className?: string;
 }
 
 export class CreateWorkerInfo {
-  name: string;
-  className: string;
+  name?: string;
+  className?: string;
 }
 
 export class DeleteWorkerInfo {

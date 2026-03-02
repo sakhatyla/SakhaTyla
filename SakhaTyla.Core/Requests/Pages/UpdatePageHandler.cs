@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Pages
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdatePage request, CancellationToken cancellationToken)
+        public async Task Handle(UpdatePage request, CancellationToken cancellationToken)
         {
             var page = await _pageRepository.GetEntities()
                 .Include(e => e.Route)
@@ -44,7 +44,6 @@ namespace SakhaTyla.Core.Requests.Pages
             await _unitOfWork.CommitAsync(cancellationToken);
             await _pageRepository.CalculateTree(page);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateUser(UpdateUserRequest updateUserRequest, ServerCallContext context)
         {
             var updateUser = _mapper.Map<UpdateUserRequest, UpdateUser>(updateUserRequest);
-            var model = await _mediator.Send(updateUser);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateUser);
+            return new Empty();
         }
 
         [Authorize("WriteUser")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteUser(DeleteUserRequest deleteUserRequest, ServerCallContext context)
         {
             var deleteUser = _mapper.Map<DeleteUserRequest, DeleteUser>(deleteUserRequest);
-            var model = await _mediator.Send(deleteUser);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteUser);
+            return new Empty();
         }
     }
 }

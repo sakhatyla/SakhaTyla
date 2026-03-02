@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteWidget")]
         [HttpPost("UpdateWidget")]
-        public async Task<Unit> UpdateWidgetAsync([FromBody] UpdateWidget updateWidget)
+        public async Task UpdateWidgetAsync([FromBody] UpdateWidget updateWidget)
         {
-            return await _mediator.Send(updateWidget);
+            await _mediator.Send(updateWidget);
         }
 
         [Authorize("WriteWidget")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteWidget")]
         [HttpPost("DeleteWidget")]
-        public async Task<Unit> DeleteWidgetAsync([FromBody] DeleteWidget deleteWidget)
+        public async Task DeleteWidgetAsync([FromBody] DeleteWidget deleteWidget)
         {
-            return await _mediator.Send(deleteWidget);
+            await _mediator.Send(deleteWidget);
         }
     }
 }

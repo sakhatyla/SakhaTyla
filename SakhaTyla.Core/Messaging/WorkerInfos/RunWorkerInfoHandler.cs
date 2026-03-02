@@ -28,7 +28,7 @@ namespace SakhaTyla.Core.Messaging.WorkerInfos
             _messagingService = messagingService;
         }
 
-        public async Task<Unit> Handle(RunWorkerInfo request, CancellationToken cancellationToken)
+        public async Task Handle(RunWorkerInfo request, CancellationToken cancellationToken)
         {
             var workerRun = new WorkerRun
             {
@@ -38,7 +38,6 @@ namespace SakhaTyla.Core.Messaging.WorkerInfos
             _workerRunRepository.Add(workerRun);
             await _unitOfWork.CommitAsync(cancellationToken);
             await _messagingService.SendAsync(StartWorkerRun.QueueName, new StartWorkerRun(workerRun.Id));
-            return Unit.Value;
         }
     }
 }

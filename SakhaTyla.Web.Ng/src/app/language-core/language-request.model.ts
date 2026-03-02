@@ -20,14 +20,14 @@ export class ExportLanguages {
 }
 
 export class UpdateLanguage {
-  id: number;
-  name: string;
-  code: string;
+  id?: number;
+  name?: string;
+  code?: string;
 }
 
 export class CreateLanguage {
-  name: string;
-  code: string;
+  name?: string;
+  code?: string;
 }
 
 export class DeleteLanguage {

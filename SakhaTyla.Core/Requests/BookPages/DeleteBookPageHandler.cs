@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.BookPages
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteBookPage request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteBookPage request, CancellationToken cancellationToken)
         {
             var bookPage = await _bookPageRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.BookPages
             }
             _bookPageRepository.Delete(bookPage);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

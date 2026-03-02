@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateCategory(UpdateCategoryRequest updateCategoryRequest, ServerCallContext context)
         {
             var updateCategory = _mapper.Map<UpdateCategoryRequest, UpdateCategory>(updateCategoryRequest);
-            var model = await _mediator.Send(updateCategory);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateCategory);
+            return new Empty();
         }
 
         [Authorize("WriteCategory")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteCategory(DeleteCategoryRequest deleteCategoryRequest, ServerCallContext context)
         {
             var deleteCategory = _mapper.Map<DeleteCategoryRequest, DeleteCategory>(deleteCategoryRequest);
-            var model = await _mediator.Send(deleteCategory);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteCategory);
+            return new Empty();
         }
     }
 }

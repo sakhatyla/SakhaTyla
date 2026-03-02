@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
@@ -33,13 +33,14 @@ export class BookLabelListComponent implements OnInit {
     'page',
     'action'
   ];
-  columns = this.storedValueService.getStoredValue('bookLabelColumns', this.defaultColumns);
   columnDescriptions: ColumnDescription[] = [
     { name: 'select', isSystem: true },
     { name: 'name', displayName: this.translocoService.translate('Name') },
     { name: 'page', displayName: this.translocoService.translate('Page') },
     { name: 'action', isSystem: true },
   ];
+  columns = this.storedValueService.getStoredValue('bookLabelColumns', this.defaultColumns,
+    ColumnDescription.filter(this.columnDescriptions));
   selectedIds = new Set<number>();
 
   @Input()

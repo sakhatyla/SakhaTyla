@@ -20,22 +20,22 @@ export class ExportArticles {
 }
 
 export class UpdateArticle {
-  id: number;
-  title: string;
-  textSource: string;
-  fromLanguageId: number;
-  toLanguageId: number;
-  fuzzy: boolean;
-  categoryId: number;
+  id?: number;
+  title?: string;
+  textSource?: string;
+  fromLanguageId?: number;
+  toLanguageId?: number;
+  fuzzy?: boolean;
+  categoryId?: number;
 }
 
 export class CreateArticle {
-  title: string;
-  textSource: string;
-  fromLanguageId: number;
-  toLanguageId: number;
-  fuzzy: boolean;
-  categoryId: number;
+  title?: string;
+  textSource?: string;
+  fromLanguageId?: number;
+  toLanguageId?: number;
+  fuzzy?: boolean;
+  categoryId?: number;
 }
 
 export class DeleteArticle {
@@ -43,7 +43,7 @@ export class DeleteArticle {
 }
 
 export class ImportArticles {
-  fromLanguageId: number;
-  toLanguageId: number;
-  fileId: number;
+  fromLanguageId?: number;
+  toLanguageId?: number;
+  fileId?: number;
 }

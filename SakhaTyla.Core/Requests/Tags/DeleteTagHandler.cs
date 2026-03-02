@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.Tags
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteTag request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteTag request, CancellationToken cancellationToken)
         {
             var tag = await _tagRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.Tags
             }
             _tagRepository.Delete(tag);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

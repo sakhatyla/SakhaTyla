@@ -30,8 +30,11 @@ namespace SakhaTyla.Web.Infrastructure
                 return c.Type == JwtClaimTypes.Role || c.Type == JwtClaimTypes.Name;
             }).ToList();
 
-            claims.Add(new Claim("first_name", user.FirstName ?? ""));
-            claims.Add(new Claim("last_name", user.LastName ?? ""));
+            if (user != null)
+            {
+                claims.Add(new Claim("first_name", user.FirstName ?? ""));
+                claims.Add(new Claim("last_name", user.LastName ?? ""));
+            }            
 
             //add your claims 
             context.IssuedClaims.AddRange(claims);

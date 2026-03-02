@@ -20,12 +20,12 @@ export class ExportTags {
 }
 
 export class UpdateTag {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }
 
 export class CreateTag {
-  name: string;
+  name?: string;
 }
 
 export class DeleteTag {

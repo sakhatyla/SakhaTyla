@@ -26,7 +26,7 @@ namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(Delete$model.Entity.Name$ request, CancellationToken cancellationToken)
+        public async Task Handle(Delete$model.Entity.Name$ request, CancellationToken cancellationToken)
         {
             var $model.Entity.NameLower$ = await _$model.Entity.NameLower$Repository.GetEntities()
                 .Where(e => e.$model.Entity.IdField.Name$ == request.$model.Entity.IdField.Name$)
@@ -37,7 +37,6 @@ namespace $model.Solution.Namespace$.Core.Requests.$model.Entity.PluralName$
             }
             _$model.Entity.NameLower$Repository.Delete($model.Entity.NameLower$);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

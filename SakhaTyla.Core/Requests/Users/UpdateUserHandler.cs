@@ -26,7 +26,7 @@ namespace SakhaTyla.Core.Requests.Users
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateUser request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateUser request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(request.Id.ToString());
             if (user == null)
@@ -52,18 +52,20 @@ namespace SakhaTyla.Core.Requests.Users
                 foreach (var role in request.RoleIds)
                 {
                     var newRole = await _roleManager.FindByIdAsync(role.ToString());
-                    newUserRolesList.Add(newRole);
+                    if (newRole != null)
+                    {
+                        newUserRolesList.Add(newRole);
+                    }                    
                 }
             }
 
-            var newUserRoleNamesList = newUserRolesList.Select(newUserRole => newUserRole.Name).ToList();
+            var newUserRoleNamesList = newUserRolesList.Select(newUserRole => newUserRole.Name!).ToList();
 
             result = await _userManager.AddToRolesAsync(user, newUserRoleNamesList.Except(userCurrentRoles));
             result.CheckIfSucceeded();
 
             result = await _userManager.RemoveFromRolesAsync(user, userCurrentRoles.Except(newUserRoleNamesList));
             result.CheckIfSucceeded();
-            return Unit.Value;
         }
     }
 }

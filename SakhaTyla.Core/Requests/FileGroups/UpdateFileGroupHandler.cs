@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.FileGroups
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateFileGroup request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateFileGroup request, CancellationToken cancellationToken)
         {
             var fileGroup = await _fileGroupRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -40,7 +40,6 @@ namespace SakhaTyla.Core.Requests.FileGroups
             }
             _mapper.Map(request, fileGroup);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

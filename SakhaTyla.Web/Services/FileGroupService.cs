@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateFileGroup(UpdateFileGroupRequest updateFileGroupRequest, ServerCallContext context)
         {
             var updateFileGroup = _mapper.Map<UpdateFileGroupRequest, UpdateFileGroup>(updateFileGroupRequest);
-            var model = await _mediator.Send(updateFileGroup);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateFileGroup);
+            return new Empty();
         }
 
         [Authorize("WriteFileGroup")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteFileGroup(DeleteFileGroupRequest deleteFileGroupRequest, ServerCallContext context)
         {
             var deleteFileGroup = _mapper.Map<DeleteFileGroupRequest, DeleteFileGroup>(deleteFileGroupRequest);
-            var model = await _mediator.Send(deleteFileGroup);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteFileGroup);
+            return new Empty();
         }
     }
 }

@@ -54,9 +54,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteFile")]
         [HttpPost("UpdateFile")]
-        public async Task<Unit> UpdateFileAsync(int id, IFormFile file)
+        public async Task UpdateFileAsync(int id, IFormFile file)
         {
-            return await _mediator.Send(new UpdateFile()
+            await _mediator.Send(new UpdateFile()
             {
                 Id = id,
                 Name = file.FileName,
@@ -80,9 +80,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteFile")]
         [HttpPost("DeleteFile")]
-        public async Task<Unit> DeleteFileAsync([FromBody] DeleteFile deleteFile)
+        public async Task DeleteFileAsync([FromBody] DeleteFile deleteFile)
         {
-            return await _mediator.Send(deleteFile);
+            await _mediator.Send(deleteFile);
         }
     }
 }

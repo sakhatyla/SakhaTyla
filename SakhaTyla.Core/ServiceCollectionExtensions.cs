@@ -22,10 +22,6 @@ namespace SakhaTyla.Core
         {
             services.AddTransient<IValidatorFactory, ServiceProviderValidatorFactory>();
             services.AddScoped<IMediator, Mediator>();
-            services.AddTransient<ServiceFactory>(sp =>
-            {
-                return t => sp.GetRequiredService(t);
-            });
             services.AddAllRequestHandlers();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddAllValidators();

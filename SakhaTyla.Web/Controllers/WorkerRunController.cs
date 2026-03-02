@@ -52,9 +52,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteWorkerRun")]
         [HttpPost("DeleteWorkerRun")]
-        public async Task<Unit> DeleteWorkerRunAsync([FromBody] DeleteWorkerRun deleteWorkerRun)
+        public async Task DeleteWorkerRunAsync([FromBody] DeleteWorkerRun deleteWorkerRun)
         {
-            return await _mediator.Send(deleteWorkerRun);
+            await _mediator.Send(deleteWorkerRun);
         }
     }
 }

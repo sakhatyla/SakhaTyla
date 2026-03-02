@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cynosura.Web" Version="0.4.0-b372" />
+    <PackageReference Include="Cynosura.Web" Version="0.5.0-b489" />
     <PackageReference Include="OrchardCore.Localization.Core" Version="1.2.2" />
   </ItemGroup>
 

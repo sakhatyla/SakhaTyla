@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.Menus
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteMenu request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteMenu request, CancellationToken cancellationToken)
         {
             var menu = await _menuRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.Menus
             }
             _menuRepository.Delete(menu);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';

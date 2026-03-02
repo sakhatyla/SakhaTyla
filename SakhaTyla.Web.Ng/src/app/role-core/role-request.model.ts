@@ -20,14 +20,14 @@ export class ExportRoles {
 }
 
 export class UpdateRole {
-  id: number;
-  name: string;
-  displayName: string;
+  id?: number;
+  name?: string;
+  displayName?: string;
 }
 
 export class CreateRole {
-  name: string;
-  displayName: string;
+  name?: string;
+  displayName?: string;
 }
 
 export class DeleteRole {

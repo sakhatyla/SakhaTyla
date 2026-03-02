@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateWorkerScheduleTask(UpdateWorkerScheduleTaskRequest updateWorkerScheduleTaskRequest, ServerCallContext context)
         {
             var updateWorkerScheduleTask = _mapper.Map<UpdateWorkerScheduleTaskRequest, UpdateWorkerScheduleTask>(updateWorkerScheduleTaskRequest);
-            var model = await _mediator.Send(updateWorkerScheduleTask);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateWorkerScheduleTask);
+            return new Empty();
         }
 
         [Authorize("WriteWorkerScheduleTask")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteWorkerScheduleTask(DeleteWorkerScheduleTaskRequest deleteWorkerScheduleTaskRequest, ServerCallContext context)
         {
             var deleteWorkerScheduleTask = _mapper.Map<DeleteWorkerScheduleTaskRequest, DeleteWorkerScheduleTask>(deleteWorkerScheduleTaskRequest);
-            var model = await _mediator.Send(deleteWorkerScheduleTask);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteWorkerScheduleTask);
+            return new Empty();
         }
     }
 }

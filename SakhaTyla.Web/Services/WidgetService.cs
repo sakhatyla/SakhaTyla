@@ -45,8 +45,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> UpdateWidget(UpdateWidgetRequest updateWidgetRequest, ServerCallContext context)
         {
             var updateWidget = _mapper.Map<UpdateWidgetRequest, UpdateWidget>(updateWidgetRequest);
-            var model = await _mediator.Send(updateWidget);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(updateWidget);
+            return new Empty();
         }
 
         [Authorize("WriteWidget")]
@@ -61,8 +61,8 @@ namespace SakhaTyla.Web.Services
         public override async Task<Empty> DeleteWidget(DeleteWidgetRequest deleteWidgetRequest, ServerCallContext context)
         {
             var deleteWidget = _mapper.Map<DeleteWidgetRequest, DeleteWidget>(deleteWidgetRequest);
-            var model = await _mediator.Send(deleteWidget);
-            return _mapper.Map<Unit, Empty>(model);
+            await _mediator.Send(deleteWidget);
+            return new Empty();
         }
     }
 }

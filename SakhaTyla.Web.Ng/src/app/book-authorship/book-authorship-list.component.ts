@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
@@ -33,13 +33,14 @@ export class BookAuthorshipListComponent implements OnInit {
     'weight',
     'action'
   ];
-  columns = this.storedValueService.getStoredValue('bookAuthorshipColumns', this.defaultColumns);
   columnDescriptions: ColumnDescription[] = [
     { name: 'select', isSystem: true },
     { name: 'author', displayName: this.translocoService.translate('Author') },
     { name: 'weight', displayName: this.translocoService.translate('Weight') },
     { name: 'action', isSystem: true },
   ];
+  columns = this.storedValueService.getStoredValue('bookAuthorshipColumns', this.defaultColumns,
+    ColumnDescription.filter(this.columnDescriptions));
   selectedIds = new Set<number>();
 
   @Input()

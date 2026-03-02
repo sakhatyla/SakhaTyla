@@ -99,14 +99,14 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account.Manage
             if (Input.NewEmail != email)
             {
                 var userId = await _userManager.GetUserIdAsync(user);
-                var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
+                var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail!);
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmailChange",
                     pageHandler: null,
                     values: new { userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme)!;
                 await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
+                    Input.NewEmail!,
                     _stringLocalizer["Confirm your email"],
                     _stringLocalizer["Please confirm your account by <a href='{0}'>clicking here</a>.", HtmlEncoder.Default.Encode(callbackUrl)]);
 
@@ -142,7 +142,7 @@ namespace SakhaTyla.Web.Areas.Identity.Pages.Account.Manage
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme)!;
             await _emailSender.SendEmailAsync(
-                email,
+                email!,
                 _stringLocalizer["Confirm your email"],
                 _stringLocalizer["Please confirm your account by <a href='{0}'>clicking here</a>.", HtmlEncoder.Default.Encode(callbackUrl)]);
 

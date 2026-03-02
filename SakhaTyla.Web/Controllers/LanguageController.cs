@@ -45,9 +45,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteLanguage")]
         [HttpPost("UpdateLanguage")]
-        public async Task<Unit> UpdateLanguageAsync([FromBody] UpdateLanguage updateLanguage)
+        public async Task UpdateLanguageAsync([FromBody] UpdateLanguage updateLanguage)
         {
-            return await _mediator.Send(updateLanguage);
+            await _mediator.Send(updateLanguage);
         }
 
         [Authorize("WriteLanguage")]
@@ -59,9 +59,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteLanguage")]
         [HttpPost("DeleteLanguage")]
-        public async Task<Unit> DeleteLanguageAsync([FromBody] DeleteLanguage deleteLanguage)
+        public async Task DeleteLanguageAsync([FromBody] DeleteLanguage deleteLanguage)
         {
-            return await _mediator.Send(deleteLanguage);
+            await _mediator.Send(deleteLanguage);
         }
     }
 }

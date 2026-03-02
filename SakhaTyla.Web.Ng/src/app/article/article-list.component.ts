@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
@@ -39,7 +39,6 @@ export class ArticleListComponent implements OnInit {
     'category',
     'action'
   ];
-  columns = this.storedValueService.getStoredValue('articleColumns', this.defaultColumns);
   columnDescriptions: ColumnDescription[] = [
     { name: 'select', isSystem: true },
     { name: 'title', displayName: this.translocoService.translate('Title') },
@@ -50,6 +49,8 @@ export class ArticleListComponent implements OnInit {
     { name: 'category', displayName: this.translocoService.translate('Category') },
     { name: 'action', isSystem: true },
   ];
+  columns = this.storedValueService.getStoredValue('articleColumns', this.defaultColumns,
+    ColumnDescription.filter(this.columnDescriptions));
   selectedIds = new Set<number>();
 
   @Input()

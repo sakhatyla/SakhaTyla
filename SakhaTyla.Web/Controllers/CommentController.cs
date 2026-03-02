@@ -53,9 +53,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteComment")]
         [HttpPost("UpdateComment")]
-        public async Task<Unit> UpdateCommentAsync([FromBody] UpdateComment updateComment)
+        public async Task UpdateCommentAsync([FromBody] UpdateComment updateComment)
         {
-            return await _mediator.Send(updateComment);
+            await _mediator.Send(updateComment);
         }
 
         [Authorize("WriteComment")]
@@ -67,9 +67,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteComment")]
         [HttpPost("DeleteComment")]
-        public async Task<Unit> DeleteCommentAsync([FromBody] DeleteComment deleteComment)
+        public async Task DeleteCommentAsync([FromBody] DeleteComment deleteComment)
         {
-            return await _mediator.Send(deleteComment);
+            await _mediator.Send(deleteComment);
         }
     }
 }

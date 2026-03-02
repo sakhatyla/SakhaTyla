@@ -24,13 +24,13 @@ export class ExportFiles {
 }
 
 export class UpdateFile {
-  id: number;
-  file: File;
+  id?: number;
+  file?: File;
 }
 
 export class CreateFile {
-  file: File;
-  groupId: number;
+  file?: File;
+  groupId?: number;
 }
 
 export class DeleteFile {

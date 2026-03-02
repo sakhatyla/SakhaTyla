@@ -1,16 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
-@import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+@import "@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
 
 /* Add Angular Material themes*/
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "@angular/material/legacy-prebuilt-themes/indigo-pink.css";
 @import '@angular/material/theming';
 
-@import '~material-icons-font/sass/variables';
-@import '~material-icons-font/sass/mixins';
-$MaterialIcons_FontPath: "~material-icons-font/fonts";
-@import '~material-icons-font/sass/main';
-@import '~material-icons-font/sass/Regular';
+@import 'styles/material-icons.css';
 
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
@@ -46,14 +42,14 @@ $primary: mat.define-palette(mat.$indigo-palette);
        url('assets/fonts/ibm-plex-sans-v8-latin_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-$custom-typography: mat.define-typography-config(
+$custom-typography: mat.define-legacy-typography-config(
   $font-family: 'IBM Plex Sans'
 );
 
-@include mat.typography-hierarchy($custom-typography);
-@include mat.checkbox-typography($custom-typography);
-@include mat.all-component-typographies($custom-typography);
-@include mat.core($custom-typography);
+@include mat.legacy-typography-hierarchy($custom-typography);
+@include mat.legacy-checkbox-typography($custom-typography);
+@include mat.all-legacy-component-typographies($custom-typography);
+@include mat.legacy-core();
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;

@@ -62,6 +62,10 @@ export class ColumnDescription {
   name: string;
   displayName?: string;
   isSystem ? = false;
+
+  static filter(columnDescriptions: ColumnDescription[]): (value: string[]) => string[] {
+    return (value: string[]) => value.filter((item) => columnDescriptions.find(cd => cd.name === item));
+  }
 }
 
 export class ColumnSettingsStore {

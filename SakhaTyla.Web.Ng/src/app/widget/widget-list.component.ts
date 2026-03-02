@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
@@ -34,7 +34,6 @@ export class WidgetListComponent implements OnInit {
     'type',
     'action'
   ];
-  columns = this.storedValueService.getStoredValue('widgetColumns', this.defaultColumns);
   columnDescriptions: ColumnDescription[] = [
     { name: 'select', isSystem: true },
     { name: 'name', displayName: this.translocoService.translate('Name') },
@@ -43,6 +42,8 @@ export class WidgetListComponent implements OnInit {
     { name: 'type', displayName: this.translocoService.translate('Type') },
     { name: 'action', isSystem: true },
   ];
+  columns = this.storedValueService.getStoredValue('widgetColumns', this.defaultColumns,
+    ColumnDescription.filter(this.columnDescriptions));
   selectedIds = new Set<number>();
 
   @Input()

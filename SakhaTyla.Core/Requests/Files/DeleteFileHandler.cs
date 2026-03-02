@@ -30,7 +30,7 @@ namespace SakhaTyla.Core.Requests.Files
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteFile request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteFile request, CancellationToken cancellationToken)
         {
             var file = await _fileRepository.GetEntities()
                 .Include(e => e.Group)
@@ -50,7 +50,6 @@ namespace SakhaTyla.Core.Requests.Files
             }
             _fileRepository.Delete(file);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

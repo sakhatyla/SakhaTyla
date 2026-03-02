@@ -1,7 +1,7 @@
 ﻿main(model) ::= <<
 import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
@@ -33,12 +33,13 @@ export class $model.Entity.Name$ListComponent implements OnInit {
     $model.Entity.AllFields:field(); separator="\r\n"$
     'action'
   ];
-  columns = this.storedValueService.getStoredValue('$model.Entity.NameLower$Columns', this.defaultColumns);
   columnDescriptions: ColumnDescription[] = [
     { name: 'select', isSystem: true },
     $model.Entity.AllFields:fieldDescription(); separator="\r\n"$
     { name: 'action', isSystem: true },
   ];
+  columns = this.storedValueService.getStoredValue('$model.Entity.NameLower$Columns', this.defaultColumns,
+    ColumnDescription.filter(this.columnDescriptions));
   selectedIds = new Set<number>();
 
   @Input()

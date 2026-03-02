@@ -46,9 +46,9 @@ namespace $model.Solution.Namespace$.Web.Controllers
 
         [Authorize("Write$model.Entity.Name$")]
         [HttpPost("Update$model.Entity.Name$")]
-        public async Task<Unit> Update$model.Entity.Name$Async([FromBody] Update$model.Entity.Name$ update$model.Entity.Name$)
+        public async Task Update$model.Entity.Name$Async([FromBody] Update$model.Entity.Name$ update$model.Entity.Name$)
         {
-            return await _mediator.Send(update$model.Entity.Name$);
+            await _mediator.Send(update$model.Entity.Name$);
         }
 
         [Authorize("Write$model.Entity.Name$")]
@@ -60,9 +60,9 @@ namespace $model.Solution.Namespace$.Web.Controllers
 
         [Authorize("Write$model.Entity.Name$")]
         [HttpPost("Delete$model.Entity.Name$")]
-        public async Task<Unit> Delete$model.Entity.Name$Async([FromBody] Delete$model.Entity.Name$ delete$model.Entity.Name$)
+        public async Task Delete$model.Entity.Name$Async([FromBody] Delete$model.Entity.Name$ delete$model.Entity.Name$)
         {
-            return await _mediator.Send(delete$model.Entity.Name$);
+            await _mediator.Send(delete$model.Entity.Name$);
         }
     }
 }

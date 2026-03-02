@@ -20,15 +20,15 @@ export class ExportBookPages {
 }
 
 export class UpdateBookPage {
-  id: number;
-  fileName: string;
-  number: number;
+  id?: number;
+  fileName?: string;
+  number?: number;
 }
 
 export class CreateBookPage {
-  bookId: number;
-  fileName: string;
-  number: number;
+  bookId?: number;
+  fileName?: string;
+  number?: number;
 }
 
 export class DeleteBookPage {

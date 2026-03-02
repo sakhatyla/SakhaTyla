@@ -40,15 +40,15 @@ namespace SakhaTyla.Core.Requests.Users
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.UserName.Contains(filter.Text) || e.Email.Contains(filter.Text) || e.FirstName!.Contains(filter.Text) || e.LastName!.Contains(filter.Text));
+                queryable = queryable.Where(e => e.UserName!.Contains(filter.Text) || e.Email!.Contains(filter.Text) || e.FirstName!.Contains(filter.Text) || e.LastName!.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.UserName))
             {
-                queryable = queryable.Where(e => e.UserName.Contains(filter.UserName));
+                queryable = queryable.Where(e => e.UserName!.Contains(filter.UserName));
             }
             if (!string.IsNullOrEmpty(filter?.Email))
             {
-                queryable = queryable.Where(e => e.Email.Contains(filter.Email));
+                queryable = queryable.Where(e => e.Email!.Contains(filter.Email));
             }
             if (!string.IsNullOrEmpty(filter?.FirstName))
             {

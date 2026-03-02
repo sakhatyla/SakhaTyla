@@ -20,22 +20,22 @@ export class ExportUsers {
 }
 
 export class UpdateUser {
-  id: number;
-  email: string;
+  id?: number;
+  email?: string;
   password?: string;
   confirmPassword?: string;
-  roleIds: number[];
-  firstName: string;
-  lastName: string;
+  roleIds?: number[];
+  firstName?: string;
+  lastName?: string;
 }
 
 export class CreateUser {
-  email: string;
+  email?: string;
   password?: string;
   confirmPassword?: string;
-  roleIds: number[];
-  firstName: string;
-  lastName: string;
+  roleIds?: number[];
+  firstName?: string;
+  lastName?: string;
 }
 
 export class DeleteUser {

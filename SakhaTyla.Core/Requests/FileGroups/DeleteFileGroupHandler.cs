@@ -25,7 +25,7 @@ namespace SakhaTyla.Core.Requests.FileGroups
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(DeleteFileGroup request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteFileGroup request, CancellationToken cancellationToken)
         {
             var fileGroup = await _fileGroupRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -36,7 +36,6 @@ namespace SakhaTyla.Core.Requests.FileGroups
             }
             _fileGroupRepository.Delete(fileGroup);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

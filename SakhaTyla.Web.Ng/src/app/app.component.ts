@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
-import { MediaObserver } from '@angular/flex-layout';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { debounceTime, map, tap, first } from 'rxjs/operators';
 
@@ -22,20 +22,13 @@ export class AppComponent implements OnInit {
   userName: Observable<string>;
   accountUrl: string;
 
-  isHandset$: Observable<boolean> = this.media.asObservable().pipe(
-    map(
-      () =>
-        this.media.isActive('xs') ||
-        this.media.isActive('sm') ||
-        this.media.isActive('lt-md')
-    ),
-    tap(() => this.cdRef.detectChanges()));
+  isHandset: MediaQueryList = this.media.matchMedia('(max-width: 959px)');
 
   constructor(private authorizeService: AuthorizeService,
               private loadingService: LoadingService,
               private configService: ConfigService,
               private cdRef: ChangeDetectorRef,
-              private media: MediaObserver) {
+              private media: MediaMatcher) {
     loadingService
       .onLoadingChanged
       .pipe(debounceTime(500))
@@ -54,13 +47,9 @@ export class AppComponent implements OnInit {
 
   toggle(sidenav: MatSidenav): void {
     this.emitEventResize();
-    this.isHandset$.pipe(
-      first()
-    ).subscribe(isHandset => {
-      if (isHandset) {
-        sidenav.toggle();
-      }
-    });
+    if (this.isHandset.matches) {
+      sidenav.toggle();
+    }
   }
 
   emitEventResize() {

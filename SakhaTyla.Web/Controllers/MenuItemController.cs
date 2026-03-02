@@ -45,16 +45,16 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteMenuItem")]
         [HttpPost("UpdateMenuItem")]
-        public async Task<Unit> UpdateMenuItemAsync([FromBody] UpdateMenuItem updateMenuItem)
+        public async Task UpdateMenuItemAsync([FromBody] UpdateMenuItem updateMenuItem)
         {
-            return await _mediator.Send(updateMenuItem);
+            await _mediator.Send(updateMenuItem);
         }
 
         [Authorize("WriteMenu")]
         [HttpPost("UpdateMenuItemWeight")]
-        public async Task<Unit> UpdateMenuItemWeightAsync([FromBody] UpdateMenuItemWeight updateMenuItemWeight)
+        public async Task UpdateMenuItemWeightAsync([FromBody] UpdateMenuItemWeight updateMenuItemWeight)
         {
-            return await _mediator.Send(updateMenuItemWeight);
+            await _mediator.Send(updateMenuItemWeight);
         }
 
         [Authorize("WriteMenuItem")]
@@ -66,9 +66,9 @@ namespace SakhaTyla.Web.Controllers
 
         [Authorize("WriteMenuItem")]
         [HttpPost("DeleteMenuItem")]
-        public async Task<Unit> DeleteMenuItemAsync([FromBody] DeleteMenuItem deleteMenuItem)
+        public async Task DeleteMenuItemAsync([FromBody] DeleteMenuItem deleteMenuItem)
         {
-            return await _mediator.Send(deleteMenuItem);
+            await _mediator.Send(deleteMenuItem);
         }
     }
 }

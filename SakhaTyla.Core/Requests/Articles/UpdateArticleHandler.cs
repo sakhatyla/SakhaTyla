@@ -35,7 +35,7 @@ namespace SakhaTyla.Core.Requests.Articles
             _messagingService = messagingService;
         }
 
-        public async Task<Unit> Handle(UpdateArticle request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateArticle request, CancellationToken cancellationToken)
         {
             var article = await _articleRepository.GetEntities()
                 .Include(e => e.Tags)
@@ -49,7 +49,6 @@ namespace SakhaTyla.Core.Requests.Articles
             _mapper.Map(request, article);
             await _unitOfWork.CommitAsync(cancellationToken);
             await _messagingService.SendAsync(UpdateArticleIndex.QueueName, new UpdateArticleIndex() { Id = article.Id, Action = IndexAction.Update });
-            return Unit.Value;
         }
 
     }

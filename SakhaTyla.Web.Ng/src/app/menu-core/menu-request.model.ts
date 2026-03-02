@@ -20,14 +20,14 @@ export class ExportMenus {
 }
 
 export class UpdateMenu {
-  id: number;
-  name: string;
-  code: string;
+  id?: number;
+  name?: string;
+  code?: string;
 }
 
 export class CreateMenu {
-  name: string;
-  code: string;
+  name?: string;
+  code?: string;
 }
 
 export class DeleteMenu {

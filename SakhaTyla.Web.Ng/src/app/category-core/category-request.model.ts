@@ -20,12 +20,12 @@ export class ExportCategories {
 }
 
 export class UpdateCategory {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }
 
 export class CreateCategory {
-  name: string;
+  name?: string;
 }
 
 export class DeleteCategory {

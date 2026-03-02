@@ -20,18 +20,18 @@ export class ExportBookAuthors {
 }
 
 export class UpdateBookAuthor {
-  id: number;
-  lastName: string;
-  firstName: string;
-  middleName: string;
-  nickName: string;
+  id?: number;
+  lastName?: string;
+  firstName?: string;
+  middleName?: string;
+  nickName?: string;
 }
 
 export class CreateBookAuthor {
-  lastName: string;
-  firstName: string;
-  middleName: string;
-  nickName: string;
+  lastName?: string;
+  firstName?: string;
+  middleName?: string;
+  nickName?: string;
 }
 
 export class DeleteBookAuthor {

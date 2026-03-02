@@ -20,15 +20,15 @@ export class ExportBookAuthorships {
 }
 
 export class UpdateBookAuthorship {
-  id: number;
-  authorId: number;
-  weight: number;
+  id?: number;
+  authorId?: number;
+  weight?: number;
 }
 
 export class CreateBookAuthorship {
-  bookId: number;
-  authorId: number;
-  weight: number;
+  bookId?: number;
+  authorId?: number;
+  weight?: number;
 }
 
 export class DeleteBookAuthorship {

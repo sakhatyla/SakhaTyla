@@ -29,7 +29,7 @@ namespace SakhaTyla.Core.Requests.Languages
             _localizer = localizer;
         }
 
-        public async Task<Unit> Handle(UpdateLanguage request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateLanguage request, CancellationToken cancellationToken)
         {
             var language = await _languageRepository.GetEntities()
                 .Where(e => e.Id == request.Id)
@@ -40,7 +40,6 @@ namespace SakhaTyla.Core.Requests.Languages
             }
             _mapper.Map(request, language);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return Unit.Value;
         }
 
     }

@@ -32,11 +32,11 @@ namespace SakhaTyla.Core.Requests.Roles
         {
             if (!string.IsNullOrEmpty(filter?.Text))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Text) || e.DisplayName.Contains(filter.Text));
+                queryable = queryable.Where(e => e.Name!.Contains(filter.Text) || e.DisplayName.Contains(filter.Text));
             }
             if (!string.IsNullOrEmpty(filter?.Name))
             {
-                queryable = queryable.Where(e => e.Name.Contains(filter.Name));
+                queryable = queryable.Where(e => e.Name!.Contains(filter.Name));
             }
             if (!string.IsNullOrEmpty(filter?.DisplayName))
             {

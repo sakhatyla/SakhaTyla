@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Sort } from '@angular/material/sort';
 import { forkJoin, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
@@ -33,13 +33,14 @@ export class RoleListComponent implements OnInit {
     'displayName',
     'action'
   ];
-  columns = this.storedValueService.getStoredValue('roleColumns', this.defaultColumns);
   columnDescriptions: ColumnDescription[] = [
     { name: 'select', isSystem: true },
     { name: 'name', displayName: this.translocoService.translate('Name') },
     { name: 'displayName', displayName: this.translocoService.translate('Display Name') },
     { name: 'action', isSystem: true },
   ];
+  columns = this.storedValueService.getStoredValue('roleColumns', this.defaultColumns,
+    ColumnDescription.filter(this.columnDescriptions));
   selectedIds = new Set<number>();
 
   @Input()
