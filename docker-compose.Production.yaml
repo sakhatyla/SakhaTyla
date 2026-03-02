@@ -5,6 +5,7 @@
   AWSS3Storage__SecretKey: '${S3_SECRET_KEY}'
   AWSS3Storage__BucketName: '${S3_BUCKET_NAME}'
   AWSS3Storage__ServiceUrl: '${S3_SERVICE_URL}'
+  AWSS3Storage__Url: '${STORAGE_URL}'
   Messaging__ConnectionUrl: 'rabbitmq://mq'
   Messaging__Username: '${MQ_USERNAME}'
   Messaging__Password: '${MQ_PASSWORD}'

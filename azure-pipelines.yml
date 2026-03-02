@@ -95,6 +95,7 @@ stages:
         S3_SECRET_KEY=$(S3SecretKey)
         S3_BUCKET_NAME=$(S3BucketName)
         S3_SERVICE_URL=$(S3ServiceUrl)
+        STORAGE_URL=$(StorageUrl)
         MQ_USERNAME=$(MqUsername)
         MQ_PASSWORD=$(MqPassword)
         EMAIL_SMTP_SERVER=$(EmailSmtpServer)
