@@ -11,6 +11,8 @@
         }
     </h3>
     <div class="article-text">@Html.Raw(Model.Article.Text)</div>
+    <button class="btn btn-sm btn-outline-secondary article-text-toggle" style="display: none"
+            data-text-more="@Localizer["More"]" data-text-less="@Localizer["Less"]">@Localizer["More"]</button>
     @if (Model.Article.Category != null)
     {
         <div class="article-category">@Localizer["Category"]: @Model.Article.Category.Name</div>

@@ -36,3 +36,9 @@ msgstr "Страница {0}"
 
 msgid "Category"
 msgstr "Категория"
+
+msgid "More"
+msgstr "Развернуть"
+
+msgid "Less"
+msgstr "Свернуть"

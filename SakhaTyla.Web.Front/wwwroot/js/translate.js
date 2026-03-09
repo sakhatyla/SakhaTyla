@@ -45,4 +45,26 @@
         $(this).parent().hide().next().show();
         return false;
     });
+
+    var maxArticleHeight = 200;
+
+    $('.translations-content .article-text').each(function () {
+        var $text = $(this);
+        if (this.scrollHeight > maxArticleHeight) {
+            $text.addClass('article-text-collapsed');
+            $text.next('.article-text-toggle').show();
+        }
+    });
+
+    $(document).on('click', '.article-text-toggle', function () {
+        var $btn = $(this);
+        var $text = $btn.prev('.article-text');
+        if ($text.hasClass('article-text-collapsed')) {
+            $text.removeClass('article-text-collapsed');
+            $btn.text($btn.data('text-less'));
+        } else {
+            $text.addClass('article-text-collapsed');
+            $btn.text($btn.data('text-more'));
+        }
+    });
 });
