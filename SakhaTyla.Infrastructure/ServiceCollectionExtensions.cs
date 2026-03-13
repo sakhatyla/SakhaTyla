@@ -11,6 +11,8 @@ using SakhaTyla.Infrastructure.Email;
 using SakhaTyla.Infrastructure.FileStorage;
 using SakhaTyla.Infrastructure.Formatters;
 using SakhaTyla.Infrastructure.Search;
+using SakhaTyla.Core.SpellCheck;
+using SakhaTyla.Infrastructure.SpellCheck;
 
 namespace SakhaTyla.Infrastructure
 {
@@ -26,6 +28,7 @@ namespace SakhaTyla.Infrastructure
             services.AddSingleton<ISearchIndexWriter, LuceneIndexWriter>();
             services.AddTransient<ISearchIndexReader, LuceneIndexReader>();
             services.Configure<AWSS3StorageSettings>(configuration.GetSection("AWSS3Storage"));
+            services.AddSingleton<ISpellCheckService, SpellCheckService>();
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 

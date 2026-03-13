@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     <PackageReference Include="Telegram.Bot" Version="18.0.0" />
     <PackageReference Include="System.Linq.Async" Version="5.0.0" />
+    <PackageReference Include="WeCantSpell.Hunspell" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
