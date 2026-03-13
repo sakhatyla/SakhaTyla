@@ -20,6 +20,7 @@ namespace SakhaTyla.Infrastructure.SpellCheck
             ["sah"] = new Dictionary<char, char>
             {
                 ['5'] = 'ҕ',
+                ['8'] = 'ө',
                 ['е'] = 'ө',
                 ['h'] = 'һ',
                 ['ц'] = 'ҥ',
@@ -31,6 +32,7 @@ namespace SakhaTyla.Infrastructure.SpellCheck
             ["sah"] = new Dictionary<char, char>
             {
                 ['5'] = 'ҕ',
+                ['8'] = 'ө',
                 ['е'] = 'ө',
                 ['h'] = 'һ',
                 ['ь'] = 'һ',
