@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Options;
@@ -42,6 +43,12 @@ namespace SakhaTyla.Infrastructure.SpellCheck
             }
         };
 
+        private static readonly Dictionary<string, string> DictionaryFileNames = new()
+        {
+            ["sah"] = "sah",
+            ["ru"] = "ru_RU",
+        };
+
         public SpellCheckService(IOptions<LuceneOptions> options)
         {
             _options = options.Value;
@@ -51,13 +58,14 @@ namespace SakhaTyla.Infrastructure.SpellCheck
         {
             return _dictionaries.GetOrAdd(language, lang =>
             {
-                var affPath = Path.Combine(_options.HunspellPath!, lang + ".aff");
-                var dicPath = Path.Combine(_options.HunspellPath!, lang + ".dic");
+                var fileName = DictionaryFileNames.GetValueOrDefault(lang, lang);
+                var affPath = Path.Combine(_options.HunspellPath!, fileName + ".aff");
+                var dicPath = Path.Combine(_options.HunspellPath!, fileName + ".dic");
                 return WordList.CreateFromFiles(dicPath, affPath);
             });
         }
 
-        public string FixSpelling(string language, string text)
+        public string FixSpelling(string language, string text, string[]? additionalLanguages = null)
         {
             if (string.IsNullOrEmpty(text))
                 return text;
@@ -76,11 +84,25 @@ namespace SakhaTyla.Infrastructure.SpellCheck
                     extraMap[kvp.Key] = kvp.Value;
             }
 
+            var additionalDictionaries = additionalLanguages?
+                .Select(lang => GetDictionary(lang))
+                .ToArray();
+
             return Regex.Replace(text, @"[\p{L}\p{N}]+", match =>
             {
                 var word = match.Value;
                 if (dictionary.Check(word))
                     return word;
+
+                // Skip words that are correct in additional languages
+                if (additionalDictionaries != null)
+                {
+                    foreach (var additionalDictionary in additionalDictionaries)
+                    {
+                        if (additionalDictionary.Check(word))
+                            return word;
+                    }
+                }
 
                 if (!ContainsMapChar(word, fullMap))
                     return word;

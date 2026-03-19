@@ -103,7 +103,8 @@ namespace SakhaTyla.Data
         {
             return new[]
             {
-                new WorkerInfo("Article Import", typeof(ArticleImportWorker).FullName!)
+                new WorkerInfo("Article Import", typeof(ArticleImportWorker).FullName!),
+                new WorkerInfo("Spelling Fix", typeof(SpellingFixWorker).FullName!)
             };
         }
 

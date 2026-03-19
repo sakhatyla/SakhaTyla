@@ -30,6 +30,7 @@ namespace SakhaTyla.Core
             services.AddTransient<TestWorker>();
             services.AddTransient<SearchIndexerWorker>();
             services.AddTransient<ArticleImportWorker>();
+            services.AddTransient<SpellingFixWorker>();
             services.AddTransient<ArticleIndexer>();
             services.Configure<ServerOptions>(configuration.GetSection("Server"));
             return services; 
