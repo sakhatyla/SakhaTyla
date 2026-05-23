@@ -69,6 +69,9 @@ services:
     environment:
       <<: *env
       Telegram__BotToken: '${TELEGRAM_BOT_TOKEN}'
+      Telegram__ProxyUrl: '${TELEGRAM_PROXY_URL}'
+      Telegram__ProxyUsername: '${TELEGRAM_PROXY_USERNAME}'
+      Telegram__ProxyPassword: '${TELEGRAM_PROXY_PASSWORD}'
     volumes:
       - ./hunspell:/var/hunspell
       - index:/index

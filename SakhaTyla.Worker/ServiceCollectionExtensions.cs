@@ -18,6 +18,8 @@ using SakhaTyla.Infrastructure.Messaging;
 using SakhaTyla.Worker.Infrastructure;
 using SakhaTyla.Worker.Jobs;
 using SakhaTyla.Worker.WorkerInfos;
+using System.Net;
+using System.Net.Http;
 using Telegram.Bot;
 
 namespace SakhaTyla.Worker
@@ -52,6 +54,22 @@ namespace SakhaTyla.Worker
             services.AddTransient<IHostedService, WorkerInfoShedulerService>();
             services.AddTransient<StartWorkerRunJob>();
             services.AddHttpClient("TelegramBotClient")
+                .ConfigurePrimaryHttpMessageHandler(sp =>
+                {
+                    var settings = sp.GetService<IOptions<TelegramSettings>>()?.Value;
+                    var handler = new HttpClientHandler();
+                    if (!string.IsNullOrEmpty(settings?.ProxyUrl))
+                    {
+                        var proxy = new WebProxy(settings.ProxyUrl);
+                        if (!string.IsNullOrEmpty(settings.ProxyUsername))
+                        {
+                            proxy.Credentials = new NetworkCredential(settings.ProxyUsername, settings.ProxyPassword);
+                        }
+                        handler.Proxy = proxy;
+                        handler.UseProxy = true;
+                    }
+                    return handler;
+                })
                 .AddTypedClient<ITelegramBotClient>((httpClient, sp) =>
                 {
                     var settings = sp.GetService<IOptions<TelegramSettings>>()?.Value;
