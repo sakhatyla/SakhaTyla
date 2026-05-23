@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SakhaTyla.Core.ChatBots;
 using Telegram.Bot;
@@ -29,7 +30,7 @@ namespace SakhaTyla.Infrastructure.ChatBots
             {
                 replyMarkup = FromReplyButtons(replyButtons);
             }
-            text = TruncateMessage(text);
+            text = TruncateMessage(text, html);
             await _botClient.SendTextMessageAsync(long.Parse(chatId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
 
@@ -40,7 +41,7 @@ namespace SakhaTyla.Infrastructure.ChatBots
             {
                 replyMarkup = FromInlineReplyButtons(replyButtons);
             }
-            text = TruncateMessage(text);
+            text = TruncateMessage(text, html);
             await _botClient.EditMessageTextAsync(long.Parse(chatId), int.Parse(messageId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
 
@@ -84,11 +85,60 @@ namespace SakhaTyla.Infrastructure.ChatBots
             };
         }
 
-        private static string TruncateMessage(string text)
+        private static string TruncateMessage(string text, bool html)
         {
             if (text.Length <= MaxMessageLength)
                 return text;
-            return text.Substring(0, MaxMessageLength - 1) + "…";
+
+            var truncated = text.Substring(0, MaxMessageLength - 20);
+
+            if (html)
+            {
+                truncated = CloseUnclosedTags(truncated);
+            }
+
+            return truncated + "…";
+        }
+
+        private static string CloseUnclosedTags(string html)
+        {
+            // Remove any incomplete tag at the end (e.g., "<b class=" or "<")
+            var lastOpenBracket = html.LastIndexOf('<');
+            if (lastOpenBracket >= 0)
+            {
+                var lastCloseBracket = html.LastIndexOf('>');
+                if (lastCloseBracket < lastOpenBracket)
+                {
+                    html = html.Substring(0, lastOpenBracket);
+                }
+            }
+
+            var openTags = new Stack<string>();
+            var tagPattern = new Regex(@"<(/?)(\w+)[^>]*?>", RegexOptions.Compiled);
+
+            foreach (Match match in tagPattern.Matches(html))
+            {
+                var isClosing = match.Groups[1].Value == "/";
+                var tagName = match.Groups[2].Value.ToLowerInvariant();
+
+                if (isClosing)
+                {
+                    if (openTags.Count > 0 && openTags.Peek() == tagName)
+                        openTags.Pop();
+                }
+                else
+                {
+                    openTags.Push(tagName);
+                }
+            }
+
+            var sb = new StringBuilder(html);
+            while (openTags.Count > 0)
+            {
+                sb.Append($"</{openTags.Pop()}>");
+            }
+
+            return sb.ToString();
         }
     }
 }
