@@ -13,6 +13,8 @@ namespace SakhaTyla.Infrastructure.ChatBots
 {
     public class TelegramMessageSender : IChatBotMessageSender
     {
+        private const int MaxMessageLength = 4096;
+
         private readonly ITelegramBotClient _botClient;
 
         public TelegramMessageSender(ITelegramBotClient botClient)
@@ -27,6 +29,7 @@ namespace SakhaTyla.Infrastructure.ChatBots
             {
                 replyMarkup = FromReplyButtons(replyButtons);
             }
+            text = TruncateMessage(text);
             await _botClient.SendTextMessageAsync(long.Parse(chatId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
 
@@ -37,6 +40,7 @@ namespace SakhaTyla.Infrastructure.ChatBots
             {
                 replyMarkup = FromInlineReplyButtons(replyButtons);
             }
+            text = TruncateMessage(text);
             await _botClient.EditMessageTextAsync(long.Parse(chatId), int.Parse(messageId), text, parseMode: html ? ParseMode.Html : null, replyMarkup: replyMarkup);
         }
 
@@ -78,6 +82,13 @@ namespace SakhaTyla.Infrastructure.ChatBots
             {
                 ResizeKeyboard = true
             };
+        }
+
+        private static string TruncateMessage(string text)
+        {
+            if (text.Length <= MaxMessageLength)
+                return text;
+            return text.Substring(0, MaxMessageLength - 1) + "…";
         }
     }
 }
