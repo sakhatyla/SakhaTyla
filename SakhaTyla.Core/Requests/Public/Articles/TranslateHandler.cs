@@ -49,14 +49,14 @@ namespace SakhaTyla.Core.Requests.Public.Articles
             var models = ExactMatchFirst(articles, query)
                 .Select(e => _mapper.Map<Article, ArticleModel>(e))
                 .ToList();            
-            var articleGroups = models.GroupBy(a => new { FromLanguageName = a.FromLanguage.Name, ToLanguageName = a.ToLanguage.Name })
+            var articleGroups = OrderGroups(models.GroupBy(a => new { FromLanguageName = a.FromLanguage.Name, ToLanguageName = a.ToLanguage.Name })
                 .Select(a => new ArticleGroupModel()
                 {
                     FromLanguage = new LanguageShortModel(a.Key.FromLanguageName),
                     ToLanguage = new LanguageShortModel(a.Key.ToLanguageName),
                     Articles = a.ToList(),
                 })
-                .ToList();
+                .ToList());
 
             if (articleGroups.Count == 0)
             {
@@ -93,7 +93,7 @@ namespace SakhaTyla.Core.Requests.Public.Articles
                 articleQuery = articleQuery.Where(a => a.ToLanguage.Code == toLanguageCode);
             var articles = await articleQuery.ToListAsync();
 
-            return articles.GroupBy(a => new { FromLanguageName = a.FromLanguage.Name, ToLanguageName = a.ToLanguage.Name })
+            return OrderGroups(articles.GroupBy(a => new { FromLanguageName = a.FromLanguage.Name, ToLanguageName = a.ToLanguage.Name })
                 .Select(g => new ArticleGroupModel()
                 {
                     FromLanguage = new LanguageShortModel(g.Key.FromLanguageName),
@@ -107,6 +107,13 @@ namespace SakhaTyla.Core.Requests.Public.Articles
                         })
                         .ToList()
                 })
+                .ToList());
+        }
+
+        private static List<ArticleGroupModel> OrderGroups(List<ArticleGroupModel> groups)
+        {
+            return groups
+                .OrderBy(g => g.FromLanguage.Name == g.ToLanguage.Name ? 1 : 0)
                 .ToList();
         }
 
