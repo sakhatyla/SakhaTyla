@@ -36,7 +36,7 @@ namespace SakhaTyla.Web.Infrastructure
                 if (context != null)
                 {
                     var identity = (ClaimsIdentity?)context.User.Identity;
-                    var userName = identity?.Claims.Where(e => e.Type == ClaimTypes.Name).Select(e => e.Value).FirstOrDefault();
+                    var userName = identity?.Name;
                     _userInfoModel = new UserInfoModel
                     {
                         User = await _userRepository.GetEntities().FirstOrDefaultAsync(e => e.UserName == userName),
