@@ -4,9 +4,17 @@
     font-weight: bold;
   }
 }
-.mat-column-from {
-  width: 40%;
-}
+.mat-column-from,
 .mat-column-to {
-  width: 40%;
+  width: 35%;
+}
+
+.property-changes {
+  width: 100%;
+  table-layout: fixed;
+
+  th, td {
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
 }

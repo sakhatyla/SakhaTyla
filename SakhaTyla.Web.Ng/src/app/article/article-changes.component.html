@@ -4,8 +4,8 @@
 
         <app-entity-change-list [entityName]="entityName" [entityId]="entityId" [state]="state">
             <div *appEntityChangeValue="let value; name: 'Title'">{{ value }}</div>
-            <div *appEntityChangeValue="let value; name: 'Text'">{{ value }}</div>
-            <div *appEntityChangeValue="let value; name: 'TextSource'">{{ value }}</div>
+            <div class="multiline-text" *appEntityChangeValue="let value; name: 'Text'">{{ value }}</div>
+            <div class="multiline-text" *appEntityChangeValue="let value; name: 'TextSource'">{{ value }}</div>
             <app-language-show *appEntityChangeValue="let value; name: 'FromLanguageId'" [entityId]="value"></app-language-show>
             <app-language-show *appEntityChangeValue="let value; name: 'ToLanguageId'" [entityId]="value"></app-language-show>
             <app-bool-view *appEntityChangeValue="let value; name: 'Fuzzy'" [value]="value"></app-bool-view>

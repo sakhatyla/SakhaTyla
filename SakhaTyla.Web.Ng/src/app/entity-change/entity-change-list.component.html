@@ -19,7 +19,7 @@
       <ng-container matColumnDef="changes">
         <th mat-header-cell *matHeaderCellDef>{{ t('Changes') }}</th>
         <td mat-cell *matCellDef="let item">
-          <table mat-table [dataSource]="filterEntityPropertyChanges(item.changes)">
+          <table class="property-changes" mat-table [dataSource]="filterEntityPropertyChanges(item.changes)">
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>{{ t('Property Name') }}</th>
               <td mat-cell *matCellDef="let change">
